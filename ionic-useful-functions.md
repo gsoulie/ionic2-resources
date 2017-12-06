@@ -1,7 +1,16 @@
 # Useful Functions
 
+* [Useful functions](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-useful-functions.md)  
+	* [Get specific platform](#get-specific-platform)   
+	* [Generate UUID](#generate-uuid)  
+	* [Safely displaying data with elvis operator](#safely-displaying-data-with-elvis-operator)    
+	* [Show / hide DOM element](#show-hide-dom-element)    
+	* [Checking network connection](#checking-network-connection)    
+	* [Close modal](#close-modal)    
+	* [Accessing DOM element @ViewChild](#accessing-dom-element)  
+	
 ## Get specific platform
-[Back to top](#ionic-2)  
+[Back to top](#useful-functions)  
 
 ```javascript
 var isWebView = ionic.Platform.isWebView();
@@ -34,7 +43,7 @@ ionic.Platform.exitApp(); // stops the app
 ```
  
 ## Generate UUID
-[Back to top](#ionic-2) 
+[Back to top](#useful-functions) 
 
 To simply generate UUID like "547d8e40-354c-11e6-aa97-083e8ec535fb"
 
@@ -87,7 +96,7 @@ To avoid this, we have to use **Elvis operator** like below :
 
 
 ## Show hide DOM element
-[Back to top](#ionic-2) 
+[Back to top](#useful-functions) 
 
 #### Solution 1
 
@@ -155,7 +164,7 @@ menuIsOpen: boolean = false;
 
 
 ## Checking network connection
-[Back to top](#ionic-2)
+[Back to top](#useful-functions)
 
 ```
 $ cordova plugin add cordova-plugin-network-information
@@ -170,7 +179,7 @@ if(navigator.onLine){
 ```
 
 ## Close modal
-[Back to top](#ionic-2)
+[Back to top](#useful-functions)
 	
 *View file*
 ```xml
