@@ -1,5 +1,8 @@
 # Bluetooth    
-[Back to top](#ionic-2)   
+
+* [Bluetooth](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-bluetooth.md)    
+	* [BLE](#ble)    
+	* [Bluetooth Serial](#bluetooth-serial)  
 
 ## BLE    
 
@@ -54,6 +57,8 @@ export class HomePage {
 
 ### Scan
 
+[Back to top](#bluetooth)   
+
 *Home Controller file*
 
 ```javascript
@@ -85,6 +90,8 @@ export class HomePage {
 ```
 
 ### Connect
+
+[Back to top](#bluetooth)   
 
 *Device Controller file*
 
@@ -130,6 +137,8 @@ export class HomePage {
 ```
 
 ### Read
+
+[Back to top](#bluetooth)   
 
 *Device Controller file*
 
@@ -177,6 +186,8 @@ export class HomePage {
 
 ### Write
 
+[Back to top](#bluetooth)   
+
 *Device Controller file*
 
 ```javascript
@@ -220,7 +231,7 @@ export class HomePage {
 ```
 
 ## Bluetooth serial
-[Back to top](#ionic-2)  
+[Back to top](#bluetooth)   
 
 [link : official documentation](https://ionicframework.com/docs/native/bluetooth-serial/)    
 
@@ -260,6 +271,8 @@ $ npm install --save @ionic-native/bluetooth-serial
 ```
 
 ### Connect
+
+[Back to top](#bluetooth)   
 
 Connect selected device
 
@@ -340,6 +353,8 @@ Connect selected device
 
 ### Read
 
+[Back to top](#bluetooth)   
+
 *Controller file*
 
 ```javascript
@@ -361,6 +376,8 @@ Connect selected device
 ```
 
 ### Write
+
+[Back to top](#bluetooth)   
 
 *Controller file*
 
