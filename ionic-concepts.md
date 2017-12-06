@@ -1,7 +1,15 @@
 # Concepts
 
+* [Concepts](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-concepts.md)    
+	* [Angular 2](#angular-2)  
+	* [Decorators](#decorators)    	
+	* [Pipe](#pipe)    
+	* [Promise vs Observable](#promise-vs-observable)    
+	* [Mapping](#mapping)    
+	* [Arrow function](#arrow-function)    
+
 ## Angular 2
-[Back to top](#ionic-2)  
+[Back to top](#concepts)  
 
 [link : become a ninja with Angular 2](https://books.ninja-squad.com/public/samples/Become_a_ninja_with_Angular2_sample.html)    
 
@@ -165,7 +173,7 @@ for (let i = 0; i < a.length; i++) {
 }
 ```
 ## Decorators
-[Back to top](#ionic-2)  
+[Back to top](#concepts)  
 
 [link : Decorators by Josh MORONY](https://www.joshmorony.com/building-mobile-apps-with-ionic-2/decorators-in-ionic2.html)
 
@@ -433,7 +441,7 @@ export class truncatePipe implements PipeTransform{
 Pipes are very useful for string formatting like date, hour, regexp...
 
 ## Promise vs Observable
-[Back to top](#ionic-2) 
+[Back to top](#concepts) 
 
 [link : RxJS Observables vs Promises](https://egghead.io/lessons/rxjs-rxjs-observables-vs-promises)
 
@@ -535,7 +543,7 @@ If we change timeout value of 500 ms to 1500
 
 
 ## Arrow function
-[Back to top](#ionic-2) 
+[Back to top](#concepts) 
 
 [link : official documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
