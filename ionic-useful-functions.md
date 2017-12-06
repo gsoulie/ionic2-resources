@@ -229,6 +229,8 @@ getMaxTrip() {
 ```
 ## Accessing DOM element
 
+[Back to top](#useful-functions)  
+
 Here, we are going to see how to accessing to a DOM element with the directive ```@ViewChild```. In the following sample, we want to change the label of the top left back button.
 
 *View File*
