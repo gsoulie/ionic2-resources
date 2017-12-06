@@ -1,7 +1,27 @@
 # UI Components
 
+* [UI Components](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-ui-component.md)    
+	* [modal](#modal)    
+	* [comboBox](#combobox)    
+	* [ion-list](#ion-list)  
+	* [searchbar](#searchbar)    
+	* [list filtering](#high-performance-list-filtering)    
+	* [tab](#tab)       
+	* [tab icon](#tab-icon)    
+	* [alert dialog box](#alert-dialog-box)    
+	* [floating button](#floating-button)  
+	* [chart](#chart)    
+	* [grid](#grid)    
+	* [toggle](#toggle)    
+	* [popover menu](#popover-menu)    
+	* [dynamic style](#dynamic-style)    
+	* [Toggle menu](#toggle-menu)    
+	* [Expandable header](#expandable-header)    
+	* [List accordion](#list-accordion)    
+	* [Picker](#picker)     
+	
 ## Modal
-[Back to top](#ionic-2)  
+[Back to top](#ui-components)  
 
 Consider that we have a page (UserListPage for example) with a button wich open a modal based on UserPage controller.
 
@@ -60,7 +80,7 @@ onClose(remove = false){
 
 
 ## ComboBox
-[Back to top](#ionic-2)  
+[Back to top](#ui-components)  
 
 *View file*
 ```xml
@@ -92,7 +112,7 @@ selectObject(_selectedItem){
 
 
 ## ion-list
-[Back to top](#ionic-2)  
+[Back to top](#ui-components)  
 
 ### Show list right arrow
 
@@ -645,7 +665,7 @@ groupPatients(patients){
 ```   
 
 ## Searchbar
-[Back to top](#ionic-2)  
+[Back to top](#ui-components)  
 
 *View file*
 
@@ -720,7 +740,7 @@ constructor(public nav: NavController) {
 ```
 
 ## High performance list filtering
-[Back to top](#ionic-2)  
+[Back to top](#ui-components)  
 
 To increase list filtering, we can use Observable instead of basic filtering shows in searchbar section above.
 
@@ -840,7 +860,7 @@ A delay is fine, and an artificial delay is sometimes even beneficial, but you d
 We’re going to make a change now that won’t have any effect on performance, but it will have an impact on the user’s perception of the responsiveness of the app. We’re simply going to add a loading spinner that will display when a search is in progress.
 
 ## Tab
-[Back to top](#ionic-2)  
+[Back to top](#ui-components)  
 
 According to the latest Android material guideline, you have to follow these rules :
 
@@ -916,7 +936,7 @@ export class MyClass implements OnInit{
 ```
 
 ## Tab icon
-[Back to top](#ionic-2)  
+[Back to top](#ui-components)  
 
 Customize tab icon
 
@@ -937,7 +957,7 @@ Then just create a custom css, something like this:
 
 
 ## Alert dialog box
-[Back to top](#ionic-2)  
+[Back to top](#ui-components)  
 
 Here's a sample code to show a confirmation dialog box. The key is to add Alert import and then, don't miss to add alert object to current navigation stack
 
@@ -986,7 +1006,7 @@ export class HomePage {
 ```
 
 ## Floating button
-[Back to top](#ionic-2) 
+[Back to top](#ui-components)  
 
 This snippet show how to fix floating button in front of a list
 
@@ -1011,7 +1031,7 @@ This snippet show how to fix floating button in front of a list
 ```
 
 ## Chart
-[Back to top](#ionic-2) 
+[Back to top](#ui-components)  
 
 [Josh morony chartJS](https://www.joshmorony.com/adding-responsive-charts-graphs-to-ionic-2-applications/)    
 [ChartJS](http://www.chartjs.org/docs/latest/charts/)    
@@ -1020,13 +1040,13 @@ This snippet show how to fix floating button in front of a list
 
 
 ## grid
-[Back to top](#ionic-2) 
+[Back to top](#ui-components)  
 
 
 [link : complex layout using grid and flexbox](http://www.joshmorony.com/an-in-depth-look-at-the-grid-system-in-ionic-2/) 
 
 ## toggle
-[Back to top](#ionic-2) 
+[Back to top](#ui-components)  
 
 *View.html*
 
@@ -1049,7 +1069,7 @@ refreshTracking(e){
 ```
 
 ## Popover menu
-[Back to top](#ionic-2) 
+[Back to top](#ui-components)  
 
 Create popover menu like Evernote edit menu 
 
@@ -1068,7 +1088,7 @@ Create popover menu like Evernote edit menu
 ```
 
 ## Dynamic style
-[Back to top](#ionic-2) 
+[Back to top](#ui-components)  
 
 You can dynamically change the UI component style with condition like below :
 
@@ -1077,7 +1097,7 @@ You can dynamically change the UI component style with condition like below :
 ```
 
 ## Toggle menu
-[Back to top](#ionic-2) 
+[Back to top](#ui-components)  
 
 To add a toggle menu in your pages, follow the example below
 
@@ -1118,7 +1138,7 @@ To add a toggle menu in your pages, follow the example below
 
 
 ## Expandable header
-[Back to top](#ionic-2) 
+[Back to top](#ui-components)  
 
 See the complete Josh Morony's tutorial at : 
 [link : Josh Morony tutorial](https://www.joshmorony.com/creating-a-custom-expandable-header-component-for-ionic-2/)     
