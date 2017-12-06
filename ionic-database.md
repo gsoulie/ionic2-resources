@@ -1,6 +1,9 @@
 # Database
 
-[Back to top](#ionic-2)  
+* [Database](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-database.md)  
+	* [SQLite database](#sqlite-database)    
+	* [SQLStorage](#sqlstorage)   
+	
 ## SQLite database
 
 ### Storage method
@@ -135,6 +138,8 @@ export class HomePage implements OnInit{
 ```
 
 ### SQLite method
+
+[Back to top](#database)  
 
 [link : Using Sqlite storage tutorial](https://devdactic.com/ionic-2-sqlstorage/)
 
@@ -271,7 +276,7 @@ export class HomePage {
 </ion-content>
 ```
 ## SQLStorage
-[Back to top](#ionic-2)  
+[Back to top](#database)  
 
 Is recommanded using **SqlStorage**. 
 
@@ -327,7 +332,7 @@ this.storage.query('select * from projects').then((resp) => {})
 ```
 
 ## PouchDB
-
+[Back to top](#database)  
 First, install cordova sqlite-storage plugin
 
 ```
@@ -337,7 +342,7 @@ $ ionic cordova plugin add cordova-sqlite-storage
 **TODO - implementing ionic 2 sample app**
 
 #### Resources
-
+[Back to top](#database)  
 [Google chrome PouchDB inspector extension](https://chrome.google.com/webstore/detail/pouchdb-inspector/hbhhpaojmpfimakffndmpmpndcmonkfa?hl=en)    
 
 [Ionic 2 - PouchDB tutorial](http://gonehybrid.com/how-to-use-pouchdb-sqlite-for-local-storage-in-ionic-2/)    
