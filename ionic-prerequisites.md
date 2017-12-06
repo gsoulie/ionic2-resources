@@ -153,7 +153,7 @@ $ sudo npm install -g bower
 ```
 
 ## Visual Studio Code
-[Back to top](#ionic-2) 
+[Back to top](#prerequisites) 
 
 Another very good alternative to Atom is [visual studio code] (https://code.visualstudio.com/c?utm_expid=101350005-27.GqBWbOBuSRqlazQC_nNSRg.2&utm_referrer=https%3A%2F%2Fwww.google.fr%2F)
 
