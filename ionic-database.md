@@ -3,6 +3,7 @@
 * [Database](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-database.md)  
 	* [SQLite database](#sqlite-database)    
 	* [SQLStorage](#sqlstorage)   
+	* [PouchDB](#pouchdb)
 	
 ## SQLite database
 
