@@ -1,0 +1,60 @@
+# Publishing app
+[Back to top](#ionic-2)
+
+[link : publishing app](http://ionicframework.com/docs/guide/publishing.html)    
+
+First of all, check your config.xml file and modify **id, author, name, description etc...**
+
+more information about it's configuration [here](http://cordova.apache.org/docs/en/latest/config_ref/index.html)
+[V1 documentation](https://ionicframework.com/docs/v1/guide/publishing.html)  
+
+Now that we have a working app, we are ready to push it live to the world! Since the Ionic team already submitted the Todo app from this guide to the app store, chances are you’ll want to follow this chapter with a new app that you make on your own.
+
+So first, we need to generate a release build of our app, targeted at each platform we wish to deploy on. Before we deploy, we should take care to adjust plugins needed during development that should not be in production mode. For example, we probably don’t want the debug console plugin enabled, so we should remove it before generating the release builds:
+
+```$ ionic cordova plugin rm cordova-plugin-console```
+
+## Android publishing
+
+  
+
+To generate a release build for Android :
+
+```
+$ cordova build --release --prod android
+```
+
+This will generate a release build based on the settings in your config.xml. Your Ionic app will have preset default values in this file, but if you need to customize how your app is built, you can edit this file to fit your preferences
+
+[Other build option](https://ionicframework.com/docs/cli/cordova/build/)    
+
+Next, we can find our unsigned **APK** file in ```platforms/android/build/outputs/apk```
+
+Now, we need to sign the unsigned APK and run an alignment utility on it to optimize it and prepare it for the app store. If you already have a signing key, skip these steps and use that one instead.
+
+Let’s generate our private key using the **keytool** command that comes with the JDK.
+
+```
+$ keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+```
+
+You will first be prompted to create a password for the keystore. Then, answer the rest of the nice tools’s questions and when it’s all done, you should have a file called **my-release-key.keystore** created in the current directory.
+
+**Note:** Make sure to save this file somewhere safe, if you lose it you won’t be able to submit updates to your app!
+
+To sign the unsigned APK, run the **jarsigner** tool which is also included in the JDK:
+
+**WARNING** you must copy your apk in the same folder that your keystore were generated ! Else you will have the following error 
+```jarsigner: unable to open jar file: android-release-unsigned.apk```
+
+```
+$ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore HelloWorld-release-unsigned.apk alias_name
+```
+
+This signs the apk in place. Finally, we need to run the zip align tool to optimize the APK. The **zipalign** tool can be found in **/path/to/Android/sdk/build-tools/VERSION/zipalign**. For example, on OS X with Android Studio installed, **zipalign is in ~/Library/Android/sdk/build-tools/VERSION/zipalign:**
+
+```
+$ zipalign -v 4 HelloWorld-release-unsigned.apk HelloWorld.apk
+```
+
+Now we have our final release binary called HelloWorld.apk and we can release this on the Google Play Store
