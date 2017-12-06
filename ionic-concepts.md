@@ -5,7 +5,6 @@
 	* [Decorators](#decorators)    	
 	* [Pipe](#pipe)    
 	* [Promise vs Observable](#promise-vs-observable)    
-	* [Mapping](#mapping)    
 	* [Arrow function](#arrow-function)    
 
 ## Angular 2
@@ -270,7 +269,7 @@ which would then allow you to implement it in your templates like this:
 Now someString would be run through your custom myPipe before the value is output to the user.
 
 ## Pipe
-[Back to top](#ionic-2)  
+[Back to top](#concepts)  
 
 [link : Understanding Pipe](http://mcgivery.com/understanding-ionic-2-pipe/)      
 [link : Josh Morony Pipe documentation](http://www.joshmorony.com/how-to-use-pipes-to-manipulate-data-in-ionic-2/)
