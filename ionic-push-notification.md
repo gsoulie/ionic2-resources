@@ -5,6 +5,8 @@
 
 #### 1 - Create Firebase application
 
+Go to Firebase console and create a new project
+
 #### 2 - fcm plugin installation
 
 ```
