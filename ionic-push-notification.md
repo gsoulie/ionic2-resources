@@ -2,7 +2,7 @@
 
 ## FCM push notification (Firebase Cloud Messaging)
 
-[Documentation](#https://www.djamware.com/post/58a1378480aca7386754130a/ionic-2-fcm-push-notification)    
+[Documentation](https://www.djamware.com/post/58a1378480aca7386754130a/ionic-2-fcm-push-notification)    
 
 #### 1 - Create Firebase application
 
