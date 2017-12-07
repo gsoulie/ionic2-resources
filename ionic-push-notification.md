@@ -132,7 +132,7 @@ So, if you want to display the notification in the system tray when your app is 
 
 Next, by default, push notification sound is disable in the Firebase console. To activate it, you have advanced settings section in the notification create screen.
 
-## Other way
+## Push notification with phonegap-plugin-push (need to be updated)
 [Back to top](#push-notification) 
 
 [link : working both platform tutorial](https://medium.com/@ankushaggarwal/push-notifications-in-ionic-2-658461108c59#.tqfzfx5dd)
