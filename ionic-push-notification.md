@@ -1,5 +1,124 @@
 # Push notification
-[Back to top](#ionic-2) 
+
+## FCM push notification (Firebase Cloud Messaging)
+[Back to top](#push-notification) 
+
+#### 1 - Create Firebase application
+
+#### 2 - fcm plugin installation
+
+```
+ionic cordova plugin add cordova-plugin-fcm
+npm install --save @ionic-native/fcm
+```
+#### 3 - get google-services.json
+
+In your firebase dashboard, go to *Settings* --> *project parameters* and download **google-services.json** file. Next, copy this file at the root of your project 
+
+#### 4 - updating build.gradle
+
+Update your */platforms/android/build.gradle* to reflecting the following code
+
+```javascript
+// Allow plugins to declare Maven dependencies via build-extras.gradle.
+allprojects {
+    repositories {
+        mavenCentral();
+        jcenter();
+        maven { url "https://maven.google.com" }  // new line
+    }
+}
+```
+#### 5 - Declare FCM module
+
+*app.module.ts*
+
+```javascript
+import { FCM } from '@ionic-native/fcm';
+
+
+@NgModule({
+  declarations: [
+    MyApp,
+    HomePage
+  ],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(MyApp)
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    HomePage
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    FCM,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
+})
+export class AppModule {}
+```
+
+#### 6 - implement basic push notification reception
+
+*app.component.ts*
+
+```javascript
+import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { FCM } from '@ionic-native/fcm';
+import { HomePage } from '../pages/home/home';
+@Component({
+  templateUrl: 'app.html'
+})
+export class MyApp {
+  rootPage:any = HomePage;
+
+  constructor(platform: Platform, 
+    statusBar: StatusBar, 
+    splashScreen: SplashScreen,
+    public fcm: FCM) {
+    platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      statusBar.styleDefault();
+      this.initFCM();
+      splashScreen.hide();
+    });
+  }
+
+  initFCM(){
+    this.fcm.subscribeToTopic('all');
+    this.fcm.getToken().then(token => {
+      // backend.registerToken(token);
+    });
+    this.fcm.onNotification().subscribe(data => {
+      alert('message received')
+      if(data.wasTapped) {
+       console.info("Received in background");
+      } else {
+       console.info("Received in foreground");
+      };
+    });
+    this.fcm.onTokenRefresh().subscribe(token => {
+      // backend.registerToken(token);
+    });
+  }
+}
+```
+
+Finally, run the application on a device
+
+#### 7 - Send notification from Firebase
+
+Go to your firebase console and open **Notifications** menu, then follow the instructions to send your first push notification. 
+
+## Other way
+[Back to top](#push-notification) 
 
 [link : working both platform tutorial](https://medium.com/@ankushaggarwal/push-notifications-in-ionic-2-658461108c59#.tqfzfx5dd)
 
@@ -103,3 +222,4 @@ module.exports = {
         console.log("Device token:", data.token);
     });
 ```
+[Back to top](#push-notification) 
