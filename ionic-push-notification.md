@@ -111,6 +111,9 @@ export class MyApp {
     this.fcm.onTokenRefresh().subscribe(token => {
       // backend.registerToken(token);
     });
+    
+    // You can also subscribe on a specific channel
+    // this.fcm.subscribeToTopic('topicExample');
   }
 }
 ```
@@ -120,6 +123,14 @@ Finally, run the application on a device
 #### 7 - Send notification from Firebase
 
 Go to your firebase console and open **Notifications** menu, then follow the instructions to send your first push notification. 
+
+#### 8 - Going further
+
+With this method, you will see that push notification doesn't display on the system tray when the app is foreground, but the push notification appears when the app is in background.
+
+So, if you want to display the notification in the system tray when your app is foreground, you can use *local notification*
+
+Next, by default, push notification sound is disable in the Firebase console. To activate it, you have advanced settings section in the notification create screen.
 
 ## Other way
 [Back to top](#push-notification) 
