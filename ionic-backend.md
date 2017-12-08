@@ -33,6 +33,8 @@ cordova plugin add cordova-plugin-inappbrowser@1.1.0
 
 [link : Josh morony tutorial](https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/)
 
+[USING angularfire OFFLINE](https://github.com/adriancarriger/angularfire2-offline)    
+
 **Warning** The original tutorial is not updated with AngularFire 5.0, so if you are running AngularFire 5.0.x use my code below which is updated according to the angularfire2 v5.0 change log.
 
 #### Plugin installation
