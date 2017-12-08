@@ -897,7 +897,7 @@ export class AppModule {}
 
 ### Hide tab on sub pages
 
-To hide tabs on sub pages, just add ---- in your app.module.ts
+To hide tabs on sub pages, modify your *app.module-ts* as following
 
 *app.module.ts*
 
@@ -905,7 +905,7 @@ To hide tabs on sub pages, just add ---- in your app.module.ts
 @NgModule({
   declarations: [...],
   imports: [
-    IonicModule.forRoot(MyApp,{tabsHideOnSubPages:"true"})
+    IonicModule.forRoot(MyApp,{tabsHideOnSubPages:"true"})	// Hide tab
   ],
   bootstrap: [IonicApp],
   entryComponents: [...],
