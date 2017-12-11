@@ -144,6 +144,11 @@ export class HomePage {
     // Initialize data                
     this.songsList = this.afDB.list('/songs');
     this.songs = this.songsList.valueChanges();
+    
+    // Querying data on title
+    /*this.songsList = this.afDB.list('/songs', ref => ref.orderByChild('title').equalTo('<YOUR_TITLE>'));
+    this.songs = this.songsList.valueChanges();
+    return this.songs;  */
   }
 
   /**
