@@ -250,4 +250,4 @@ export class HomePage {
 ## Authentication
 [Back to top](#angularfire2) 
 
-[Github repos]()
+[Github repos](https://github.com/gsoulie/ionic2-angularFire2-authentication)    
