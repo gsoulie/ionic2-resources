@@ -4,7 +4,7 @@
 
 
 ## Create custom component
-First, create your custom component with ```ionic g component compo```
+First, create your custom component with ```ionic g component compo```, then add its declaration in your *app.module.ts* file
 
 *View file*
 
