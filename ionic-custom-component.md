@@ -28,8 +28,14 @@ export class CompoComponent implements OnInit{
   
   @Input() title: string = "";  // @Input allow to get parameter from parent page
   
-  constructor(public navCtrl: NavController,public navParams: NavParams, dbService: DatabaseService) { }
+  constructor(public navCtrl: NavController,public navParams: NavParams, dbService: DatabaseService) { 
+  	console.log("title = " + title); // !!! Doesn't return anything, the constructor
+  }
   
+  ngOnInit(){
+  	console.log("title = " + title); // Ok here !!
+  	this.onFetchData();
+  }
   // Get data from WS
   onFetchData(){
   	this.dbService.fetch()
@@ -39,6 +45,8 @@ export class CompoComponent implements OnInit{
 ```
 
 Notice that in the code we are using **@Input**, this allow to get parameters from the parent's page. In this example, we create an input parameter which give us the title to set in the component
+
+**IMPORTANT** : Custom component will not have the *ion-* view lifecycle events. In this case, you'll need to use the raw angular *ngOnInit*, *ngAfterInit* hooks.
 
 ## Using custom component in another page
 
@@ -74,7 +82,7 @@ In our example, we want to call the *onFectchData* component function, from the 
 
 ```javascript
 import { CompoComponent } from './../../components/compo/compo';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
