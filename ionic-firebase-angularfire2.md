@@ -305,4 +305,4 @@ onFetchData(){
 ## Authentication
 [Back to top](#angularfire2) 
 
-[Github repos](https://github.com/gsoulie/ionic2-angularFire2-authentication)    
+[Personnal sample Github repos](https://github.com/gsoulie/ionic2-angularFire2-authentication)    
