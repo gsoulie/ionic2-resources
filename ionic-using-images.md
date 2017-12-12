@@ -1,7 +1,7 @@
 # Using image
 [Back to top](#ionic-2) 
 
-To use image in your app, you can store them into ```src/app/assets/*.png```
+To use image in your app, you can store them under ```src/assets/imgs/*.png```
 
 *View file*
 
@@ -12,7 +12,7 @@ To use image in your app, you can store them into ```src/app/assets/*.png```
 *Controller file*
 
 ```javascript
-let item = {name:"my item", image:"./assets/my_image.png"}
+let item = {name:"my item", image:"./assets/imgs/my_image.png"}
 ```
 
 *Style file*
