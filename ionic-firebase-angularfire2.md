@@ -71,6 +71,9 @@ export const firebaseConfig = {
 export class AppModule {}
 ```
 
+#### Usage
+[Back to top](#angularfire2) 
+
 *Home.html*
 
 ```html
@@ -123,11 +126,6 @@ export class HomePage {
     // Initialize data                
     this.songsList = this.afDB.list('/songs');
     this.songs = this.songsList.valueChanges();
-    
-    // Querying data on title
-    /*this.songsList = this.afDB.list('/songs', ref => ref.orderByChild('title').equalTo('<YOUR_TITLE>'));
-    this.songs = this.songsList.valueChanges();
-    return this.songs;  */
   }
 
   /**
@@ -245,6 +243,62 @@ export class HomePage {
   }
 }
 
+```
+
+#### Firebase rules configuration
+[Back to top](#angularfire2) 
+
+In order to improve the querying performance, it is recommanded to add *.indexOn* rule in your firebase rules like below :
+
+```javascript
+{
+    "rules": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        "songs": {
+            ".indexOn": "title"
+        }
+     }
+}
+```
+
+#### Filtering data
+[Back to top](#angularfire2) 
+
+Go further with filtering data on attribute :
+
+```javascript
+onFetchData(){
+    // Querying data on title
+    this.songsList = this.afDB.list('/songs', ref => ref.orderByChild('title').equalTo('<YOUR_TITLE>'));
+    this.songs = this.songsList.valueChanges();
+    return this.songs;
+}
+```
+
+#### Ordering data
+[Back to top](#angularfire2) 
+
+After retieving your dataset, you can sort it with *.map* function like below 
+
+```javascript
+onFetchData(){
+    // Querying data on title and sort by artist
+    this.songsList = this.afDB.list('/songs', ref => ref.orderByChild('title').equalTo('<YOUR_TITLE>'));
+    this.songs = this.songsList.valueChanges().map(items => items.sort(this.predicateBy("artist")));
+    return this.songs;
+}
+
+ predicateBy(prop){
+    return function(a,b){
+      if( a[prop] > b[prop]){
+          return 1;
+      }else if( a[prop] < b[prop] ){
+          return -1;
+      }
+      return 0;
+    }
+  }
 ```
 
 
