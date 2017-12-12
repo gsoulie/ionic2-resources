@@ -9,7 +9,8 @@
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
 
-[link : Josh morony tutorial](https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/)
+[link : Josh morony tutorial](https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/)    
+[link : AngularFire2 change log](https://github.com/angular/angularfire2/blob/master/docs/rtdb/querying-lists.md)    
 
 [USING angularfire OFFLINE](https://github.com/adriancarriger/angularfire2-offline)    
 
