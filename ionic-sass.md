@@ -190,6 +190,8 @@ $searchbar-ios-background-color: rgba(247,247,247,1);
 
 ## Disable scrolling on ion-content
 
+### Old method
+
 *View file*
 
 ```javascript
@@ -206,6 +208,31 @@ $searchbar-ios-background-color: rgba(247,247,247,1);
             overflow: hidden !important;
         }
 }
+```
+
+### New solution
+
+```
+$ ionic plugin add --save ionic-plugin-keyboard
+$ npm install --save @ionic-native/keyboard
+```
+
+Next, add provider for plugin like this
+
+*app.module.ts*
+
+```
+@NgModule({
+declarations: [...],
+imports: [
+IonicModule.forRoot(MyApp, { scrollAssist: false, autoFocusAssist: false } )
+]
+providers: [
+    ...
+    Keyboard
+    ...
+  ]
+})
 ```
 
 ## Label with full width inside ion-item
