@@ -1,33 +1,10 @@
 # Backends
 
 * [Backends](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-backend.md)    
-	* [Strongloop](#strongloop)     
 	* [Firebase with angularfire2](#firebase-with-angularfire2)    
 	* [Firebase](#firebase)     	
+	* [Strongloop](#strongloop)     
 	
-## Strongloop
-[Back to top](#backends) 
-
-[link : Strongloop and bluemix](http://www.raymondcamden.com/2015/10/29/strongloop-ionic-and-ibm-bluemix/)    
-
-### Network app sample
-
-[link : ionic 2 oauth social with firebase](http://www.gajotres.net/ionic-2-succesfull-oauth-social-login-with-firebase/)
-[link : ionic framework and firebase](https://www.toptal.com/front-end/building-multi-platform-real-time-mobile-applications-using-ionic-framework-and-firebase)
-
-**cordova plugin installation**
-
-```
-cordova plugin add cordova-plugin-whitelist
-cordova plugin add cordova-plugin-inappbrowser@1.1.0
-```
-
-*app.html configuration*
-
-```html
-<meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
-```
-
 ## Firebase with angularfire2
 [Back to top](#backends) 
 
@@ -608,4 +585,28 @@ export class DataService {
 export class Game {
 	constructor(public name: string, .....) {}
 }
+```
+
+
+## Strongloop
+[Back to top](#backends) 
+
+[link : Strongloop and bluemix](http://www.raymondcamden.com/2015/10/29/strongloop-ionic-and-ibm-bluemix/)    
+
+### Network app sample
+
+[link : ionic 2 oauth social with firebase](http://www.gajotres.net/ionic-2-succesfull-oauth-social-login-with-firebase/)
+[link : ionic framework and firebase](https://www.toptal.com/front-end/building-multi-platform-real-time-mobile-applications-using-ionic-framework-and-firebase)
+
+**cordova plugin installation**
+
+```
+cordova plugin add cordova-plugin-whitelist
+cordova plugin add cordova-plugin-inappbrowser@1.1.0
+```
+
+*app.html configuration*
+
+```html
+<meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
 ```
