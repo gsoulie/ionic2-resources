@@ -8,7 +8,11 @@
 	* [Checking network connection](#checking-network-connection)    
 	* [Close modal](#close-modal)    
 	* [Accessing DOM element @ViewChild](#accessing-dom-element)  
-	
+
+## Ionic 2 useful functions snippets
+
+[Personnal Ionic 2 snippet repo](https://github.com/gsoulie/Ionic2-snippets)    
+
 ## Get specific platform
 [Back to top](#useful-functions)  
 
