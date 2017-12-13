@@ -1,8 +1,7 @@
 # Bluetooth    
 
-* [Bluetooth](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-bluetooth.md)    
-	* [BLE](#ble)    
-	* [Bluetooth Serial](#bluetooth-serial)  
+* [BLE](#ble)    
+* [Bluetooth Serial](#bluetooth-serial)  
 
 ## BLE    
 
