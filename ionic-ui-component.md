@@ -1035,8 +1035,10 @@ This snippet show how to fix floating button in front of a list
 ## Chart
 [Back to top](#ui-components)  
 
+[Chart.js](http://www.chartjs.org/)    
+[Chart.js API](http://www.chartjs.org/docs/latest/charts/)    
+
 [Josh morony chartJS](https://www.joshmorony.com/adding-responsive-charts-graphs-to-ionic-2-applications/)    
-[ChartJS](http://www.chartjs.org/docs/latest/charts/)    
 [link : ng2-chart](http://valor-software.com/ng2-charts/)    
 [forum : related post](https://forum.ionicframework.com/t/solved-ionic-2-ng2-charts/42926)    
 
