@@ -1,8 +1,5 @@
 # Custom Component
 
-[Back to top](#ionic-2)  
-
-
 ## Create custom component
 First, create your custom component with ```ionic g component compo```, then add its declaration in your *app.module.ts* file
 
