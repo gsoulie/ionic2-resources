@@ -1,5 +1,7 @@
 # Third party lib
-[Back to top](#ionic-2)
+
+* [ES6](#es6)   
+* [TypeScript](#typescript)    
 
 ## ES6
 To use a custom lib file in your project, follow the next steps 
