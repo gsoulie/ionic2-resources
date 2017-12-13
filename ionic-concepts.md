@@ -1,11 +1,10 @@
 # Concepts
 
-* [Concepts](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-concepts.md)    
-	* [Angular 2](#angular-2)  
-	* [Decorators](#decorators)    	
-	* [Pipe](#pipe)    
-	* [Promise vs Observable](#promise-vs-observable)    
-	* [Arrow function](#arrow-function)    
+* [Angular 2](#angular-2)  
+* [Decorators](#decorators)    	
+* [Pipe](#pipe)    
+* [Promise vs Observable](#promise-vs-observable)    
+* [Arrow function](#arrow-function)    
 
 ## Angular 2
 [Back to top](#concepts)  
