@@ -1,11 +1,10 @@
 # Themes
-[Back to top](#ionic-2)  
 
-### Dynamic theming
+## Dynamic theming
 
 [devdactic dynamic theming](https://devdactic.com/dynamic-theming-ionic/)    
 
-### Statusbar
+## Statusbar
 
 **cordova plugin installation**
 
@@ -40,7 +39,7 @@ export class MyApp {
 }
 ```
 
-### Change background color of a specific page
+## Change background color of a specific page
 
 ```xml
 <ion-content padding class="masters">
@@ -66,7 +65,7 @@ Lastly you make sure this scss is being compiled with your **app.core.scss** by 
 @import "../pages/masters/masters";
 ```
 
-### Override variable.scss
+## Override variable.scss
 
 In the *variable.scss* file, you can define a lot of variables to create your custom style (see more on [ionic 2 overriding variables](#https://ionicframework.com/docs/v2/theming/overriding-ionic-variables/). Here is an example of variable.scss overriding
 
