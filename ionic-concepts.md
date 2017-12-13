@@ -444,6 +444,8 @@ Pipes are very useful for string formatting like date, hour, regexp...
 
 [link : RxJS Observables vs Promises](https://egghead.io/lessons/rxjs-rxjs-observables-vs-promises)
 
+> **Update : Observable changes** [See this topic on Observable changes](https://www.joshmorony.com/using-observables-in-ionic-3-9-x-and-angular-5/)    
+
 Both Promises and Observables provide us with abstractions that help us deal with the asynchronous nature of our applications. However, there are important differences between the two:
 
 - Observable can emit multiple values over time
