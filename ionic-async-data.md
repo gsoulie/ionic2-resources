@@ -1,7 +1,5 @@
 # Async data
 
-[Back to top](#ionic-2)  
-
 It is possible to use **async pipe** to get asynchronous data  : 
 
 *View file*
