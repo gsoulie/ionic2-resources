@@ -6,7 +6,7 @@
 
 ## BLE    
 
-First install *cordova-native-ble-central* plugin
+First install ```cordova-native-ble-central* plugin
 
 [native ble](ttps://ionicframework.com/docs/native/ble/)    
 
