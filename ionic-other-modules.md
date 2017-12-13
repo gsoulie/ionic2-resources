@@ -1,5 +1,4 @@
 # Other modules
-[Back to top](#ionic-2) 
 
 ## CRC Computation
 
