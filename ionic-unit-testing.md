@@ -1,5 +1,4 @@
 # Unit testing
-[Back to top](#ionic-2)
 
 [link : Unit testing with karma](http://www.roblouie.com/article/376/ionic-2-set-up-unit-testing-the-best-way/)    
 [link : Angular doc](https://angular.io/docs/ts/latest/guide/testing.html)    
