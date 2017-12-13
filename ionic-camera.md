@@ -1,5 +1,4 @@
 # Camera
-[Back to top](#ionic-2)  
 
 [See documentation here](https://ionicframework.com/docs/v2/native/camera/)    
 
