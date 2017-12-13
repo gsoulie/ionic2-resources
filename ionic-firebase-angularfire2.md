@@ -1,10 +1,8 @@
 
 # AngularFire2
 
-
-* [Backends](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-firebase-angularfire2.md)    
-	* [CRUD angularfire2](#crud-angularfire2)    
-	* [Authentication](#authentication)  
+* [CRUD angularfire2](#crud-angularfire2)    
+* [Authentication](#authentication)  
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
