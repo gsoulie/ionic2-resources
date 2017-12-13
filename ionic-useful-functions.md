@@ -1,6 +1,5 @@
 # Useful Functions
 
-* [Useful functions](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-useful-functions.md)  
 	* [Get specific platform](#get-specific-platform)   
 	* [Generate UUID](#generate-uuid)  
 	* [Safely displaying data with elvis operator](#safely-displaying-data-with-elvis-operator)    
