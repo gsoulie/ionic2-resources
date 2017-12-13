@@ -1,8 +1,7 @@
 # Prerequisites
 
-* [Prerequisites](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-prerequisites.md)    
-	* [Start with ionic](#start-with-ionic)  
-	* [Visual Studio Code](#visual-studio-code)   
+* [Start with ionic](#start-with-ionic)  
+* [Visual Studio Code](#visual-studio-code)   
 
 ## Start with ionic
 
