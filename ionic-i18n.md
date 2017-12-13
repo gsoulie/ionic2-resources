@@ -1,5 +1,4 @@
 # Internationalization
-[Back to top](#ionic-2)  
 
 **cordova plugin installation**
 
