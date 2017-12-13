@@ -1,11 +1,24 @@
 # PWA
-[Back to top](#ionic-2)   
 
-[ionic blog post](http://blog.ionic.io/how-to-make-pwas-with-ionic/)    
+## Resources
 
-**1** Add browser platform with ```ionic cordova platform add browser```    
+[ionic blog post](http://blog.ionic.io/how-to-make-pwas-with-ionic/)     
+[link : josh morony tutorial PWA](https://www.joshmorony.com/the-bare-necessities-progressive-web-apps-in-ionic/)    
+[link : josh morony tutorial](https://www.joshmorony.com/preparing-a-progressive-web-application-for-production/)    
 
-**2** Uncomment the following code in the index.html to activate service worker to enabling caching resources
+[discussion with firebase hosting](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689)    
+[discussion](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689/2)    
+[discussion](https://forum.ionicframework.com/t/pwa-my-experience-creating-a-pwa-with-ionic-from-scratch-to-deployment/94541)    
+[discussion](https://forum.ionicframework.com/t/deploying-pwa/73749)   
+[firebase hosting](https://coryrylan.com/blog/deploy-angular-cli-apps-to-firebase)    
+
+## Step 1
+
+Add browser platform with ```ionic cordova platform add browser```    
+
+## Step 2
+
+Uncomment the following code in the index.html to activate service worker to enabling caching resources
 
 ```
 <script>
@@ -17,13 +30,17 @@
 </script>
 ```
 
-**3** If you need to caching some resources, add them in ```service-worker.js```
+## Step 3
 
-**4** Run with ```ionic cordova run browser``` to test the site
+If you need to caching some resources, add them in ```service-worker.js```
+
+## Step 4
+
+Run with ```ionic cordova run browser``` to test the site
 
 **favicon** the favicon must be placed in the src/assets/icon/ folder, then use ionic cordova resources --icon
 
-**Steps for hosting and deploying on Firebase**
+## Step 5 Hosting and deploying on Firebase
 
 ```
 Create your firebase project on Firebase, then
@@ -48,9 +65,4 @@ overwrite index.html
 
 firebase deploy
 ```
-[josh morony tutorial](https://www.joshmorony.com/the-bare-necessities-progressive-web-apps-in-ionic/)    
-[discussion with firebase hosting](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689)    
-[discussion](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689/2)    
-[discussion](https://forum.ionicframework.com/t/pwa-my-experience-creating-a-pwa-with-ionic-from-scratch-to-deployment/94541)    
-[discussion](https://forum.ionicframework.com/t/deploying-pwa/73749)   
-[firebase hosting](https://coryrylan.com/blog/deploy-angular-cli-apps-to-firebase)    
+
