@@ -1,12 +1,12 @@
 # Useful Functions
 
-	* [Get specific platform](#get-specific-platform)   
-	* [Generate UUID](#generate-uuid)  
-	* [Safely displaying data with elvis operator](#safely-displaying-data-with-elvis-operator)    
-	* [Show / hide DOM element](#show-hide-dom-element)    
-	* [Checking network connection](#checking-network-connection)    
-	* [Close modal](#close-modal)    
-	* [Accessing DOM element @ViewChild](#accessing-dom-element)  
+* [Get specific platform](#get-specific-platform)   
+* [Generate UUID](#generate-uuid)  
+* [Safely displaying data with elvis operator](#safely-displaying-data-with-elvis-operator)    
+* [Show / hide DOM element](#show-hide-dom-element)    
+* [Checking network connection](#checking-network-connection)    
+* [Close modal](#close-modal)    
+* [Accessing DOM element @ViewChild](#accessing-dom-element)  
 
 ## Ionic 2 useful functions snippets
 
