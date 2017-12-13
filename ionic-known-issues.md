@@ -1,5 +1,4 @@
 # Known issues
-[Back to top](#ionic-2) 
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
 
