@@ -1,8 +1,7 @@
 # Backends
 
-* [Backends](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-backend.md)    
-	* [Firebase](#firebase)     	
-	* [Strongloop](#strongloop)     
+* [Firebase](#firebase)     	
+* [Strongloop](#strongloop)     
 	
 ## Firebase
 [Back to top](#backends) 
