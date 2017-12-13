@@ -1,5 +1,4 @@
 # Global variables
-[Back to top](#ionic-2)
 
 Here's a solution to centralize application's globals. The solution consist in using **config.js** file in provider's folder.
 
