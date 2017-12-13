@@ -1,5 +1,4 @@
 # Navigation
-[Back to top](#ionic-2)  
 
 ### Using NavController
 
