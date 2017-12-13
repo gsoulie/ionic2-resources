@@ -1,5 +1,4 @@
 # Using image
-[Back to top](#ionic-2) 
 
 To use image in your app, you can store them under ```src/assets/imgs/*.png```
 
