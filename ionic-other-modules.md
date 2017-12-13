@@ -1,5 +1,8 @@
 # Other modules
 
+* [CRC Computation](#crc-computation)    
+* [Make PDF](#make-pdf)    
+
 ## CRC Computation
 
 Here is a library which permit CRC computation. This lib return a JSON object which contains all type of CRC (see usage below).
