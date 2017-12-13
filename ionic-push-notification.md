@@ -1,7 +1,7 @@
 # Push notification
 
-* [Firebase Cloud Messaging](fcm-push-notification)    
-* [Phonegap plugin push](push-notification-with-phonegap-plugin-push-need-to-be-updated)    
+* [Firebase Cloud Messaging](#fcm-push-notification)    
+* [Phonegap plugin push](#push-notification-with-phonegap-plugin-push-need-to-be-updated)    
 
 ## FCM push notification
 
