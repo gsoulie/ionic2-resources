@@ -1,5 +1,4 @@
 # MomentJS
-[Back to top](#ionic-2)  
 
 ### Package installation
 
