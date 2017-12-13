@@ -1,5 +1,4 @@
 # Sass
-[Back to top](#ionic-2) 
 
 Here are some tips to perform your scss.
 
