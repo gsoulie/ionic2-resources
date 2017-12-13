@@ -1,5 +1,4 @@
 # Build for iOS
-[Back to top](#ionic-2)
 
 [Build without using XCode](https://github.com/phonegap/ios-deploy)      
 ```
