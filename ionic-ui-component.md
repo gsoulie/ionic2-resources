@@ -667,6 +667,8 @@ groupPatients(patients){
 ## Searchbar
 [Back to top](#ui-components)  
 
+> **Update** see this tutorial for Observable update on searchbar (https://www.joshmorony.com/using-observables-in-ionic-3-9-x-and-angular-5/)
+
 *View file*
 
 ```xml
