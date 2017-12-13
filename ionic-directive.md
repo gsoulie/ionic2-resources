@@ -1,5 +1,4 @@
 # Directive
-[Back to top](#ionic-2)  
 
 ### ngFor
 
