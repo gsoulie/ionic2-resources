@@ -1,5 +1,4 @@
 # Forms
-[Back to top](#ionic-2) 
 
 Here is a basic form sample
 
