@@ -1,7 +1,6 @@
 # Events
 
 ## Page event
-[Back to top](#ionic-2)
 
 | Page event    | Description   |
 | ------------- |---------------|
@@ -14,7 +13,7 @@
 | ionViewDidUnload | Runs after the page has been destroyed and its elements have been removed. |
 
 ## Event propagation
-[Back to top](#ionic-2)  
+[Back to top](#events)  
 
 This code show how to stop event propagation
 
