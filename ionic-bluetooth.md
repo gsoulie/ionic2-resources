@@ -6,9 +6,14 @@
 
 ## BLE    
 
-First install ```cordova-native-ble-central* plugin```
+Plugin installation
 
-[native ble](ttps://ionicframework.com/docs/native/ble/)    
+```
+ionic cordova plugin add cordova-plugin-ble-central
+npm install --save @ionic-native/ble
+```
+
+[native ble](https://ionicframework.com/docs/native/ble/)    
 
 [personal BLE repo](https://github.com/gsoulie/ionicBLE)
 
