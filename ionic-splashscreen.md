@@ -1,5 +1,4 @@
 # Splash screen and appicon
-[Back to top](#ionic-2)
 
 [link : Appicon and Splash screen documentation](http://blog.ionic.io/automating-icons-and-splash-screens/)
 
