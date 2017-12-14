@@ -5,6 +5,7 @@
 * [Pipe](#pipe)    
 * [Promise vs Observable](#promise-vs-observable)    
 * [Arrow function](#arrow-function)    
+* [Async/Await functions](#await-async functions)    
 
 ## Angular 2
 [Back to top](#concepts)  
@@ -605,3 +606,88 @@ ionViewDidLeave(){
 }
 ...
 ```
+
+
+## Await async functions
+[Back to top](#concepts)  
+
+[link : MDN definition](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/async_function)    
+[link : asyncawait-with-angular](https://labs.encoded.io/2016/12/08/asyncawait-with-angular/)    
+
+### Understand the concept of *async/await* asynchronous functions. 
+
+Since ES6, you can use the keyword **async** on an asynchronous function (**not on Observable !**). Then the keyword **await** becomes available. 
+When **await** is used as a prefix *on a promise*, the result of the expression is "paused" until the promise is resolved or rejected.
+
+*example*
+
+```javascript
+async function myFunction(){
+    await myPromise;
+    return res;  // This line will be reached only when myPromise will be resolved / rejected
+}
+```
+
+*full example 1*
+
+```javascript
+async function sendEmails(query) {
+  const users = await getUsers(query);
+  const emails = users.map(u => u.email);
+  const sentP = emails.map(email => sendMail(email, "Good day"));
+  return await Promise.all(sentP);
+}
+
+// WARNING : we can not use "await" outside a "async" function
+// So we have to "wrap" our code around asynchronous function
+async function main() {
+  try {
+    await sendEmails({ firstName: "Nicolas" });
+    console.log("OK");
+  } catch (e) {
+    console.error("FAIL");
+  }
+}
+
+main();
+```
+
+*Full example 2*
+
+```javascript
+function resolveAfter2Seconds(x) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x);
+    }, 2000);
+  });
+}
+
+// With add1() the second timeout is created when the first one is finished
+async function add1(x) {
+  const a = await resolveAfter2Seconds(20); 
+  const b = await resolveAfter2Seconds(30); 
+  return x + a + b;
+}
+
+add1(10).then(v => {
+  console.log(v);  // display 60 after 4 seconds.
+});
+
+// --------------------------------------------------------
+
+// With add2() the two timeout are created at the same time
+async function add2(x) {
+  const a = resolveAfter2Seconds(20); 
+  const b = resolveAfter2Seconds(30); 
+  return x + await a + await b;
+}
+
+add2(10).then(v => {
+  console.log(v);  // display 60 after 2 seconds.
+});
+```
+
+### Conclusion
+
+Using *await/async* function is just syntactic sugar, it is not better or worst, it is a matter of personal preference.
