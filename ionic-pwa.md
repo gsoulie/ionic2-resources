@@ -42,26 +42,31 @@ Run with ```ionic cordova run browser``` to test the site
 
 ## Step 5 Hosting and deploying on Firebase
 
+The first thing you need to do is to **create a new project in Firebase**, then navigate in the Hosting option and click on **Get started**. You will be promped to install *firebase-tool* 
+
 ```
-Create your firebase project on Firebase, then
+npm install -g firebase-tools
+```
 
-$ionic cordova build browser --prod
+And follow the steps below :
 
-$npm install -g firebase-tools
+```
+firebase login
 
-$firebase login
+firebase init
+--> select "hosting" option
 
-$firebase init
---> select "hosting"
-
-Choose de default directory :
+What do you want to use as your public directory ?
 --> platforms/browser/www
 
-single page ?
---> yes
+COnfigure as a single-page app ?
+--> Yes
 
-overwrite index.html 
---> no
+File www/index.html already exists. Overwrite ?
+--> No
+
+// Build your application
+ionic cordova build browser --prod
 
 firebase deploy
 ```
