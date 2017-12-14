@@ -5,7 +5,7 @@
 * [Pipe](#pipe)    
 * [Promise vs Observable](#promise-vs-observable)    
 * [Arrow function](#arrow-function)     
-* [Async Await functions](#await-async functions)     
+* [Async / Await functions](#await-async-functions)     
 
 ## Angular 2
 [Back to top](#concepts)  
