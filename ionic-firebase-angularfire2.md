@@ -299,6 +299,44 @@ onFetchData(){
   }
 ```
 
+#### Targeting sub-nodes
+[Back to top](#angularfire2) 
+
+The following example shows how to add data for the current logged user.
+
+*Firebase Data structure*
+```
++ songs
+-+ guid (logged user)
+---- song 1
+---- song 2
+-+ guid (other logged user)
+---- song 1
+```
+
+```javascript
+...
+constructor(...){
+    // Get the logged user	
+    this.user = this.afAuth.auth.currentUser.uid;
+}
+
+addItem(){
+    const newRef = this.afDB.database.ref('/songs/'+this.user).push({});
+        
+    newRef.set({
+      id: newRef.key,
+      title: title.toUpperCase()
+    });    
+}
+
+fetchData(type){
+    this.songsList = this.afDB.list('/songs/'+this.user, ref => ref.orderByChild('songType').equalTo(type));
+    this.songs = this.songsList.valueChanges().map(items => items.sort(this.tool.predicateBy("title")));
+    return this.songs;  
+}
+```
+
 
 ## Authentication
 [Back to top](#angularfire2) 
