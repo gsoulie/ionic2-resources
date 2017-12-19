@@ -2,7 +2,8 @@
 # AngularFire2
 
 * [CRUD angularfire2](#crud-angularfire2)    
-* [Authentication](#authentication)  
+* [Authentication](#authentication)     
+* [Firebase rules](#firebase-rules)     
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -342,3 +343,92 @@ fetchData(type){
 [Back to top](#angularfire2) 
 
 [Personnal sample Github repos](https://github.com/gsoulie/ionic2-angularFire2-authentication)    
+
+
+## Firebase rules
+[Back to top](#angularfire2) 
+
+[Reference](https://howtofirebase.com/firebase-security-rules-88d94606ce4a)    
+
+Something important on firebase is to set optimized rules for your database. To speed up queries, firebase provide a set of rules that allows to set powerful *index* on specified columns.
+
+Imagine the following data structure [tweets/user/tweet]:
+```
+{
+    tweets: {
+        user1_ID :{
+	    tweet1_ID:{
+	    	date:...
+	    },
+	    tweet2_ID:{
+	    	date:...
+	    }
+	},
+	user2_ID:{
+	   tweet1_ID:{
+	    	date:...
+	    },
+	    tweet2_ID:{
+	    	date:...
+	    },
+	    tweet3_ID:{
+	    	date:...
+	    },
+	    tweet4_ID:{
+	    	date:...
+	    }
+	}
+    }
+```
+
+To optimize the tweet querying, you can set your database rules as the following :
+
+```javascript
+{
+"rules": {
+   "tweets": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid",
+        ".indexOn": "date"
+       }       
+  	}
+  }
+}
+
+// Where $uid is the user generated ID
+```
+
+An other example 
+
+```
+{
+    games: {
+        game1_ID :{
+	   title: "blablabla"
+	},
+	game2_ID :{
+	   title: "blablabla"
+	},
+	game3_ID :{
+	   title: "blablabla"
+	},
+	game4_ID :{
+	   title: "blablabla"
+	}
+    }
+}
+
+// Rules
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "games": {
+      ".indexOn": "title"
+    }
+  }
+}
+
+
+```
