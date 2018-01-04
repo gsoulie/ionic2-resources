@@ -1,3 +1,5 @@
+[< Back to main Menu](https://github.com/gsoulie/Mobile-App-Development/blob/master/ionic2-test.md)    
+
 # Global variables
 
 Here's a solution to centralize application's globals. The solution consist in using **config.js** file in provider's folder.
