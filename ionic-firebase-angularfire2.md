@@ -244,6 +244,29 @@ export class HomePage {
 
 ```
 
+
+#### Convert Observable<any[]> to array of any
+
+It could be useful to work with ```any[]``` instead of ```Observable<any[]>```
+
+Simply use the following code
+
+```javascript
+songs: Observable<any[]>;
+songsArray: any[] = [];
+
+onFetchData(){
+    this.songs = this.dataService.fetchData();	// Simply get data from Firebase
+    this.songs.subscribe(res => {
+        this.songsArray = res as any[];
+    },
+    error => {
+    });
+}
+```
+
+Then you can use ```songsArray``` in your view file as usual.
+
 #### Firebase rules configuration
 [Back to top](#angularfire2) 
 
