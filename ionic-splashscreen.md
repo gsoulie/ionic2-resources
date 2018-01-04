@@ -1,3 +1,5 @@
+[< Back to main Menu](https://github.com/gsoulie/Mobile-App-Development/blob/master/ionic2-test.md)    
+
 # Splash screen and appicon
 
 [link : Appicon and Splash screen documentation](http://blog.ionic.io/automating-icons-and-splash-screens/)
