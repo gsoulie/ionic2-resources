@@ -1,3 +1,5 @@
+[< Back to main Menu](https://github.com/gsoulie/Mobile-App-Development/blob/master/ionic2-test.md)    
+
 # Camera
 
 [See documentation here](https://ionicframework.com/docs/v2/native/camera/)    
