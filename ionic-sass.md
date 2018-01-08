@@ -153,10 +153,33 @@ In the view file
 
 ### Vertical alignment
 
-```css
+```html
 <div text-center>
 	<button ion-button outline type="submit" text-center [disabled]="!f.valid">VALIDER</button>
 </div>
+```
+
+### ion-label vertical alignment
+
+To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you need to set ```display: flex;``` on the parent container (here the ion-item) and set ```margin:auto;``` on the ```<ion-label>```
+
+```html
+  <ion-item no-lines class="alertItem">
+    <ion-label class="alertLabel" color="danger">Bluetooth adapter is disabled</ion-label>
+    <button class="alertButton" ion-button clear default item-end color="white" (click)="onEnableBluetooth()">ENABLE</button>
+  </ion-item>
+```
+
+```css
+    .alertLabel{
+        text-align: left;
+        color: #ffffff;
+        margin: auto;
+    }
+    .alertItem{
+        display: flex;
+        background-color: map-get($colors , danger)
+    }
 ```
 
 ### Add button at the bottom of listview
