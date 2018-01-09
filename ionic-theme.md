@@ -12,6 +12,7 @@
 
 ```
 $ ionic cordova plugin add cordova-plugin-statusbar
+$ npm install --save @ionic-native/status-bar
 ```
 
 **Customize**
