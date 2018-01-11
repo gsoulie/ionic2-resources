@@ -18,9 +18,9 @@ Here is an example of structure :
 
 > Create a folder called **no-homers**
 
-> Create a folder inside of *no-homers* called **server** to hold your NodeJS server
+> Create a folder inside of **no-homers** called **server** to hold your NodeJS server
 
-> Generate a new Ionic application inside of *no-homers* called **client**
+> Generate a new *Ionic application inside* of **no-homers** called **client**
 
 ## Setting up the NodeJS Server
 [Back to top](#communication-between-ionic-and-nodejs)  
