@@ -6,7 +6,8 @@
 * [Project structure](#project-structure)    
 * [Setting up the NodeJS Server](#setting-up-the-nodejs-server)    
 * [Making a REQUEST to NodeJS](#making-a-request-to-nodejs)    
-* [Run](#run)    
+* [Run](#run)   
+* [Deploying server](#deploying-server)    
 
 [link : josh Morony communicating-between-an-ionic-application-and-a-nodejs-backend](https://www.joshmorony.com/communicating-between-an-ionic-application-and-a-nodejs-backend/)    
 
@@ -236,5 +237,19 @@ GET Response: Welcome !
 POST Response: > {passed: true, message: "welcome friend!"}
 ```
 
+## Deploying server
+[Back to top](#communication-between-ionic-and-nodejs)    
+
+If you were to install the Ionic application on your phone, or anywhere other than the machine your server is running on, and attempt to make a request from the application it wouldn't work. Since the server is running **locally**, you can only make requests to the server if your application is also running locally.
+
+In order to make your application accessible to everybody in the world, **you will need to host your NodeJS server**, and then you would make requests to:
+
+```
+this.http.get('https://my-server.com/posts').map(res => res.json()).subscribe(data => {
+    console.log(data);
+});
+```
+
+One particularly easy way to get your NodeJS server up and running is to use [**Heroku**](https://www.heroku.com/).
 
 
