@@ -27,11 +27,7 @@ Here is an example of structure :
 
 We are going to start by setting up our NodeJS server. The basics we will need are a **package.json** file that describes the dependencies that our server will need, and a **server.js** file that will contain our servers code.
 
-For now, just create a blank file called **server.js** inside of the server folder. You can also create your **package.json** manually, or you can run the following command:
-
-```npm init```
-
-inside of your **server** folder, and it will prompt you through the creation of the file. You really only need to answer the following questions right away:
+For now, just create a blank file called **server.js** inside of the server folder. You can also create your **package.json** manually, or you can run the following command: ```npm init``` **inside of your server folder**, and it will prompt you through the creation of the file. You really only need to answer the following questions right away:
 
 ```
 package name: your-server-name
