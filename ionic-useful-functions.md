@@ -271,4 +271,4 @@ export class UserPage {
 }
 ```
 
-see more @ViewChild - @ViewChildren](####@viewvhild-@viewvhildren)
+see more @ViewChild - @ViewChildren
