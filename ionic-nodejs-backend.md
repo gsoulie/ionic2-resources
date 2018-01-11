@@ -55,10 +55,10 @@ var methodOverride = require('method-override') // method-override provides supp
 var cors = require('cors'); // cors package provides a simple way to handle CORS (Cross Origin Resource Sharing) issues
  
 var app = express();
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(methodOverride());
-app.use(cors());
+app.use(logger('dev')); // use logger middleware
+app.use(bodyParser.json()); // use bodyParser middleware
+app.use(methodOverride()); // use methodOverride middleware
+app.use(cors()); // use cors middleware
 
 // /checkname POST webservice
 app.post('/checkname', function(req, res){
