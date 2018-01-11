@@ -23,6 +23,8 @@ Here is an example of structure :
 > Generate a new Ionic application inside of *no-homers* called **client**
 
 ## Setting up the NodeJS Server
+[Back to top](#communication-between-ionic-and-nodejs)  
+
 We are going to start by setting up our NodeJS server. The basics we will need are a **package.json** file that describes the dependencies that our server will need, and a **server.js** file that will contain our servers code.
 
 For now, just create a blank file called **server.js** inside of the server folder. You can also create your **package.json** manually, or you can run the following command:
