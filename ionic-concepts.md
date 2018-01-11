@@ -545,6 +545,11 @@ If we change timeout value of 500 ms to 1500
 > "42"
 
 
+### map operator
+
+While *http.get* returns the result of the request in the form of an *Observable*, **map** converts the result into a **JSON decoded** version of the result, and **subscribe** allows us to access the data that is returned
+
+
 ## Arrow function
 [Back to top](#concepts) 
 
