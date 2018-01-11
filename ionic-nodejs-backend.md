@@ -93,9 +93,9 @@ app.get('/checkname/:name', function(req, res){
 app.listen(process.env.PORT || 8080); // Listening on localhost 8080
 ```
 
-In both cases, we convert the supplied value to lowercase and see if it is equal to “homer”. If it is, we set the HTTP status to 401, which is the “Unauthorized” error code (you don’t have to do this, but it’s a good idea to provide useful status codes), and then in the POST route we send a response to the Ionic application by using the send method. If the name is not equal to “homer”, then we send a JSON object back that includes a message.
+In both cases, we convert the supplied value to lowercase and see if it is equal to *"homer"*. If it is, we set the **HTTP status to 401**, which is the *"Unauthorized"* error code (you don’t have to do this, but it's a good idea to provide useful status codes), and then in the **POST** route we send a response to the Ionic application by using the send method. If the name is not equal to *"homer"*, then we send a JSON object back that includes a message.
 
-The GET route is very similar, except rather than using res.send we use res.json. These methods are mostly identical, and will both send a response back to the Ionic application, but the benefit of using res.json is that it will format any data supplied as valid JSON data (even if we just supply a simple string like ‘Welcome!’).
+The **GET** route is very similar, except rather than using res.send we use res.json. These methods are mostly identical, and will both send a response back to the Ionic application, but the benefit of using res.json is that it will format any data supplied as valid JSON data (even if we just supply a simple string like 'Welcome!').
 
 ## Making a REQUEST to NodeJS
 [Back to top](#communication-between-ionic-and-nodejs)   
