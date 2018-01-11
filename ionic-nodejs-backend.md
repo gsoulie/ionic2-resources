@@ -212,13 +212,13 @@ now, we are expecting to get a JSON response in return, and we log that out to t
 
 First open a terminal and run ```npm start```
 
-Then in an other terminal instance, run your ionic app ```ionic serve -lsc```
+Then in an **other** terminal instance, run your ionic app ```ionic serve -lsc```
 
 > **Important** : note that if you run your application on real device, this will could not communicate with the nodeJS server which is listening on localhost (8080).
 
 ### Response 
 
-After running the NodeJS server and the ionic app, if you send **homer** as user, you will get the following response (use chrome console)
+After running the NodeJS server and the ionic app, if you send *"homer"* as user, you will get the following response (use chrome console)
 
 ```
 > GET http://localhost:8080/checkname/homer 401 (Unauthorized)
@@ -229,7 +229,7 @@ After running the NodeJS server and the ionic app, if you send **homer** as user
   Response {_body: "{message: Sorry, no Homer's}", status: 401, ok: false, statusText: "Unauthorized"...}
 ```
 
-Now, if you send a name other than *homer*, you will get the following response :
+Now, if you send a name other than *"homer"*, you will get the following response :
 
 ```
 GET Response: Welcome !
