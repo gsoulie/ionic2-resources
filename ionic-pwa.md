@@ -56,7 +56,7 @@ And follow the steps below :
 firebase login
 
 firebase init
---> select "hosting" option
+--> select "hosting" option and hit SPACE then ENTER !!
 
 What do you want to use as your public directory ?
 --> platforms/browser/www
