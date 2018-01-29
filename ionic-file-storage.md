@@ -122,7 +122,7 @@ export class HomePage {
 
 **Note :** In the example, we are using **exertnalDataDirectory** wich is not a private repository allows us to see the file with a file browser in the app repository. You can also use **dataDirectory** which is a private directory in order to hide your file in the file browser.
 
-[Cordova plugin file documentation]](https://github.com/apache/cordova-plugin-file)
+[Cordova plugin file documentation](https://github.com/apache/cordova-plugin-file)    
 
 Next let see an other example of photo storage in a new file
 
