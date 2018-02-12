@@ -2,6 +2,15 @@
 
 # Navigation
 
+* [Using NavController](#using-navcontroller)   
+* [Passing data](#passing-data)  
+* [Pop](#pop)    
+* [Passing data on close event](#passing-data-on-close-event)    
+* [Other Methods](#show-hide-dom-element)    
+* [Lifecycle Events](#checking-network-connection)    
+* [Navigate using navPush directive](#close-modal)    
+
+
 ### Using NavController
 
 [link : Understanding ionic 2 NavController](http://mcgivery.com/understanding-ionic-2-navigation-navcontroller/)
@@ -72,6 +81,8 @@ In our template, **Main.html**, we will have a button that will call this method
 To summarize, when this button is pressed, it will call the goToAbout method which pushes an instance of the AboutPage class onto the navigation stack which is then compiled and animated into view.
 
 #### Passing Data
+[Back to top](#navigation)
+
 In many scenarios we have data in one view that we need to pass to another. Luckily, the push method accepts a second parameter which is an object of data to pass to the ```@Component``` passed into the first parameter.
 
 ```javascript
@@ -97,6 +108,7 @@ export class AboutPage {
 }
 ```
 #### Pop
+[Back to top](#navigation)
 
 Pop is super simple to use as well. As an example, if we wanted to create a function called **goBack** that goes back when pressed in our AboutPage, we could just call **nav.pop()** :
 
@@ -117,10 +129,44 @@ export class AboutPage {
 }
 ```
 
+#### Passing data on close event
+[Back to top](#navigation)
+
+Let's see how to return value from child page to parent
+
+*Parent controller*
+
+```javascript
+returnedValue;
+
+onOpenChild(){
+	this.navCtrl.push(ChildPage, {id: this.myId, callback: (data) => {
+		this.returnedValue = data}
+	});
+}
+```
+
+
+*Child controller*
+
+```javascript
+
+onSelectItem(e){
+	this.navCtrl.pop()
+	.then(() => {
+		this.navParams.get("callback")(e);
+	});
+}
+```
+
 #### Other Methods
+[Back to top](#navigation)
+
 There is a few more methods available on the NavController such as insert, remove, etc. I would suggest reading the Official Docs.
 
 #### Lifecycle Events
+[Back to top](#navigation)
+
 In version 1.0, we had the concept of events being fired when we were entering and leaving the view, among others. In version 2.0, we have a very similar set of events. To handle one of these events, we just need to give our ```@Component``` class a method that matches the event. For example, if we want to run an event when the ```@Component``` is loaded, we will need to give our page the **onPageLoaded** method:
 ```javascript
 import {Component} from '@angular/core';
@@ -138,6 +184,7 @@ export class AboutPage {
 We can have a set of handlers for a variety of events including then the page is about to be entered, when the page is leaving, etc. Again, I would suggest reading the Official Docs.
 
 #### Navigate using navPush directive
+[Back to top](#navigation)
 
 *View file*
 
