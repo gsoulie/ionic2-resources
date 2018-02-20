@@ -2,6 +2,7 @@
 
 # Useful Functions
 
+* [Force screen refresh](#force-screen-refresh)    
 * [Get specific platform](#get-specific-platform)   
 * [Generate UUID](#generate-uuid)  
 * [Safely displaying data with elvis operator](#safely-displaying-data-with-elvis-operator)    
@@ -13,6 +14,24 @@
 ## Ionic 2 useful functions snippets
 
 [Personnal Ionic 2 snippet repo](https://github.com/gsoulie/Ionic2-snippets)    
+
+##Force screen refresh
+[Back to top](#useful-functions)  
+
+You can force screen refresh by using *ChangeDetectorRef*
+
+*home.ts*
+```javascript
+import { ChangeDetectorRef } from '@angular/core';
+
+export class HomePage{
+	constructor(private ref: ChangeDetectorRef){}
+	
+	onRefresh(){
+		this.ref.detectChanges();
+	}
+}
+```
 
 ## Get specific platform
 [Back to top](#useful-functions)  
