@@ -2,6 +2,12 @@
 
 # Sass
 
+* [Global sass file](#global-sass-file)    
+* [Lock screen orientation](#lock-screen-orientation)   
+* [Positioning](#positioning)    
+* [Styling Searchbar](#styling-searchbar)    
+* [overlay](#overlay)    
+
 Here are some tips to perform your scss.
 
 ## Global sass file
@@ -45,12 +51,14 @@ page-map {
 ```
 
 ## Lock screen orientation
+[Back to top](#sass)  
 
 [Documentation screen orientation](https://ionicframework.com/docs/native/screen-orientation/)    
 
 **Warning** You can not test the screen orientation on ionic serve, this will throw an exception
 
 ## Positioning
+[Back to top](#sass)  
 
 ### Bottom positioning
 ```css
@@ -63,6 +71,7 @@ page-map {
 ```
 
 ### Center image
+[Back to top](#sass)  
 
 ```css
 .image {
@@ -76,6 +85,7 @@ page-map {
 ```
 
 ### Center overlayed images
+[Back to top](#sass)  
 
 *View file*
 
@@ -119,6 +129,7 @@ page-map {
 ```
 
 ### Center component
+[Back to top](#sass)  
 
 vertical center in row
 
@@ -137,6 +148,7 @@ vertical center in row
 ```
 
 ### Center button text
+[Back to top](#sass)  
 
 ```css
 .myButtonStyle{
@@ -145,6 +157,7 @@ vertical center in row
 ```
 
 ### Center text inside ion-input
+[Back to top](#sass)  
 
 In the view file
 ```xml
@@ -152,6 +165,7 @@ In the view file
 ```
 
 ### Vertical alignment
+[Back to top](#sass)  
 
 ```html
 <div text-center>
@@ -160,6 +174,7 @@ In the view file
 ```
 
 ### ion-label vertical alignment
+[Back to top](#sass)  
 
 To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you need to set ```display: flex;``` on the parent container (here the ion-item) and set ```margin:auto;``` on the ```<ion-label>```
 
@@ -183,6 +198,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 ```
 
 ### Add button at the bottom of listview
+[Back to top](#sass)  
 
 ```html
 <ion-content>
@@ -195,6 +211,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 ```
 
 ## Remove Android input green highlight
+[Back to top](#sass)  
 
 add the following to your *variable.scss*
 
@@ -205,6 +222,7 @@ $text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !defa
 ```
 
 ## Styling Searchbar
+[Back to top](#sass)  
 
 To change ios searchbar background color, add the following code to your *variable.scss* file :
 
@@ -213,6 +231,7 @@ $searchbar-ios-background-color: rgba(247,247,247,1);
 ```
 
 ## Disable scrolling on ion-content
+[Back to top](#sass)  
 
 ### Old method
 
@@ -235,6 +254,7 @@ $searchbar-ios-background-color: rgba(247,247,247,1);
 ```
 
 ### New solution
+[Back to top](#sass)  
 
 ```
 $ ionic plugin add --save ionic-plugin-keyboard
@@ -260,6 +280,7 @@ providers: [
 ```
 
 ## Label with full width inside ion-item
+[Back to top](#sass)  
 
 Tips to avoid ion-label truncate
 
@@ -277,6 +298,7 @@ ion-label{
 ```
 
 ## Change ion-item height
+[Back to top](#sass)  
 
 To reduce the size of *ion-item* element you need to override *min-height* property in your css. Then apply your size in pixels.
 
@@ -288,6 +310,7 @@ To reduce the size of *ion-item* element you need to override *min-height* prope
 ```
 
 ## Split screen in 2 views
+[Back to top](#sass)  
 
 *View File*
 ```css
@@ -321,5 +344,48 @@ To reduce the size of *ion-item* element you need to override *min-height* prope
     }
     .no-scroll{
         overflow: hidden;
+    }
+```
+
+##Overlay
+[Back to top](#sass)  
+
+Create an overlay
+
+*View file*
+
+```html
+<ion-content>
+   <div class="overlay" *ngIf="doExport === true">
+    <div class="exportModal">
+      <ion-list *ngFor="let location of locations">
+        <ion-item>{{ location?.label }}</ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>
+```
+
+*Style file*
+
+```css
+ .overlay{
+        position: fixed; /* Sit on top of the page content */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0; 
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+    }
+    .exportModal{
+        background-color: white;
+        height: 50%;
+        margin-top:100%;
+        opacity: 1;
+        z-index: 0;
     }
 ```
