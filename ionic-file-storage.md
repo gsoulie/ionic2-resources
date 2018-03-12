@@ -110,10 +110,17 @@ export class HomePage {
     })
   }
 
-  onDeleteFile(){
-    this.file.removeFile(this.file.externalDataDirectory,this.filename)
-    .then(() => {console.log('success')})
-    .catch((err) => {console.log('Delete file error : ' + JSON.stringify(err))})
+  onDeleteFile(filename: string){
+    if(filename !== ""){
+      this.file.checkFile(this.file.externalDataDirectory, filename)
+      .then((data) => {
+        if(data){
+          this.file.removeFile(this.file.externalDataDirectory, filename)
+          .then(()=> {})
+          .catch((error) => this.logError("File deletion error : " + JSON.stringify(error)))
+        }
+      })
+    }
   }
 
 }
