@@ -87,7 +87,7 @@ onClose(remove = false){
 ```xml
 <ion-item>
 	<ion-label>Profession</ion-label>
-	<ion-select [(ng-model)]="prof" (ionChange)="selectObject($event)">
+	<ion-select [(ng-model)]="prof" (ionChange)="selectObject($event)" class="combo">
 		<ion-option *ngFor="let item of professions" value="{{item.objectId}}">{{item.titre}}</ion-option>
 	</ion-select>
 </ion-item>
@@ -108,6 +108,13 @@ constructor(){
 // To verify
 selectObject(_selectedItem){
 	this.newSelectedId = _selectedItem
+}
+```
+
+*Style file*
+```
+.combo{
+    max-width: 80%;	// to allow long value label
 }
 ```
 
