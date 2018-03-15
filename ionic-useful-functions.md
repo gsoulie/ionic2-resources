@@ -19,7 +19,7 @@
 ## Properly display error
 [Back to top](#useful-functions) 
 
-Sometimes, display error code like ```alert(JSON.stringify(error));``` gives an understandable return like :
+Sometimes, displaying error code with ```alert(JSON.stringify(error));``` gives an understandable return like :
 
 ```
 error {"__zone_symbol__currentTask":
