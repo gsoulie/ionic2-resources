@@ -2,6 +2,7 @@
 
 # Useful Functions
 
+* [Properly display error](#properly-display-error)    
 * [Force screen refresh](#force-screen-refresh)    
 * [Get specific platform](#get-specific-platform)   
 * [Generate UUID](#generate-uuid)  
@@ -15,7 +16,28 @@
 
 [Personnal Ionic 2 snippet repo](https://github.com/gsoulie/Ionic2-snippets)    
 
-##Force screen refresh
+## Properly display error
+[Back to top](#useful-functions) 
+
+Sometimes, display error code like ```alert(JSON.stringify(error));``` gives an understandable return like :
+
+```
+error {"__zone_symbol__currentTask":
+{"type":"microTask",
+"state":"notScheduled",
+"source":"Promise.then",
+"zone":"angular",
+"cancelFn":null,
+"runCount":0}}
+```
+
+To get a clean error code, use this syntax :
+
+```javascript
+alert(JSON.stringify(error, Object.getOwnPropertyNames(error));
+```
+
+## Force screen refresh
 [Back to top](#useful-functions)  
 
 You can force screen refresh by using *ChangeDetectorRef*
