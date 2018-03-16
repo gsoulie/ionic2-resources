@@ -197,6 +197,16 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
     }
 ```
 
+### ion-icon vertical alignment
+[Back to top](#sass)  
+
+```css
+    .ionIcon{
+        vertical-align: middle;
+	display: inline-block;
+    }
+```
+
 ### Add button at the bottom of listview
 [Back to top](#sass)  
 
