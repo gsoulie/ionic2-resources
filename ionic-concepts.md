@@ -549,6 +549,56 @@ If we change timeout value of 500 ms to 1500
 
 While *http.get* returns the result of the request in the form of an *Observable*, **map** converts the result into a **JSON decoded** version of the result, and **subscribe** allows us to access the data that is returned
 
+### Examples of promises
+
+*Provider file*
+
+```javascript
+  /**
+   * Display prompt alert
+   * @param {String} _args.title
+   * @param {String} _args.message
+   * @param {String} _args.inputPlaceholder
+   * @param {String} _args.okButtonLabel
+   * @param {String} _args.cancelButtonLabel
+   */
+  prompt(_args: any = {}){
+    return new Promise((resolve,reject) => {
+      this.alertCtrl.create({
+        title: _args.title || "",
+        message: _args.message || "",
+        inputs: [
+          {
+            name: 'value',
+            placeholder: _args.inputPlaceholder || "Your value"
+          },
+        ],
+        buttons: [
+          {
+            text: _args.cancelButtonLabel || 'Cancel',
+            handler: data => {
+              reject(null);
+            }
+          },
+          {
+            text: _args.okButtonLabel || 'Ok',
+            handler: data => {
+              resolve(data.value)
+            }
+          }
+        ]
+    }).present();})
+  }
+```
+
+*Controller file*
+
+```javascript
+this.myProvider.prompt({title: "Input value", message:"Enter your hexadecimal value"})
+.then((data) => {
+	console.log("Returned : " + data);
+});
+```
 
 ## Arrow function
 [Back to top](#concepts) 
