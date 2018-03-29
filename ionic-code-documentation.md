@@ -13,7 +13,7 @@ $ npm install --global typedoc
 Then, move into the root of your project and generate the documentation with the following command
 
 ```
-typedoc --out "./docs" --mode file --target ES6 --ignoreCompilerErrors "./src" --includes "./src"
+typedoc --out "./docs" --mode file --target ES6 --ignoreCompilerErrors "./src/pages" --includes "./src/providers"
 ```
 
 You can also create a batch file like 
