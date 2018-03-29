@@ -680,7 +680,7 @@ groupPatients(patients){
 *View file*
 
 ```xml
-<ion-heade>
+<ion-header>
   <ion-navbar color="primary">
     <ion-title>
       Annuaire
