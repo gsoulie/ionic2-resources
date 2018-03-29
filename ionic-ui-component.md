@@ -686,7 +686,7 @@ groupPatients(patients){
       Annuaire
     </ion-title>
   </ion-navbar>
-  <ion-toolbar maintheme>
+  <ion-toolbar color="maintheme">
   <ion-searchbar placeholder="Rechercher un device" (ionInput)="getDevice($event)"></ion-searchbar>
    </ion-toolbar>
 </ion-header>
