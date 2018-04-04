@@ -107,10 +107,11 @@ $color: {
 ## Remove Android input green highlight
 [Back to top](#themes)    
 
-add the following to your variable.scss
+add the following to your *variable.scss*
 
 ```
 $text-input-md-show-focus-highlight: false !default;
 $text-input-md-show-valid-highlight: $text-input-md-show-focus-highlight !default;
-$text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !default;```
+$text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !default;
+```
 
