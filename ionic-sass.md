@@ -357,8 +357,8 @@ To reduce the size of *ion-item* element you need to override *min-height* prope
     }
 ```
 
-##Overlay
-[Back to top](#sass)  
+## Overlay
+[Back to top](#sass)     
 
 Create an overlay
 
