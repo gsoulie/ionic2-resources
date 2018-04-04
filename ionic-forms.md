@@ -3,7 +3,7 @@
 # Forms
 
 * [NgModel Forms](#ngmodel-forms)    
-* [FormController](#formcontroller)    
+* [FormBuilder](#formbuilder)    
 
 ## NgModel Forms
 Here is a basic form sample
@@ -163,6 +163,6 @@ Displaying data in the *home* page
 </ion-content>
 ```
 
-## FormController
+## FormBuilder
 [Back to top](#forms)    
 
