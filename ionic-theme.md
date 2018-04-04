@@ -5,8 +5,8 @@
 * [Dynamic theming](#dynamic-theming)    
 * [StatusBar](#statusbar)    
 * [Change background color of a specific page](#change-background-color-of-a-specific-page)    
-* [Override Sass variable](#override-variable.sass)    
-* []
+* [Override Sass variable](#override-variable-sass)    
+* [Remove Android input green highlight](#remove-android-input-green-highlight)    
 
 ## Dynamic theming
 
