@@ -2,10 +2,10 @@
 
 # Forms
 
-* [Basics form](#basics-forms)    
+* [NgModel Forms](#ngmodel-forms)    
 * [FormController](#formcontroller)    
 
-## Basics forms
+## NgModel Forms
 Here is a basic form sample
 
 *View file (addPlace.html)*
