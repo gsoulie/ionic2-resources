@@ -2,6 +2,10 @@
 
 # Forms
 
+* [Basics form](#basics-forms)    
+* [FormController](#formcontroller)    
+
+## Basics forms
 Here is a basic form sample
 
 *View file (addPlace.html)*
@@ -158,3 +162,7 @@ Displaying data in the *home* page
 	</ion-card>
 </ion-content>
 ```
+
+## FormController
+[Back to top](#forms)    
+
