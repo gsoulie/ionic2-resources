@@ -2,6 +2,7 @@
 
 # UI Components
 
+* [button](#button)    
 * [modal](#modal)    
 * [comboBox](#combobox)    
 * [ion-list](#ion-list)  
@@ -20,7 +21,14 @@
 * [Expandable header](#expandable-header)    
 * [List accordion](#list-accordion)    
 * [Picker](#picker)     
-	
+
+## Button
+[Back to top](#ui-components)  
+
+#### disable text-transform
+
+```<button ion-button style="text-transform: none;">```
+
 ## Modal
 [Back to top](#ui-components)  
 
