@@ -2,11 +2,18 @@
 
 # Themes
 
+* [Dynamic theming](#dynamic-theming)    
+* [StatusBar](#statusbar)    
+* [Change background color of a specific page](#change-background-color-of-a-specific-page)    
+* [Override Sass variable](#override-variable.sass)    
+* []
+
 ## Dynamic theming
 
 [devdactic dynamic theming](https://devdactic.com/dynamic-theming-ionic/)    
 
 ## Statusbar
+[Back to top](#themes)    
 
 **cordova plugin installation**
 
@@ -42,7 +49,12 @@ export class MyApp {
 }
 ```
 
+To change ios searchbar background color, add the following code to your variable.scss file :
+
+```$searchbar-ios-background-color: rgba(247,247,247,1);```
+
 ## Change background color of a specific page
+[Back to top](#themes)    
 
 ```xml
 <ion-content padding class="masters">
@@ -69,6 +81,7 @@ Lastly you make sure this scss is being compiled with your **app.core.scss** by 
 ```
 
 ## Override variable.scss
+[Back to top](#themes)    
 
 In the *variable.scss* file, you can define a lot of variables to create your custom style (see more on [ionic 2 overriding variables](#https://ionicframework.com/docs/v2/theming/overriding-ionic-variables/). Here is an example of variable.scss overriding
 
@@ -90,3 +103,14 @@ $color: {
 ```
 
 *note* : New colors variables must be called with ```<Button color="myNewColor">```
+
+## Remove Android input green highlight
+[Back to top](#themes)    
+
+add the following to your variable.scss
+
+```
+$text-input-md-show-focus-highlight: false !default;
+$text-input-md-show-valid-highlight: $text-input-md-show-focus-highlight !default;
+$text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !default;```
+
