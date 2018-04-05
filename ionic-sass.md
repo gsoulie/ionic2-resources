@@ -267,7 +267,7 @@ $searchbar-ios-background-color: rgba(247,247,247,1);
 [Back to top](#sass)  
 
 ```
-$ ionic plugin add --save ionic-plugin-keyboard
+$ ionic cordova plugin add ionic-plugin-keyboard
 $ npm install --save @ionic-native/keyboard
 ```
 
