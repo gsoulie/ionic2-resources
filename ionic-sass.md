@@ -2,17 +2,16 @@
 
 # Sass
 
-* [Global sass file](#global-sass-file)    
+* [Set transparent color to element](#set-transparent-color-to-element)     
+* [Set transparent NavBar](#set-transparent-navbar)    
+* [Set background image to content](#set-background-image-to-content)    
 * [Lock screen orientation](#lock-screen-orientation)   
 * [Positioning](#positioning)    
+* [Remove Android input green highlight](#remove-android-input-green-highlight)    
 * [Styling Searchbar](#styling-searchbar)    
 * [overlay](#overlay)    
 
 Here are some tips to perform your scss.
-
-## Global sass file
-
-You can use your *app.scss* file to define the global style 
 
 ## Get color variables from *variable.scss*
 
