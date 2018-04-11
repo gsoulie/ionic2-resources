@@ -1,11 +1,13 @@
 [< Back to main Menu](https://github.com/gsoulie/Mobile-App-Development/blob/master/ionic2-test.md)    
 
 # Geolocation
-[Back to top](#ionic-2)  
+
+* [Angular2 Google maps integration](angular2-google-maps-integration)    
+* [Customize map markers](#customize-map-markers)    
 
 [link : google map geolocation](http://www.joshmorony.com/ionic-2-how-to-use-google-maps-geolocation-video-tutorial/)
 
-### Angular2 Google maps integration
+## Angular2 Google maps integration
 
 First we are going to see how to add a map on our application and add / display markers
 
@@ -216,9 +218,8 @@ page-add-place {
 }
 ```
 
-[Back to top](#ionic-2) 
-
 ### Using native geolocation plugin
+[Back to top](#geolocation) 
 
 Now we have integrated a map on our application, we will use the native geolocation plugin to locate our current position and display it on the previous map.
 
@@ -286,3 +287,8 @@ export class LocationPage {
 	}
 }
 ```
+
+## Customize map markers
+[back to top](#geolocation)    
+
+[Official gogole map documentation](https://developers.google.com/maps/documentation/javascript/custom-markers)    
