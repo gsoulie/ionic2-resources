@@ -4,13 +4,13 @@
 
 ## Create lib file
 
-### 1 Create "lib" folder under app
+#### Create "lib" folder under app
 
 ```
 /app/lib/utils.ts
 ```
 
-### 2 implement lib class
+#### implement lib class
 
 *utils.ts*
 ```javascript
@@ -29,7 +29,7 @@ export class UTILS {
 ```
 **Be careful** and don't forget **@Injectable** decorator
 
-### 3 Inject class in other component
+#### Inject class in other component
 
 ```javascript
 import {UTILS} from '../../lib/utils';
@@ -45,15 +45,15 @@ export class HomePage {
 
 ## Create file for constant
 
-### 1 Create "lib" folder under app
+#### Create "lib" folder under app
 
 ```
 /app/lib/const.ts
 ```
 
-### 2 implement lib class
+#### implement lib class
 
-*utils.ts*
+*const.ts*
 ```javascript
 import { Injectable } from '@angular/core';
 
@@ -67,7 +67,7 @@ export class LibConst {
 ```
 **Be careful** and don't forget **@Injectable** decorator
 
-### 3 Inject class in other component
+#### Inject class in other component
 
 ```javascript
 import {LibConst} from '../../lib/const';
