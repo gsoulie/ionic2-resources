@@ -4,6 +4,7 @@
 
 ## Resources
 
+[PWA stencil](https://stenciljs.com/pwa/)    
 [ionic blog post](http://blog.ionic.io/how-to-make-pwas-with-ionic/)     
 [link : josh morony tutorial PWA](https://www.joshmorony.com/the-bare-necessities-progressive-web-apps-in-ionic/)    
 [link : josh morony tutorial](https://www.joshmorony.com/preparing-a-progressive-web-application-for-production/)    
