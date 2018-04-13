@@ -7,12 +7,13 @@
 [PWA stencil](https://stenciljs.com/pwa/)    
 [ionic blog post](http://blog.ionic.io/how-to-make-pwas-with-ionic/)     
 [link : josh morony tutorial PWA](https://www.joshmorony.com/the-bare-necessities-progressive-web-apps-in-ionic/)    
-[link : josh morony tutorial](https://www.joshmorony.com/preparing-a-progressive-web-application-for-production/)    
+[link : josh morony tutorial](https://www.joshmorony.com/preparing-a-progressive-web-application-for-production/)   
+[link : freecodecamp PWA](https://medium.freecodecamp.org/progressive-web-apps-bridging-the-gap-between-web-and-mobile-apps-a08c76e3e768)    
 
 [discussion with firebase hosting](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689)    
-[discussion](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689/2)    
-[discussion](https://forum.ionicframework.com/t/pwa-my-experience-creating-a-pwa-with-ionic-from-scratch-to-deployment/94541)    
-[discussion](https://forum.ionicframework.com/t/deploying-pwa/73749)   
+[discussion - building-for-browsers-pwa](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689/2)    
+[discussion - pwa-my-experience](https://forum.ionicframework.com/t/pwa-my-experience-creating-a-pwa-with-ionic-from-scratch-to-deployment/94541)    
+[discussion - deploying-pwa](https://forum.ionicframework.com/t/deploying-pwa/73749)   
 [firebase hosting](https://coryrylan.com/blog/deploy-angular-cli-apps-to-firebase)   
 
 ## Browser support
