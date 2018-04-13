@@ -10,7 +10,7 @@
 [link : josh morony tutorial](https://www.joshmorony.com/preparing-a-progressive-web-application-for-production/)   
 [link : freecodecamp PWA](https://medium.freecodecamp.org/progressive-web-apps-bridging-the-gap-between-web-and-mobile-apps-a08c76e3e768)    
 
-[discussion with firebase hosting](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689)    
+[discussion - firebase hosting](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689)    
 [discussion - building-for-browsers-pwa](https://forum.ionicframework.com/t/building-for-browsers-pwa/72689/2)    
 [discussion - pwa-my-experience](https://forum.ionicframework.com/t/pwa-my-experience-creating-a-pwa-with-ionic-from-scratch-to-deployment/94541)    
 [discussion - deploying-pwa](https://forum.ionicframework.com/t/deploying-pwa/73749)   
