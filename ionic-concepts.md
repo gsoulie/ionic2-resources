@@ -278,7 +278,7 @@ Now someString would be run through your custom myPipe before the value is outpu
 
 ### First step : create the pipe class
 
-First, create a "pipe" directory in your project will containing all pipe lib. A basic pipe class looks like below :
+First, create a *pipe* directory in your project will containing all pipe lib. A basic pipe class looks like below :
 
 ```javascript
 import {Pipe} from '@angular/core';
@@ -293,6 +293,8 @@ export class HelloWorld {
 	}
 }
 ```
+
+**IMPORTANT** The first letter of the pipe class name must be in upper case. But notice that during the usage, you must use lower case on the first letter.
 
 **Angular 2 best practice**
 
