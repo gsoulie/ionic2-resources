@@ -5,7 +5,8 @@
 * [Angular2 Google maps integration](angular2-google-maps-integration)    
 * [Customize map markers](#customize-map-markers)    
 
-# See google map integration (full example)(https://github.com/gsoulie/ionic2-resources/blob/master/ionic-google-map-full.md)
+## See google map integration (full example)
+[Full example here](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-google-map-full.md)    
 
 [link : google map geolocation](http://www.joshmorony.com/ionic-2-how-to-use-google-maps-geolocation-video-tutorial/)
 
