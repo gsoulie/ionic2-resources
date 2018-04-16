@@ -8,9 +8,9 @@
 ## See google map integration (full example)
 [Full example here](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-google-map-full.md)    
 
-[link : google map geolocation](http://www.joshmorony.com/ionic-2-how-to-use-google-maps-geolocation-video-tutorial/)
 
 ## Angular2 Google maps integration
+[link : google map geolocation](http://www.joshmorony.com/ionic-2-how-to-use-google-maps-geolocation-video-tutorial/)
 
 First we are going to see how to add a map on our application and add / display markers
 
