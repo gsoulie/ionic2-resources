@@ -4,6 +4,7 @@
 
 * [Angular2 Google maps integration](angular2-google-maps-integration)    
 * [Customize map markers](#customize-map-markers)    
+* [reverse geocoding](#reverse-geocoding)    
 
 ## See google map integration (full example)
 [Full example here](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-google-map-full.md)    
@@ -295,3 +296,8 @@ export class LocationPage {
 [back to top](#geolocation)    
 
 [Official gogole map documentation](https://developers.google.com/maps/documentation/javascript/custom-markers)    
+
+##Reverse geocoding
+[back to top](#geolocation)   
+
+[Reverse geocoding with ionic](http://masteringionic.com/blog/2017-06-13-geocodingreverse-geocoding-with-ionic-native/)    
