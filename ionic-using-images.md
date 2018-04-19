@@ -23,3 +23,18 @@ let item = {name:"my item", image:"./assets/imgs/my_image.png"}
   width: 50px;
 }
 ```
+
+
+# Add blur on image
+
+*style file*
+
+```
+    .blurred{
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+    }
+```
