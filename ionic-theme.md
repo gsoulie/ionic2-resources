@@ -7,6 +7,7 @@
 * [Change background color of a specific page](#change-background-color-of-a-specific-page)    
 * [Override Sass variable](#override-variable-sass)    
 * [Remove Android input green highlight](#remove-android-input-green-highlight)    
+* [Remove android navbar border](#remove-android-navbar-border)    
 
 ## Dynamic theming
 
@@ -115,3 +116,11 @@ $text-input-md-show-valid-highlight: $text-input-md-show-focus-highlight !defaul
 $text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !default;
 ```
 
+## Remove Android Navbar border
+[Back to top](#themes)    
+
+```
+<ion-header no-border>
+
+<ion-header>
+```
