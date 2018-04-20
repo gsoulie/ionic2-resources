@@ -19,5 +19,7 @@ However, with agm-core,the disableDefaultUI is apparently not working. So you ha
 ```
 
 *instead of*
-```[disableDefaultUI]="true"```
+```
+[disableDefaultUI]="true"
+```
 
