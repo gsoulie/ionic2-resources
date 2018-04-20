@@ -8,7 +8,7 @@
 
 ### disable default UI buttons
 
-According to the google map documentation, you can disable default UI buttons (like zoom, streetview...) with the *disableDefaultUI* options.
+According to the [google map documentation](https://developers.google.com/maps/documentation/javascript/examples/control-disableUI?hl=fr), you can disable default UI buttons (like zoom, streetview...) with the **disableDefaultUI** options.
 
 However, with agm-core,the disableDefaultUI is apparently not working. So you have to disable each control himself :
 
