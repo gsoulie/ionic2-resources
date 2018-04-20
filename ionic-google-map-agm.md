@@ -4,6 +4,18 @@
 
 [Official agm-core documentation](https://angular-maps.com/api-docs/agm-core/)    
 
+## Create Google Map API Key
+
+The first thing to use Google Map is to create a Google Map API Key [get api key](https://developers.google.com/maps/documentation/javascript/get-api-key).
+
+Click on the **Obtain Key** button or :
+1. Access to the *Google API Console*
+2. Create or select a project
+3. Click to continue to activate API and other services
+4. On the Credentials page, get your API key and define the restrictions of the key
+
+**Important** You need to activate **Google Map Javascript API** and **Google Map Geocoding API**
+
 ## Map options
 
 ### disable default UI buttons
