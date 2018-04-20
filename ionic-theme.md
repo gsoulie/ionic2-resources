@@ -2,7 +2,8 @@
 
 # Themes
 
-* [Dynamic theming](#dynamic-theming)    
+* [Dynamic theming](#dynamic-theming)  
+* [Navbar](#navbar)    
 * [StatusBar](#statusbar)    
 * [Change background color of a specific page](#change-background-color-of-a-specific-page)    
 * [Override Sass variable](#override-variable-sass)    
@@ -12,6 +13,11 @@
 ## Dynamic theming
 
 [devdactic dynamic theming](https://devdactic.com/dynamic-theming-ionic/)    
+
+## Navbar
+[Back to top](#themes)    
+
+[Styling on header](https://yannbraga.com/2017/03/16/how-to-transparent-header-ionic2/)
 
 ## Statusbar
 [Back to top](#themes)    
