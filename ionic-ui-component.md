@@ -1058,6 +1058,156 @@ This snippet show how to fix floating button in front of a list
 [link : ng2-chart](http://valor-software.com/ng2-charts/)    
 [forum : related post](https://forum.ionicframework.com/t/solved-ionic-2-ng2-charts/42926)    
 
+### Sample code
+
+*View.html*
+
+```
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      ChartJS
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item [style.backgroundColor]="'transparent'" no-lines>
+    <ion-icon item-left name="md-tablet-landscape" color="dark"></ion-icon>
+    <b item-right>Basculez en mode paysage pour voir le graphe</b>
+  </ion-item>
+  <div *ngIf="orientationPortrait">  
+    <ion-item *ngFor="let i of dataList">{{ i }}</ion-item>
+  </div>
+  <ion-card no-padding *ngIf="!orientationPortrait">
+    <ion-card-header>
+      Weight chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+```
+
+*Controller.ts*
+
+```javascript
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { Chart } from 'chart.js';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { ChangeDetectorRef } from '@angular/core';
+
+@Component({
+  selector: 'page-chart',
+  templateUrl: 'chart.html',
+})
+export class ChartPage implements OnInit{
+
+  @ViewChild('lineCanvas') lineCanvas;
+  lineChart: any;
+  orientation;
+  orientationPortrait: boolean = true;
+  dataList = [13.2, 13.5, 14.2, 13.8, 13.5, 13.4, 13.7];
+
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private screenOrientation: ScreenOrientation,
+    private ref: ChangeDetectorRef) {
+  }
+
+  ngOnInit(){
+    
+    this.screenOrientation.onChange().subscribe(
+      () => {
+          this.orientation = this.screenOrientation.type
+          switch(this.screenOrientation.type){
+            case this.screenOrientation.ORIENTATIONS.LANDSCAPE :
+            case this.screenOrientation.ORIENTATIONS.LANDSCAPE_PRIMARY :
+            case this.screenOrientation.ORIENTATIONS.LANDSCAPE_SECONDARY :
+              this.orientationPortrait = false;
+              this.ref.detectChanges();// force refresh
+              this.onGenerateChart();
+              this.ref.detectChanges();// force refresh
+              break;
+            case this.screenOrientation.ORIENTATIONS.PORTRAIT :
+            case this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY :
+            case this.screenOrientation.ORIENTATIONS.PORTRAIT_SECONDARY :
+              this.orientationPortrait = true;
+              this.ref.detectChanges();// force refresh
+              break;
+            default:
+              this.orientationPortrait = true;
+              this.ref.detectChanges(); // force refresh
+              break;
+          }
+      }
+   );
+  }
+
+  ionViewDidLoad() {
+    this.onGenerateChart();
+  }
+
+  onGenerateChart(){
+    // fill the chart with gradient
+    //https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
+    var ctx = this.lineCanvas.nativeElement.getContext("2d");
+    var grd=ctx.createLinearGradient(0,0,0,200);
+    grd.addColorStop(0,"#cc1e1e");
+    grd.addColorStop(1,"white");
+
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+ 
+      type: 'line',
+      data: {
+          labels: ["January", "February", "March", "April", "May", "June", "July"],
+          datasets: [
+              {
+                  label: "weight",
+                  fill: true, // remplissage de la zone sous le graphe
+                  lineTension: 0.5, // lissage de la courbe
+                  backgroundColor: grd,//"rgba(0,0,0,0.4)",
+                  borderColor: "rgba(0,0,0,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(0,0,0,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(0,0,0,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                  data: this.dataList,
+                  spanGaps: false
+              }
+          ]
+      }
+   });
+  }
+}
+```
+*Style.scss*
+
+```
+page-chart {
+    .scroll-content {
+        background-color: map-get($colors, light);
+    }
+
+    ion-card-header {
+        font-weight: bold;
+    }
+}
+```
+
 
 ## grid
 [Back to top](#ui-components)  
