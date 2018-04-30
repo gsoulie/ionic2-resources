@@ -6,9 +6,9 @@
 * [Passing data](#passing-data)  
 * [Pop](#pop)    
 * [Passing data on close event](#passing-data-on-close-event)    
-* [Other Methods](#show-hide-dom-element)    
-* [Lifecycle Events](#checking-network-connection)    
-* [Navigate using navPush directive](#close-modal)    
+* [Other Methods](#other-methods)    
+* [Lifecycle Events](#lifecycle-events)    
+* [Navigate using navPush directive](#navigate-using-navpush-directive)    
 
 
 ### Using NavController
