@@ -59,6 +59,106 @@ page-map {
 ## Positioning
 [Back to top](#sass)  
 
+### Center a div
+
+*View file*
+
+```html
+<div class="overlay" padding>
+  <div class="popup_modal">
+    <font class="title">{{ title }}</font>
+    <p class="content">{{ content }}</p>
+
+    <button [style.float]="'right'" clear text-center ion-button (click)="onDismiss()">
+      {{ cancelButtonCaption }}
+    </button>
+    <button [style.float]="'right'" clear text-center ion-button (click)="onDismiss()">
+      {{ okButtonCaption }}
+    </button>
+  </div>
+</div>
+```
+
+*Style file*
+
+```
+popup {
+    .overlay{
+        background-color: rgba(0,0,0,0.6);
+        height: 100%;
+        width: 100%;
+    }
+    .popup_modal{
+        background-color: #ffffff;
+        border-radius: 5px;
+        padding: 5px;
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        margin: auto;
+        margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+        transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+    }
+    .title{
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px !important;
+        padding: 5px;
+    }
+    .content{
+        padding: 5px;
+    }
+}
+```
+
+*View file*
+
+```javascript
+import { NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'popup',
+  templateUrl: 'popup.html'
+})
+export class PopupComponent implements OnInit{
+
+  title: string = "Title";
+  content: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  okButtonCaption: string = "OK";
+  cancelButtonCaption: string = "CANCEL";
+
+  constructor(public navCtrl: NavController, public navParam: NavParams) {
+  }
+
+  ngOnInit(){
+    // Récupération des paramètres
+    
+    if(this.navParam.get("title") && this.navParam.get("title") !== ""){
+      this.title = this.navParam.get("title")
+    }
+    
+    if(this.navParam.get("content") && this.navParam.get("content") !== ""){
+      this.content = this.navParam.get("content")
+    }
+
+    if(this.navParam.get("okButtonCaption") && this.navParam.get("okButtonCaption") !== ""){
+      this.okButtonCaption = this.navParam.get("okButtonCaption")
+    }
+
+    if(this.navParam.get("cancelButonCaption") && this.navParam.get("cancelButonCaption") !== ""){
+      this.cancelButtonCaption = this.navParam.get("cancelButonCaption")
+    }
+  }
+
+  onDismiss(){
+    this.navCtrl.pop();
+  }
+
+}
+
+```
+
 ### Bottom positioning
 ```css
 .cform {
