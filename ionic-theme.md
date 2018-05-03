@@ -162,6 +162,8 @@ Next, add a *@font-face* for each font you want to use
 }
 ```
 
+**Important** : *format()* must use the real font format name (i.e ttf = truetype, otf = opentype)
+
 And use it like :
 
 *home.scss*
