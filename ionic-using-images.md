@@ -23,7 +23,9 @@ let item = {name:"my item", image:"./assets/imgs/my_image.png"}
   width: 50px;
 }
 ```
+# SVG
 
+To use SVG image you must specify **./assets/imgs/xxxxxx.svg** instead of **../assets/imgs/xxxxx.svg**
 
 # Add blur on image
 
