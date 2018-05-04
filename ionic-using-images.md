@@ -81,6 +81,10 @@ Then generate sprites and css with :
 $ sprity ./output-directory/ ./input-directory/*.png
 ```
 
+## Other way to use SVG icon
+
+[https://golb.hplar.ch/2018/01/Custom-SVG-icons-in-Ionic.html]    
+
 ## Add blur on image
 
 *style file*
