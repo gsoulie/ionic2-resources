@@ -68,6 +68,18 @@ Then add it to your code (juste adjust the real path for ionic)
 </ion-content>
 ```
 
+### Sprite automation
+
+Install sprity
+```
+$ npm install -g sprity
+```
+
+Then generate sprites and css with :
+
+```
+$ sprity ./output-directory/ ./input-directory/*.png
+```
 
 ## Add blur on image
 
