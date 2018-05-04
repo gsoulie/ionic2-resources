@@ -27,6 +27,8 @@ let item = {name:"my item", image:"./assets/imgs/my_image.png"}
   width: 50px;
 }
 ```
+
+**Warning** when running serve, path must be *../assets/imgs/xxxx* but when running device, path must be *./assets/imgs/xxxxx*
 ## SVG
 
 To use SVG image you must specify **./assets/imgs/xxxxxx.svg** instead of **../assets/imgs/xxxxx.svg**
