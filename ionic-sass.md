@@ -21,6 +21,23 @@ myClass {
 }
 ```
 
+Or other solution, put the code below in your css file
+
+```
+ ion-header {
+        .toolbar {
+          position: absolute;
+      
+          .toolbar-background {
+            background: transparent;
+          }
+          .toolbar-title {
+            color: black;
+          }
+        }
+      }
+```
+
 ## Set transparent color to element
 
 Add new transparent color in your *variable.scss* and use it as a standard color
