@@ -18,6 +18,7 @@ First, install *sqlite storage* plugin
 
 ```
 ionic cordova plugin add cordova-sqlite-storage
+npm install --save @ionic-native/sqlite
 ```
 
 Then add it in the imports list in *app.module.ts* file
