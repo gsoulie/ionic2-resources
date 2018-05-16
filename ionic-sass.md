@@ -9,7 +9,8 @@
 * [Positioning](#positioning)    
 * [Remove Android input green highlight](#remove-android-input-green-highlight)    
 * [Styling Searchbar](#styling-searchbar)    
-* [overlay](#overlay)    
+* [Overlay](#overlay)    
+* [Remove ion-card shadow](#remove-ion-card-shadow)    
 
 Here are some tips to perform your scss.
 
@@ -537,4 +538,13 @@ Create an overlay
         opacity: 1;
         z-index: 0;
     }
+```
+
+## Remove ion-card shadow
+[Back to top](#sass)     
+
+```
+ion-card, .card-ios, .card-md {
+    box-shadow: none !important;
+}
 ```
