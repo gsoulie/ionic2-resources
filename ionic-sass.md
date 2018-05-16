@@ -346,6 +346,23 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 }
 ```
 
+### Vertical align text in div
+
+```
+<div class="container">
+	<div class="text">My text</div>
+</div>
+```
+
+```
+.container{
+	display: table;
+}
+.text{
+	display: table-cell;
+    	vertical-align: middle;
+}
+```
 
 ### Add button at the bottom of listview
 [Back to top](#sass)  
