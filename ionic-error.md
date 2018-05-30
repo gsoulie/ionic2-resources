@@ -42,6 +42,8 @@ If you forget to delete it, you will get the error above when you will try to bu
 
 Sometimes iOS build failed with ```Asset catalog - xcassets error``` and XCode throw a ```Distill failed for unknown reasons``` error.
 
+This error seems to be caused by ios assets files
+
 To solve this error 
 
 ```
