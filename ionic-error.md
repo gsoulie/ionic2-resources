@@ -4,6 +4,7 @@
 
 * [Typescript error](#typescript-error)     
 * [iOS xcassets error - Distill failed for unknown reasons](#xcassets-error)    
+* [Android build error In <declare-styleable>](#declare-stylable-error)     
 
 ## Typescript error
 
@@ -106,3 +107,24 @@ To
 ```
 
 After that, iOS build should be ok
+
+## declare-stylable error
+
+Sometimes, Android build failed with 
+
+```
+In <declare-styleable> FontFamilyFont, unable to find attribute android:fontVariationSettings
+In <declare-styleable> FontFamilyFont, unable to find attribute android:font
+In <declare-styleable> FontFamilyFont, unable to find attribute android:fontVariationSettings
+ERROR: In FontFamilyFont, unable to find attribute android:font
+ERROR: In FontFamilyFont, unable to find attribute android:fontStyle
+ERROR: In FontFamilyFont, unable to find attribute android:fontWeight
+```
+
+**the solution**
+
+```
+cordova plugin rm cordova-plugin-compat --force
+cordova platform rm android
+ionic cordova platform add android@6.3.0
+```
