@@ -492,7 +492,7 @@ addData(content){
 }
 ```
 
-##AngularFire issue
+## AngularFire issue
 [Back to top](#angularfire2) 
 
 Since recent releases of AngularFire require rxjs 6. You can get the following error when you try to *list* elements of your database :
