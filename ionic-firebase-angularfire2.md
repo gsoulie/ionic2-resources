@@ -6,6 +6,7 @@
 * [Authentication](#authentication)     
 * [Firebase rules](#firebase-rules)     
 * [Add data with custom key](#add-data-with-custom-key)    
+* [angularfire issue](#angularfire-issue)     
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -490,3 +491,26 @@ addData(content){
     });
 }
 ```
+
+##AngularFire issue
+[Back to top](#angularfire2) 
+
+Since recent releases of AngularFire require rxjs 6. You can get the following error when you try to *list* elements of your database :
+
+```
+zone.js:192 Uncaught TypeError: Object(...) is not a function
+    at SwitchMapSubscriber.eval [as project] (changes.js:7)
+    at SwitchMapSubscriber._next (switchMap.js:91)
+    at SwitchMapSubscriber.Subscriber.next (Subscriber.js:95)
+    at RefCountSubscriber.Subscriber._next (Subscriber.js:131)
+    at RefCountSubscriber.Subscriber.next (Subscriber.js:95)
+    at Subject.next (Subject.js:56)
+    at ConnectableSubscriber.Subscriber._next (Subscriber.js:131)
+    at ConnectableSubscriber.Subscriber.next (Subscriber.js:95)
+    at Notification.observe (Notification.js:32)
+    at AsyncAction.DelaySubscriber.dispatch (delay.js:91)
+```
+
+To fix it, you must upgrade RxJs to v6 [RxJS v6 migration](https://github.com/ReactiveX/RxJS/blob/HEAD/MIGRATION.md#backwards-compatibility)    
+
+If the error persists, run ```npm install rxjs@^6.0.0 --save``` command.
