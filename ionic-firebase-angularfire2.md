@@ -5,6 +5,7 @@
 * [CRUD angularfire2](#crud-angularfire2)    
 * [Authentication](#authentication)     
 * [Firebase rules](#firebase-rules)     
+* [Add data with custom key](#add-data-with-custom-key)    
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -455,4 +456,37 @@ An other example
 }
 
 
+```
+
+
+## Add data with custom key
+[Back to top](#angularfire2) 
+
+When you use **push** function, firebase generate automatic unique uid like -Lz32d1q23d64d. In some case, you may need to use custom unique uid like guid, email, product number or other.
+
+To doing this you need to use **child** function associated to **set** method instead of **add**/**push** methods that generate unique uid.
+
+```javascript
+var content = {
+	"user":"me",
+	"email":"email",
+	...
+};
+
+addData(content){
+
+    let uid = this.auth.onGetCurrentUser(); // ahits.auth refers to AngularFireAuth.auth.currentUser.uid
+    
+    // Get the main node reference
+    let ref = this.afDB.database.ref('/parent-node/');
+    
+    // Insert data in /parent-node/<user-uid>/<my-custom-id>
+    ref.child(uid + "/" + "my-custom-id").set(content)
+    .then(() => {
+      console.log("--- add data --- Ok");
+    })
+    .catch((e) => {
+      console.log("--- add data --- Error");
+    });
+}
 ```
