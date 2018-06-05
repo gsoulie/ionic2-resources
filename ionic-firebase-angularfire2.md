@@ -3,6 +3,7 @@
 # AngularFire2
 
 * [CRUD angularfire2](#crud-angularfire2)    
+* [Demo example](#demo-example)    
 * [Authentication](#authentication)     
 * [Firebase rules](#firebase-rules)     
 * [Add data with custom key](#add-data-with-custom-key)    
@@ -364,6 +365,301 @@ fetchData(type){
 }
 ```
 
+## Demo example
+[Back to top](#angularfire2) 
+
+*app.module.ts*
+```javascript
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+...
+
+// AngularFire2 account settings
+export const firebaseConfig = {
+  apiKey: "AIzaXXXXXXXXXXXXXXXXX",
+  authDomain: "xxxxxxx.firebaseapp.com",
+  databaseURL: "https://xxxxxxx.firebaseio.com",
+  projectId: "xxxxxxxx",
+  storageBucket: "xxxxxxxx.appspot.com",
+  messagingSenderId: "XXXXXXXXXX"
+};
+
+@NgModule({
+  declarations: [
+    MyApp,
+    HomePage
+  ],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),	// add declaration here
+    AngularFireDatabaseModule	// add declaration here
+  ],
+  bootstrap: [IonicApp],
+  entryComponents: [
+    MyApp,
+    HomePage
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ]
+})
+export class AppModule {}
+```
+
+*Home.html*
+
+```html
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="bAuth === false">
+    <ion-item>
+      <ion-label>login</ion-label>
+      <ion-input [(ngModel)]="login"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>password</ion-label>
+      <ion-input [(ngModel)]="password" type="password"></ion-input>
+    </ion-item>
+    <br><br>
+    <button ion-button (click)="onAuth()">CONNEXION</button>
+  </div>
+  <div *ngIf="bAuth === true">
+    <ion-item>
+      <ion-label>item guid</ion-label>
+      <ion-input [(ngModel)]="guid"></ion-input>
+    </ion-item>
+    <br><br>
+    <button ion-button (click)="onAddNode()" >Add new node</button>
+    <button ion-button (click)="onDisconnect()" color="danger">Disconnect</button>
+    <button ion-button (click)="onReadData()">Read node</button>
+    <button ion-button (click)="onInsertNode()">Insert data in current node</button>
+    <p>{{ res }}</p>
+  </div>
+</ion-content>
+
+```
+
+*home.ts*
+
+```javascript
+import { FirebaseServiceProvider } from './../../providers/firebase-service/firebase-service';
+import { AuthProvider } from './../../providers/auth/auth';
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { Observable } from 'rxjs/Observable';
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  login: string = "";
+  password: string = "";
+  bAuth: boolean = false;
+  guid: string = "";
+  res;
+
+  constructor(public navCtrl: NavController,
+    public auth: AuthProvider,
+    public fb: FirebaseServiceProvider) {
+  }
+
+  /**
+   * Firebase Authentication
+   */
+  onAuth(){
+    this.auth.loginUser(this.login, this.password)
+    .then( authData => {
+      // Auth success
+      this.bAuth = true;
+      this.res = "Success : " + authData.user.uid;
+    }, error => {
+      // Auth error
+
+    });
+  }
+
+  onDisconnect(){
+    this.auth.logoutUser()
+      .then( authData => {
+        // Auth success
+        this.bAuth = false;
+        this.res = "";
+      }, error => {
+        // Auth error
+
+      });
+  }
+
+  /**
+   * Add new node
+   */
+  onAddNode(){
+    // JSON object to create in firebase
+    let nodeData = {  
+        guid : this.guid,
+        customer_info : "TOTO",
+        profiles : [ {
+          profile_id : "3000",
+          validity_date : ""
+        }, {
+          profile_id : "3001",
+          validity_date : ""
+        }, {
+          profile_id : "3EE2",
+          validity_date : ""
+        }, {
+          profile_id : "3003",
+          validity_date : ""
+        } ]
+    };
+
+    this.fb.addConfig(this.guid,nodeData);  
+  }
+
+  /**
+   * Read selected node (guid) data
+   */
+  async onReadData(){
+    
+    this.fb.onGetDataWithPromise(this.guid)
+    .then(data => {
+      console.log("--- final obj --- " + JSON.stringify(data));
+      this.res = "guid : " + data[0].guid + "\r\n";
+      this.res += "customer_info : " + data[0].customer_info + "\r\n";
+    })
+    .catch(error => {
+      this.res = "Error " + error.error;
+    })
+  }
+
+
+  /**
+   * Insert daat in the current node (guid)
+   */
+  onInsertNode(){
+    // JSON object to insert into firebase
+    let nodeData = {  
+      deviceList : {
+        devices : [ {
+          productType : "iPhone",
+          id : 0,
+          name : "iPhone 6"
+        }, {
+          productType : "iPhone",
+          id : 1,
+          name : "iPhone 7"
+        }, {
+          productType : "iPhone",
+          id : 2,
+          name : "iPhone 8"
+        }]
+      }
+    };
+
+    this.fb.insertNode(this.guid,nodeData);  
+  }
+}
+```
+
+*firebase-service.ts*
+
+```javascript
+import { AuthProvider } from './../auth/auth';
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
+
+@Injectable()
+export class FirebaseServiceProvider {
+
+  dataList: AngularFireList<any>;
+  data: Observable<any[]>;  
+  resData: any[] = [];
+
+  constructor(public afDB: AngularFireDatabase,
+              public auth: AuthProvider) {
+  }
+
+  /**
+   * Add new node into firebase
+   * @param content : contenu json
+   */
+  addConfig(guid,content){
+    // get authenticated user uid
+    let uid = this.auth.onGetCurrentUser();
+
+    // Get ref of the main firebase node where we want to add data
+    var ref = this.afDB.database.ref('/rights/');
+
+    // Add the sub-node in "uid/<custom guid>"
+    ref.child(uid + "/" + guid).set(content)
+    .then(() => {
+      console.log("--- add data --- Ok");
+      return "Add node success";
+    })
+    .catch((e) => {
+      console.log("--- add data --- Error");
+      return "Import Error ! " + JSON.stringify(e, Object.getOwnPropertyNames(e));
+    });
+  }
+
+  /**
+   * Fetch data from /rights/<user_uid>/<custom guid>
+   * @param guid 
+   */
+  onGetDataWithPromise(guid){
+    let uid = this.auth.onGetCurrentUser(); // get authenticated user uid
+    
+    this.dataList = this.afDB.list('/rights/'+ uid);// +"/"+guid);  // fetch all sub-nodes of the current user
+
+    return new Promise((resolve, reject) => {
+      this.dataList.valueChanges().subscribe((res) => {      
+        this.resData = res as any[];
+        console.log("--- onGetData res ---" + JSON.stringify(this.resData));
+        resolve(res);
+      });
+    });
+  }
+
+  /**
+   * Insert data in specified node
+   * @param content : contenu json
+   */
+  insertNode(guid,content){
+    // get authenticated user uid
+    let uid = this.auth.onGetCurrentUser();
+
+    // Get ref of the main firebase node where we want to add data
+    var ref = this.afDB.database.ref('/rights/');
+
+    // Update sub-node data "uid/<custom guid>"
+    ref.child(uid + "/" + guid).update(content)
+    .then(() => {
+      console.log("--- add data --- Ok");
+      return "Add node success";
+    })
+    .catch((e) => {
+      console.log("--- add data --- Error");
+      return "Import Error ! " + JSON.stringify(e, Object.getOwnPropertyNames(e));
+    });
+  }
+}
+
+
+```
 
 ## Authentication
 [Back to top](#angularfire2) 
