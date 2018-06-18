@@ -18,6 +18,7 @@ Then, we need to configure it, just press **F5** with the Ionic project folder a
 
 This will create a new *.vscode/launch.json* configuration file. You only need to modify the webRoot value of the launch configuration to point to the www folder and change the port in url value to 8100. Feel free to rename the configuration to your liking. I also removed the attach configuration since I don't plan on using it. These are the final contents of my launch.json file:
 
+```
 {
   "version": "0.2.0",
   "configurations": [
@@ -31,6 +32,6 @@ This will create a new *.vscode/launch.json* configuration file. You only need t
     }
   ]
 }
-
+```
 Now you just have to add break points in your code and press **F5** to launch the debugger (kill all other ionic serve instances before launching debugger).
 
