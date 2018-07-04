@@ -123,6 +123,8 @@ export class MyApp {
 }
 ```
 
+> **Important** : The topics are created by the client through the ```subscribeToTopic()``` function. After client subsciption, the topic is available in Firebase in Target --> Topic
+
 Finally, run the application on a device
 
 #### 7 - Send notification from Firebase
@@ -133,6 +135,7 @@ Go to your firebase console and open **Notifications** menu, then follow the ins
 <img src="https://github.com/gsoulie/ionic2-resources/blob/master/fcm_form.png" align="center" width="900">
 </p>     
 
+As shown as above, you can specify a set of key / value in the advanced options
 
 #### 8 - Going further
 
