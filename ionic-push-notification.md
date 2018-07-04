@@ -7,6 +7,7 @@
 
 ## FCM push notification
 
+[Official plugin documentation](https://github.com/fechanique/cordova-plugin-fcm)    
 [tutorial 1](http://simonwillshire.com/blog/Ionic-2-FCM-Notifications/)    
 [tutorial 2](https://www.djamware.com/post/58a1378480aca7386754130a/ionic-2-fcm-push-notification)    
 
