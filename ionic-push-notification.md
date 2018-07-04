@@ -101,10 +101,14 @@ export class MyApp {
   }
 
   initFCM(){
+    // Subscribe to all topics
     this.fcm.subscribeToTopic('all');
+    
     this.fcm.getToken().then(token => {
+      // save token if needed
       // backend.registerToken(token);
     });
+    
     this.fcm.onNotification().subscribe(data => {
       alert('message received')
       if(data.wasTapped) {
@@ -117,13 +121,13 @@ export class MyApp {
       // backend.registerToken(token);
     });
     
-    // You can also subscribe on a specific channel
+    // You can also subscribe to a specific topic
     // this.fcm.subscribeToTopic('topicExample');
   }
 }
 ```
 
-> **Important** : The topics are created by the client through the ```subscribeToTopic()``` function. After client subsciption, the topic is available in Firebase in Target --> Topic
+> **Important** : The topics are created by the client through the ```subscribeToTopic()``` function. After client subscription, the topic is available in Firebase in Target --> Topic
 
 Finally, run the application on a device
 
