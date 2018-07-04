@@ -129,6 +129,11 @@ Finally, run the application on a device
 
 Go to your firebase console and open **Notifications** menu, then follow the instructions to send your first push notification. 
 
+<p align="center">
+<img src="https://github.com/gsoulie/ionic2-resources/blob/master/fcm_form.png" align="center" width="900">
+</p>     
+
+
 #### 8 - Going further
 
 With this method, you will see that push notification doesn't display on the system tray when the app is foreground, but the push notification appears when the app is in background.
