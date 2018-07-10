@@ -142,6 +142,8 @@ Go to your firebase console and open **Notifications** menu, then follow the ins
 
 As shown as above, you can specify a set of key / value in the advanced options
 
+You can also testing your notification with [https://cordova-plugin-fcm.appspot.com/]. You will find your GCM API Key in *Settings --> Cloud Messaging*
+
 #### 8 - Going further
 
 With this method, you will see that push notification doesn't display on the system tray when the app is foreground, but the push notification appears when the app is in background.
