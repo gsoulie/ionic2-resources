@@ -39,6 +39,67 @@ Uncomment the following code in the index.html to activate service worker to ena
 </script>
 ```
 
+#### Further Optimizations
+Let’s do some other tweaks to remove unnecessary things. These steps aren’t necessary but are good to do if you are deploying your app only as a PWA.
+
+Currently, right above that service worker script is the script to call *cordova.js*. If you are **only going to run the app as a PWA** and not a cordova app, go ahead and comment it out.
+```
+<!-- cordova.js required for cordova apps -->
+<!--<script src="cordova.js"></script>-->
+```
+If your only deploying this as a PWA you can go inside *app.component.ts*, and remove the platform and plugin calls:
+
+```
+import { Component } from '@angular/core';
+import { TabsPage } from '../pages/tabs/tabs';
+
+@Component({
+  templateUrl: 'app.html'
+})
+export class MyApp {
+  rootPage: any = TabsPage;
+
+  constructor() {}
+}
+```
+You can also go into the *app.module.ts* file and remove the imports for the *StatusBar* and *SplashScreen* plugins.
+
+#### Web Manifest and Service Worker
+The web manifest and Service Worker are what officially make our app a PWA. Let’s take a look at these two features.
+
+Let’s examine the web manifest and the service worker to see what’s going on. First, open src/manifest.json
+```
+{
+  "name": "Ionic",
+  "short_name": "Ionic",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [{
+    "src": "assets/imgs/logo.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#4e8ef7",
+  "theme_color": "#4e8ef7"
+}
+```
+This is the standard web manifest that comes with the app. Let’s go through each option:
+
+```"name": "Ionic"```, => This is the name of our application.
+```"short_name": "Ionic"```, => This is our short name, used when there’s not enough space for the name. It is most commonly used when the user adds the application to the home screen.
+```"start_url": "index.html"```, => This is the URL the app is going to open to.
+```"display": "fullscreen"```, => Defines the developer’s preferred display mode for the web application. When using fullscreen all of the available display area is used, and no browser chrome is shown.
+The icons object lets you set the icons your app will use depending on the resolution of the screen. The highest resolution icon (512×512) will also be shown on the splash screen of the application
+```"icons": [{
+  "src": "assets/imgs/logo.png",
+  "sizes": "512x512",
+  "type": "image/png"
+}]
+```
+```"background_color": "#4e8ef7"```, => Defines the expected background color for the web application.
+```"theme_color": "#4e8ef7"``` => Defines the default theme color for an application. This will affect things such as the notification bar color on Android.
+Make sure to add your preferred logo to src/assets/img/logo.png. This is the logo the PWA will display when the user adds it to the home screen, and it will show it on the splash screen when the user opens the app through the homescreen or app drawer in Android.
+
 ## Step 3
 
 If you need to caching some resources, add them in ```service-worker.js```
