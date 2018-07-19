@@ -141,3 +141,19 @@ ionic cordova build browser --prod
 firebase deploy
 ```
 
+## Using cordova plugin
+
+### Using Camera plugin in PWA 
+
+```
+ionic cordova platform add browser
+ionic cordova plugin add cordova-plugin-camera
+npm install --save @ionic-native/camera
+ionic cordova build browser --prod
+```
+
+Or simply use : 
+
+<ion-content padding>
+  <input type="file" accept="image/*" capture="camera" />
+</ion-content>
