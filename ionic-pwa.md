@@ -145,6 +145,8 @@ firebase deploy
 
 ### Using Camera plugin in PWA 
 
+https://forum.ionicframework.com/t/ionic-pwa-cordova/104700/4
+
 ```
 ionic cordova platform add browser
 ionic cordova plugin add cordova-plugin-camera
