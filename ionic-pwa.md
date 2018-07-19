@@ -156,6 +156,8 @@ ionic cordova build browser --prod
 
 Or simply use : 
 
+```
 <ion-content padding>
   <input type="file" accept="image/*" capture="camera" />
 </ion-content>
+```
