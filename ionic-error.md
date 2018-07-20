@@ -5,6 +5,7 @@
 * [Typescript error](#typescript-error)     
 * [iOS xcassets error - Distill failed for unknown reasons](#xcassets-error)    
 * [Android build error In <declare-styleable>](#declare-stylable-error)     
+* [DexArchiveMergerException](DexArchiveMergerException)    
 
 ## Typescript error
 
