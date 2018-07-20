@@ -128,3 +128,36 @@ cordova plugin rm cordova-plugin-compat --force
 cordova platform rm android
 ionic cordova platform add android@6.3.0
 ```
+
+## DexArchiveMergerException
+
+#### Error
+```
+* What went wrong:
+Execution failed for task ':app:transformDexArchiveWithExternalLibsDexMergerForDebug'.
+> java.lang.RuntimeException: java.lang.RuntimeException: com.android.builder.dexing.DexArchiveMergerException: Unable to merge dex
+```
+
+#### Fix
+
+Remove and re-add Android platform
+
+Sometimes need to update build.gradle with :
+
+```
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+    }
+    //This replaces project.properties w.r.t. build settings
+    project.ext {
+      defaultBuildToolsVersion="28.0.1"//"25.0.2" //String
+      defaultMinSdkVersion=19 //Integer - Minimum requirement is Android 4.4
+      defaultTargetSdkVersion=26 //Integer - We ALWAYS target the latest by default
+      defaultCompileSdkVersion=26 //Integer - We ALWAYS compile with the latest by default
+    }
+}
+```
