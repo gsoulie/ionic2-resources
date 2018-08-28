@@ -6,6 +6,7 @@
 * [iOS xcassets error - Distill failed for unknown reasons](#xcassets-error)    
 * [Android build error In <declare-styleable>](#declare-stylable-error)     
 * [DexArchiveMergerException](#dexarchivemergerexception)    
+* [CORS issues](#cors-issues)    
 
 ## Typescript error
 
@@ -162,3 +163,7 @@ allprojects {
     }
 }
 ```
+
+## CORS issues
+
+https://www.joshmorony.com/dealing-with-cors-cross-origin-resource-sharing-in-ionic-applications/
