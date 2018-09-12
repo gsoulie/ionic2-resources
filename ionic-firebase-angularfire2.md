@@ -8,6 +8,7 @@
 * [Firebase rules](#firebase-rules)     
 * [Add data with custom key](#add-data-with-custom-key)    
 * [angularfire issue](#angularfire-issue)     
+* [Querying on Firebase](#querying-on-firebase)    
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -810,3 +811,64 @@ zone.js:192 Uncaught TypeError: Object(...) is not a function
 To fix it, you must upgrade RxJs to v6 [RxJS v6 migration](https://github.com/ReactiveX/RxJS/blob/HEAD/MIGRATION.md#backwards-compatibility)    
 
 If the error persists, run ```npm install rxjs@^6.0.0 --save``` command.
+
+## Querying on Firebase
+[Back to top](#angularfire2) 
+
+Here's some help to querying more easily on firebase
+
+[Firebase blog - part 1](https://firebase.googleblog.com/2013/10/queries-part-1-common-sql-queries.html)    
+[Firebase blog - part 2](https://firebase.googleblog.com/2014/11/firebase-now-with-more-querying.html)     
+
+#### Select a user by ID (WHERE id = x)
+
+We'll start off with the basics and build from here. In Firebase queries, records are stored in a "path", which is simply a URL in the data hierarchy. In our sample data, we've stored our users at /user. So to retrieve record by it's id, we just append it to the URL:
+
+```javascript
+new Firebase('https://example-data-sql.firebaseio.com/user/1').once('value', function(snap) {
+   console.log('I fetched a user!', snap.val());
+});
+```
+
+#### Find a user by email address (WHERE email = x)
+
+Selecting an ID is all good and fine. But what if I want to look up an account by something that's not already part of the URL path?
+
+Well this is where ordered data becomes our friend. Since we know that email addresses will be a common lookup method, we can call *setPriority()* whenever we add a new record. Then we can use that priority to look them up later.
+
+```javascript
+new Firebase("https://examples-sql-queries.firebaseio.com/user")
+    .startAt('kato@firebase.com')
+    .endAt('kato@firebase.com')
+    .once('value', function(snap) {
+       console.log('accounts matching email address', snap.val())
+});
+```
+
+#### Paginate through widgets (LIMIT 10 OFFSET 10)
+
+Pagination for small, static data sets (less than 1MB) can be done entirely client side. For larger static data sets, things get a bit more challenging. Assuming we're writing append-only data, we can use our ordered data examples above and assign each message a page number or a unique incremental counter and then use *startAt()/endAt()*.
+
+```javascript
+// fetch page 2 of messages
+new Firebase("https://examples-sql-queries.firebaseio.com/messages")
+    .startAt(2) // assumes the priority is the page number
+    .endAt(2)
+    .once('value', function(snap) {
+       console.log('messages in range', snap.val());
+});
+```
+
+#### Join records using an id (FROM table1 JOIN table2 USING id)
+
+Firebase is a real-time sync platform. It's built for speed and efficiency. You don't need to worry about creating extra references, and can listen to as many paths as you'd like to retrieve your data:
+
+```javascript
+var fb = new Firebase("https://examples-sql-queries.firebaseio.com/");
+fb.child('user/123').once('value', function(userSnap) {
+   fb.child('media/123').once('value', function(mediaSnap) {
+       // extend function: https://gist.github.com/katowulf/6598238
+       console.log( extend({}, userSnap.val(), mediaSnap.val()) );
+   });
+});
+```
