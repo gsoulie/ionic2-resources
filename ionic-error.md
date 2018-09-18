@@ -7,6 +7,7 @@
 * [Android build error In <declare-styleable>](#declare-stylable-error)     
 * [DexArchiveMergerException](#dexarchivemergerexception)    
 * [CORS issues](#cors-issues)    
+* [HTTP query issues](#http-query-issues)    
 
 ## Typescript error
 
@@ -111,6 +112,7 @@ To
 After that, iOS build should be ok
 
 ## declare-stylable error
+[back to top](#common-errors) 
 
 Sometimes, Android build failed with 
 
@@ -132,6 +134,7 @@ ionic cordova platform add android@6.3.0
 ```
 
 ## DexArchiveMergerException
+[back to top](#common-errors) 
 
 #### Error
 ```
@@ -165,5 +168,13 @@ allprojects {
 ```
 
 ## CORS issues
+[back to top](#common-errors) 
 
 https://www.joshmorony.com/dealing-with-cors-cross-origin-resource-sharing-in-ionic-applications/
+
+## HTTP query issues
+[back to top](#common-errors) 
+
+Sometimes, Http GET queries with Angular can failed on iOS. To void that, it is recommanded to use ```httpIonic.get()``` instead of ```HttpAngular.get()```
+
+For Android, ```HttpAngular.get()``` still works fine.
