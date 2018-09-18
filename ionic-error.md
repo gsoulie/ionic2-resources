@@ -177,4 +177,4 @@ https://www.joshmorony.com/dealing-with-cors-cross-origin-resource-sharing-in-io
 
 Sometimes, Http GET queries with Angular can failed on iOS. To void that, it is recommanded to use ```httpIonic.get()``` instead of ```HttpAngular.get()```
 
-For Android, ```HttpAngular.get()``` still works fine.
+For Android, ```HttpAngular.get()``` still works fine when ```httpIonic.get()``` doesn't work.
