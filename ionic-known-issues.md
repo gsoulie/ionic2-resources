@@ -95,3 +95,11 @@ To remove scrolling when entering input field focus, add the code below in you *
     })    
   ],
   ```
+  
+  ### Display carriage return
+  
+  To insert ```\r\n``` tags, use that syntax :
+  
+  ```
+  <p  [innerHTML]="texteAvecBalises"></p>
+  ```
