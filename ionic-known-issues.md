@@ -101,5 +101,12 @@ To remove scrolling when entering input field focus, add the code below in you *
   To insert ```\r\n``` tags, use that syntax :
   
   ```
-  <p  [innerHTML]="texteAvecBalises"></p>
+  <p  class="pClass">{{someTextWithCarriageReturn}}</p>
+  ```
+  
+  ```
+  .pClass{
+        white-space: pre-line;
+        overflow: auto;
+  }
   ```
