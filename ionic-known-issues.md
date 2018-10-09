@@ -2,7 +2,15 @@
 
 # Known issues
 
+* [Clicking item does not work](#)     
+* [Slow tap on component](#slow-tap-on-component-and-element)     
+* [Conflict with "this" on callback](#conflict-with-"this"-on-callback)    
+* [Scrolling when entering input field](#scrolling-when-entering-input-field)    
+* [Display carriage return](#display-carriage-return)    
+* [Remove iOS cache](#remove-ios-cache)    
+
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
+[Back to top](#known-issues)    
 
 Sometimes,  on the emulator or on device, 2 out of 3 clicks it doesn't fire the click function. To solve the issue, change ```<ion-item>``` to ```<button>``` with the styling of ```ion-item```.
 
@@ -16,6 +24,7 @@ Sometimes,  on the emulator or on device, 2 out of 3 clicks it doesn't fire the 
 ```
 
 ### Slow tap on component and element
+[Back to top](#known-issues)    
 
 If you create custom components or html element (div or ion-card) and then use click handler like ```(click)="itemTap()"``` you may notice a delay if the element are not an anchor tag or button.
 To fix it, add **tappable** as an attribute to you element or component like ```(click)="itemTap($event)" tappable``` or add it on your view file like ```<ion-card tappable="true" (click)="onOpen()">```
@@ -23,6 +32,7 @@ To fix it, add **tappable** as an attribute to you element or component like ```
 see also : button role on non button clickable elements ```role="button"```
 
 ### Conflict with "this" on callback
+[Back to top](#known-issues)    
 
 refering to **this** has traditionally been a pain point in JavaScript. Fat arrows fix it by capturing the meaning of this from the surrounding context. So it is very useful in case of calling asynchronous callback after a window closing event.
 
@@ -83,6 +93,7 @@ save(){
 ```
 
 ### Scrolling when entering input field
+[Back to top](#known-issues)    
 
 To remove scrolling when entering input field focus, add the code below in you *app.component.ts*
 
@@ -97,6 +108,7 @@ To remove scrolling when entering input field focus, add the code below in you *
   ```
   
   ### Display carriage return
+  [Back to top](#known-issues)    
   
   To insert ```\r\n``` tags, use that syntax :
   
@@ -110,3 +122,22 @@ To remove scrolling when entering input field focus, add the code below in you *
         overflow: auto;
   }
   ```
+  
+  ### Remove iOS cache
+  [Back to top](#known-issues)    
+  
+  **iOS**
+  
+  ```javascript
+  import { File } from '@ionic-native/file';
+  
+  if(platform.is('ios')){
+      this.file.removeRecursively(this.file.cacheDirectory, "Webkit").catch(err => console.log(err));
+  }
+  ```
+  
+  **Android**
+  
+  For Android, use *disable-http-cache-cache* plugin
+  
+
