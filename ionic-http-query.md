@@ -101,3 +101,35 @@ export class httpProvider {
   }
 }
 ```
+
+## PUT query
+
+In order to avoid *http.put* query issue when sending binary file, you can use *FileTransfer*(https://ionicframework.com/docs/native/file-transfer/) to send your *PUT* query like below :
+ 
+```javascript
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+
+@Injectable()
+export class MyProvider { 
+
+constructor(public transfer: FileTransfer){ }
+
+onSendHttpPutQuery(myPictureFullPathURI){
+const fileTransfer: FileTransferObject = this.transfer.create(); 
+ 
+let options: FileUploadOptions = { 
+    fileKey: 'file', 
+    headers: { 'Content-Type': 'image/jpg', 'Access-Control-Allow-Origin': '*' }, 
+    httpMethod: 'PUT', 
+    mimeType: 'image/jpg' 
+} 
+
+return fileTransfer.upload(myPictureFullPathURI,myWebServiceURL, options) 
+.then((result) => { 
+    return result; 
+}, (err) => { 
+    alert("request failure - ", JSON.stringify(err)); 
+}); 
+}
+}
+```
