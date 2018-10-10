@@ -1,7 +1,12 @@
 [< Back to main Menu](https://github.com/gsoulie/Mobile-App-Development/blob/master/ionic2-test.md)    
 
-# File storage
-[Back to top](#ionic-2)  
+# File
+
+* [File storage](#file-storage)    
+* [File size](#file-size)    
+
+##File storage
+[Back to top](#file)  
 
 [File Documentation here](https://ionicframework.com/docs/v2/native/file/)    
 
@@ -194,4 +199,57 @@ export class HomePage {
 	);
     }
 }
+```
+
+##File size
+[Back to top](#file)  
+
+
+```javascript
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+declare var window;
+
+@Component({
+  selector: 'page-photo',
+  templateUrl: 'photo.html',
+})
+export class PhotoPage {
+  fileSize;
+  consoleLog: string = "";
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera, private file: File) {
+  }
+
+  ionViewDidLoad() {
+  }
+  onTakePhoto(){
+    this.camera.getPicture({
+      quality: 100,
+      targetWidth: 900,
+      targetHeight: 600,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      saveToPhotoAlbum: false,
+      allowEdit: false,
+      sourceType: this.camera.PictureSourceType.CAMERA
+    }).then((imagedata) => {
+      var tempName = imagedata.substr(imagedata.lastIndexOf('/') + 1);
+      var tempPath = imagedata.substr(0, imagedata.lastIndexOf('/') + 1);
+      this.consoleLog += "imageData : " + JSON.stringify(imagedata) + "\r\n";
+      this.consoleLog += "tempName : " + tempName + "\r\n";
+      this.consoleLog += "tempPath : " + tempPath + "\r\n";
+
+      this.file.resolveLocalFilesystemUrl(imagedata).then(fileEntry => {
+        fileEntry.getMetadata((metadata) => {
+            this.fileSize = metadata.size;	// size in bytes
+        })
+      })
+    })
+  }
+}
+
 ```
