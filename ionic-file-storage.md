@@ -5,7 +5,7 @@
 * [File storage](#file-storage)    
 * [File size](#file-size)    
 
-##File storage
+## File storage
 [Back to top](#file)  
 
 [File Documentation here](https://ionicframework.com/docs/v2/native/file/)    
@@ -201,7 +201,7 @@ export class HomePage {
 }
 ```
 
-##File size
+## File size
 [Back to top](#file)  
 
 
