@@ -39,5 +39,5 @@ This code show how to stop event propagation
 ```javascript
 pickDevice(event,_idDevice){
     event.stopPropagation();
-  }
+}
 ```
