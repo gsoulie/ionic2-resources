@@ -79,6 +79,60 @@ page-map {
 
 ### Center a div
 
+Center (horizontally and vertically) a div containing a form :
+
+*View file*
+
+```html
+<ion-content padding class="window">
+    <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+      <div class="cardForm">
+        <ion-item>
+          <ion-label stacked>Email</ion-label>
+          <ion-input #email formControlName="email" type="email" placeholder="Your email address"
+            [class.invalid]="!loginForm.controls.email.valid"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid">
+          <font class="info">Please enter a valid email.</font>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label stacked>Password</ion-label>
+          <ion-input #password formControlName="password" type="password" placeholder="Your password"
+            [class.invalid]="!loginForm.controls.password.valid"></ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid">
+          <font class="info">Your password needs more than 6 characters.</font>
+        </ion-item>
+      </div>
+  
+      <button ion-button block class="submitButton" type="submit">
+        Login
+      </button>
+      <button ion-button block class="submitButtonOutline" (click)="createAccount()">
+        Create a new account
+      </button>
+    </form>  
+</ion-content>
+```
+
+*Style file*
+
+```
+.myDiv{
+    width: 400px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    padding:15px;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+```
+
+### Other way to center a div
+
 *View file*
 
 ```html
