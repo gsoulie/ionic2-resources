@@ -8,6 +8,7 @@
 * [Scrolling when entering input field](#scrolling-when-entering-input-field)    
 * [Display carriage return](#display-carriage-return)    
 * [Remove iOS cache](#remove-ios-cache)    
+* [Gradle build failure](#gradle-build-failure-app:debugCompileClasspath)    
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
 [Back to top](#known-issues)    
@@ -140,4 +141,43 @@ To remove scrolling when entering input field focus, add the code below in you *
   
   For Android, use *disable-http-cache-cache* plugin
   
+### Gradle build failure app:debugCompileClasspath
+  
+```
+FAILURE: Build failed with an exception.
+ 
+* What went wrong:
+Could not resolve all files for configuration ':app:debugCompileClasspath'.
+> Could not find support-v4.aar (com.android.support:support-v4:27.1.1).
+  Searched in the following locations:
+      https://jcenter.bintray.com/com/android/support/support-v4/27.1.1/support-v4-27.1.1.aar
+```
+
+To fix it, modify your */platforms/android/build.gradle* to reflects the following :
+
+```javascript
+ allprojects {
+    repositories {
+    	// JUST REPLACE repositories content by the following
+	mavenLocal()
+	maven { url 'https://maven.google.com' }
+	jcenter()
+	maven {
+	// All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+	url "$rootDir/../node_modules/react-native/android"
+	}
+	maven {
+		url 'https://maven.google.com/'
+		name 'Google'
+	} 
+    }
+    project.ext{
+	defaultBuildToolsVersion="25.0.2"
+	defaultMinSdkVersion=19
+	defaultTargetSdkVersion=26
+	defaultCompileSdkVersion=26
+    }
+
+}
+  ```
 
