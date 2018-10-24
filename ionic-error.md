@@ -8,6 +8,7 @@
 * [DexArchiveMergerException](#dexarchivemergerexception)    
 * [CORS issues](#cors-issues)    
 * [HTTP query issues](#http-query-issues)    
+* [Android build error](#android-build-error)    
 
 ## Typescript error
 
