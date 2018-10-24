@@ -178,3 +178,34 @@ https://www.joshmorony.com/dealing-with-cors-cross-origin-resource-sharing-in-io
 Sometimes, Http GET queries with Angular can failed on iOS. To void that, it is recommanded to use ```httpIonic.get()``` instead of ```HttpAngular.get()```
 
 For Android, ```HttpAngular.get()``` still works fine when ```httpIonic.get()``` doesn't work.
+
+## Android Build error
+[back to top](#common-errors) 
+
+*Build Issue*
+```
+Could not resolve all files for configuration ':app:debugCompileClasspath'.
+> Could not find play-services-basement.aar (com.google.android.gms:play-services-basement:15.0.1).
+Searched in the following locations:
+            https://jcenter.bintray.com/com/google/android/gms/play-services-basement/15.0.1/play-services-basement-15.0.1.aar
+```
+
+To fix it, modify your */platforms/android/build.gradle* to reflecting the following
+*
+```
+allprojects {
+    repositories {
+            mavenLocal()
+            maven { url 'https://maven.google.com' }
+            jcenter()
+            maven {
+                // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+                url "$rootDir/../node_modules/react-native/android"
+            }
+            maven {
+                url 'https://maven.google.com/'
+                name 'Google'
+            }
+    }
+}
+```
