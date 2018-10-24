@@ -192,7 +192,7 @@ Searched in the following locations:
 ```
 
 To fix it, modify your */platforms/android/build.gradle* to reflecting the following
-*
+
 ```
 allprojects {
     repositories {
