@@ -136,6 +136,14 @@ $ ionic cordova build ios
 $ ionic cordova emulate ios
 ```
 
+You can debugging faster on devices by using these commands :
+
+```
+$ ionic cordova build ios -lc
+$ ionic cordova emulate ios -lc
+```
+Which is directly deploying the app on your connected device plus automatically reloading whenever you change something.
+
 **Run on device**
 
 After app is running on device, you can inspect it with chrome inspect device
