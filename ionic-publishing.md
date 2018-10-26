@@ -4,7 +4,11 @@
 
 [link : publishing app](http://ionicframework.com/docs/guide/publishing.html)    
 
-First of all, check your config.xml file and modify **id, author, name, description etc...**
+First of all, check your config.xml file and modify **id, author, name, description etc...**. Don't forget to add ```android-versionCode="xxx"``` in *config.xml* file like below :
+
+```
+<widget android-versionCode="1" versio="1.0.1" id="com.mydomain.myapp"...>
+```
 
 more information about it's configuration [here](http://cordova.apache.org/docs/en/latest/config_ref/index.html)
 [V1 documentation](https://ionicframework.com/docs/v1/guide/publishing.html)  
