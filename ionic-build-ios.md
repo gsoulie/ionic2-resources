@@ -47,3 +47,13 @@ Adding those entries manually to the *plist* can't be the solution, and of cours
 ```
 
 This will automatically create the needed entries whenever you build your Ionic app for iOS, just make sure to add reasonable information in here. 
+
+## Restrict plist to iphone only
+[back to top](#build-for-ios)    
+
+You can modify your plist to target only iphone form factor :
+
+```
+<key>UIDeviceFamily</key>
+<string>1</string>
+```
