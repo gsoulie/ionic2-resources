@@ -9,6 +9,7 @@
 * [Display carriage return](#display-carriage-return)    
 * [Remove iOS cache](#remove-ios-cache)    
 * [Gradle build failure](#gradle-build-failure-app:debugCompileClasspath)    
+* [iOS 12 keyboard issue](#ios12-keyboard-issue)    
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
 [Back to top](#known-issues)    
@@ -179,5 +180,18 @@ To fix it, modify your */platforms/android/build.gradle* to reflects the followi
     }
 
 }
-  ```
+```
+
+## iOS 12 plugin issue
+[Back to top](#known-issues) 
+
+According 
+
+Since iOS 12, you may get the following error :```API error returned 0 width, assuming UIViewNoIntrinsicMetric```
+
+This affect the keyboard usage, this is due to the ```ionic-plugin-keyboard``` which is deprecated. So you must remove this plugin and install ```cordova-plugin-ionic-keyboard```
+
+https://forum.ionicframework.com/t/api-error-returned-0-width-assuming-uiviewnointrinsicmetric/110655/26
+https://forum.ionicframework.com/t/important-all-ionic-users-please-update-your-keyboard-plugin/46889
+  
 
