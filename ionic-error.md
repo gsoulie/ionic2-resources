@@ -183,7 +183,7 @@ For Android, ```HttpAngular.get()``` still works fine when ```httpIonic.get()```
 ## Android Build error
 [back to top](#common-errors) 
 
-*Build Issue*
+*Build Issue :app:debugCompileClasspath*
 ```
 Could not resolve all files for configuration ':app:debugCompileClasspath'.
 > Could not find play-services-basement.aar (com.google.android.gms:play-services-basement:15.0.1).
@@ -210,3 +210,15 @@ allprojects {
     }
 }
 ```
+
+*Build Issue :transformClassesWithDexForDebug*
+```
+Error build Android: Execution failed for task':transformClassesWithDexForDebug'. 
+```
+
+To fix it :
+
+```
+cordova clean 
+```
+
