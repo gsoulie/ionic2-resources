@@ -39,6 +39,14 @@ Uncomment the following code in the index.html to activate service worker to ena
 </script>
 ```
 
+And change the title of the app
+
+```
+  <title>My app</title>
+```
+
+Don't forget to change the favicon in *src/assets/ico*, notice that the favicon does not well support transparency
+
 #### Further Optimizations
 Let’s do some other tweaks to remove unnecessary things. These steps aren’t necessary but are good to do if you are deploying your app only as a PWA.
 
