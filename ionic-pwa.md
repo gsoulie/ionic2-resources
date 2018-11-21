@@ -47,6 +47,12 @@ And change the title of the app
 
 Don't forget to change the favicon in *src/assets/ico*, notice that the favicon does not well support transparency
 
+Finally, if you use Google map, be sure that the google map api url is in *https*
+
+```
+<script src="https://maps.google.com/maps/api/js?key=YOUR_KEY"></script>
+```
+
 #### Further Optimizations
 Let’s do some other tweaks to remove unnecessary things. These steps aren’t necessary but are good to do if you are deploying your app only as a PWA.
 
