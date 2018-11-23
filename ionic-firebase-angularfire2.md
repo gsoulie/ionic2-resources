@@ -84,7 +84,7 @@ export class AppModule {}
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+        Nb item ({{(songs | async)?.length}})
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="addSong()">
