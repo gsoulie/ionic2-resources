@@ -16,6 +16,7 @@
 [link : Josh morony tutorial](https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/)    
 [link : AngularFire2 change log](https://github.com/angular/angularfire2/blob/master/docs/rtdb/querying-lists.md)    
 [link : Firebase query tutorial](https://www.youtube.com/watch?v=sKFLI5FOOHs)    
+[link : firebase cloud functions](https://stackoverflow.com/questions/32004582/delete-firebase-data-older-than-2-hours)    
 
 [USING angularfire OFFLINE](https://github.com/adriancarriger/angularfire2-offline)    
 
