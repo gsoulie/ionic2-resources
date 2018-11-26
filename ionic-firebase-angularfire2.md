@@ -15,6 +15,7 @@
 
 [link : Josh morony tutorial](https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/)    
 [link : AngularFire2 change log](https://github.com/angular/angularfire2/blob/master/docs/rtdb/querying-lists.md)    
+[link : Firebase query tutorial](https://www.youtube.com/watch?v=sKFLI5FOOHs)    
 
 [USING angularfire OFFLINE](https://github.com/adriancarriger/angularfire2-offline)    
 
