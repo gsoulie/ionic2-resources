@@ -9,6 +9,7 @@
 * [Add data with custom key](#add-data-with-custom-key)    
 * [angularfire issue](#angularfire-issue)     
 * [Querying on Firebase](#querying-on-firebase)    
+* [Firebase cloud function](#firebase-cloud-function)    
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -16,7 +17,6 @@
 [link : Josh morony tutorial](https://www.joshmorony.com/building-a-crud-ionic-2-application-with-firebase-angularfire/)    
 [link : AngularFire2 change log](https://github.com/angular/angularfire2/blob/master/docs/rtdb/querying-lists.md)    
 [link : Firebase query tutorial](https://www.youtube.com/watch?v=sKFLI5FOOHs)    
-[link : firebase cloud functions](https://stackoverflow.com/questions/32004582/delete-firebase-data-older-than-2-hours)    
 
 [USING angularfire OFFLINE](https://github.com/adriancarriger/angularfire2-offline)    
 
@@ -874,3 +874,71 @@ fb.child('user/123').once('value', function(userSnap) {
    });
 });
 ```
+
+## Firebase cloud function
+[Back to top](#angularfire2) 
+
+[link : firebase official tutorial](https://firebase.google.com/docs/functions/get-started)    
+[link : firebase cloud functions](https://stackoverflow.com/questions/32004582/delete-firebase-data-older-than-2-hours)    
+[link : firebase deploy $RESSOURCE_DIR issue](https://github.com/firebase/firebase-tools/issues/610)     
+
+The first step to create a firebase cloud function is to initiate a nodejs project by running ```npm init``` into your project directory. You will be promped to answer few questions (project name, version, project entry point file etc...
+
+Then following the steps in the official firebase tutorial.
+
+### Example of function
+
+In this example, we need a function which clean all data in our firebase database where *datetime* attribute is older than the last 24h. This function will be triggerred when adding data into our *data* table
+
+*Sample of our database*
+```
+data
+ |
+ |-<auto UID>
+     |- data: {...}
+     |- datetime: "2018-11-01"
+     |- name: "today's data"
+     
+ |-<auto UID>
+     |- data: {...}
+     |- datetime: "2018-09-10"
+     |- name:"old data"
+ ...
+```
+
+Considering we are in november 1st, the goal is to remove all data before october 31st.
+
+The function below, do that job !
+
+```
+const functions = require('firebase-functions');
+
+// The Firebase Admin SDK to access the Firebase Realtime Database.
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+exports.deleteOldItems = functions.database.ref('/data/{pushId}')
+  .onWrite((change, context) => {
+    var ref = change.after.ref.parent;//('/data/'); // reference to the items
+    
+    var dateOffset = (24*60*60*1000) * 1; //offset 1 days
+    let currentDate = new Date();	// current date
+    currentDate.setTime(currentDate.getTime() - dateOffset);	// change current date by adding offset
+    let dateToString = currentDate.getFullYear()+"-"+("0"+(currentDate.getMonth()+1)).slice(-2)+"-"+("0"+(currentDate.getDate())).slice(-2);	// need to convert date to string. If not, the following .endAt function will not work
+  
+  
+    var oldItemsQuery = ref.orderByChild('datetime').endAt(dateToString);
+    return oldItemsQuery.once('value', function(snapshot) {
+      // create a map with all children that need to be removed
+      var updates = {};
+      snapshot.forEach(function(child) {
+        updates[child.key] = null
+      });
+      // execute all updates in one go and return the result to end the function
+      return ref.update(updates);
+    });
+});
+```
+
+To finish, just run firebase deploy command
+
