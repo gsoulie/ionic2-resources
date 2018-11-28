@@ -882,7 +882,21 @@ fb.child('user/123').once('value', function(userSnap) {
 [link : firebase cloud functions](https://stackoverflow.com/questions/32004582/delete-firebase-data-older-than-2-hours)    
 [link : firebase deploy $RESSOURCE_DIR issue](https://github.com/firebase/firebase-tools/issues/610)     
 
-The first step to create a firebase cloud function is to initiate a nodejs project by running ```npm init``` into your project directory. You will be promped to answer few questions (project name, version, project entry point file etc...
+The first step to create a firebase cloud function is to initiate a nodejs project by running 
+```
+npm install -g firebase-tools
+```
+
+Then run
+```
+firebase login
+```
+
+And finally go to your firebase project directory and run
+
+```
+firebase init functions
+```
 
 Then following the steps in the official firebase tutorial.
 
