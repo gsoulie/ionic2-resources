@@ -955,3 +955,48 @@ exports.deleteOldItems = functions.database.ref('/data/{pushId}')
 ```
 
 To finish, just run firebase deploy command ```firebase deploy --only functions```
+
+### Using the same function with Https trigger
+
+```
+exports.deleteOldItemsHttpTEST = functions.https.onRequest((req, res) =>{
+  var dbRef = admin.database().ref('/data/');
+
+  // Manage CORS ISSUE
+  res.set('Access-Control-Allow-Origin', '*');
+  if (req.method === 'OPTIONS') {
+    // Send response to OPTIONS requests
+    res.set('Access-Control-Allow-Methods', 'GET');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.set('Access-Control-Max-Age', '3600');
+    res.status(204).send('');
+  } else {
+    // Set CORS headers for the main request
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send('Hello World!');
+ 
+    var dateOffset = (24*60*60*1000) * 1; //offset 1 days
+    let currentDate = new Date();
+    currentDate.setTime(currentDate.getTime() - dateOffset);
+    let dateToString = currentDate.getFullYear()+"-"+("0"+(currentDate.getMonth()+1)).slice(-2)+"-"+("0"+(currentDate.getDate())).slice(-2);
+  
+    var oldItemsQuery = dbRef.orderByChild('datetime').endAt(dateToString);
+    oldItemsQuery.once('value', function(snapshot) {
+      // create a map with all children that need to be removed
+      var updates = {};
+      snapshot.forEach(function(child) {
+        updates[child.key] = null
+      });
+      // execute all updates in one go and return the result to end the function
+      dbRef.update(updates);
+    });
+    res.redirect(200);
+  }
+
+});
+```
+
+### CORS issue
+
+[link: official cloud function documentation](https://cloud.google.com/functions/docs/writing/http)
+
