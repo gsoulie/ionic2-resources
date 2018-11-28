@@ -954,5 +954,4 @@ exports.deleteOldItems = functions.database.ref('/data/{pushId}')
 });
 ```
 
-To finish, just run firebase deploy command
-
+To finish, just run firebase deploy command ```firebase deploy --only functions```
