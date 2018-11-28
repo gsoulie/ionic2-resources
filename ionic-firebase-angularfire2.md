@@ -903,7 +903,7 @@ Then following the steps in the official firebase tutorial.
 
 ### Example of function
 
-In this example, we need a function which clean all data in our firebase database where *datetime* attribute is older than the last 24h. This function will be triggerred when adding data into our *data* table
+In this example, we need a function which clean all data in our firebase database where *datetime* attribute is older than the last 24h. This function will be triggerred when create data into our *data* table
 
 *Sample of our database*
 ```
@@ -933,7 +933,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 exports.deleteOldItems = functions.database.ref('/data/{pushId}')
-  .onWrite((change, context) => {
+  .onCreate((change, context) => {
     var ref = change.after.ref.parent;//('/data/'); // reference to the items
     
     var dateOffset = (24*60*60*1000) * 1; //offset 1 days
