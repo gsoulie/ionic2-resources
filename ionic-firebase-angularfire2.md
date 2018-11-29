@@ -875,6 +875,125 @@ fb.child('user/123').once('value', function(userSnap) {
 });
 ```
 
+#### Join on realtime dataset
+
+Join data on realtime database is not possible with Firebase. So you can doing your join like below :
+
+*Database structure*
+```
+data
+ |
+ |-<auto UID>
+     |- data: {...}
+     |- datetime: "2018-11-01"
+     |- tagID: "1"
+     |- 
+     
+ |-<auto UID>
+     |- data: {...}
+     |- datetime: "2018-09-10"
+     |- tagID: "2"
+ ...
+tags
+ |
+ |-<auto UID>
+     |- name: "logical name 1"
+     |- tagID:"1"
+ |-<auto UID>
+     |-name: "logical name 2"
+     |- tagID: "2"
+```
+
+```
+  dataList: AngularFireList<any>; // realtime datasource
+  dataset: Observable<any[]>; // data to display
+  searchTerm: string = '';  // text from searchbar
+  nbData: number = 0; // data counter
+  selectedTag: any;
+  currentTag: any = {};
+  tagAngularFireList: AngularFireList<any>; // tag list realtime datasource
+  tagObservable: Observable<any[]>; // tag list
+  tagList = []; // tag list to display
+  
+  constructor(public navCtrl: NavController, 
+    public http: HttpClient,
+    public navParams: NavParams,
+    private dataService: DataProvider,
+    public afDB: AngularFireDatabase, 
+    private auth: AuthProvider,
+    private alertCtrl: AlertController,
+    private ref: ChangeDetectorRef,
+    private toastCtrl: ToastController,
+    private tools: ToolsProvider) {
+      // Get tag list
+      this.onFetchTagList().subscribe((res) => {
+        this.tagList = res as any[];
+        this.tagList.splice(0,0,{id:"0",mac:"",name:"ALL TAGS",tagID:null});
+      });
+      // Loading data
+      this.onFetchData();      
+  }
+
+  /**
+   * Get tag list with custom tag name
+   */
+  onFetchTagList(){
+    this.tagAngularFireList = this.afDB.list("tags");
+    this.tagObservable = this.tagAngularFireList.valueChanges();
+    return this.tagObservable;
+  }
+
+  /**
+   * Get data from firebase
+   */
+  onFetchData(tagID: string = ""){
+    var dateOffset = (24*60*60*1000) * 1; //offset 1 days
+    let currentDate = new Date();
+    currentDate.setTime(currentDate.getTime() - dateOffset);
+    let dateToString = currentDate.getFullYear()+"-"+("0"+(currentDate.getMonth()+1)).slice(-2)+"-"+("0"+(currentDate.getDate())).slice(-2);	// retrieve data from the last 24h 
+    
+    // Fetch all data until yesterday
+    this.dataList = this.afDB.list("data",ref => ref.orderByChild('datetime').startAt(dateToString));      
+    this.dataset = this.dataList.valueChanges().map(items => items.sort(this.tools.predicateBy("datetime")).reverse().filter(item => {
+          item['name'] = this.getTagLogicalName(item.tagID);
+          item['tagRef'] = this.getTagRef(item.tagID);
+          return item;
+    }));
+ }
+ 
+  
+ /**
+  * Retrieve tag's logical name by tagID
+  * @param tagID 
+  */
+ getTagLogicalName(tagID){
+    let logicalName = "";
+    let tagJoin = this.tagList.find(tag => tag.tagID == tagID);
+
+    if(tagJoin){
+      logicalName = tagJoin.name;      
+    } else {
+      logicalName = tagID;
+    }
+    return logicalName;
+  }
+ /**
+  * Retrieve tag's firebase ID auto (table TAGS)
+  * @param tagID 
+  */
+ getTagRef(tagID){
+    let tagRef = "";
+    let tagJoin = this.tagList.find(tag => tag.tagID == tagID);
+
+    if(tagJoin){
+      tagRef = tagJoin.id      
+    } else {
+      tagRef = null
+    }
+    return tagRef;
+  }
+```
+
 ## Firebase cloud function
 [Back to top](#angularfire2) 
 
