@@ -4,6 +4,7 @@
 
 * [File storage](#file-storage)    
 * [File size](#file-size)    
+* [PWA : write file](#pwa-write-file)     
 
 ## File storage
 [Back to top](#file)  
@@ -252,4 +253,32 @@ export class PhotoPage {
   }
 }
 
+```
+
+## PWA write file
+[Back to top](#file)  
+
+Here's how to write file in a PWA
+
+*Controller file*
+
+```javascript
+onWriteFile(){
+    let filename = "myfile.csv"
+    let data = "my text to write in file. Could be anything you want";
+    var blob = new Blob([dataToWrite],{type:'text/plain'}),
+    e = document.createEvent('MouseEvents'),
+    a = document.createElement('a');
+
+    // For IE	
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(blob, filename);
+    } else {
+        a.download = filename;
+        a.href = window.URL.createObjectURL(blob);
+        a.dataset.downloadurl = ['text/plain', a.download, a.href].join(':');
+        e.initEvent('click', true, false);
+        a.dispatchEvent(e);
+    }
+  }
 ```
