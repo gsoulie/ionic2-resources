@@ -10,6 +10,7 @@
 * [angularfire issue](#angularfire-issue)     
 * [Querying on Firebase](#querying-on-firebase)    
 * [Firebase cloud function](#firebase-cloud-function)    
+* [Firebase hosting](#firebase-hosting)    
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -1119,4 +1120,38 @@ exports.deleteOldItemsHttpTEST = functions.https.onRequest((req, res) =>{
 ### CORS issue
 
 [link: official cloud function documentation](https://cloud.google.com/functions/docs/writing/http)
+
+## Firebase hosting
+
+Firebase hosting is a service provided by Firebase, which permit to host your PWA.
+
+The first thing you need to do is to **create a new project in the Firebase console**, then navigate in the Hosting option and click on **Get started**. You will be promped to install *firebase-tool* 
+
+Run the commands below into your PWA folder
+```
+npm install -g firebase-tools
+```
+
+And follow the steps below :
+
+```
+firebase login
+
+firebase init
+--> select "hosting" option and make sure to hit SPACE then ENTER !!
+
+What do you want to use as your public directory ?
+--> platforms/browser/www
+
+Configure as a single-page app ?
+--> Yes
+
+File www/index.html already exists. Overwrite ?
+--> No
+
+// Build your application
+ionic cordova build browser --prod
+
+firebase deploy
+```
 
