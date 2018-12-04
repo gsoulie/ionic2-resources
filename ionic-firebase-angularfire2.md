@@ -1075,7 +1075,9 @@ exports.deleteOldItems = functions.database.ref('/data/{pushId}')
 });
 ```
 
-To finish, just run firebase deploy command ```firebase deploy --only functions```
+To finish, just run firebase **deploy command**
+
+```firebase deploy --only functions```
 
 ### Using the same function with Https trigger
 
@@ -1122,6 +1124,7 @@ exports.deleteOldItemsHttpTEST = functions.https.onRequest((req, res) =>{
 [link: official cloud function documentation](https://cloud.google.com/functions/docs/writing/http)
 
 ## Firebase hosting
+[Back to top](#angularfire2) 
 
 Firebase hosting is a service provided by Firebase, which permit to host your PWA.
 
