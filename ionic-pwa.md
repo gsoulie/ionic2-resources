@@ -175,3 +175,9 @@ Or simply use :
   <input type="file" accept="image/*" capture="camera" />
 </ion-content>
 ```
+
+## Analysing PWA performance with Lighthouse
+
+After you deploy your PWA, it is recommanded to audit your PWA with Lighthouse chrome extension. You just need to install lighthouse chrome extension, then running your PWA and launch lighthouse audit on your app.
+
+You will get an audit report which indicates some optimizations.
