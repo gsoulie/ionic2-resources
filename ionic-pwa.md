@@ -149,8 +149,10 @@ Configure as a single-page app ?
 File www/index.html already exists. Overwrite ?
 --> No
 
-// Build your application
-ionic cordova build browser --prod
+// Build your application : NOTE : you can add --minifyjs --minifycss options
+ionic cordova build browser --prod 
+
+// OR : npm run ionic:build -- --prod
 
 firebase deploy
 ```
