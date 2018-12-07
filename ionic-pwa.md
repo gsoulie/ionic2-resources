@@ -183,3 +183,15 @@ Or simply use :
 After you deploy your PWA, it is recommanded to audit your PWA with Lighthouse chrome extension. You just need to install lighthouse chrome extension, then running your PWA and launch lighthouse audit on your app.
 
 You will get an audit report which indicates some optimizations.
+
+## Optimize PWA
+
+Here are some step to improve your PWA performance :
+
+Replace the ```<meta>``` tag by the following :
+
+```
+<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0">
+```
+
+Remove all unused css, colors variables, unused plugins
