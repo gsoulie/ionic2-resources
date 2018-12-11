@@ -11,6 +11,7 @@
 * [Styling Searchbar](#styling-searchbar)    
 * [Overlay](#overlay)    
 * [Remove ion-card shadow](#remove-ion-card-shadow)    
+* [Remove header shadow](#remove-header-shadow)     
 
 Here are some tips to perform your scss.
 
@@ -633,4 +634,13 @@ Create an overlay
 ion-card, .card-ios, .card-md {
     box-shadow: none !important;
 }
+```
+
+## Remove ion-card shadow
+[Back to top](#sass)     
+
+```
+<ion-header no-border>
+	<ion-navbar>...</ion-navbar>
+</ion-header>
 ```
