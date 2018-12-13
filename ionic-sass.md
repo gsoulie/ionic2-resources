@@ -3,7 +3,7 @@
 # Sass
 
 * [Set transparent color to element](#set-transparent-color-to-element)     
-* [Set transparent NavBar](#set-transparent-navbar)    
+* [Set transparent NavBar](#configure-navbar-color)    
 * [Set background image to content](#set-background-image-to-content)    
 * [Lock screen orientation](#lock-screen-orientation)   
 * [Positioning](#positioning)    
@@ -51,9 +51,10 @@ $colors: (
 );
 ```
 
-## Set transparent NavBar
+## Configure NavBar color
 
-Put the following code in your *variable.scss* : ```$toolbar-background: transparent;```
+Put the following code in your *variable.scss* : ```$toolbar-background: transparent; // or color```
+
 
 ## Set background image to content
 
