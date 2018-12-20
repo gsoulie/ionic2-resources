@@ -124,6 +124,8 @@ Run with ```ionic cordova run browser``` to test the site
 
 **favicon** the favicon must be placed in the src/assets/icon/ folder, then use ionic cordova resources --icon
 
+Compile PWA with ``` ionic cordova build browser --minifyjs --minifycss```
+
 ## Step 5 Hosting and deploying on Firebase
 
 The first thing you need to do is to **create a new project in Firebase**, then navigate in the Hosting option and click on **Get started**. You will be promped to install *firebase-tool* 
