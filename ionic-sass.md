@@ -395,6 +395,37 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
     }
 ```
 
+### ion-col vertical alignment
+
+*view.html*
+```
+<ion-grid>
+      <ion-row>
+        <ion-col [style.backgroundColor]="'#ffcc00'">
+          <ion-item class="formItem" no-lines>
+            <ion-input placeholder="Suggestion" type="text" name="suggestion" ngModel></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col [style.backgroundColor]="'#aacc00'">
+          <button ion-button clear class="submitButton" color="dark_red" [disabled]="!f.valid">AJOUTER</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+```
+
+*style.css*
+```
+   ion-row{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    ion-col{
+        height: 100%;
+    }
+```
+
+
 ### CSS vertical alignment
 [Back to top](#sass)    
 
