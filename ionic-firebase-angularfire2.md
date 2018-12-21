@@ -11,6 +11,7 @@
 * [Querying on Firebase](#querying-on-firebase)    
 * [Firebase cloud function](#firebase-cloud-function)    
 * [Firebase hosting](#firebase-hosting)    
+* [Lazy loading on firebase dataset](#lazy-loading-on-firebase-dataset)    
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -1164,3 +1165,110 @@ When you are switching between multiple firebase account for the same project (i
 
 To fix it, run ```firebase use --add``` before running ```firebase deploy```. You may have the same issue when deploying Firebase Cloud Functions
 
+## Lazy loading on firebase dataset
+[Back to top](#angularfire2) 
+
+*View.html*
+
+```
+<ion-header>
+  <ion-navbar>
+ 	...
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="window">
+
+  <ion-item *ngFor="let data of dataSource">
+    <!-- some stuff here -->
+  </ion-item>
+  <ion-infinite-scroll (ionInfinite)="scrollHandler($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+```
+
+*Controller.ts*
+
+```javascript
+import { Component, ViewChild } from '@angular/core';
+import { NavController, AlertController, LoadingController, Content } from 'ionic-angular';
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  dataList: AngularFireList<any>;
+  dataObservable: Observable<any[]>;
+  dataSource: any[] = [];
+  @ViewChild(Content) content: Content; // ion-content 
+  private direction: string = ""; // to get scroll direction
+  private lastScrollTop: number = 0;
+  private lastItem = null;	// last loaded item
+
+  constructor(public navCtrl: NavController,
+    private dataService: DataProvider,
+    public afDB: AngularFireDatabase) {
+      this.getData();
+  }
+
+  ngAfterViewInit() {
+    // Add scroll listener
+    this.content.ionScrollEnd.subscribe((data) => {
+      let currentScrollTop = data.scrollTop;
+      if(currentScrollTop > this.lastScrollTop){
+        this.direction = 'down';
+      }else if(currentScrollTop < this.lastScrollTop){
+        this.direction = 'up';
+      }
+      this.lastScrollTop = currentScrollTop;
+    });
+  }
+
+  /**
+   * Infinite scroll listener
+   * @param infiniteScroll 
+   */
+  scrollHandler(infiniteScroll){
+    setTimeout(() => {
+      // Update data only when scrolling down 
+      if(this.direction == 'down'){
+        // Update data only when end of page is detected
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+          this.getData();
+        }
+      }
+      infiniteScroll.complete();
+    }, 500);    
+  }
+
+  getData(){
+    
+    if(this.lastItem === null){
+      this.dataList = this.afDB.list("myTable", ref => ref.orderByChild('id').limitToLast(20));
+    } else {
+      this.dataList = this.afDB.list("myTable", ref => ref.orderByChild('id').endAt(this.lastItem).limitToLast(20));
+    }
+    this.dataObservable = this.dataList.valueChanges().map(items => items.sort().reverse());
+    try{
+      this.dataObservable.subscribe((res) => {
+          let temp = res as any[];
+          this.lastItem = temp[temp.length-1].id;
+
+	  // if previous data in dataset, remove the first item from the new selection, because is already in displayed dataset
+          if(this.dataset.length > 0){
+            temp.splice(0,1);
+          }
+          temp.forEach(e => {
+            this.dataset.push(e);	// updating dataset with the new following 20 items
+          });    
+      })
+    } catch(e){
+    }
+    
+  }
+}
+
+```
