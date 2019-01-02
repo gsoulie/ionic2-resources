@@ -678,7 +678,7 @@ ion-card, .card-ios, .card-md {
 </ion-header>
 ```
 
-##Dynamic class
+## Dynamic class
 [Back to top](#sass)
 
 ```
