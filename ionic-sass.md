@@ -12,6 +12,7 @@
 * [Overlay](#overlay)    
 * [Remove ion-card shadow](#remove-ion-card-shadow)    
 * [Remove header shadow](#remove-header-shadow)     
+* [Dynamic class](#dynamic-class)     
 
 Here are some tips to perform your scss.
 
@@ -675,4 +676,11 @@ ion-card, .card-ios, .card-md {
 <ion-header no-border>
 	<ion-navbar>...</ion-navbar>
 </ion-header>
+```
+
+##Dynamic class
+[Back to top](#sass)
+
+```
+  <div class="divCard" [ngClass]="item.show == true ? 'divCardExtand' : 'divCard'"></div>
 ```
