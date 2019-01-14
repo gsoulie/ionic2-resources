@@ -152,6 +152,7 @@ File www/index.html already exists. Overwrite ?
 --> No
 
 // Build your application : NOTE : you can add --minifyjs --minifycss options
+// ionic cordova build browser --minifyjs --minifycss
 ionic cordova build browser --prod 
 
 // OR : npm run ionic:build -- --prod
