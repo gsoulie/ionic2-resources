@@ -1127,8 +1127,8 @@ This snippet show how to fix floating button in front of a list
 
 
 <ion-content padding>
-  <ion-item [style.backgroundColor]="'transparent'" no-lines>
-    <ion-icon item-left name="md-tablet-landscape" color="dark"></ion-icon>
+  <ion-item [style.backgroundColor]="'transparent'" lines="none">
+    <ion-icon slot="start" name="md-tablet-landscape" color="dark"></ion-icon>
     <b item-right>Basculez en mode paysage pour voir le graphe</b>
   </ion-item>
   <div *ngIf="orientationPortrait">  
