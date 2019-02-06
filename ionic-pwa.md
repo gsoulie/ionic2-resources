@@ -160,6 +160,12 @@ ionic cordova build browser --prod
 firebase deploy
 ```
 
+
+## Hosting issue
+When you are switching between multiple firebase account for the same project (i.e one for testing and an other for production), sometimes you may have the following error Error: Authorization failed. This account is missing the following required permissions on project <PROJECT_ID>
+
+To fix it, run firebase use --add before running firebase deploy. You may have the same issue when deploying Firebase Cloud Functions
+
 ## Using cordova plugin
 
 ### Using Camera plugin in PWA 
