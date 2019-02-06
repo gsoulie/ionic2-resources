@@ -95,12 +95,12 @@ onClose(remove = false){
 
 *View file*
 ```xml
-<ion-item>
-	<ion-label>Profession</ion-label>
-	<ion-select [(ng-model)]="prof" (ionChange)="selectObject($event)" class="combo">
-		<ion-option *ngFor="let item of professions" value="{{item.objectId}}">{{item.titre}}</ion-option>
-	</ion-select>
-</ion-item>
+ <ion-item>
+    <ion-label>Profession</ion-label>
+    <ion-select placeholder="Select One" (ionChage)="select($event)" [(ngModel)]="prof">
+      <ion-select-option *ngFor="let item of professions" value="{{item.objectId}}">{{ item.titre }}</ion-select-option>
+    </ion-select>
+ </ion-item>
 ```
 
 *Controller file*
@@ -116,7 +116,7 @@ constructor(){
 }
 
 // To verify
-selectObject(_selectedItem){
+select(_selectedItem){
 	this.newSelectedId = _selectedItem
 }
 ```
