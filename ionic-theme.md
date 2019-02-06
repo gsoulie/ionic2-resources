@@ -2,6 +2,7 @@
 
 # Themes
 
+* [Color Generator](#color-generator)    
 * [Dynamic theming](#dynamic-theming)  
 * [Navbar](#navbar)    
 * [StatusBar](#statusbar)    
@@ -10,6 +11,13 @@
 * [Remove Android input green highlight](#remove-android-input-green-highlight)    
 * [Remove android navbar border](#remove-android-navbar-border)    
 * [Custom fonts](#custom-fonts)    
+
+## Color Generator
+[Back to top](#themes)    
+
+Ionic 4 provide an online color generator : https://ionicframework.com/docs/theming/color-generator
+
+This color generator allows you to dynamically generate your */src/theme/variables.scss* file
 
 ## Dynamic theming
 
