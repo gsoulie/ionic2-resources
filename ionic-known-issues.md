@@ -18,10 +18,10 @@ Sometimes,  on the emulator or on device, 2 out of 3 clicks it doesn't fire the 
 
 ```xml
 <ion-list>
-	<button ion-item *ngFor="let audience of audience" (click)="pushProfilesList(audience)">
+	<ion-item *ngFor="let audience of audience" (click)="pushProfilesList(audience)">
 		<h2 class="list-title">{{audience.segment}}</h2>
 		<span class="list-info">{{audience.amount}}</span>
-	</button>
+	</ion-item>
 </ion-list>
 ```
 
