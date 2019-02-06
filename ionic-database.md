@@ -262,13 +262,13 @@ export class HomePage {
 
 ```xml
 <ion-header>
-	<ion-navbar>
-	    <ion-title>
-	        Home
-	    </ion-title>
-	    <button ion-button clear (click)="refresh()">Refresh</button>
-	    <button ion-button clear (click)="add()">Add</button>
-	</ion-navbar>
+<ion-navbar>
+    <ion-title>
+	Home
+    </ion-title>
+    <ion-button fill="clear" (click)="refresh()">Refresh</ion-button>
+    <ion-button fill="clear" (click)="add()">Add</ion-button>
+</ion-navbar>
 </ion-header> 
 <ion-content class="home">
     <ion-list>
