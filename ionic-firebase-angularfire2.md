@@ -90,10 +90,10 @@ export class AppModule {}
     <ion-title>
         Nb item ({{(songs | async)?.length}})
     </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addSong()">
-        <ion-icon name="add"></ion-icon>
-      </button>
+    <ion-buttons slot="end">
+      <ion-button (click)="addSong()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -436,7 +436,7 @@ export class AppModule {}
       <ion-input [(ngModel)]="password" type="password"></ion-input>
     </ion-item>
     <br><br>
-    <button ion-button (click)="onAuth()">CONNEXION</button>
+    <ion-button (click)="onAuth()">CONNEXION</ion-button>
   </div>
   <div *ngIf="bAuth === true">
     <ion-item>
@@ -444,10 +444,10 @@ export class AppModule {}
       <ion-input [(ngModel)]="guid"></ion-input>
     </ion-item>
     <br><br>
-    <button ion-button (click)="onAddNode()" >Add new node</button>
-    <button ion-button (click)="onDisconnect()" color="danger">Disconnect</button>
-    <button ion-button (click)="onReadData()">Read node</button>
-    <button ion-button (click)="onInsertNode()">Insert data in current node</button>
+    <ion-button (click)="onAddNode()" >Add new node</ion-button>
+    <ion-button (click)="onDisconnect()" color="danger">Disconnect</ion-button>
+    <ion-button (click)="onReadData()">Read node</ion-button>
+    <ion-button (click)="onInsertNode()">Insert data in current node</ion-button>
     <p>{{ res }}</p>
   </div>
 </ion-content>
