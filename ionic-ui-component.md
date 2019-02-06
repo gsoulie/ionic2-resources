@@ -12,12 +12,10 @@
 * [list filtering](#high-performance-list-filtering)    
 * [tab](#tab)       
 * [tab icon](#tab-icon)    
-* [alert dialog box](#alert-dialog-box)    
 * [floating button](#floating-button)  
 * [chart](#chart)    
 * [grid](#grid)    
 * [toggle](#toggle)    
-* [popover menu](#popover-menu)    
 * [dynamic style](#dynamic-style)    
 * [Toggle menu](#toggle-menu)    
 * [Expandable header](#expandable-header)    
@@ -1048,79 +1046,25 @@ Then just create a custom css, something like this:
 }
 ```
 
-
-## Alert dialog box
-[Back to top](#ui-components)  
-
-Here's a sample code to show a confirmation dialog box. The key is to add Alert import and then, don't miss to add alert object to current navigation stack
-
-```javascript
-import {Component, NavController, Alert} from 'ionic-angular';
-import {Data} from '../../providers/data/data';
-
-@Component({
-  templateUrl: 'build/pages/home/home.html'
-})
-export class HomePage {
-
-  static get parameters(){
-    return [[Data], [NavController]];
-  }
-  //Chargement de la base de données
-  constructor(dataService, nav) {
-    this.dataService = dataService;
-    this.items = [];
-    this.nav = nav;
-  }
-  
-  doAlert(item){
-  	let confirm = Alert.create({
-          title: "Suppression",
-          message: 'Êtes-vous certain de vouloir supprimer l\'item ' + item.message + ' ?',
-          buttons: [
-            {
-              text: 'Non',
-              handler: () => {
-                console.log('Disagree clicked');
-              }
-            },
-            {
-              text: 'Oui',
-              handler: () => {
-                this.dataService.deleteDocument(item);            
-              }
-            }
-          ]
-        });
-      
-      this.nav.present(confirm);
-  }
-}
-```
-
 ## Floating button
 [Back to top](#ui-components)  
 
 This snippet show how to fix floating button in front of a list
 
 ```xml
-<ion-content padding class="page1">
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      ...
-    </ion-item>
-  </ion-list>
-</ion-content>
-<ion-fab right bottom>
-    <button ion-fab icon-only><ion-icon name="person-add" center></ion-icon></button>
-</ion-fab>
-<!-- OLD VERSION
-<ion-fab>
-	<button ion-fab icon-only fab-bottom fab-right fab-fixed style="z-index:100">
-  		<ion-icon name="add"></ion-icon>
-	</button>
-</ion-fab>
--->
+ <!-- Fixed Floating Action Button that does not scroll with the content -->
+  <ion-fab>
+    <ion-fab-button>Button</ion-fab-button>
+  </ion-fab>
+
+  <!-- Default Floating Action Button that scrolls with the content.-->
+  <ion-fab-button>Default</ion-fab-button>
+
+  <!-- Mini -->
+  <ion-fab-button size="small">Mini</ion-fab-button>
+
+  <!-- Colors -->
+  <ion-fab-button color="primary">Primary</ion-fab-button>
 ```
 
 ## Chart
@@ -1287,7 +1231,6 @@ page-chart {
 ## grid
 [Back to top](#ui-components)  
 
-
 [link : complex layout using grid and flexbox](http://www.joshmorony.com/an-in-depth-look-at-the-grid-system-in-ionic-2/) 
 
 ## toggle
@@ -1300,7 +1243,7 @@ page-chart {
 <ion-content padding>
   <ion-item>
     <ion-label>Tracking</ion-label>
-    <ion-toggle id="trackingButton" black checked="false" (ionChange)="refreshTracking($event)"></ion-toggle>
+    <ion-toggle [(ngModel)]="val" black checked="false" (ionChange)="refreshTracking($event)"></ion-toggle>
   </ion-item>
 </ion-content>
 ```
@@ -1313,32 +1256,13 @@ refreshTracking(e){
 }
 ```
 
-## Popover menu
-[Back to top](#ui-components)  
-
-Create popover menu like Evernote edit menu 
-
-![alt tag](https://github.com/gsoulie/ionic/blob/master/popover_menu.png)
-
-```xml
-<ion-fab top right edge>
-    <button ion-fab><ion-icon name="add"></ion-icon></button>
-    <ion-fab-list>
-      <button ion-fab><ion-icon name="logo-facebook"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-twitter"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-vimeo"></ion-icon></button>
-      <button ion-fab><ion-icon name="logo-googleplus"></ion-icon></button>
-    </ion-fab-list>
-</ion-fab>
-```
-
 ## Dynamic style
 [Back to top](#ui-components)  
 
 You can dynamically change the UI component style with condition like below :
 
 ```xml
-<button ion-button [style.backgroundColor]="enable ? '#00CC00' : '#FF0000'">Test</button>
+<ion-button [style.backgroundColor]="enable ? '#00CC00' : '#FF0000'">Test</ion-button>
 ```
 
 ## Toggle menu
