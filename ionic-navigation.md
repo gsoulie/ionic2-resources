@@ -2,7 +2,8 @@
 
 # Navigation
 
-* [Navigation by routing](#navigation-by-routing)    
+* [Navigation by routing](#navigation-by-routing)   
+* [Tab Routing](#tab-routing)    
 * [Using NavController](#using-navcontroller)   
 * [Passing data](#passing-data)  
 * [Passing data on close event](#passing-data-on-close-event)    
@@ -101,6 +102,22 @@ ngOnInit() {
   this.route.params.subscribe(...);
 }
 ```
+## Tab Routing
+[Back to top](#navigation)
+
+An advanced technique is to use named outlets and secondary routes for rendering nested content inside the view - this is how the Ionic Tabs starter template works. The reason behind this routing setup is to achieve a push/pop style of navigation commonly used in native apps. Remember, the NavController from Ionic 3 is deprecated, so named outlets in Angular provide a comparable replacement.
+
+```
+{
+  path: 'contact',
+  outlet: 'modal',
+  component: ContactModal
+}
+```
+
+In the HTML, this route will be looking for an outlet with the matching name.
+
+```<ion-router-outlet name="modal"></ion-router-outlet>```
 
 ## Using NavController
 
