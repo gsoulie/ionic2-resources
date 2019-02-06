@@ -2,6 +2,7 @@
 
 # Sass
 
+* [Component variables](#component-variables)    
 * [Set transparent color to element](#set-transparent-color-to-element)     
 * [Set transparent NavBar](#configure-navbar-color)    
 * [Set background image to content](#set-background-image-to-content)    
@@ -15,6 +16,40 @@
 * [Dynamic class](#dynamic-class)     
 
 Here are some tips to perform your scss.
+
+## Component variables
+
+Since ionic 4, some component variables are available for styling it. You can find them in CSS Custom Properties of each component, for example these are the Custom css properties for ion-item (https://ionicframework.com/docs/api/item#css-custom-properties) :
+
+```
+--background	Background of the item
+--background-activated	Background of the activated item
+--border-color	Color of the item border
+--border-radius	Radius of the item border
+--border-style	Style of the item border
+--border-width	Width of the item border
+--box-shadow	Box shadow of the item
+--color	Color of the item
+--detail-icon-color	Color of the item detail icon
+--detail-icon-font-size	Font size of the item detail icon
+--detail-icon-opacity	Opacity of the item detail icon
+--highlight-color-focused	The color of the highlight on the item when focused
+--highlight-color-invalid	The color of the highlight on the item when invalid
+--highlight-color-valid	The color of the highlight on the item when valid
+--highlight-height	The height of the highlight on the item
+--inner-border-width	Width of the item inner border
+--inner-box-shadow	Box shadow of the item inner
+--inner-padding-bottom	Bottom padding of the item inner
+--inner-padding-end	End padding of the item inner
+--inner-padding-start	Start padding of the item inner
+--inner-padding-top	Top padding of the item inner
+--min-height	Minimum height of the item
+--padding-bottom	Bottom padding of the item
+--padding-end	End padding of the item
+--padding-start	Start padding of the item
+--padding-top	Top padding of the item
+--transition	Transition of the item
+```
 
 ## Get color variables from *variable.scss*
 
