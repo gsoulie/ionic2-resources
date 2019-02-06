@@ -5,6 +5,7 @@
 * [button](#button)    
 * [modal](#modal)    
 * [comboBox](#combobox)    
+* [ion-item](#ion-item)    
 * [ion-list](#ion-list)  
 * [searchbar](#searchbar)    
 * [list filtering](#high-performance-list-filtering)    
@@ -165,6 +166,16 @@ selectObject(_selectedItem){
 
 ### ion-item slots
 
+Since Ionic 4, ion-item uses *slot* in replacement of *item-left* and *item-right*
+
+Now use slots instead :
+
+```
+<ion-button slot="start">
+<ion-button slot="end">
+<ion-icon slot="icon-only">
+```
+
 ## ion-list
 [Back to top](#ui-components)  
 
@@ -214,8 +225,8 @@ Consider a ion-list in which we want to hide every items which property "deleted
   <ion-item-sliding *ngFor="let item of getActiveItems()" #slidingItem>
     <ion-item>{{item.fach}} ({{item.kuerzel}})</ion-item>
     <ion-item-options>
-      <button ion-button (click)="showEditModal(item, slidingItem)"><ion-icon name="create"></ion-icon>Bearbeiten</button>
-      <button ion-button danger (click)="doConfirm(item, slidingItem)"><ion-icon name="trash"></ion-icon>Löschen</button>
+      <ion-button (click)="showEditModal(item, slidingItem)"><ion-icon name="create"></ion-icon>Bearbeiten</ion-button>
+      <ion-button danger (click)="doConfirm(item, slidingItem)"><ion-icon name="trash"></ion-icon>Löschen</ion-button>
     </ion-item-options>
   </ion-item-sliding>
 </ion-list>
@@ -243,8 +254,8 @@ Second solution, in case that you prefer to do the filtering in the template the
     <ion-item-sliding *ngIf="!item.deleted" #slidingItem>
       <ion-item>{{item.fach}} ({{item.kuerzel}})</ion-item>
       <ion-item-options>
-        <button ion-button (click)="showEditModal(item, slidingItem)"><ion-icon name="create"></ion-icon>Bearbeiten</button>
-        <button ion-button danger (click)="doConfirm(item, slidingItem)"><ion-icon name="trash"></ion-icon>Löschen</button>
+        <ion-button (click)="showEditModal(item, slidingItem)"><ion-icon name="create"></ion-icon>Bearbeiten</ion-button>
+        <ion-button danger (click)="doConfirm(item, slidingItem)"><ion-icon name="trash"></ion-icon>Löschen</ion-button>
       </ion-item-options>
     </ion-item-sliding>
   </template>
@@ -263,9 +274,9 @@ Second solution, in case that you prefer to do the filtering in the template the
     	...
     	</ion-item>
     	<ion-item-options>
-    	    <button ion-button danger (click)="removePost(post)" icon-only>
+    	    <ion-button danger (click)="removePost(post)" icon-only>
     	    	<ion-icon name="remove"></ion-icon>
-    	    </button>
+    	    </ion-button>
     	</ion-item-options>
     </ion-item-sliding>
 </ion-list>
