@@ -18,6 +18,15 @@ Here are some tips to perform your scss.
 
 ## Get color variables from *variable.scss*
 
+**Ionic 4 syntax**
+
+```
+myClass {
+    background-color: var(--ion-color-myCustomColor);
+}
+```
+
+**Ionic 2/3 syntax**
 ```css
 myClass {
     background-color: map-get($colors, primary);
@@ -382,7 +391,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
     }
     .alertItem{
         display: flex;
-        background-color: map-get($colors , danger)
+        background-color: var(--ion-color-myCustomColor)
     }
 ```
 
