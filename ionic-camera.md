@@ -25,18 +25,18 @@ Implement code
     <form #f="ngForm" (ngSubmit)="onSubmit(f)">
         <ion-list>
             <ion-item>
-                <ion-label fixed>Title</ion-label>
+                <ion-label position="fixed">Title</ion-label>
                 <ion-input type="text" name="title" ngModel required></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label floating>Description</ion-label>
+                <ion-label position="floating">Description</ion-label>
                 <ion-textarea name="description" ngModel required></ion-textarea>
             </ion-item>
         </ion-list>
         <ion-grid>
             <ion-row>
                 <ion-col>
-                    <button ion-button block outline type="button" (click)="onTakePhoto()">Take a photo</button>
+                    <ion-button expand="block" fill="outline" type="button" (click)="onTakePhoto()">Take a photo</ion-button>
                 </ion-col>
             </ion-row>
             <ion-row *ngIf="imageUrl != ''">
@@ -46,8 +46,8 @@ Implement code
             </ion-row>
             <ion-row>
                 <ion-col>
-                    <button ion-button color="secondary" block type="submit" 
-		    [disabled]="!f.valid || !locationIsSet">Add this place</button>
+                    <ion-button color="secondary" expand="block" type="submit" 
+		    [disabled]="!f.valid || !locationIsSet">Add this place</ion-button>
                 </ion-col>
             </ion-row>
         </ion-grid>        
