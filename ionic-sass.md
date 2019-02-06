@@ -3,6 +3,7 @@
 # Sass
 
 * [Component variables](#component-variables)    
+* [Add color](#add-color)    
 * [Set transparent color to element](#set-transparent-color-to-element)     
 * [Set transparent NavBar](#configure-navbar-color)    
 * [Set background image to content](#set-background-image-to-content)    
@@ -51,7 +52,26 @@ Since ionic 4, some component variables are available for styling it. You can fi
 --transition	Transition of the item
 ```
 
+## Add color
+[Back to top](#sass)  
+
+Note : It's recommanded to use https://ionicframework.com/docs/theming/color-generator to generate your custom color
+
+To add a new color, create a class that defines all of the variations using CSS variables for that color. The class should be written in the format .ion-color-{COLOR} where {COLOR} is the name of the color to add. For example, to add a color called favorite, the following class could be added:
+
+```
+.ion-color-favorite {
+  --ion-color-base: #69bb7b;
+  --ion-color-base-rgb: 105,187,123;
+  --ion-color-contrast: #ffffff;
+  --ion-color-contrast-rgb: 255,255,255;
+  --ion-color-shade: #5ca56c;
+  --ion-color-tint: #78c288;
+}
+```
+
 ## Get color variables from *variable.scss*
+[Back to top](#sass)  
 
 **Ionic 4 syntax**
 
@@ -86,6 +106,7 @@ Or other solution, put the code below in your css file
 ```
 
 ## Set transparent color to element
+[Back to top](#sass)  
 
 Add new transparent color in your *variable.scss* and use it as a standard color
 ```css
@@ -97,6 +118,7 @@ $colors: (
 ```
 
 ## Configure NavBar color
+[Back to top](#sass)  
 
 Put the following code in your *variable.scss* : ```$toolbar-background: transparent; // or color```
 
