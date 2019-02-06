@@ -27,7 +27,7 @@
 
 #### disable text-transform
 
-```<button ion-button style="text-transform: none;">```
+```<ion-button style="text-transform: none;">```
 
 ## Modal
 [Back to top](#ui-components)  
@@ -126,18 +126,56 @@ selectObject(_selectedItem){
 }
 ```
 
+## ion-item
+[Back to top](#ui-components)  
+
+- show right arrow : add ```detail``` property on ion-item ```<ion item detail>```
+- hide right arrow : add ```detail="false"``` property on ion-item  ```<ion item detail="false">```
+- hide item line : add ```lines="none"``` property on ion-item  ```<ion item lines="none">```
+
+*Different type of lines*
+
+```
+<!-- Item Inset Lines -->
+<ion-item lines="inset">
+  <ion-label>Item Lines Inset</ion-label>
+</ion-item>
+
+<!-- Item Full Lines -->
+<ion-item lines="full">
+  <ion-label>Item Lines Full</ion-label>
+</ion-item>
+
+<!-- Item None Lines -->
+<ion-item lines="none">
+  <ion-label>Item Lines None</ion-label>
+</ion-item>
+
+<!-- List Full Lines -->
+<ion-list lines="full">
+  <ion-item>
+    <ion-label>Full Lines Item 1</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Full Lines Item 2</ion-label>
+  </ion-item>
+</ion-list>
+```
+
+### ion-item slots
 
 ## ion-list
 [Back to top](#ui-components)  
 
 ### Show list right arrow
 
-To show the right arrow (like ios list item), just add ```detail-push``` property on ion-item :
+To show the right arrow (like ios list item), just add ```detail``` property on ion-item :
 
 *View File*
 
 ```xml
-<ion-item *ngFor="let item of group.patients" detail-push>{{ item }}</ion-item>
+<ion-item *ngFor="let item of group.patients" detail>{{ item }}</ion-item>
 ```
 
 And modify your *variable.sass* file to reflect the following 
@@ -150,12 +188,6 @@ $item-ios-detail-push-show: true;
 ```
 
 After that refresh your browser
-
-#### Remove list arrow from button
-
-```html
-<button ion-item detail-none>My button</button>
-```
 
 ### Standard dynamic ion-list item
 
