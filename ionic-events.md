@@ -25,9 +25,9 @@ This code show how to stop event propagation
 <ion-content padding class="page1">
   <ion-list>
     <ion-item *ngFor="let item of items" (click)="openDetail(item.idDevice, item.nom)">
-      <button ion-button clear item-right (click)="pickDevice($event,item.idDevice)">
-        <ion-icon green name="phone-portrait" item-right></ion-icon>
-      </button>
+      <ion-button fill="clear" slot="end" (click)="pickDevice($event,item.idDevice)">
+        <ion-icon green name="phone-portrait" slot="end"></ion-icon>
+      </ion-button>
       <h2>{{item.nom}}</h2>
     </ion-item>
   </ion-list>
