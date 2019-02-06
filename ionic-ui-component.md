@@ -7,6 +7,7 @@
 * [comboBox](#combobox)    
 * [ion-item](#ion-item)    
 * [ion-list](#ion-list)  
+* [ion-label](#ion-label)    
 * [searchbar](#searchbar)    
 * [list filtering](#high-performance-list-filtering)    
 * [tab](#tab)       
@@ -175,6 +176,10 @@ Now use slots instead :
 <ion-button slot="end">
 <ion-icon slot="icon-only">
 ```
+
+### ion-item router-direction
+
+It is possible to add a *router-direction* when clicking on ion-item. It's value could be : "back" | "forward" | "root"
 
 ## ion-list
 [Back to top](#ui-components)  
@@ -722,6 +727,13 @@ groupPatients(patients){
       <p class="subtitle">{{ item.ville }}
 </ion-item>
 ```   
+
+## ion-label
+[Back to top](#ui-components)  
+
+```
+<ion-label position="floating">Datetime</ion-label>
+```
 
 ## Searchbar
 [Back to top](#ui-components)  
