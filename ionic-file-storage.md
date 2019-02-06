@@ -63,9 +63,9 @@ Next, lets see an example of easy read/write
 </ion-header>
 
 <ion-content padding>
-  <button ion-button (click)="onWriteFile()">WRITE FILE</button>
-  <button ion-button (click)="onReadFile()">READ FILE</button>
-  <button ion-button (click)="onDeleteFile()">DELETE FILE</button>
+  <ion-button (click)="onWriteFile()">WRITE FILE</ion-button>
+  <ion-button (click)="onReadFile()">READ FILE</ion-button>
+  <ion-button (click)="onDeleteFile()">DELETE FILE</ion-button>
   <p>
     {{ filecontent }}
   </p>
