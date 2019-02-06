@@ -21,11 +21,11 @@
 what functionalities are already supported by browser ?
 [to open on wanted web browser](https://whatwebcando.today/)    
 
-## Step 1
+## Step 1 : Adding browser platform
 
 Add browser platform with ```ionic cordova platform add browser```    
 
-## Step 2
+## Step 2 : Activate Service worker
 
 Uncomment the following code in the index.html to activate service worker to enabling caching resources
 
@@ -114,11 +114,11 @@ The icons object lets you set the icons your app will use depending on the resol
 ```"theme_color": "#4e8ef7"``` => Defines the default theme color for an application. This will affect things such as the notification bar color on Android.
 Make sure to add your preferred logo to src/assets/img/logo.png. This is the logo the PWA will display when the user adds it to the home screen, and it will show it on the splash screen when the user opens the app through the homescreen or app drawer in Android.
 
-## Step 3
+## Step 3 : Add resources to service worker
 
 If you need to caching some resources, add them in ```service-worker.js```
 
-## Step 4
+## Step 4 : Build and Run
 
 Run with ```ionic cordova run browser``` to test the site
 
@@ -159,7 +159,6 @@ ionic cordova build browser --prod
 
 firebase deploy
 ```
-
 
 ## Hosting issue
 When you are switching between multiple firebase account for the same project (i.e one for testing and an other for production), sometimes you may have the following error Error: Authorization failed. This account is missing the following required permissions on project <PROJECT_ID>
