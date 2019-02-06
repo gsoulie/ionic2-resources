@@ -157,7 +157,7 @@ Center (horizontally and vertically) a div containing a form :
     <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
       <div class="cardForm">
         <ion-item>
-          <ion-label stacked>Email</ion-label>
+          <ion-label position="stacked">Email</ion-label>
           <ion-input #email formControlName="email" type="email" placeholder="Your email address"
             [class.invalid]="!loginForm.controls.email.valid"></ion-input>
         </ion-item>
@@ -166,7 +166,7 @@ Center (horizontally and vertically) a div containing a form :
         </ion-item>
       
         <ion-item>
-          <ion-label stacked>Password</ion-label>
+          <ion-label position="stacked">Password</ion-label>
           <ion-input #password formControlName="password" type="password" placeholder="Your password"
             [class.invalid]="!loginForm.controls.password.valid"></ion-input>
         </ion-item>
@@ -175,12 +175,12 @@ Center (horizontally and vertically) a div containing a form :
         </ion-item>
       </div>
   
-      <button ion-button block class="submitButton" type="submit">
+      <ion-button block class="submitButton" type="submit">
         Login
-      </button>
-      <button ion-button block class="submitButtonOutline" (click)="createAccount()">
+      </ion-button>
+      <ion-button expand="block" class="submitButtonOutline" (click)="createAccount()">
         Create a new account
-      </button>
+      </ion-button>
     </form>  
 </ion-content>
 ```
@@ -210,12 +210,12 @@ Center (horizontally and vertically) a div containing a form :
     <font class="title">{{ title }}</font>
     <p class="content">{{ content }}</p>
 
-    <button [style.float]="'right'" clear text-center ion-button (click)="onDismiss()">
+    <ion-button [style.float]="'right'" fill="clear" text-center (click)="onDismiss()">
       {{ cancelButtonCaption }}
-    </button>
-    <button [style.float]="'right'" clear text-center ion-button (click)="onDismiss()">
+    </ion-button>
+    <ion-button [style.float]="'right'" fill="clear" text-center (click)="onDismiss()">
       {{ okButtonCaption }}
-    </button>
+    </ion-button>
   </div>
 </div>
 ```
@@ -424,7 +424,7 @@ In the view file
 
 ```html
 <div text-center>
-	<button ion-button outline type="submit" text-center [disabled]="!f.valid">VALIDER</button>
+	<ion-button fill="outline" type="submit" text-center [disabled]="!f.valid">VALIDER</ion-button>
 </div>
 ```
 
@@ -436,7 +436,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 ```html
   <ion-item no-lines class="alertItem">
     <ion-label class="alertLabel" color="danger">Bluetooth adapter is disabled</ion-label>
-    <button class="alertButton" ion-button clear default item-end color="white" (click)="onEnableBluetooth()">ENABLE</button>
+    <ion-button class="alertButton" fill="clear" default slot="end" color="white" (click)="onEnableBluetooth()">ENABLE</ion-button>
   </ion-item>
 ```
 
@@ -467,17 +467,17 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 *view.html*
 ```
 <ion-grid>
-      <ion-row>
-        <ion-col [style.backgroundColor]="'#ffcc00'">
-          <ion-item class="formItem" no-lines>
-            <ion-input placeholder="Suggestion" type="text" name="suggestion" ngModel></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col [style.backgroundColor]="'#aacc00'">
-          <button ion-button clear class="submitButton" color="dark_red" [disabled]="!f.valid">AJOUTER</button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+<ion-row>
+<ion-col [style.backgroundColor]="'#ffcc00'">
+  <ion-item class="formItem" no-lines>
+    <ion-input placeholder="Suggestion" type="text" name="suggestion" ngModel></ion-input>
+  </ion-item>
+</ion-col>
+<ion-col [style.backgroundColor]="'#aacc00'">
+  <ion-button fill="clear" class="submitButton" color="dark_red" [disabled]="!f.valid">AJOUTER</ion-button>
+</ion-col>
+</ion-row>
+</ion-grid>
 ```
 
 *style.css*
@@ -542,7 +542,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 </ion-content>
 
 <ion-footer no-shadow>
-	<button ion-button block>MY BUTTON</button>
+	<ion-button expand="block">MY BUTTON</ion-button>
 </ion-footer>
 ```
 
@@ -621,9 +621,9 @@ providers: [
 Tips to avoid ion-label truncate
 
 ```html
-<button ion-item>
+<ion-item>
 	<ion-label>my very long text labe</ion-label>
-</button>
+</ion-item>
 ```
 
 ```css
