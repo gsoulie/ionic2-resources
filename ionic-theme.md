@@ -74,10 +74,10 @@ To change ios searchbar background color, add the following code to your variabl
 
 ```xml
 <ion-content padding class="masters">
-  <ion-list inset>
-    <button ion-item *ngFor="#master of masterPages" (click)="navMaster(master)">
+  <ion-list inset="true">
+    <ion-item *ngFor="#master of masterPages" (click)="navMaster(master)">
       {{master.title}}
-    </button>
+    </ion-item>
   </ion-list>
 </ion-content>
 ```
