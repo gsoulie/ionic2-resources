@@ -48,7 +48,7 @@ export class AppRoutingModule { }
 *loadChildren* : define the module.ts file (of the page to show) to load before showing the page => Lazy loading
 *component* : define the ts file to load
 
-> **loadChildren** : is important to use for PWA
+> **loadChildren** : Recommended for PWA
 
 ### Navigate by view file
 
