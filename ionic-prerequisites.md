@@ -57,15 +57,9 @@ Then, restart your computer and test ANDROID_HOME ```$ANDROID_HOME``` don't forg
 **ionic 2 project creation**
 
 ```
-$ ionic start myionic2project --v2 --ts
-```
-
-**--ts** to work with TypeScript
-
-**ionic 2 tutorial app**
-
-```
-$ ionic start myTutorial tutorial --v2
+ionic start myApp tabs
+ionic start myApp blank
+ionic start myApp sidemenu
 ```
 
 **add platform support to project**
@@ -89,7 +83,7 @@ $ ionic g page myNewPage
 It creates new folder in the project treeview
 
 ```
-$ ionic g provider myProvider
+$ ionic g service myProvider
 ```
 
 **Generate new component**
