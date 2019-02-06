@@ -92,15 +92,15 @@ Create signin and signup forms
     <form #f="ngForm" (ngSubmit)="onSignin(f)">
         <ion-list>
             <ion-item>
-                <ion-label fixed>Mail</ion-label>
+                <ion-label position="fixed">Mail</ion-label>
                 <ion-input type="email" ngModel name="email" required></ion-input>
             </ion-item>
             <ion-item>
-                <ion-label fixed>password</ion-label>
+                <ion-label position="fixed">password</ion-label>
                 <ion-input type="password" ngModel name="password" required></ion-input>
             </ion-item>
         </ion-list>
-        <button ion-button block type="submit" [disabled]="!f.valid">Signin</button>
+        <ion-button expand="block" type="submit" [disabled]="!f.valid">Signin</ion-button>
     </form>  
 </ion-content>
 ```
