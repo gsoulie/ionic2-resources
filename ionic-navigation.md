@@ -4,6 +4,7 @@
 
 * [Navigation by routing](#navigation-by-routing)   
 * [Tab Routing](#tab-routing)    
+* [Routing Guards](#routing-guards)    
 * [Using NavController](#using-navcontroller)   
 * [Passing data](#passing-data)  
 * [Passing data on close event](#passing-data-on-close-event)    
@@ -118,6 +119,47 @@ An advanced technique is to use named outlets and secondary routes for rendering
 In the HTML, this route will be looking for an outlet with the matching name.
 
 ```<ion-router-outlet name="modal"></ion-router-outlet>```
+
+## Routing Guards
+[Back to top](#navigation)
+
+Guards are an extremely powerful and under-utilized tool in the Angular router. At first, they might seem overwhelming, but they are really just the implementation of a single method, typically canActivate, which must return a boolean or something that resolves to a boolean, like a Promise or Observable.
+
+```
+ionic generate guard auth
+```
+
+*Example of guard*
+```
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router) {}
+
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+
+    const loggedIn = false; // replace with actual user auth checking logic
+
+    if (!loggedIn) {
+      this.router.navigate(['/']);
+    }
+
+    return loggedIn;
+  }
+}
+```
+
+Now you can apply this rule to as many routes as you need in the router config.
+
+```
+const routes: Routes = [
+  { path: 'special', component: SpecialPage, canActivate: [AuthGuard] },
+];
+```
 
 ## Using NavController
 
