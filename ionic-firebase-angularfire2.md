@@ -1136,6 +1136,34 @@ Run the commands below into your PWA folder
 npm install -g firebase-tools
 ```
 
+### Force browser cache clean
+
+Update your firebase.json with the following
+
+```
+{
+  "hosting": {
+    "public": "platforms/browser/www",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "headers": [
+      { "source":"/service-worker.js", "headers": [{"key": "Cache-Control", "value": "no-cache"}] }	// <== Force cache cleaning
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+```
+
+### Build and deploy
+
 And follow the steps below :
 
 ```
