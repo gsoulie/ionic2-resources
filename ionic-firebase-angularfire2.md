@@ -1138,7 +1138,7 @@ npm install -g firebase-tools
 
 ### Force browser cache clean
 
-Update your firebase.json with the following
+Update your firebase.json with the following AFTER running *firebase init* !!!
 
 ```
 {
@@ -1161,6 +1161,8 @@ Update your firebase.json with the following
   }
 }
 ```
+
+**WARNING** : running firebase init will overwrite the firebase.json file !!!
 
 ### Build and deploy
 
