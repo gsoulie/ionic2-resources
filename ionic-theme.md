@@ -152,19 +152,19 @@ Next, add a *@font-face* for each font you want to use
 ```
 @font-face {
     font-family: "AguafinaScript-Regular";
-    src: url("../assets/fonts/AguafinaScript-Regular.ttf") format("truetype");
+    src: url("/src/assets/fonts/AguafinaScript-Regular.ttf") format("truetype");
     font-weight: 200;
     font-style: normal;
 }
 @font-face {
     font-family: "DINPro";
-    src: url("../assets/fonts/DINPro.otf") format("opentype");
+    src: url("/src/assets/fonts/DINPro.otf") format("opentype");
     font-weight: 200;
     font-style: normal;
 }
 @font-face {
     font-family: "DINPro-Italic";
-    src: url("../assets/fonts/DINPro-Italic.otf") format("opentype");
+    src: url("/src/assets/fonts/DINPro-Italic.otf") format("opentype");
     font-weight: 200;
     font-style: normal;
 }
