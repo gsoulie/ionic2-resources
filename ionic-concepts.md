@@ -5,6 +5,7 @@
 * [Angular 2](#angular-2)  
 * [Decorators](#decorators)    	
 * [Pipe](#pipe)    
+* [Map operator](#map-operator)    
 * [Promise vs Observable](#promise-vs-observable)    
 * [Arrow function](#arrow-function)     
 * [Async / Await functions](#await-async-functions)     
@@ -442,6 +443,31 @@ export class truncatePipe implements PipeTransform{
 #### Conclusion
 
 Pipes are very useful for string formatting like date, hour, regexp...
+
+## Map operator
+[Back to top](#concepts)  
+
+According to rxjs 6, here is the new syntax :
+
+*Old syntax*
+
+```
+import 'rxjs/add/operator/map'
+
+myObservable
+  .map(data => data * 2)
+  .subscribe(...);
+```
+
+*New syntax*
+
+```
+import { map } from 'rxjs/operators';
+
+myObservable
+  .pipe(map(data => data * 2))
+  .subscribe(...);
+```
 
 ## Promise vs Observable
 [Back to top](#concepts) 
