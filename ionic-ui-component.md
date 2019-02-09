@@ -21,8 +21,6 @@
 * [Expandable header](#expandable-header)    
 * [List accordion](#list-accordion)    
 * [Picker](#picker)     
-* [ion-loading-controller](#ion-loading-controller)    
-* [ion-alert-controller](#ion-alert-controller)    
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -1545,38 +1543,4 @@ export class HomePage {
     <ion-multi-picker cancelText="Fermer" doneText="Valider" item-content [multiPickerColumns]="simpleColumns"></ion-multi-picker>
   </ion-item>
 </ion-content>
-```
-
-
-## ion-loading-controller
-[Back to top](#ui-components)  
-
-New LoadingController syntax since ionic 4 
-
-```
-const loader = document.querySelector('ion-loading-controller');
-await loader.componentOnReady();
-
-const loadingElement = await loader.create({
-message: 'Loading...',
-spinner: 'crescent',
-duration: 2000
-});
-await loadingElement.present();
-```
-## ion-alert-controller
-[Back to top](#ui-components)  
-
-New AlertController syntax since ionic 4
-```
-  const alertController = document.querySelector('ion-alert-controller');
-  await alertController.componentOnReady();
-
-  const alert = await alertController.create({
-    header: 'Alert',
-    subHeader: 'Subtitle',
-    message: 'This is an alert message.',
-    buttons: ['OK']
-  });
-  return await alert.present();
 ```
