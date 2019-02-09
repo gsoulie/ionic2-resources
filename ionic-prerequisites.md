@@ -170,3 +170,50 @@ Another very good alternative to Atom is [visual studio code] (https://code.visu
 * [npm intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense)    
 * [sass lint](https://marketplace.visualstudio.com/items?itemName=glen-84.sass-lint)    
 * [TSlint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)    
+
+### Custom snippet code
+
+This is how to create custom snippet code :
+```
+1 - Hit > shift + command + p and type snippets
+2 - Select Preferences: Open User Snippets
+3 - Choose the language type for which you want to add the custom snippet (Typescript required for IONIC)
+```
+A code snippet is formatted as a JSON object where *prefix* is what is used to trigger the snippet and the *body* will be expanded and inserted
+
+*Snippet example*
+
+```
+{
+	"Alert_snippet": {
+		"prefix" : "myalert",
+		"body": [
+			"const alertController = document.querySelector('ion-alert-controller');",
+			"await alertController.componentOnReady();",  
+			"const alert = await alertController.create({",
+			  "header: '$1',",
+			  "message: '$2',",
+			  "buttons: [{",
+				  "text: '$3',",
+				  "role: 'cancel'",
+				"}",
+			  "]});",
+			"await alert.present();"
+		],
+		"description": "Create ionic 4 alert controller"
+	},
+	"Loading_snippet": {
+		"prefix" : "loading",
+		"body": [
+			"const loader = document.querySelector('ion-loading-controller');",
+			"await loader.componentOnReady();",
+			"const loadingElement = await loader.create({",
+				"message: '$1',",
+				"spinner: 'crescent'",
+			"});",
+			"await loadingElement.present();"
+		],
+		"description": "Create Ionic 4 Loading controller"
+	}
+}
+```
