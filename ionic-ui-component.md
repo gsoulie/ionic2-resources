@@ -21,6 +21,7 @@
 * [Expandable header](#expandable-header)    
 * [List accordion](#list-accordion)    
 * [Picker](#picker)     
+* [alert controller](#alert-controller)    
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -1543,4 +1544,18 @@ export class HomePage {
     <ion-multi-picker cancelText="Fermer" doneText="Valider" item-content [multiPickerColumns]="simpleColumns"></ion-multi-picker>
   </ion-item>
 </ion-content>
+```
+## Alert Controller
+[Back to top](#ui-components)  
+
+Ionic 4 Alert Controller syntax
+```
+import { AlertController } from '@ionic/angular';
+
+const alert = await this.alertCtrl.create({
+      header: titre || '',
+      message: message,
+      buttons: ['OK']
+    });
+await alert.present();
 ```
