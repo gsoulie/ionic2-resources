@@ -690,7 +690,7 @@ export class Contacts {
     onSearchPatient(ev: any){
         this.initializeItems();
         this.groupedPatients = [];
-        let val = ev.target.value;
+        let val = ev.detail.value;
         var temp = [];
 
         if (val && val.trim() != '') {
@@ -849,7 +849,7 @@ constructor(public nav: NavController) {
     this.getAllDevices();
 
     // set searchText to the value of the searchbar
-    var searchText = ev.target.value;
+    var searchText = ev.detail.value;
 
     // Avoid research if searchtext is empty
     if (!searchText || searchText.trim() === '') {
