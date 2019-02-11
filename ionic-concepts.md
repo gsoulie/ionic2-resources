@@ -5,7 +5,7 @@
 * [Angular 2](#angular-2)  
 * [Decorators](#decorators)    	
 * [Pipe](#pipe)    
-* [Map operator](#map-operator)    
+* [RxJS 6 Map operator](#map-operator)    
 * [Promise vs Observable](#promise-vs-observable)    
 * [Arrow function](#arrow-function)     
 * [Async / Await functions](#await-async-functions)     
