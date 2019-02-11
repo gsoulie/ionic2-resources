@@ -434,7 +434,7 @@ In the view file
 To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you need to set ```display: flex;``` on the parent container (here the ion-item) and set ```margin:auto;``` on the ```<ion-label>```
 
 ```html
-  <ion-item no-lines class="alertItem">
+  <ion-item lines="none" class="alertItem">
     <ion-label class="alertLabel" color="danger">Bluetooth adapter is disabled</ion-label>
     <ion-button class="alertButton" fill="clear" default slot="end" color="white" (click)="onEnableBluetooth()">ENABLE</ion-button>
   </ion-item>
@@ -469,7 +469,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 <ion-grid>
 <ion-row>
 <ion-col [style.backgroundColor]="'#ffcc00'">
-  <ion-item class="formItem" no-lines>
+  <ion-item class="formItem" lines="none">
     <ion-input placeholder="Suggestion" type="text" name="suggestion" ngModel></ion-input>
   </ion-item>
 </ion-col>
