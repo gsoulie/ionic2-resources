@@ -4,7 +4,7 @@
 
 * [ion-button](#button)    
 * [modal](#modal)    
-* [comboBox](#combobox)    
+* [ion-select](#ion-select)    
 * [ion-item](#ion-item)    
 * [ion-list](#ion-list)  
 * [ion-label](#ion-label)    
@@ -124,42 +124,32 @@ onClose(remove = false){
 ```
 
 
-## ComboBox
+## ion-select
 [Back to top](#ui-components)  
 
 *View file*
 ```xml
  <ion-item>
     <ion-label>Profession</ion-label>
-    <ion-select placeholder="Select One" (ionChage)="select($event)" [(ngModel)]="prof">
-      <ion-select-option *ngFor="let item of professions" value="{{item.objectId}}">{{ item.titre }}</ion-select-option>
-    </ion-select>
+	 <ion-select (ionChange)="onFiltering($event.detail.value)"
+      	interface="action-sheet" placeholder="Select your item" [(ngModel)] ="selectedItem" name="cbo">
+        <ion-select-option *ngFor="let item of itemList" [value]="item.id">{{ item.id }} - {{ item.name }}</ion-select-option>
+      </ion-select>
  </ion-item>
 ```
 
 *Controller file*
 
 ```javascript
-public prof: string;
-private professions: any[];
-private newSelectedId: number = 0;
+  onFilteringTag(selectedItem){
+    this.currentTag = selectedTag;	// contains item.id
 
-constructor(){
-	this.prof = "prof 1";
-	this.professions = [{objectId: 1, titre: "prof 1"},{objectId: 2, titre: "prof 2"},{objectId: 3, titre: "prof 3"}];
-}
-
-// To verify
-select(_selectedItem){
-	this.newSelectedId = _selectedItem
-}
-```
-
-*Style file*
-```
-.combo{
-    max-width: 80%;	// to allow long value label
-}
+    if(selectedItem === null){
+	// do some stuff
+    } else {
+     	// other stuff
+    }
+  }
 ```
 
 ## ion-item
