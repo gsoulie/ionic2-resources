@@ -782,7 +782,8 @@ groupPatients(patients){
     </ion-title>
   </ion-navbar>
   <ion-toolbar color="maintheme">
-  <ion-searchbar placeholder="Rechercher un device" (ionInput)="getDevice($event)"></ion-searchbar>
+      <ion-searchbar debounce="500" placeholder="Search by Tag ID, Name or Mac address" 
+      class="searchbar" [(ngModel)]="searchTerm" (ionChange)="getDevice($event)"></ion-searchbar>
    </ion-toolbar>
 </ion-header>
 
@@ -794,6 +795,8 @@ groupPatients(patients){
   </ion-list>
 </ion-content>
 ```
+
+> It's recommanded to use *ionChange* event instead of *ionInput* to gives enough time to the user for tiping. In completion, use *debounce* option
 
 *Some options*
 ```
