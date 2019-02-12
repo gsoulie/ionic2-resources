@@ -143,30 +143,33 @@ $text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !defa
 ## Custom fonts
 [Back to top](#themes)    
 
-To use custom fonts, first download font file and put it in /src/assets/fonts
+To use custom fonts, first download font file and put it in src/assets/fonts
 
 Next, add a *@font-face* for each font you want to use
 
-*app.scss*
+*global.scss*
 
 ```
 @font-face {
     font-family: "AguafinaScript-Regular";
-    src: url("/src/assets/fonts/AguafinaScript-Regular.ttf") format("truetype");
+    src: url("src/assets/fonts/AguafinaScript-Regular.ttf") format("truetype");
     font-weight: 200;
     font-style: normal;
 }
 @font-face {
     font-family: "DINPro";
-    src: url("/src/assets/fonts/DINPro.otf") format("opentype");
+    src: url("src/assets/fonts/DINPro.otf") format("opentype");
     font-weight: 200;
     font-style: normal;
 }
 @font-face {
     font-family: "DINPro-Italic";
-    src: url("/src/assets/fonts/DINPro-Italic.otf") format("opentype");
+    src: url("src/assets/fonts/DINPro-Italic.otf") format("opentype");
     font-weight: 200;
     font-style: normal;
+}
+* {
+    --ion-font-family: 'DINPro';
 }
 ```
 
