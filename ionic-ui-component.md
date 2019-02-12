@@ -214,7 +214,15 @@ Now use slots instead :
 ### ion-item router-direction
 
 It is possible to add a *router-direction* when clicking on ion-item. It's value could be : "back" | "forward" | "root"
+### ion-item with multiple lines
 
+```
+<ion-item>
+    <ion-label text-wrap>
+    ...
+    </ion-label>
+</ion-item>
+```
 ## ion-list
 [Back to top](#ui-components)  
 
