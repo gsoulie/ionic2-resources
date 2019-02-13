@@ -210,6 +210,38 @@ const routes: Routes = [
 ];
 ```
 
+### Example of guard with AngularFireAuth
+
+```
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuardGuard implements CanActivate {
+  constructor(public afAuth: AngularFireAuth, 
+    private router: Router){}
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    
+    this.afAuth.authState.subscribe(res => {
+      if (res && res.uid) {
+        return true;
+      } else {
+        this.router.navigate(['/login']);
+        return false;
+      }
+    });
+    return true;
+  }
+}
+
+```
+
 ## Using NavController
 
 ### Passing Data
