@@ -103,6 +103,55 @@ ngOnInit() {
   this.route.params.subscribe(...);
 }
 ```
+
+### Navigate to the previous page
+[Back to top](#navigation)
+
+The trick consists in create a new service like below : 
+
+*previous-routing-service*
+```
+import { Router, NavigationEnd } from '@angular/router';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PreviousRouteServiceService {
+
+  private previousUrl: string;
+  private currentUrl: string;
+
+  constructor(private router: Router) {
+    this.currentUrl = this.router.url;
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {        
+        this.previousUrl = this.currentUrl;
+        this.currentUrl = event.url;
+      };
+    });
+  }
+
+  public getPreviousUrl() {
+    return this.previousUrl;
+  }    
+}
+```
+
+Then, just instanciate this service in each page which call a subpage
+
+```
+constructor(private previousRouteService: PreviousRouteServiceService) { }
+```
+
+And call the ```getPreviousUrl()``` function in sub page to get the last route and redirect to it
+
+```
+backFwd(){
+    this.router.navigateByUrl(this.previousRouteService.getPreviousUrl());
+}
+```
+
 ## Tab Routing
 [Back to top](#navigation)
 
