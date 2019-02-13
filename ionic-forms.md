@@ -3,7 +3,7 @@
 # Forms
 
 * [NgModel Forms](#ngmodel-forms)    
-* [FormBuilder](#formbuilder)    
+* [Form in Ionic 4](#form-in-ionic-4)     
 
 ## NgModel Forms
 Here is a basic form sample
@@ -163,6 +163,102 @@ Displaying data in the *home* page
 </ion-content>
 ```
 
-## FormBuilder
+## Form in ionic 4
 [Back to top](#forms)    
 
+Ionic 4 makes changes with FormGroup
+
+First, you need to import FormsModule and ReactiveFormsModule in your *app.module.ts* file
+*app.module.ts*
+
+```
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouteReuseStrategy } from '@angular/router';
+
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { IonicStorageModule } from '@ionic/storage';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
+
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [
+    BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    IonicStorageModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+```
+
+*view file of your form page*
+```
+<!-- if[UserInterface]-->
+<ion-content no-padding class="window">
+    <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+      <ion-item class="formItem">
+        <ion-input #email formControlName="email" type="email" aria-labelledby="lbl-email" placeholder="Your email address"
+          [class.invalid]="!loginForm.controls.email.valid">
+        </ion-input>
+      </ion-item>
+      <ion-item class="formItem">
+        <ion-input #password formControlName="password" type="password" aria-labelledby="lbl-password" placeholder="Your password"
+            [class.invalid]="!loginForm.controls.password.valid">
+        </ion-input>
+      </ion-item>
+      <ion-button fill="clear" class="formSubmitButton" type="submit">Login</ion-button>
+    </form>
+</ion-content>
+```
+you can also import FormsModule and ReactiveFormsModule to yourFormPage.page.ts
+
+```
+import { FormGroup, FormArray, FormBuilder, Validators,ReactiveFormsModule } from '@angular/forms';
+```
+
+Then you must import FormsModule and ReactiveFormsModule to *yourFormPage.module.ts* file
+
+*yourFormPage.module.ts
+```
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+import { FormGroup, FormArray, FormBuilder, Validators,ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+
+import { LoginPage } from './login.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: LoginPage
+  }
+];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    IonicModule,
+    RouterModule.forChild(routes)
+  ],
+  declarations: [LoginPage]
+})
+export class LoginPageModule {}
+
+```
