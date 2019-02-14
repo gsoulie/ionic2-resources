@@ -248,6 +248,8 @@ const routes: Routes = [
 ];
 ```
 
+**Note :** You can pass an array of multiple guards to check differents conditions
+
 ### Example of guard with AngularFireAuth
 
 ```
