@@ -61,6 +61,22 @@ export class AppRoutingModule { }
 <ion-button href="/hello/me">Hello</ion-button>	<!-- WARNING you must define hello/id route in your app-routing.module.ts file
 ```
 
+### Router Direction
+
+You can specify router direction to set a specific animation
+
+```
+<ion-button expand="block" routerLink="/" routerDirection="root">
+   Logout
+</ion-button>
+```
+
+routerDirection values
+
+- *root*
+- *back*
+- *forward*
+
 ### Navigate by code
 
 ```
