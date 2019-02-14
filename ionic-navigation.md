@@ -213,7 +213,7 @@ In the HTML, this route will be looking for an outlet with the matching name.
 Guards are an extremely powerful and under-utilized tool in the Angular router. At first, they might seem overwhelming, but they are really just the implementation of a single method, typically canActivate, which must return a boolean or something that resolves to a boolean, like a Promise or Observable.
 
 ```
-ionic generate guard auth
+ionic g guard guards/auth
 ```
 
 *Example of guard*
