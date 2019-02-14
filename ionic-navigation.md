@@ -123,6 +123,28 @@ ngOnInit() {
 ### Navigate to the previous page
 [Back to top](#navigation)
 
+#### Classic way
+
+The classic way to navigate back is to manually manage a back button using *defaultHref* property
+```
+<ion-header>
+ <ion-toolbar color="primary">
+   <ion-buttons slot="start">
+     <ion-back-button defaultHref="/dashboard"></ion-back-button>
+   </ion-buttons>
+   <ion-title>Details</ion-title>
+ </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+ My ID is: {{ myId }}
+</ion-content>
+```
+
+**Note :** This method does not allow to navigate back on a specific tab.
+
+#### Navigarte from page to specific tab
+
 The trick consists in create a new service like below : 
 
 *previous-routing-service*
