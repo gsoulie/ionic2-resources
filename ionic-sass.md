@@ -15,6 +15,7 @@
 * [Remove ion-card shadow](#remove-ion-card-shadow)    
 * [Remove header shadow](#remove-header-shadow)     
 * [Dynamic class](#dynamic-class)     
+* [Spacer](#spacer)    
 
 Here are some tips to perform your scss.
 
@@ -750,3 +751,28 @@ ion-card, .card-ios, .card-md {
 ```
   <div class="divCard" [ngClass]="item.show == true ? 'divCardExtand' : 'divCard'"></div>
 ```
+
+## Spacer
+[Back to top](#sass)  
+
+*View file*
+```
+<mat-toolbar color="primary">
+    <span><a routerLink="/">My messages</a></span>
+    <span class="spacer"></span>
+    <span><a routerLink="/create">New messages</a></span>
+</mat-toolbar>
+```
+
+*Style file*
+```
+a {
+    text-decoration: none;
+    color: white;
+}
+.spacer {
+    flex: 1 1 auto;
+}
+```
+
+Spacer will set the first span on the left side and the third span on the right side of the screen
