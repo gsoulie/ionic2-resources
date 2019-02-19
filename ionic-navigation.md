@@ -120,6 +120,20 @@ ngOnInit() {
 }
 ```
 
+### Test if param exists
+
+It could be useful to test if a specific parameter exists. For example to determinate which opening mode to use for in a detail page.
+
+```
+this.route.paramMap.subscribe((paramMap: ParamMap) => {
+	if(paramMap.has('postId')) {
+		// EDIT mode
+	} else {
+		// CREATION mode
+	}
+});
+```
+
 ### Navigate to the previous page
 [Back to top](#navigation)
 
