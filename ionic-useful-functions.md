@@ -2,6 +2,7 @@
 
 # Useful Functions
 
+* [Find element in array](#find-element-in-array)    
 * [Properly display error](#properly-display-error)    
 * [Force screen refresh](#force-screen-refresh)    
 * [Get specific platform](#get-specific-platform)   
