@@ -12,6 +12,14 @@
 * [Close modal](#close-modal)    
 * [Accessing DOM element @ViewChild](#accessing-dom-element)  
 
+## Find element in array
+
+```
+getPost(id: string) {
+    return{...this.posts.find(p => p.id === id)};
+}
+```
+
 ## Ionic 2 useful functions snippets
 
 [Personnal Ionic 2 snippet repo](https://github.com/gsoulie/Ionic2-snippets)    
