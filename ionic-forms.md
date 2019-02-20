@@ -262,3 +262,144 @@ const routes: Routes = [
 export class LoginPageModule {}
 
 ```
+
+### Antoher Angular form example
+[Back to top](#forms)    
+
+*View file*
+```
+<!-- <textarea rows="6" [value]="newPost" #postInput></textarea> -->
+<mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form [formGroup]="form" (ngSubmit)="onSavePost()" *ngIf="!isLoading">
+        <mat-form-field>
+            <input 
+            placeholder="Title" 
+            matInput type="text" 
+            formControlName="title">
+            <mat-error *ngIf="form.get('title').invalid"><i>Please enter a post title</i></mat-error>
+            <br>
+        </mat-form-field>
+        <mat-form-field>
+            <textarea 
+            placeholder="Content" 
+            rows="4" 
+            matInput 
+            formControlName="content"></textarea>
+            <mat-error *ngIf="form.get('content').invalid"><i>Please enter a post content</i></mat-error>
+            <br>
+        </mat-form-field>
+        <div>
+            <button mat-stroked-button type="button" (click)="filePicker.click()">Upload image</button>
+            <input type="file" #filePicker>
+        </div>
+        <br>
+        <button 
+        mat-raised-button 
+        color="primary" 
+        type="submit">save post</button>
+    </form>
+</mat-card>
+
+```
+
+*style file*
+```
+mat-card{
+    margin-top: 20px;
+}
+mat-form-field,
+textarea {
+    width: 100%;
+}
+mat-spinner {
+    margin: auto;
+}
+
+input[type="file"] {
+    visibility: hidden
+}
+```
+
+*controller file*
+```
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { PostService } from '../post.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+
+@Component({
+    selector: 'app-post-create',
+    templateUrl: './post-create.component.html',
+    styleUrls: ['./post-create.component.scss']
+})
+export class PostCreateComponent implements OnInit {
+    postTitle = '';
+    postValue = '';
+    private mode = 'create';
+    private postId: string;
+    post: Post;
+    isLoading = false;  // show/hide loading spinner
+
+    // Creating form
+    form: FormGroup;
+
+    constructor(public postServidce: PostService,
+        public route: ActivatedRoute) {
+    }
+
+    ngOnInit() {
+        // Intialize FormGroup
+        this.initializeForm();
+
+        this.route.paramMap.subscribe((paramMap: ParamMap) => {
+            if (paramMap.has('postId')) {
+                this.mode = 'edit';
+                this.postId = paramMap.get('postId');
+                this.isLoading = true;
+                // this.post = this.postServidce.getPost(this.postId);  // for old solution which return a local copy of the object
+                this.postServidce.getPost(this.postId)  // solution 2 : retrieve post from server instead of locally
+                .subscribe(postData => {
+                    this.isLoading = false;
+                    // initialize post object
+                    this.post = {id: postData._id, title: postData.title, content: postData.content };
+
+                    // Initialize formGroup default values
+                    this.form.setValue({'title': this.post.title, 'content': this.post.content});
+                });
+
+            } else {
+                this.mode = 'create';
+                this.postId = null;
+            }
+        });
+    }
+
+    /**
+     * Initialize FormGroup
+     */
+    initializeForm() {
+        this.form = new FormGroup({
+            'title': new FormControl(null, {validators: [Validators.required, Validators.minLength(3)]}),
+            'content': new FormControl(null, {validators: [Validators.required]})
+        });
+    }
+
+    /**
+     * Add or update post
+     */
+    onSavePost() {
+        if (this.form.invalid) {
+            return;
+        }
+        this.isLoading = true;
+        if (this.mode === 'create') {
+            this.postServidce.addPost(this.form.value.title, this.form.value.content);
+        } else {
+            this.postServidce.updatePost(this.postId, this.form.value.title, this.form.value.content);
+        }
+        this.form.reset();
+    }
+}
+
+```
