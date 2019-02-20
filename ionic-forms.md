@@ -291,7 +291,7 @@ export class LoginPageModule {}
         </mat-form-field>
         <div>
             <button mat-stroked-button type="button" (click)="filePicker.click()">Upload image</button>
-            <input type="file" #filePicker>
+            <input type="file" #filePicker (change)="onImagePicked($event)">
         </div>
         <br>
         <button 
