@@ -293,6 +293,9 @@ export class LoginPageModule {}
             <button mat-stroked-button type="button" (click)="filePicker.click()">Upload image</button>
             <input type="file" #filePicker (change)="onImagePicked($event)">
         </div>
+	<div class="image-preview" *ngIf="imagePreview !== '' && imagePreview">
+            <img [src]="imagePreview" [alt]="form.value.title">
+        </div>
         <br>
         <button 
         mat-raised-button 
@@ -319,6 +322,15 @@ mat-spinner {
 input[type="file"] {
     visibility: hidden
 }
+
+.image-preview {
+    height: 5rem;
+    margin: 1rem 0;
+}
+
+.image-preview img {
+    height: 100%;
+}
 ```
 
 *controller file*
@@ -340,6 +352,7 @@ export class PostCreateComponent implements OnInit {
     private postId: string;
     post: Post;
     isLoading = false;  // show/hide loading spinner
+    imagePreview: string;
 
     // Creating form
     form: FormGroup;
@@ -381,8 +394,27 @@ export class PostCreateComponent implements OnInit {
     initializeForm() {
         this.form = new FormGroup({
             'title': new FormControl(null, {validators: [Validators.required, Validators.minLength(3)]}),
-            'content': new FormControl(null, {validators: [Validators.required]})
+            'content': new FormControl(null, {validators: [Validators.required]}),
+            'image': new FormControl(null, {validators: [Validators.required]})
         });
+    }
+
+    /**
+     * Picking image event
+     * @param event
+     */
+    onImagePicked(event: Event) {
+        const file = (event.target as HTMLInputElement).files[0];   // get the selected file
+        this.form.patchValue({image: file});    // to associate an object to formgroup property
+        this.form.get('image').updateValueAndValidity();
+        console.log(file);
+        
+        // convert image to url for <img> source
+        const reader = new FileReader();
+        reader.onload = () => {
+            this.imagePreview = reader.result as string;
+        };
+        reader.readAsDataURL(file);
     }
 
     /**
@@ -401,5 +433,6 @@ export class PostCreateComponent implements OnInit {
         this.form.reset();
     }
 }
+
 
 ```
