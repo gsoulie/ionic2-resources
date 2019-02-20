@@ -5,6 +5,7 @@
 * [SVG](#svg)    
 * [Using cascading SVG](#using-cascading-svg)    
 * [Add blur](#add-blur-on-image)    
+* [Upload image](#upload-image)    
 
 To use image in your app, you can store them under ```src/assets/imgs/*.png```
 
@@ -99,4 +100,23 @@ $ sprity ./output-directory/ ./input-directory/*.png
         -ms-filter: blur(5px);
         filter: blur(5px);
     }
+```
+
+## Upload image
+
+*View file*
+```
+<div>
+    <button mat-stroked-button type="button" (click)="filePicker.click()">Upload image</button>
+    <input type="file" #filePicker>
+</div>
+```
+
+The ```<input type="file" #filePicker>``` create an automatic upload button which open the file explorer. But this button is not customizable, so we want using our custom button ```<button mat-stroked-button>``` to target the ```<input type="file" #filePicker>``` event.
+
+*style file*
+```
+input[type="file"] {
+    visibility: hidden
+}
 ```
