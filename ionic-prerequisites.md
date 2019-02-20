@@ -4,6 +4,7 @@
 
 * [Start with ionic](#start-with-ionic)  
 * [Visual Studio Code](#visual-studio-code)   
+* [Android debugging with logcat](#android-debugging-with-logcat)    
 
 ## Start with ionic
 
@@ -217,3 +218,11 @@ A code snippet is formatted as a JSON object where *prefix* is what is used to t
 	}
 }
 ```
+
+## Android debugging with logcat
+[Back to top](#prerequisites) 
+
+You can visualize android logcat console by using **adb**. Open a terminal from */<your_android_sdk_path>/platform-tools/* and run :
+
+```
+$<path-to-android-sdk>/platform-tools adb logcat
