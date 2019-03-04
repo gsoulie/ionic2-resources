@@ -1175,7 +1175,7 @@ firebase init
 --> select "hosting" option and make sure to hit SPACE then ENTER !!
 
 What do you want to use as your public directory ?
---> platforms/browser/www
+--> www
 
 Configure as a single-page app ?
 --> Yes
@@ -1184,7 +1184,7 @@ File www/index.html already exists. Overwrite ?
 --> No
 
 // Build your application
-ionic cordova build browser --prod
+ionic build --prod 
 
 firebase deploy
 ```
