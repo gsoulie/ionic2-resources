@@ -21,9 +21,9 @@
 what functionalities are already supported by browser ?
 [to open on wanted web browser](https://whatwebcando.today/)    
 
-## Step 1 : Adding browser platform
+## Step 1 : What about browser platform ?
 
-Add browser platform with ```ionic cordova platform add browser```    
+"The cordova browser platform was originally built as an experiment from the cordova team and was really meant to be used by plugin developers only. Because of this it causes all kinds of issues when trying to use it as an actual production platform and is why we are going to start officially recommending people **not use it**."   
 
 ## Step 2 : Activate Service worker
 
@@ -120,11 +120,12 @@ If you need to caching some resources, add them in ```service-worker.js```
 
 ## Step 4 : Build and Run
 
-Run with ```ionic cordova run browser``` to test the site
+Run with ```ionic serve``` to test the site
 
 **favicon** the favicon must be placed in the src/assets/icon/ folder, then use ionic cordova resources --icon
 
-Compile PWA with ``` ionic cordova build browser --minifyjs --minifycss```
+Compile PWA with ``` ionic build --prod```
+Old compile method ``` ionic cordova build browser --minifyjs --minifycss```
 
 ## Step 5 Hosting and deploying on Firebase
 
@@ -142,8 +143,8 @@ firebase login
 firebase init
 --> select "hosting" option and make sure to hit SPACE then ENTER !!
 
-What do you want to use as your public directory ?
---> platforms/browser/www
+What do you want to use as your public directory ? (old method : platforms/browser/www)
+--> www
 
 Configure as a single-page app ?
 --> Yes
@@ -152,8 +153,8 @@ File www/index.html already exists. Overwrite ?
 --> No
 
 // Note : if build with prod failed, you can use
-// ionic cordova buil browser --minifyjs --minifycss --optimizejs --release
-ionic cordova build browser --prod 
+// old : ionic cordova buil browser --minifyjs --minifycss --optimizejs --release
+ionic build --prod 
 
 // OR : npm run ionic:build -- --prod
 
