@@ -345,7 +345,7 @@ removePost(post){
       </button>
 
       <ion-item-options>
-        <button ion-button color="darkgrey" (click)="removeNote(item)" class="btn"><ion-icon name="trash"></ion-icon>Delete</button>
+        <ion-button color="darkgrey" (click)="removeNote(item)" class="btn"><ion-icon name="trash"></ion-icon>Delete</ion-button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
@@ -513,9 +513,9 @@ export class NewsFeedPage {
 ```xml
 <ion-list>
 	<ion-item *ngFor="let item of items" (click)="openDetail(item.idDevice, item.nom)">
-		<button ion-button color="clear" item-right (click)="pickDevice($event,item.idDevice)">
-			<ion-icon [style.color]="item.disponible ? '#00CC00' : '#CD1625'" name="phone-portrait" item-center></ion-icon>
-		</button>
+		<ion-button color="clear" slot="end" (click)="pickDevice($event,item.idDevice)">
+			<ion-icon [style.color]="item.disponible ? '#00CC00' : '#CD1625'" name="phone-portrait"></ion-icon>
+		</ion-button>
 		<h2>{{item.nom}}</h2>
 	</ion-item>
 </ion-list>
@@ -566,7 +566,7 @@ export class Page1 {
 *Change button backgroundColor dynamically*
 
 ```xml
-<button ion-button[style.backgroundColor]="enable ? '#00CC00' : '#FF0000'">Test</button>
+<ion-button[style.backgroundColor]="enable ? '#00CC00' : '#FF0000'">Test</ion-button>
 ```
 
 
@@ -581,11 +581,11 @@ export class Page1 {
   </ion-refresher>
   <ion-list>
     <button ion-item *ngFor="let user of users" (click)="goToDetails($event, user.login)">
-      <ion-avatar item-left>
+      <ion-avatar slot="start">
         <img [src]="user.avatar_url">
       </ion-avatar>
       <h2>{{ user.login }}</h2>
-      <ion-icon md="md-arrow-forward" item-right></ion-icon>
+      <ion-icon md="md-arrow-forward" slot="end"></ion-icon>
     </button>
   </ion-list>
 </ion-content>
@@ -1090,8 +1090,10 @@ This snippet show how to fix floating button in front of a list
 
 ```xml
  <!-- Fixed Floating Action Button that does not scroll with the content -->
-  <ion-fab>
-    <ion-fab-button>Button</ion-fab-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </ion-fab-button>
   </ion-fab>
 
   <!-- Default Floating Action Button that scrolls with the content.-->
@@ -1131,7 +1133,7 @@ This snippet show how to fix floating button in front of a list
 <ion-content padding>
   <ion-item [style.backgroundColor]="'transparent'" lines="none">
     <ion-icon slot="start" name="md-tablet-landscape" color="dark"></ion-icon>
-    <b item-right>Basculez en mode paysage pour voir le graphe</b>
+    <b slot="end">Basculez en mode paysage pour voir le graphe</b>
   </ion-item>
   <div *ngIf="orientationPortrait">  
     <ion-item *ngFor="let i of dataList">{{ i }}</ion-item>
@@ -1322,14 +1324,14 @@ To add a toggle menu in your pages, follow the example below
 <!-- the page header -->
 <ion-header>
   <ion-navbar color="githubviolet">
-    <button ion-button menuToggle>
+    <ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </ion-button>
     <ion-title>{{username}}</ion-title>  
-     <ion-buttons end>
-        <button ion-button icon-only (click)="openSearch()">
-          <ion-icon name="search"></ion-icon>
-        </button>
+     <ion-buttons slot="end">
+        <ion-button (click)="openSearch()">
+          <ion-icon slot="icon-only" name="search"></ion-icon>
+        </ion-button>
       </ion-buttons>
   </ion-navbar>
 </ion-header>
