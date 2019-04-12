@@ -850,7 +850,7 @@ constructor(public nav: NavController) {
     this.getAllDevices();
 
     // set searchText to the value of the searchbar
-    var searchText = ev.detail.value;
+    var searchText = ev.value;// OLD syntax : var searchText = ev.detail.value;
 
     // Avoid research if searchtext is empty
     if (!searchText || searchText.trim() === '') {
