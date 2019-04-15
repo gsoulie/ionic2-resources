@@ -736,7 +736,7 @@ ion-card, .card-ios, .card-md {
 }
 ```
 
-## Remove ion-card shadow
+## Remove header shadow
 [Back to top](#sass)     
 
 ```
