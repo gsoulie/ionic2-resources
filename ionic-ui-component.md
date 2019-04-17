@@ -352,6 +352,109 @@ removePost(post){
 </ion-content>
 ```
 
+### Lazy loading on scroll
+
+*View file*
+
+```
+<ion-header>
+  ...
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let item of items">
+    
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="scrollHandler($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+```
+
+*Controller file*
+
+```
+import { IonInfiniteScroll } from '@ionic/angular';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage {
+
+    // variables pour la gestion du lazy loading
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    
+    constructor(...) {
+      this.getData();
+    }
+    
+    
+  /**
+   * Infinite scroll listener
+   * @param infiniteScroll 
+   */
+  scrollHandler(event) {
+    setTimeout(() => {
+      // Update data only when end of page is detected
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        this.getData();
+      }
+      event.target.complete();
+    }, 500);
+  }
+  
+  /**
+   * Fetching data from Firebase 20 by 20 items
+   */
+  async getData() {
+    if (this.filteringMode === false) {
+      this.deckDataList = this.afDB.list(cst.TBL_DECK, ref => ref.orderByChild('deckName')); 
+      this.deckObservable = this.deckDataList.valueChanges();
+      this.deckObservable.subscribe((res) => {
+        this.decks = res as any[];
+        this.decks.push({deckName: 'Tous'});
+      });
+
+      const loader = await this.loadingCtrl.create({
+        message: 'Loading...'
+      });
+      await loader.present();
+
+      // fetching data 20 by 20
+      if (this.lastItem === null) {
+        this.dataList = this.afDB.list(cst.TBL_MATCH, ref => ref.orderByChild('id').limitToLast(20));
+      } else {
+        this.dataList = this.afDB.list(cst.TBL_MATCH, ref => ref.orderByChild('id').endAt(this.lastItem).limitToLast(20));
+      }
+      this.matchs = this.dataList.valueChanges()
+      .pipe(map(items => items.sort().reverse()));
+
+      try {
+        this.matchs.subscribe((res) => {
+            let temp = res as any[];
+            this.lastItem = temp[temp.length - 1].id;	// memorize last item fetched for the next fetching
+
+            // remove first item if it is not the first fetching (else it is added twice in the dataset)
+            if (this.matchs2.length > 0) { 
+              temp.splice(0, 1);
+            }
+            temp.forEach(match => {
+              this.matchs2.push(match);
+            });
+            loader.dismiss();
+            console.table(this.matchs2);
+        });
+      } catch (e) {
+        loader.dismiss();
+      }
+    }
+  }
+}
+```
+
+
 ### Inifinite scroll in ion-list
 
 #### Solution 1
