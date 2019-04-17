@@ -2,7 +2,7 @@
 
 # UI Components
 
-* [ion-button](#button)    
+* [ion-button](#ion-button)    
 * [modal](#modal)    
 * [ion-select](#ion-select)    
 * [ion-item](#ion-item)    
