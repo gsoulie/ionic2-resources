@@ -16,6 +16,11 @@
 [discussion - deploying-pwa](https://forum.ionicframework.com/t/deploying-pwa/73749)   
 [firebase hosting](https://coryrylan.com/blog/deploy-angular-cli-apps-to-firebase)   
 
+## PWA Builder
+
+https://preview.pwabuilder.com/
+
+
 ## Browser support
 
 what functionalities are already supported by browser ?
