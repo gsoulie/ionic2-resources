@@ -95,6 +95,8 @@ export class HomePage {
 
 ### Get routing parameters
 
+Best practices : [https://ionicacademy.com/pass-data-angular-router-ionic-4/]
+
 ```
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
