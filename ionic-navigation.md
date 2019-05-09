@@ -3,10 +3,11 @@
 # Navigation
 
 * [Navigation by routing](#navigation-by-routing)   
+* [Routing params](#routing-params)    
 * [Tab Routing](#tab-routing)    
 * [Routing Guards](#routing-guards)    
 * [Using NavController](#using-navcontroller)   
-* [Passing data](#passing-data)  
+* [Passing data Ionic 3](#passing-data-ionic-3)  
 * [Passing data on close event](#passing-data-on-close-event)    
 * [Disable Android hardware back button](#disable-android-hardware-back-button)    
 
@@ -93,49 +94,6 @@ export class HomePage {
 }
 ```
 
-### Get routing parameters
-
-Best practices : [https://ionicacademy.com/pass-data-angular-router-ionic-4/]
-
-```
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
-@Component({ ... })
-export class ProfileComponent implements OnInit {
-
-  id: string;
-
-  constructor(private route: ActivatedRoute) {}
-
-  ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-  }
-}
-```
-
-It is also possible to react to changes by using Observable
-
-```
-ngOnInit() {
-  this.route.params.subscribe(...);
-}
-```
-
-### Test if param exists
-
-It could be useful to test if a specific parameter exists. For example to determinate which opening mode to use for in a detail page.
-
-```
-this.route.paramMap.subscribe((paramMap: ParamMap) => {
-	if(paramMap.has('postId')) {
-		// EDIT mode
-	} else {
-		// CREATION mode
-	}
-});
-```
-
 ### Navigate to the previous page
 [Back to top](#navigation)
 
@@ -204,6 +162,154 @@ And call the ```getPreviousUrl()``` function in sub page to get the last route a
 backFwd(){
     this.router.navigateByUrl(this.previousRouteService.getPreviousUrl());
 }
+```
+
+
+## Routing params
+[Back to top](#navigation)
+
+Best practices : [https://ionicacademy.com/pass-data-angular-router-ionic-4/]
+
+### Solution 1 : Service and Resolve Function (legit)
+
+*Home.html*
+
+```html
+...
+<ion-content>
+	<ion-button (click)="onOpenDetail()"></ion-button>
+</ion-content>
+```
+
+*Home.ts*
+
+```javascript
+constructor(private router: Router, private dataService: DataService){ }
+onOpenDetail() {
+	let selectedId = 3;	// here set your selected id
+	this.router.navigateByUrl('/detail/'+ selectedId);
+}
+```
+
+*Detail.html*
+
+```html
+...
+<ion-content>
+	<h2>{{ title }}</h2>
+</ion-content>
+```
+
+*Detail.ts*
+
+```javascript
+export class DetailPage implements OnInit {
+	title = '';
+	constructor(private route: ActivatedRoute, private router: Router){ }
+	
+	ngOnInit() {
+		if (this.route.snapshot.data['special']) {
+			this.title = this.route.snapshot.data['special'].title;
+		}
+	}
+}
+```
+
+
+*dataService.ts*
+
+```
+export class DataService {
+	dataset = [
+		{id: 1, title: 'item 1'},
+		{id: 2, title: 'item 2'},
+		{id: 3, title: 'item 3'},
+		{id: 4, title: 'item 4'},
+		{id: 5, title: 'item 5'},
+	];
+	
+	constructor() { }
+	getItemById(id) {
+		let res;
+		this.dataset.filter(item => {
+			if(item.id == id) {	// WARNING, do not use === operator
+				res = item;
+			}
+		}
+		return res;
+	}
+}
+```
+
+**Create Angular Resolver**
+
+```ionic g service resolver/dataResolver```
+
+*data-resolver.service.ts*
+
+```
+constructor(private dataService: DataService) { }
+resolve(route: ActivatedRouteSnapshot) {
+	const id = route.paramMap.get('id');
+	return this.dataService.getItemById(id);
+}
+```
+
+**Update routing file**
+
+*app-routing.module.ts*
+
+```
+const routes: Routes = {
+	...
+	{	path: 'detail', loadChildren: './detail/detail.module#DetailPageModule},
+	{
+		path: 'detail/:id,
+		resolve: { special: DataResolverService },
+		loadChildren: './detail/detail.module#DetailPageModule'
+	}
+}
+```
+
+### Solution 2 : Using Query Params (bad)
+
+```
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({ ... })
+export class ProfileComponent implements OnInit {
+
+  id: string;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
+  }
+}
+```
+
+It is also possible to react to changes by using Observable
+
+```
+ngOnInit() {
+  this.route.params.subscribe(...);
+}
+```
+
+### Test if param exists
+
+It could be useful to test if a specific parameter exists. For example to determinate which opening mode to use for in a detail page.
+
+```
+this.route.paramMap.subscribe((paramMap: ParamMap) => {
+	if(paramMap.has('postId')) {
+		// EDIT mode
+	} else {
+		// CREATION mode
+	}
+});
 ```
 
 ## Tab Routing
@@ -300,7 +406,7 @@ export class AuthGuardGuard implements CanActivate {
 
 ## Using NavController
 
-### Passing Data
+### Passing Data Ionic 3
 [Back to top](#navigation)
 
 In many scenarios we have data in one view that we need to pass to another. Luckily, the push method accepts a second parameter which is an object of data to pass to the ```@Component``` passed into the first parameter.
