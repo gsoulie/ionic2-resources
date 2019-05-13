@@ -12,7 +12,7 @@ To use image in your app, you can store them under ```src/assets/imgs/*.png```
 *View file*
 
 ```xml
-<img class="thb" src="{{item.image}}" item-left/>
+<img class="thb" src="{{item.image}}" slot="end"/>
 ```
 
 *Controller file*
