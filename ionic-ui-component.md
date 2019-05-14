@@ -1214,6 +1214,7 @@ This snippet show how to fix floating button in front of a list
 
 [Chart.js](http://www.chartjs.org/)    
 [Chart.js API](http://www.chartjs.org/docs/latest/charts/)    
+[D3js](https://www.d3-graph-gallery.com/)    
 
 [Josh morony chartJS](https://www.joshmorony.com/adding-responsive-charts-graphs-to-ionic-2-applications/)    
 [link : ng2-chart](http://valor-software.com/ng2-charts/)    
