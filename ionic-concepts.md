@@ -9,6 +9,7 @@
 * [Promise vs Observable](#promise-vs-observable)    
 * [Arrow function](#arrow-function)     
 * [Async / Await functions](#await-async-functions)     
+* [Resolver](#resolver)     
 
 ## Angular 2
 [Back to top](#concepts)  
@@ -776,3 +777,8 @@ add2(10).then(v => {
 ### Conclusion
 
 Using *await/async* function is just syntactic sugar, it is not better or worst, it is a matter of personal preference.
+
+## Resolver
+[Back to top](#concepts)  
+
+[Resolver tutorial](https://ionicthemes.com/tutorials/about/improved-ux-for-ionic-apps-with-skeleton-loading-screens?utm_campaign=Ionic%20Dev%20Newsletter&utm_source=hs_email&utm_medium=email&utm_content=72678826&_hsenc=p2ANqtz-9QWSeTR97KwevKMUcvzKEnRYTLjx5Ugy1aS6vxYqFQFWg8sqlfJy6xbewh6Gy_7omSyC_J4HmXrz50Ufwq09hsC-E_gOU2QJaK_tXVpq5z7bQQEP8&_hsmi=72678826)    
