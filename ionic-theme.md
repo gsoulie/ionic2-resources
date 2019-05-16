@@ -23,6 +23,8 @@ This color generator allows you to dynamically generate your */src/theme/variabl
 
 [devdactic dynamic theming](https://devdactic.com/dynamic-theming-ionic/)    
 
+[Dynamically switch app theming - light/night mode](https://chrisgriffith.wordpress.com/2019/05/03/dynamic-ionic-theming/?utm_campaign=Ionic%20Dev%20Newsletter&utm_source=hs_email&utm_medium=email&utm_content=72678826&_hsenc=p2ANqtz-9QWSeTR97KwevKMUcvzKEnRYTLjx5Ugy1aS6vxYqFQFWg8sqlfJy6xbewh6Gy_7omSyC_J4HmXrz50Ufwq09hsC-E_gOU2QJaK_tXVpq5z7bQQEP8&_hsmi=72678826)
+
 ## Navbar
 [Back to top](#themes)    
 
