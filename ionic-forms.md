@@ -230,9 +230,26 @@ you can also import FormsModule and ReactiveFormsModule to yourFormPage.page.ts
 import { FormGroup, FormArray, FormBuilder, Validators,ReactiveFormsModule } from '@angular/forms';
 ```
 
+*yourFormPage.page.ts*
+
+```
+import { FormGroup, FormArray, FormBuilder, Validators,ReactiveFormsModule } from '@angular/forms';
+
+export class LoginPage implements OnInit {
+    loginForm: FormGroup;
+    
+    constructor(public formBuilder: FormBuilder) {
+	this.loginForm = formBuilder.group({
+	    email: ['', Validators.compose([Validators.required, EmailValidator.isValid])]
+	});
+    }
+}
+```
+
+
 Then you must import FormsModule and ReactiveFormsModule to *yourFormPage.module.ts* file
 
-*yourFormPage.module.ts
+*yourFormPage.module.ts*
 ```
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -262,6 +279,19 @@ const routes: Routes = [
 })
 export class LoginPageModule {}
 
+```
+
+
+**Important** your form cannot be rendered until is not instanciated. You must declare your FormGroup into your controller like below :
+
+```
+ngOnInit() {
+    let firstName, lastName = '';
+    this.loginForm = new FormGroup({
+    	'firstName': new FormControl(firstName),
+	'lastName': new FormControl(lastName)
+    });
+}
 ```
 
 ### Antoher Angular form example
