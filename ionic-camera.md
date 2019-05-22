@@ -4,7 +4,7 @@
 
 [See documentation here](https://ionicframework.com/docs/developer-resources/guides/first-app-v4/ios-android-camera)    
 
-**plugin installation **
+**plugin installation**
 
 ```
 npm install @ionic-native/camera
