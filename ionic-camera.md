@@ -2,89 +2,78 @@
 
 # Camera
 
-[See documentation here](https://ionicframework.com/docs/v2/native/camera/)    
+[See documentation here](https://ionicframework.com/docs/developer-resources/guides/first-app-v4/ios-android-camera)    
 
-First install ionic-native package if needed
-
-```
-$ npm install ionic-native --save
-```
-
-Then install cordova camera plugin
+**plugin installation **
 
 ```
-$ ionic cordova plugin add cordova-plugin-camera
+npm install @ionic-native/camera
+ionic cordova plugin add cordova-plugin-camera
 ```
 
-Implement code
+**iOS requirements**
 
-*View file (addPlace.html)*
+The next step is only required for iOS users. As of iOS 10, developers must provide a reason for why the app wishes to access the device camera. Add this to the bottom of config.xml:
 
-```xml
-<ion-content>
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-        <ion-list>
-            <ion-item>
-                <ion-label position="fixed">Title</ion-label>
-                <ion-input type="text" name="title" ngModel required></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label position="floating">Description</ion-label>
-                <ion-textarea name="description" ngModel required></ion-textarea>
-            </ion-item>
-        </ion-list>
-        <ion-grid>
-            <ion-row>
-                <ion-col>
-                    <ion-button expand="block" fill="outline" type="button" (click)="onTakePhoto()">Take a photo</ion-button>
-                </ion-col>
-            </ion-row>
-            <ion-row *ngIf="imageUrl != ''">
-                <ion-col>
-		        <img [src]="imageUrl"></img>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <ion-button color="secondary" expand="block" type="submit" 
-		    [disabled]="!f.valid || !locationIsSet">Add this place</ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>        
-    </form>
-</ion-content>
+```
+<!-- Required for iOS 10: Camera permission prompt -->
+<edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+    <string>Used to take pictures</string>
+</edit-config>
 ```
 
-*Controller file (addPlace.ts)*
+**Add plugin to app module**
 
-```javascript
+```
+import { Camera } from '@ionic-native/camera/ngx';
 
-import { SetLocationPage } from "../set-location/set-location";
-import { ModalController } from "ionic-angular";
-import { Camera } from "ionic-native";
+Then, add it as a Provider:
 
-export class LocationPage {
-	imageUrl = '';
+providers: [
+    StatusBar,
+    SplashScreen,
+    Camera,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
+  ],
+```
 
-	constructor(private modalCtrl: ModalController) {}
-	
-	onTakePhoto() {
-		// See the documentation for more camera options
-		Camera.getPicture({
-			encodingType: Camera.EncodingType.JPEG,
-			correctOrientation: true
-		})
-		.then(
-			imageData => {
-				this.imageUrl = imageData;
-			}
-		)
-		.catch(
-			err => {
-				console.log(err);
-				Camera.cleanup();	// Only if the image is stored in a new File
-			}
-		);
-	}
+**Implementation**
+
+*View.html*
+
+```
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button (click)="takePicture()">
+    <ion-icon name="camera"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<img [src]="currentImage" *ngIf="currentImage">
+```
+
+*Controller.ts*
+
+```
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
+export class Tab2Page {
+  currentImage: any;
+
+  constructor(private camera: Camera) { }
+
+  takePicture() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      this.currentImage = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+     // Handle error
+     console.log("Camera issue:" + err);
+    });
+  }
 }
 ```
