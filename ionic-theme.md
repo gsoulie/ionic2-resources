@@ -196,3 +196,13 @@ ion-title{
 	font-size: 18px;
 }
 ```
+
+** Assign font-family to the entire app**
+
+*global.scss*
+
+```
+* {
+	font-family: 'My-custom-font' !important;
+}
+```
