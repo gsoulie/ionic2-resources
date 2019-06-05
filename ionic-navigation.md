@@ -168,9 +168,42 @@ backFwd(){
 ## Routing params
 [Back to top](#navigation)
 
-Best practices : [https://ionicacademy.com/pass-data-angular-router-ionic-4/]
+### Official Documentation solution
+
+*app-routing.module.ts*
+
+```
+...
+{ path: 'pubication/:id', loadChildren :'./publication/publication.module#PublicationPageModule'}
+...
+```
+
+*Home.html*
+
+```
+<ion-button routerLink="/publication/54" routerDirection="forward">Go to Detail<ion-button>
+
+<!-- USING CONSTANT OR VALUE -->
+<ion-button routerLink="/publication/{{ myValue }}" routerDirection="forward">Go to Detail<ion-button>
+
+```
+
+*Detail.ts*
+
+```
+...
+selectedId = null;
+
+constructor(private activatedRoute: ActivatedRoute) { }
+
+ngOnInit() {
+	this.selectedId = this.activatedRoute.snapshot.paramMap.get('id');
+}
+```
 
 ### Solution 1 : Service and Resolve Function (legit)
+
+Best practices : [https://ionicacademy.com/pass-data-angular-router-ionic-4/]
 
 *Home.html*
 
