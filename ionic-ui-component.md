@@ -870,6 +870,16 @@ groupPatients(patients){
 <ion-label position="floating">Datetime</ion-label>
 ```
 
+### set long label
+
+To show long label, add the following css to your ion-label
+
+```
+.longLabel {
+    white-space: pre-warp !important;
+}
+```
+
 ## Searchbar
 [Back to top](#ui-components)  
 
