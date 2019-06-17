@@ -12,6 +12,7 @@
 * [Firebase cloud function](#firebase-cloud-function)    
 * [Firebase hosting](#firebase-hosting)    
 * [Lazy loading on firebase dataset](#lazy-loading-on-firebase-dataset)    
+* [Multiple database](#multiple-database)    
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -1299,6 +1300,130 @@ export class HomePage {
     }
     
   }
+}
+
+```
+
+## Multiple database
+[Back to top](#angularfire2) 
+
+Connect mutliple Firebase app to your Ionic app :
+
+By default, we initialize AngularFire with the first Firebase app in *app.module.ts*
+
+*app.module.ts*
+```
+...
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    AngularFireModule.initializeApp(FirebaseConf.base1conf),	// add declaration here
+    AngularFireDatabaseModule],
+  providers: [
+    StatusBar,
+    SplashScreen,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent]
+})
+...
+```
+
+
+*firebase-config.ts*
+
+```
+import { Injectable } from '@angular/core';
+
+@Injectable()
+
+export class FirebaseConf {
+  
+  public static base1conf = {
+    apiKey: "AIzaxxxxxxxxxxxxxxx",
+    authDomain: "app1.firebaseapp.com",
+    databaseURL: "https://app1.firebaseio.com",
+    projectId: "app1",
+    storageBucket: "app1.appspot.com",
+    messagingSenderId: "xxxxxxxxxx",
+    appId: "xxxxxxxxxxx"
+  };
+  
+  public static base2conf = {
+    apiKey: "AIzaxxxxxxxxxxxxxxxx",
+    authDomain: "app2.firebaseapp.com",
+    databaseURL: "https://app2.firebaseio.com",
+    projectId: "app2",
+    storageBucket: "app2.appspot.com",
+    messagingSenderId: "xxxxxxxxx",
+    appId: "xxxxxxxxxxxxxx"
+  };
+}
+```
+
+*home.html*
+
+```
+<ion-content>
+  <ion-item>
+    <ion-button (click)="onConnectDB1()">Firebase config 1</ion-button>
+    <ion-button color="danger" (click)="onConnectDB2()">Firebase config 2</ion-button>
+  </ion-item>
+  <h3>Data : </h3>
+  <p>
+    {{ res }}
+  </p>
+</ion-content>
+```
+
+*home.page.ts*
+
+```
+import { FirebaseConf } from './../config/firebase-config';
+import { Component } from '@angular/core';
+import { AngularFireList, AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
+import { Observable } from 'rxjs';
+import { AngularFireModule } from 'angularfire2';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage {
+
+  dataList: AngularFireList<any>;
+  data: Observable<any[]>;
+  res = '';
+  tempDB: AngularFireDatabase;
+
+  constructor(public afDB: AngularFireDatabase) {
+     this.onConnectDB1();
+  }
+
+  onConnectDB1() {
+    this.res = '';
+    AngularFireModule.initializeApp(FirebaseConf.base1conf);
+    this.dataList = this.afDB.list('/device', ref => ref.orderByChild('os').equalTo('Android'));
+    this.data = this.dataList.valueChanges();
+
+    this.data.subscribe((res) => {
+      let temp = res as any;
+      this.res = JSON.stringify(temp);
+    });
+
+  }
+
+  onConnectDB2() {
+    this.res = '';
+    let dbRef = this.afDB.database.app.database(FirebaseConf.base2conf.databaseURL).ref('/profiles');
+    this.afDB.object(dbRef).valueChanges().subscribe((res) => {
+      let temp = res as any;
+      this.res = JSON.stringify(temp);
+    });
+  }
+
 }
 
 ```
