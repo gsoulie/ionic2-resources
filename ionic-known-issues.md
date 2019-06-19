@@ -9,8 +9,8 @@
 * [Display carriage return](#display-carriage-return)    
 * [Remove iOS cache](#remove-ios-cache)    
 * [Gradle build failure](#gradle-build-failure-app:debugCompileClasspath)    
-* [iOS 12 keyboard issue](#ios12-keyboard-issue)    
-* [iOS 12 WebView issue](#ios12-webview-issue)    
+* [iOS 12 keyboard issue](#ios-12-keyboard-issue)    
+* [iOS 12 WebView issue](#ios-12-webview-issue)    
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
 [Back to top](#known-issues)    
