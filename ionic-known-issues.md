@@ -10,6 +10,7 @@
 * [Remove iOS cache](#remove-ios-cache)    
 * [Gradle build failure](#gradle-build-failure-app:debugCompileClasspath)    
 * [iOS 12 keyboard issue](#ios12-keyboard-issue)    
+* [iOS 12 WebView issue](#ios12-webview-issue)    
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
 [Back to top](#known-issues)    
@@ -194,4 +195,28 @@ This affect the keyboard usage, this is due to the ```ionic-plugin-keyboard``` w
 https://forum.ionicframework.com/t/api-error-returned-0-width-assuming-uiviewnointrinsicmetric/110655/26
 https://forum.ionicframework.com/t/important-all-ionic-users-please-update-your-keyboard-plugin/46889
   
+## iOS 12 Webview issue
+[Back to top](#known-issues) 
 
+Since iOS 12 there is a bug on WKWebView, Touch-Areas are offset after keyboard is hidden.
+
+[related post 1](https://github.com/ionic-team/capacitor/issues/814)
+[related post 2](https://github.com/ionic-team/cordova-plugin-ionic-webview/pull/201)
+[related post 3](https://github.com/apache/cordova-ios/issues/417)
+[related post 4](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/176)
+
+One ionic 3 app, one possible solution is to add the code below in the constructor of the *app.component.ts*
+
+```
+let html = document.getElementsByTagName("html")[0];
+window.addEventListener('native.keyboardshow', (e) => {
+	console.log("show2");
+	html.style.height = "auto";
+	//this.renderer2.setStyle(html, 'height', '101vh');
+}); 
+window.addEventListener('native.keyboardhide', () => {
+	console.log("hide2");
+	html.style.height = "101vh";
+	//this.renderer2.setStyle(html, 'height', 'auto');
+});
+```
