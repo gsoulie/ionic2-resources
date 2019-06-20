@@ -9,6 +9,7 @@
 * [CORS issues](#cors-issues)    
 * [HTTP query issues](#http-query-issues)    
 * [Android build error](#android-build-error)    
+* [Android failed to execute aapt](#android-failed-to-execute-aapt)    
 
 ## Typescript error
 
@@ -222,3 +223,28 @@ To fix it :
 cordova clean 
 ```
 
+## Android failed to execute aapt
+[back to top](#common-errors) 
+
+#### Issue
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':processDebugResources'.
+> com.android.ide.common.process.ProcessException: Failed to execute aapt
+```
+
+#### Solution
+
+Add the following code in the config.xml file
+
+```
+<platform name="android">
+ <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:networkSecurityConfig="@xml/network_security_config" />
+ </edit-config>
+ <resource-file src="resources/android/xml/network_security_config.xml" target="res/xml/network_security_config.xml" />
+</platform>
+ ```
