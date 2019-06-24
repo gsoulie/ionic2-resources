@@ -1524,6 +1524,8 @@ export class FirebaseService {
 *controller file*
 
 ```
+import { AngularFirestore } from 'angularfire2/firestore';
+
 export class HomePage implements OnInit {
     firstname = '';
     lastname = '';
