@@ -1511,6 +1511,7 @@ export class FirebaseService {
 	<ion-button (click)="onAddUser()">Add user</ion-button>
     </ion-card-content>
 </ion-card>
+<ion-searchbar (ionChange)="onFiltering($event)></ion-searchbar>
 <ion-list>
     <ion-item *ngFor="let i of dataset>
         {{ i.id }} {{ i.firstname }} {{ i.lastname }}
@@ -1557,5 +1558,27 @@ export class HomePage implements OnInit {
     onDeleteUser(item) {
         this.firebaseCRUDService.deleteData('users', item.id);
     }
-}
+    
+    /**
+     * Filter user which name start by evt
+     **/
+    onFiltering(evt) {
+        const searchText = evt.target.value);
+	this.dataset = [];
+	
+	this.afs.collection('users', ref => ref.orderBy('lastname')
+	.startAt(searchText)
+	.endAt(searchText + '\uf8ff'))
+	.snapshotChanges()
+	.subscribe(data => {
+	    this.dataset = data.map(e => {
+	        return {
+		    id: e.payload.doc.id,
+		    firstname: e.payload.doc.data()['firstname'],
+		    lastname: e.payload.doc.data()['lastname']
+		}
+	    }
+	}
+    }
+ }
 ```
