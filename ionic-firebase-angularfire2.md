@@ -1512,7 +1512,7 @@ export class FirebaseService {
     </ion-card-content>
 </ion-card>
 <ion-list>
-    <ion-item *ngFor="let i of items>
+    <ion-item *ngFor="let i of dataset>
         {{ i.id }} {{ i.firstname }} {{ i.lastname }}
 	<ion-button (click)="onDeleteUser(i)" slot="end">
 	    <ion-icon slot="icon-only" name="trash"></ion-icon>
