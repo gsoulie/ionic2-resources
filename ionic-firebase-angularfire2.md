@@ -13,6 +13,7 @@
 * [Firebase hosting](#firebase-hosting)    
 * [Lazy loading on firebase dataset](#lazy-loading-on-firebase-dataset)    
 * [Multiple database](#multiple-database)    
+* [Firestore](#firestore)    
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -1426,4 +1427,133 @@ export class HomePage {
 
 }
 
+```
+
+## Firestore
+[Back to top](#angularfire2) 
+
+### Initialisation
+
+```npm install angularfire2 firebase --save```
+
+After installed, we need to initialize Firebase. For that go to *src/app/app.module.ts* and import everything you will need:
+
+```
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { firebaseConfig } from './credentials';
+
+export const firebaseConfig = {
+  apiKey: 'Your Firebase Credentials Here',
+  authDomain: 'Your Firebase Credentials Here',
+  databaseURL: 'Your Firebase Credentials Here',
+  projectId: 'Your Firebase Credentials Here',
+  storageBucket: 'Your Firebase Credentials Here',
+  messagingSenderId: 'Your Firebase Credentials Here'
+};
+
+@NgModule({
+  declarations: [...],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule
+  ],
+  bootstrap: [...],
+  entryComponents: [...],
+  providers: [...]
+})
+```
+
+### CRUD serrvice
+
+```
+import { AngularFirestore } from 'angularfire2/firestore';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class FirebaseService {
+    constructor(private afs: AngularFirestore){}
+    
+    fetchData(collectionName: string){
+        return this.afs.collection(collectionName).snapshotChanges();
+    }
+    
+    addData(collectionName: string, record: any = {}) {
+        return this.afs.collection(collectionName).add(record);
+    }
+    
+    updateData(collectionName: string, recordID, record: any = {}) {
+        this.afs.doc(collectionName + '/' + recordID).update(record);
+    }
+    
+    deleteData(collectionName: string, recordID) {
+        this.afs.doc(collectionName + '/' + recordID).delete();
+    }
+}
+```
+
+### Usage
+
+*view file*
+
+```
+<ion-card>
+    <ion-card-content>
+        <ion-item>
+	    <ion-input [(ngModel)]="firstname"></ion-input>
+	</ion-item>
+        <ion-item>
+	    <ion-input [(ngModel)]="lastname"></ion-input>
+	</ion-item>
+	<ion-button (click)="onAddUser()">Add user</ion-button>
+    </ion-card-content>
+</ion-card>
+<ion-list>
+    <ion-item *ngFor="let i of items>
+        {{ i.id }} {{ i.firstname }} {{ i.lastname }}
+	<ion-button (click)="onDeleteUser(i)" slot="end">
+	    <ion-icon slot="icon-only" name="trash"></ion-icon>
+	</ion-button>
+    </ion-item>
+</ion-list>
+```
+
+*controller file*
+
+```
+export class HomePage implements OnInit {
+    firstname = '';
+    lastname = '';
+    dataset: any;
+    
+    constructor(private afs: AngularFirestore,
+    private firebaseCRUDService: FirebaseCRUDService){ }
+    
+    ngOnInit() {
+        this.firebaseCRUDService.fetchData('users')
+	.subscribe(data => {
+	    this.dataset = data.map(e => {
+	        return {
+		    id: e.payload.doc.id,
+		    firstname: e.payload.doc.data()['firstname'],
+		    lastname: e.payload.doc.data()['lastname']
+		};
+	    });
+	});
+    }
+    
+    onAddUser() {
+        this.firebaseCRUDService.addData('users', {
+	    firstname: this.firstname,
+	    lastname: this.lastname
+	});
+    }
+    
+    onDeleteUser(item) {
+        this.firebaseCRUDService.deleteData('users', item.id);
+    }
+}
 ```
