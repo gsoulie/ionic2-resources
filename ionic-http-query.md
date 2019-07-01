@@ -1,6 +1,108 @@
 [< Back to main Menu](https://github.com/gsoulie/Mobile-App-Development/blob/master/ionic2-test.md)    
 
-# HTTP query
+# HTTP queries
+
+* [Http on PWA with HttpClient](#http-on-pwa)    
+
+## Http on PWA
+
+Http queries requires *HttpClient* instead of Native Cordova Http module which is used for Android and iOS app.
+
+### Initialization
+
+*app.module.ts*
+
+```
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  ...
+  imports: [BrowserModule,..., HttpClientModule];
+  ...
+})
+```
+
+**optional** : You can install also *corsproxy*
+
+```
+npm install -g corsproxy
+```
+
+### GET
+
+*data.service.ts*
+
+```
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+constructor(private http: HttpClient) { }
+
+fetchData(params) {
+  const url = '<MY_URL>' + params
+  const headerOptions = {
+    headers: new HttpHeaders({'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'})
+  };
+  
+  return this.http.get(url, headerOptions);
+}
+```
+
+**Important** import HttpClient module from ```import { HttpClient, HttpHeaders } from '@angular/common/http';```
+
+*home.page.ts*
+
+```
+async fetchData() {
+  await this.dataService.fetchData()
+  .subscribe( data => {
+    const jsonData = data as any[];
+    
+    for(let i = 0; i < jsonData.length; i++) {
+      // some stuff here...
+    }
+  });
+}
+```
+
+### POST
+
+*data.service.ts*
+
+```
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+...
+
+constructor(private http: HttpClient) { }
+/**
+* WS waiting for { Login: login, Password: password } JSON object parameter
+*
+*/
+onLogin(login, password) {
+  const url = '<MY_URL>';
+  const postData = {
+    Login: login,
+    Password: password
+  };
+  
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+  
+  this.http.post(url, postData, httpOptions)
+  .subscribe(
+    data => {
+      console.log('Success');
+    },
+    error => {
+      console.log('Error', error);
+    }
+  );
+}
+```
+
+
 
 [link : using http](http://www.joshmorony.com/using-http-to-fetch-remote-data-from-a-server-in-ionic-2/)
 
