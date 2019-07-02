@@ -3,6 +3,7 @@
 # HTTP queries
 
 * [Http on PWA with HttpClient](#http-on-pwa)    
+* [CORS and CORB issue](#cors-and-corb-issue)    
 
 ## Http on PWA
 
@@ -235,3 +236,7 @@ return fileTransfer.upload(myPictureFullPathURI,myWebServiceURL, options)
 }
 }
 ```
+
+## CORS and CORB issue
+
+You may encounter CORS and CORB issue with Http queries. To avoid these issues, you need to add on your server the url of your PWA (and your localhost:8100 for ionic serve) in the authorized app. 
