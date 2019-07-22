@@ -5,6 +5,8 @@
 ## Ionic auth
 https://ionicframework.com/blog/ionic-auth-connect-single-sign-on-made-easy/
 
+**!! see pricing**
+
 ## Login with Angular 2
 [devdactic login with Angular 2](https://devdactic.com/login-ionic-2/)    
 
