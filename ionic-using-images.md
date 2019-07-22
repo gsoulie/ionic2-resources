@@ -46,7 +46,7 @@ To start put the svg file which containing all the svg icons in your *assets/img
 }
 ```
 
-Then add it to your code (juste adjust the real path for ionic)
+Then add it to your code (don't forget to adjust the real path for ionic)
 
 ```
 .icon-share {
