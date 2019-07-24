@@ -11,7 +11,7 @@ Capacitor is the successor of Cordova, it containerizes your web app and puts it
 
 Capacitor uses the WKWebView
 
-###Usage
+### Usage
 
 *Create new ionic capacitor project*
 
