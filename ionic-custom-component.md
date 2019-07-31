@@ -2,6 +2,90 @@
 
 # Custom Component
 
+* [Ionic 4 Custom component](#ionic4-custom-component)    
+
+## Ionic 4 custom component
+
+### Generate component
+
+```ionic g component components/my-component --export```
+
+### Include child component to parent
+
+In order to use your component into parent element, you must modify your **parent.module.ts** file like below :
+
+```
+import { MyComponentComponent } from './../components/my-component/my-component.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+
+import { IonicModule } from '@ionic/angular';
+
+import { HomePage } from './home.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: HomePage
+  }
+];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes)
+  ],
+  entryComponents: [MyComponentComponent],
+  declarations: [HomePage, MyComponentComponent]
+})
+export class HomePageModule {}
+```
+
+### Using component
+
+*my-component.component.html*
+
+```
+<h2>Hellow from component !</h2>
+<p> 
+Here's some data passed from my parent : 
+{{passedData}}
+</p>
+```
+
+*my-component.component.ts*
+
+```
+...
+export class MyComponentComponent implements OnInit {
+	@Input() passedData: string = '';
+	
+	constructor(){}
+	ngOnInit() {
+		console.log('passed data : ' + this.passedData); // => get Undefined !!!!
+	}
+	
+	ngAfterContentInit() {
+		console.log('passed data : ' + this.passedData);
+	}
+}
+```
+
+> **IMPORTANT** : *@Input()* only takes **string** type   
+> **IMPORTANT** : passed data are available only in *ngAfterContentInit* or *ngAfterViewInit*    
+
+*home.page.html*
+
+```
+<app-my-component passedData="{{ someDataFromBinding }}"></app-my-component>
+<app-my-component passedData="hello"></app-my-component>
+```
+
+
 ## Create custom component
 First, create your custom component with ```ionic g component components/my-compo --export```, then add its declaration in your *app.module.ts* file
 
