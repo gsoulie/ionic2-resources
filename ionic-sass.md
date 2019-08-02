@@ -457,7 +457,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 [Back to top](#sass)  
 
 ```css
-    .ionIcon{
+    ion-icon{
         vertical-align: middle;
 	display: inline-block;
     }
