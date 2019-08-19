@@ -4,6 +4,7 @@
 
 * [Navigation by routing](#navigation-by-routing)   
 * [Routing params](#routing-params)    
+* [Reset routing params](#reset-routing-params)    
 * [Tab Routing](#tab-routing)    
 * [Routing Guards](#routing-guards)    
 * [Using NavController](#using-navcontroller)   
@@ -343,6 +344,33 @@ this.route.paramMap.subscribe((paramMap: ParamMap) => {
 		// CREATION mode
 	}
 });
+```
+
+## Reset Routing params
+[Back to top](#navigation)
+
+```
+import { Subscription } from 'rxjs/Subscription';
+
+export class UserComponent implements OnInit, OnDestroy {
+	user: {id: number, name: string};
+	paramSubscription: Subscription;
+
+	constructor(private route: ActivatedRoute) {}
+	
+	ngOnInit() {
+		this.paramSubscription = this.route.params
+		.subscribe((params: Params) => {
+			this.user.id = params[‘id’];
+			this.user.name = params[‘name’];
+		}
+	}
+
+	ngOnDestroy() {
+		this.paramSubscription.unsubscribe();
+	}
+}
+
 ```
 
 ## Tab Routing
