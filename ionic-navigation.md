@@ -7,6 +7,7 @@
 * [Reset routing params](#reset-routing-params)    
 * [Tab Routing](#tab-routing)    
 * [Routing Guards](#routing-guards)    
+* [Wildcard route (404)](#wildcard-route)    
 * [Using NavController](#using-navcontroller)   
 * [Passing data Ionic 3](#passing-data-ionic-3)  
 * [Passing data on close event](#passing-data-on-close-event)    
