@@ -466,6 +466,37 @@ export class AuthGuardGuard implements CanActivate {
 
 ```
 
+## Wildcard route
+[Back to top](#navigation)
+
+To manage unwanted routes with 404 status, you must define a wildcard route into your *app-routing.module.ts* like below
+
+*app-routing.module.ts*
+```
+const routes: Routes = [
+	{ path: 'home', component: HomeComponent },
+	// ... here some other routes
+	{ path: 'not-found', component: <YourSpecificPageNotFoundComponent> },
+	{ path: '**', redirectTo: '/not-found' }
+];
+```
+
+**How it work's ?**
+
+First, you need to create a specific route for not existing route (here 'not-found' route) wich load a new component used to load a specific UI.
+
+```
+{ path: 'not-found', component: <YourSpecificPageNotFoundComponent> },
+```
+
+Next you must specify the wildcard route with ```**``` string wich redirect to the component used to display the 'not found' route
+
+```
+{ path: '**', redirectTo: '/not-found' }
+```
+
+> **IMPORTANT** : You **MUST** set the wildcard route at the **END** of the app-routing.module.ts file !!
+
 ## Using NavController
 
 ### Passing Data Ionic 3
