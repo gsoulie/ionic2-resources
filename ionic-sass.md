@@ -121,6 +121,20 @@ $colors: (
 ## Configure NavBar color
 [Back to top](#sass)  
 
+### ionic 4 translucent toolbar
+
+Set the following css in your page.tss
+
+```
+ion-toolbar {
+	--background: transparent;
+	--ion-color-base: transparent !important;
+}
+```
+
+
+### ionic 3 syntax
+
 Put the following code in your *variable.scss* : ```$toolbar-background: transparent; // or color```
 
 
@@ -565,6 +579,19 @@ To change ios searchbar background color, add the following code to your *variab
 
 ```
 $searchbar-ios-background-color: rgba(247,247,247,1);
+```
+
+### Remove border, add specific box shadow, resize
+
+*page.tss*
+```
+ion-searchbar {
+	border-radius: 10px;
+	box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+	margin-left: 20px;
+	margin-right: 20px;
+	width: auto;
+}
 ```
 
 ## Disable scrolling on ion-content
