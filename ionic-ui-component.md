@@ -1387,6 +1387,23 @@ page-chart {
 
 [link : complex layout using grid and flexbox](http://www.joshmorony.com/an-in-depth-look-at-the-grid-system-in-ionic-2/) 
 
+```
+<ion-grid>
+	<ion-row>
+		<ion-col size="6" sizeMd="4" sizeXl="3" *ngFor="let i of dataset">
+			<div class="image-container" [style.background-image]="'url(../assets/imgs/' + i.image + ')'">
+			</div>
+		</ion-col>
+	</ion-row>
+</ion-grid>
+```
+
+
+**Explanation** : 
+```size="6"``` set the coloumn size for small screen (= 2 columns), ```sizeMd="4"``` set the coloumn size for medium screen (= 3 columns), ```sizeXl="3"``` set the coloumn size for very large screen screen (= 4 columns)
+
+**Note** : You can also use ```sizeLg,  sizeSm sizeXs``
+
 ## toggle
 [Back to top](#ui-components)  
 
