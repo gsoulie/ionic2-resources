@@ -16,6 +16,7 @@
 * [Remove header shadow](#remove-header-shadow)     
 * [Dynamic class](#dynamic-class)     
 * [Spacer](#spacer)    
+* [Increase ion-icon size](#increase-icon-size)    
 
 Here are some tips to perform your scss.
 
@@ -803,3 +804,8 @@ a {
 ```
 
 Spacer will set the first span on the left side and the third span on the right side of the screen
+
+# Increase icon size
+[Back to top](#sass)  
+
+*ion-icon* using font, so you just need to increase *font-size* to get bigger icons
