@@ -22,6 +22,7 @@
 * [List accordion](#list-accordion)    
 * [Picker](#picker)     
 * [alert controller](#alert-controller)    
+* [round progress bar](#round-progress-bar)     
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -1693,4 +1694,112 @@ const alert = await this.alertCtrl.create({
       buttons: ['OK']
     });
 await alert.present();
+```
+
+## round progress bar
+[Back to top](#ui-components)  
+
+**Angular plugin installation**
+```
+npm install angular-svg-round-progressbar --save
+```
+
+**Configure your home.module.ts**
+
+```
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
+import { HomePage } from './home.page';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RoundProgressModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: HomePage
+      }
+    ])
+  ],
+  declarations: [HomePage]
+})
+export class HomePageModule {}
+```
+**View file**
+```
+ <div class="progress-wrapper">
+      <div class="current" [ngStyle]="getOverlayStyle()">{{ current }}/{{ max }}</div>
+  
+      <round-progress
+      [current]="current"
+      [max]="max"
+      [stroke]="stroke"
+      [radius]="radius"
+      [semicircle]="semicircle"
+      [rounded]="rounded"
+      [responsive]="responsive"
+      [clockwise]="clockwise"
+      [color]="gradient ? 'url(#gradient)' : color"
+      [background]="background"
+      [duration]="duration"
+      [animation]="animation"
+      [animationDelay]="animationDelay"></round-progress>
+    </div>
+</div>
+```
+
+**Style file**
+```
+.current {
+    position: absolute;
+    color: #bbb;
+    font-weight: 100;
+    line-height: 1;
+}
+.progress-wrapper {
+    position: relative;
+    margin: 20px auto;
+    font-size: 40px;
+}
+round-progress {
+    margin: auto;
+}
+```
+
+**Controller file**
+```
+  max = 100;
+  current = 35;
+  color = '#45ccce';
+  background = '#eaeaea';
+  radius = 50;
+  semicircle = false;
+
+  stroke = 12;
+  rounded = false;
+  responsive = false;
+  clockwise = true;
+  duration = 800;
+  animation = 'easeOutCubic';
+  animationDelay = 0;
+  animations: string[] = [];
+  gradient = false;
+  realCurrent = 0;
+  
+  getOverlayStyle() {
+    let isSemi = this.semicircle;
+    let transform = (isSemi ? '' : 'translateY(-50%) ') + 'translateX(-50%)';
+
+    return {
+      'top': isSemi ? 'auto' : '50%',
+      'bottom': isSemi ? '5%' : 'auto',
+      'left': '50%',
+      'transform': transform,
+      '-moz-transform': transform,
+      '-webkit-transform': transform,
+      'font-size': this.radius / 3.5 + 'px'
+    };
+  }
 ```
