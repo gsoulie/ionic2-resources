@@ -1699,6 +1699,8 @@ await alert.present();
 ## round progress bar
 [Back to top](#ui-components)  
 
+[Round progress github](https://github.com/crisbeto/angular-svg-round-progressbar/tree/master/demo) .    
+
 **Angular plugin installation**
 ```
 npm install angular-svg-round-progressbar --save
