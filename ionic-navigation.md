@@ -6,6 +6,7 @@
 * [Routing params](#routing-params)    
 * [Reset routing params](#reset-routing-params)    
 * [Tab Routing](#tab-routing)    
+* [Passing static data to a Route](#passing-static-data-to-a-route)     
 * [Routing Guards](#routing-guards)    
 * [Wildcard route (404)](#wildcard-route)    
 * [Using NavController](#using-navcontroller)   
@@ -390,6 +391,50 @@ An advanced technique is to use named outlets and secondary routes for rendering
 In the HTML, this route will be looking for an outlet with the matching name.
 
 ```<ion-router-outlet name="modal"></ion-router-outlet>```
+
+## Passing static data to a Route
+[Back to top](#navigation)
+
+*app-routing.module.ts*
+
+```
+...
+const routes: Routes = [
+  { path: '', component: HomeComponent, pathMatch: 'full'},
+  { path: 'not-found', component: ErrorPageComponent, data: {message: 'page not found'} },
+  { path: '**', redirectTo: '/not-found' },
+];
+```
+
+*error-page.html*
+
+```
+<p>{{ errorMessage }}</p>
+```
+
+*error-page.ts*
+
+```
+import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-error-page',
+  templateUrl: './error-page.component.html',
+  styleUrls: ['./error-page.component.scss']
+})
+export class ErrorPageComponent implements OnInit {
+  errorMessage: string;
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.errorMessage = this.route.snapshot.data['message'];
+  }
+
+}
+
+```
 
 ## Routing Guards
 [Back to top](#navigation)
