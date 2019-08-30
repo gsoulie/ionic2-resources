@@ -10,7 +10,7 @@
 * [Arrow function](#arrow-function)     
 * [Async / Await functions](#await-async-functions)     
 * [Resolver](#resolver)     
-. [Environments DEV/PROD](#environments)    
+* [Environments DEV/PROD](#environments)    
 
 ## Angular 2
 [Back to top](#concepts)  
