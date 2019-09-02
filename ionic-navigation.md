@@ -7,6 +7,7 @@
 * [Reset routing params](#reset-routing-params)    
 * [Tab Routing](#tab-routing)    
 * [Passing static data to a Route](#passing-static-data-to-a-route)     
+* [Passing dynamic data to a Route](#passing-dynamic-data-to-a-route)    
 * [Routing Guards](#routing-guards)    
 * [Wildcard route (404)](#wildcard-route)    
 * [Using NavController](#using-navcontroller)   
@@ -435,6 +436,86 @@ export class ErrorPageComponent implements OnInit {
 	});	
   }
 
+}
+
+```
+
+## Passing dynamic data to a Route
+[Back to top](#navigation)
+
+*server-resolver.service.ts*
+
+```
+import { ServersService } from './../servers.service';
+import { Injectable } from "@angular/core";
+import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
+
+interface ServerInterface {
+    id: number;
+    name: string;
+    status: string;
+}
+
+@Injectable()
+export class ServerResolver implements Resolve<ServerInterface> {
+
+    constructor(private serverService: ServersService) {}
+
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ServerInterface> | 
+    Promise<ServerInterface> | ServerInterface {
+        return this.serverService.getServer(+route.params['id']);
+    }
+}
+```
+
+Adding *resolve* param into routing file
+
+*app-routing.module.ts
+
+```
+import { ServerResolver } from './servers/server/server-resolver.service';
+...
+
+const routes: Routes = [
+  ...,
+  { path: 'servers', component: ServersComponent, children: [
+    { path: ':id', component: ServerComponent, resolve: {serverParam: ServerResolver}},
+    { path: ':id/edit', component: EditServerComponent},
+  ]}
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+*server.component.ts*
+
+```
+import { ActivatedRoute, Params, Router, Data } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ServersService } from '../servers.service';
+
+@Component({
+  selector: 'app-server',
+  templateUrl: './server.component.html',
+  styleUrls: ['./server.component.css']
+})
+export class ServerComponent implements OnInit {
+  server: {id: number, name: string, status: string};
+
+  constructor(private serversService: ServersService,
+              private route: ActivatedRoute,
+              private router: Router) { }
+
+  ngOnInit() {
+    this.route.data.subscribe((data: Data) => {
+      this.server = data['serverParam'];	// !! Use the same name as set into the app-routin.module.ts
+    });
+  }
 }
 
 ```
