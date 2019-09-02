@@ -201,7 +201,13 @@ selectedId = null;
 constructor(private activatedRoute: ActivatedRoute) { }
 
 ngOnInit() {
+	// Solution 1 : Get param snapshot value (!! this value will be not refreshed, it's just a snapshot at T instant
 	this.selectedId = this.activatedRoute.snapshot.paramMap.get('id');
+	
+	// Solution 2 : Get current param value
+	this.activatedRoute.params.subscribe((params: Params) => {
+		this.selectedId = +params['id'];	// '+' is for casting param Id (which is a string at that moment) to number
+	});
 }
 ```
 
