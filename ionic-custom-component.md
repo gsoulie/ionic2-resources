@@ -6,46 +6,94 @@
 
 ## Ionic 4 custom component
 
+*note :* It is recommended to put all the component in a **components** directory
+
 ### Generate component
 
 ```ionic g component components/my-component --export```
 
-### Include child component to parent
+### Create component module file
 
-In order to use your component into parent element, you must modify your **parent.module.ts** file like below :
+In order to use a component in multiple page, you need to create a *components.module.ts* file at the root of the **components** directory, in which you will export all the components needed to be share.
+
+*components.module.ts*
 
 ```
-import { MyComponentComponent } from './../components/my-component/my-component.component';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
-
-import { HomePage } from './home.page';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: HomePage
-  }
-];
+import { FormsModule } from '@ionic/forms';
+import { CommonModule } from '@ionic/common';
+import { NgModule } from '@angular/core';
+import { MyCustomComponent1 } from './my-custom-component1/my-custom-component1.component';
+import { MyCustomComponent2 } from './my-custom-component2/my-custom-component2.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  entryComponents: [MyComponentComponent],
-  declarations: [HomePage, MyComponentComponent]
+	imports: [
+		CommonModule,
+		FormsModule,
+		IonicModule
+	],
+	declarations: [
+		MyCustomComponent1,
+		MyCustomComponent2
+	],
+	exports: [
+		MyCustomComponent1,
+		MyCustomComponent2
+	],
+})
+export class ComponentsModule {}
+```
+
+**Important :** Don't forget to import ```CommonModule```, ```FormsModule```, ```IonicModule```
+
+### Add custom component to multiple pages
+
+In order to use your customs components in differents pages, you must import the **ComponentsModule** created above in each ```<page>.module.ts``` file like below :
+
+*home.module.ts*
+
+```
+@NgModule({
+	imports: [
+		CommonModule,
+		FormsModule,
+		IonicModule,
+		ComponentsModule,	// <-- Declaration of components.module.ts
+		RouterModule.forChild(routes)
+	],
+	declarations: [HomePage]
 })
 export class HomePageModule {}
 ```
 
-### Using component
+
+*detail.module.ts*
+
+```
+@NgModule({
+	imports: [
+		CommonModule,
+		FormsModule,
+		IonicModule,
+		ComponentsModule,	// <-- Declaration of components.module.ts
+		RouterModule.forChild(routes)
+	],
+	declarations: [DetailPage]
+})
+export class DetailPageModule {}
+```
+
+Then finally simply add your component selector into your ```<page>.page.html```
+
+*home.page.html*
+
+```
+<ion-content>
+	<app-my-custom-component1 customValue="{{ title }}"></app-my-custom-component1>
+</ion-content>
+```
+
+### Component sample
 
 *my-component.component.html*
 
