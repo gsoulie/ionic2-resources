@@ -37,13 +37,13 @@ This will set the elements property to fisrtName. More used to see ```{{firstNam
 **Calling a Function on an Event**
 
 ```xml
-<button ion-button (click)="someFunction($event)">
+<ion-button (click)="someFunction($event)">
 ```
 
 This will call the someFunction function and pass in the event whenever the button is clicked on. You can replace click with any native or custom event you like. You can also use the following syntax:
 
 ```xml
-<button ion-button (^click)="someFunction($event)">
+<ion-button (^click)="someFunction($event)">
 ```
 to make the event bubble up to other elements.
 
@@ -79,7 +79,7 @@ This sets the value to the expression name and when we detect the input event we
 This creates a local variable that we can use to access the element, so if I wanted to add some content into this paragraph I could do the following:
 
 ```xml
-<button ion-button (click)="myParagraph.innerHTML = 'Once upon a time...'">
+<ion-button (click)="myParagraph.innerHTML = 'Once upon a time...'">
 ```
 
 **Directives**
