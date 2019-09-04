@@ -5,6 +5,7 @@
 * [Navigation by routing](#navigation-by-routing)   
 * [Routing params](#routing-params)    
 * [Reset routing params](#reset-routing-params)    
+* [Child routes](#child-routes)    
 * [Tab Routing](#tab-routing)    
 * [Passing static data to a Route](#passing-static-data-to-a-route)     
 * [Passing dynamic data to a Route](#passing-dynamic-data-to-a-route)    
@@ -388,6 +389,28 @@ this.route.paramMap.subscribe((paramMap: ParamMap) => {
 });
 ```
 
+## Child routes
+[Back to top](#navigation)    
+
+When you have multiple page sharing the same root, you can regroup them on beside the same parent path. In the following example, we have the following routes 
+
+- /servers => displays servers list
+- /servers/new => redirect to new server page
+- /servers/id => redirect to the selected server detail page
+- /servers/id/edit => redirect to the selected server edit page
+
+We can regroupe them like below :
+
+*app-routing.module.ts*
+
+```
+{ path: 'servers', component: ServersComponent, children: [
+    { path: '', component: ServerStartComponent},	// default path when no specific server is selected
+    { path: 'new', component: ServerEditComponent},
+    { path: ':id', component: ServerComponent},
+    { path: ':id/edit', component: EditServerComponent},
+]}
+```
 ## Reset Routing params
 [Back to top](#navigation)
 
