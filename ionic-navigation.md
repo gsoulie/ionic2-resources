@@ -86,6 +86,12 @@ routerDirection values
 
 ### Navigate by code
 
+Mutliple solutions are available to navigate by code. You can use **router.navigate** or **router.navigateByUrl**
+
+#### navigateByUrl
+
+When you use ```router.navigateByUrl``` Angular completly rebuild the path from the root. So you need to specify the complete path for rooting
+
 ```
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -94,11 +100,31 @@ import { Router } from '@angular/router';
 export class HomePage {
   constructor(private router: Router) {}
 
-  go() {
-    this.router.navigateByUrl('/animals');
+  onOpenNewRecipe() {
+    this.router.navigateByUrl('/recipe/new');
   }
 }
 ```
+
+#### navigate
+
+When you use ```router.navigate```, you can specify the current root to Angular. If you do that, you just need to set the endpoint of the target root
+
+```
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({ ... })
+export class HomePage {
+  constructor(private router: Router,
+  		private activatedRoute: ActivatedRoute) {}
+
+  onOpenNewRecipe() {
+    this.router.navigate(['new'], {relativeTo: this.activatedRoute});	// append 'new' to the current route
+  }
+}
+```
+
 
 ### Navigate to the previous page
 [Back to top](#navigation)
