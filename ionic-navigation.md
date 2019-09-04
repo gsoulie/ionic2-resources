@@ -91,7 +91,7 @@ Mutliple solutions are available to navigate by code. You can use **router.navig
 
 #### navigateByUrl
 
-When you use ```router.navigateByUrl``` Angular completly rebuild the path from the root. So you need to specify the complete path for rooting
+When you use ```router.navigateByUrl``` Angular fully rebuild the path from the root. So you need to specify the complete path for rooting
 
 ```
 import { Component } from '@angular/core';
@@ -109,7 +109,7 @@ export class HomePage {
 
 #### navigate
 
-When you use ```router.navigate```, you can specify the current root to Angular. If you do that, you just need to set the endpoint of the target root
+When you use ```router.navigate```, you can specify the current route to Angular. By doing this, you just need to set the endpoint of the target route
 
 ```
 import { Component } from '@angular/core';
@@ -127,11 +127,11 @@ export class HomePage {
 ```
 
 
-```this.router.navigate(['new']);``` is equal to ```this.router.navigateByUrl(['new']);``` and give the route **/new**
+```this.router.navigate(['new']);``` is equal to ```this.router.navigateByUrl(['new']);``` and gives the route **/new**
 
 ```this.router.navigate(['new'], {relativeTo: this.activatedRoute});``` gives the route **/<current_route>/new**
 
-```this.router.navigate(['edit'], {relativeTo: this.activatedRoute});``` from ```/recipes/<id>``` is equal to ```this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.activatedRoute);``` and give the route **/recipes/<id>/edit**
+```this.router.navigate(['edit'], {relativeTo: this.activatedRoute});``` from ```/recipes/<id>``` is equal to ```this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.activatedRoute);``` and gives the route **/recipes/<id>/edit**
 
 
 
