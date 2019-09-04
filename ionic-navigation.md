@@ -128,7 +128,9 @@ export class HomePage {
 
 
 ```this.router.navigate(['new']);``` is equal to ```this.router.navigateByUrl(['new']);``` and give the route **/new**
+
 ```this.router.navigate(['new'], {relativeTo: this.activatedRoute});``` gives the route **/<current_route>/new**
+
 ```this.router.navigate(['edit'], {relativeTo: this.activatedRoute});``` from ```/recipes/<id>``` is equal to ```this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.activatedRoute);``` and give the route **/recipes/<id>/edit**
 
 
