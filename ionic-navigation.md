@@ -22,6 +22,8 @@ Since Ionic 4, the navigation is opered by the Angular routing process. However,
 
 The root configuration for the router lives in the *src/app/app-routing.module.ts* file. You may need to define routes manually, but it will be done automatically with the CLI when you generate a page.
 
+> **IMPORTANT** : route definition order is very important     
+
 ```
 import { NgModule } from '@angular/core'; 
 import { Routes, RouterModule } from '@angular/router'; 
