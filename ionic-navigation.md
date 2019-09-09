@@ -131,9 +131,9 @@ export class HomePage {
 
 ```this.router.navigate(['new'], {relativeTo: this.activatedRoute});``` gives the route **/<current_route>/new**
 
-```this.router.navigate(['edit'], {relativeTo: this.activatedRoute});``` from ```/recipes/<id>``` is equal to ```this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.activatedRoute);``` and gives the route **/recipes/<id>/edit**
+```this.router.navigate(['edit'], {relativeTo: this.activatedRoute});``` from ```/recipes/<id>``` is equal to ```this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.activatedRoute);``` and gives the route **/recipes/**<id>**/edit**
 
-
+```this.router.navigate(['../'], {relativeTo: this.activatedRoute});```	// return to parent route
 
 ### Navigate to the previous page
 [Back to top](#navigation)
