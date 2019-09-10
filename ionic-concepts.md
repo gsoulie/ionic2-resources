@@ -279,9 +279,14 @@ Now someString would be run through your custom myPipe before the value is outpu
 [link : Understanding Pipe](http://mcgivery.com/understanding-ionic-2-pipe/)      
 [link : Josh Morony Pipe documentation](http://www.joshmorony.com/how-to-use-pipes-to-manipulate-data-in-ionic-2/)
 
-### First step : create the pipe class
+### Generate pipe
 
-First, create a *pipe* directory in your project will containing all pipe lib. A basic pipe class looks like below :
+```ionic g pipe pipes/my-custom-pipe```
+```ng g pipe pipes/my-custom-pipe```
+
+### Implement pipe
+
+Here is a basic pipe
 
 ```javascript
 import {Pipe, PipeTransform} from '@angular/core';
