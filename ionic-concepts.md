@@ -284,12 +284,12 @@ Now someString would be run through your custom myPipe before the value is outpu
 First, create a *pipe* directory in your project will containing all pipe lib. A basic pipe class looks like below :
 
 ```javascript
-import {Pipe} from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
 	name: 'helloWorld'	// pipe name
 })
-export class HelloWorld {
+export class HelloWorld implements PipeTransform{
 	// Pipe function
 	transform(value) {
 		return "Hello " + value + "!";
@@ -298,19 +298,6 @@ export class HelloWorld {
 ```
 
 **IMPORTANT** The first letter of the pipe class name must be in upper case. But notice that during the usage, you must use lower case on the first letter.
-
-**Angular 2 best practice**
-
-Always implement the *PipeTransform* interface when building a Pipe
-
-```javascript
-export class HelloWorldPipe implements PipeTransform {
-	// Pipe function
-	transform(value) {
-		return "Hello " + value + "!";
-	}
-}
-```
 
 ### Using pipe in other page
 
