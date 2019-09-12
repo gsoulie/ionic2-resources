@@ -730,11 +730,13 @@ You can find the Firebase Auth REST API url here : https://firebase.google.com/d
 
 **Common error codes**
 
-| EMAIL_EXISTS |
-| EMAIL_NOT_FOUND |
-| INVALID_PASSWORD |
-| OPERATION_NOT_ALLOWED |
-| USER_DISABLED |
+| Code | 
+| --- | 
+| EMAIL_EXISTS | 
+| EMAIL_NOT_FOUND | 
+| INVALID_PASSWORD | 
+| OPERATION_NOT_ALLOWED | 
+| USER_DISABLED | 
 
 
 *auth.service.ts*
