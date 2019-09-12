@@ -706,22 +706,23 @@ You can find the Firebase Auth REST API url here : https://firebase.google.com/d
 
 ```https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]```
 
-**Request Body Payload **
+**Request Body Payload**
 
-| Property  | Name | Type |
-| ------------- | ------------- |
-| email  | string  | The email for the user to create. |
-| password  | string | The password for the user to create. |
+| Property | Name | Type |
+| --- | --- | --- |
+| email | string | The email for the user to create. |
+| password | string | The password for the user to create. |
 | returnSecureToken | boolean | Whether or not to return an ID and refresh token. Should always be true. |
 
 **Response Payload**
 
-| Property Name | Type | Description| 
-| idToken | string | A Firebase Auth ID token for the newly created user.| 
-| email	| string | The email for the newly created user.| 
-| refreshToken | string	| A Firebase Auth refresh token for the newly created user.| 
-| expiresIn | string | The number of seconds in which the ID token expires.| 
-| localId | string | The uid of the newly created user.| 
+| Property Name | Type | Description | 
+| --- | --- | --- |
+| idToken | string | A Firebase Auth ID token for the newly created user. | 
+| email	| string | The email for the newly created user. | 
+| refreshToken | string	| A Firebase Auth refresh token for the newly created user. | 
+| expiresIn | string | The number of seconds in which the ID token expires. | 
+| localId | string | The uid of the newly created user. | 
 
 
 ## Firebase rules
