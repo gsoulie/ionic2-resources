@@ -695,6 +695,18 @@ getRecipes() {
 
 Here, the GET method will fetch the content of the *recipes* firebase's node
 
+### Send data with http POST request
+
+
+```
+postRecipe(recipe: Recipe) {
+	this.http.post('https://<my-firebase-project-url>/recipes.json', recipe)
+	.subscribe(response => {
+		console.log(response);	// log firebase automatic id
+	});
+}
+```
+
 ## Authentication
 [Back to top](#angularfire2) 
 
