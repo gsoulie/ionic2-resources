@@ -732,12 +732,22 @@ You can find the Firebase Auth REST API url here : https://firebase.google.com/d
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+// GOOD PRACTICE : declare Interface for the response payload (this step is optional) 
+interface AuthInterface {
+	idToken: string;
+	email: string;
+	refreshToken: string;
+	expiresIn: string;
+	localId: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 	constructor(private http: HttpClient) {}
 	
 	signup(email: string, password: string) {
-		return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]',
+		// note : casting response with AuthInterface is optional
+		return this.http.post<AuthInterface>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]',
 		{
 			email: email,
 			password: password,
