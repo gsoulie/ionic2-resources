@@ -728,6 +728,15 @@ You can find the Firebase Auth REST API url here : https://firebase.google.com/d
 | localId | string | The uid of the newly created user. | 
 | registered (only for signin method) | boolean | Whether the email is for an existing account. |
 
+**Common error codes**
+
+| EMAIL_EXISTS |
+| EMAIL_NOT_FOUND |
+| INVALID_PASSWORD |
+| OPERATION_NOT_ALLOWED |
+| USER_DISABLED |
+
+
 *auth.service.ts*
 
 ```
@@ -755,7 +764,12 @@ export class AuthService {
 			email: email,
 			password: password,
 			returnSecureToken: true
-		}
+		})
+		.pipe(catchError(errorRes => {
+			console.log(errorRes.error.error.message); // see common error code below
+		})
+		);
+		
 	}
 	
 	signin(email: string, password: string) {
@@ -765,7 +779,7 @@ export class AuthService {
 			email: email,
 			password: password,
 			returnSecureToken: true
-		}
+		});
 	}
 }
 ```
