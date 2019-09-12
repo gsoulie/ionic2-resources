@@ -706,7 +706,8 @@ Here, the GET method will fetch the content of the *recipes* firebase's node
 
 You can find the Firebase Auth REST API url here : https://firebase.google.com/docs/reference/rest/auth
 
-```https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]```
+**signup url** : ```https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]```
+**signin url** : ```https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]```
 
 **Request Body Payload**
 
@@ -725,6 +726,7 @@ You can find the Firebase Auth REST API url here : https://firebase.google.com/d
 | refreshToken | string	| A Firebase Auth refresh token for the newly created user. | 
 | expiresIn | string | The number of seconds in which the ID token expires. | 
 | localId | string | The uid of the newly created user. | 
+| registered (only for signin method) | boolean | Whether the email is for an existing account. |
 
 *auth.service.ts*
 
@@ -754,7 +756,36 @@ export class AuthService {
 			returnSecureToken: true
 		}
 	}
+	
+	signup(email: string, password: string) {
+		// note : casting response with AuthInterface is optional
+		return this.http.post<AuthInterface>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]',
+		{
+			email: email,
+			password: password,
+			returnSecureToken: true
+		}
+	}
 }
+```
+
+*controller.ts*
+
+```
+onSignup(form: NgForm) {
+	const email = form.value.email;
+	const password = form.value.password;
+	
+	this.authService.signup(email, password)
+	.subscribe(resData => {
+		// 
+	},
+	error => {
+		// error handling
+	});
+}
+
+onSignin(
 ```
 
 ## Firebase rules
