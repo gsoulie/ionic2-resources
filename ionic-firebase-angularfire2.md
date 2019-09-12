@@ -744,9 +744,9 @@ You can find the Firebase Auth REST API url here : https://firebase.google.com/d
 ```
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
+import { User } from './user.model';
 
 // GOOD PRACTICE : declare Interface for the response payload (this step is optional) 
 interface AuthInterface {
@@ -760,7 +760,7 @@ interface AuthInterface {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-	user = new Subject();
+	user = new Subject<User>();
 	
 	constructor(private http: HttpClient) {}
 	
@@ -774,6 +774,13 @@ export class AuthService {
 		})
 		.pipe(catchError(errorRes => {
 			console.log(errorRes.error.error.message); // see common error code below
+		}), 
+		tap(resData => {
+			this.handleAuthentication(
+			resData.email, 
+			resData.localId, 
+			resData.idToken, 
+			+resData.expiresIn);
 		})
 		);
 		
@@ -786,7 +793,32 @@ export class AuthService {
 			email: email,
 			password: password,
 			returnSecureToken: true
-		});
+		})
+		.pipe(catchError(errorRes => {
+			console.log(errorRes.error.error.message); // see common error code below
+		}),
+		tap(resData => {
+			this.handleAuthentication(
+			resData.email, 
+			resData.localId, 
+			resData.idToken, 
+			+resData.expiresIn);
+		})
+		);
+	}
+	
+	/**
+	* create and emit user after signup and/or signin
+	*/
+	private handleAuthentication(email: string, localId: string, idToken: string, expiresIn: number) {
+		const expirationDate = new Date(new Date().getTime() + expiresIn * 1000); // The number of seconds in which the ID token expires
+			const user = new User(
+				email, 
+				localId, 
+				idToken, 
+				expirationDate
+			); 
+			this.user.next(user);	// emit the new user
 	}
 }
 ```
