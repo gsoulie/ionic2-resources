@@ -698,6 +698,8 @@ Here, the GET method will fetch the content of the *recipes* firebase's node
 ## Authentication
 [Back to top](#angularfire2) 
 
+### Authenticate with AngularFire
+
 [Personnal sample Github repos](https://github.com/gsoulie/ionic2-angularFire2-authentication)    
 
 ### Authenticate with Firebase Auth REST API
@@ -724,6 +726,26 @@ You can find the Firebase Auth REST API url here : https://firebase.google.com/d
 | expiresIn | string | The number of seconds in which the ID token expires. | 
 | localId | string | The uid of the newly created user. | 
 
+*auth.service.ts*
+
+```
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+	constructor(private http: HttpClient) {}
+	
+	signup(email: string, password: string) {
+		return this.http.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]',
+		{
+			email: email,
+			password: password,
+			returnSecureToken: true
+		}
+	}
+}
+```
 
 ## Firebase rules
 [Back to top](#angularfire2) 
