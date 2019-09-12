@@ -706,7 +706,8 @@ Here, the GET method will fetch the content of the *recipes* firebase's node
 
 You can find the Firebase Auth REST API url here : https://firebase.google.com/docs/reference/rest/auth
 
-**signup url** : ```https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]```
+**signup url** : ```https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]```    
+
 **signin url** : ```https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]```
 
 **Request Body Payload**
