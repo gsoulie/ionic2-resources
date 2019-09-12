@@ -820,6 +820,10 @@ export class AuthService {
 			); 
 			this.user.next(user);	// emit the new user
 	}
+	
+	logout() {
+		this.user.next(null);
+	}
 }
 ```
 
