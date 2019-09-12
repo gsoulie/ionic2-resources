@@ -3,6 +3,7 @@
 # AngularFire2
 
 * [CRUD angularfire2](#crud-angularfire2)    
+* [CRUD with Firebase REST API](#crud-with-firebase-rest-api)    
 * [Demo example](#demo-example)    
 * [Authentication](#authentication)     
 * [Firebase rules](#firebase-rules)     
@@ -664,14 +665,46 @@ export class FirebaseServiceProvider {
     });
   }
 }
+```
 
+## CRUD with Firebase REST API
+[Back to top](#angularfire2) 
+
+### Overwrite data in firebase with http PUT request
 
 ```
+storeRecipes() {
+	const recipes = [<some data>];
+	return this.http.put('https://<my-firebase-project-url>/recipes.json', recipes)
+	.subscribe(response => {...});
+}
+```
+
+Here, the PUT method will create or overwrite the content of the *recipes* firebase's node
+
+### Fetch data with http GET request
+
+```
+getRecipes() {
+	this.http.get('https://<my-firebase-project-url>/recipes.json')
+	.subscribe(recipes => {
+		console.log(recipes);
+	});
+}
+```
+
+Here, the GET method will fetch the content of the *recipes* firebase's node
 
 ## Authentication
 [Back to top](#angularfire2) 
 
 [Personnal sample Github repos](https://github.com/gsoulie/ionic2-angularFire2-authentication)    
+
+### Authenticate with Firebase Auth REST API
+
+You can find the Firebase Auth REST API url here : https://firebase.google.com/docs/reference/rest/auth
+
+```https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API_KEY]```
 
 
 ## Firebase rules
