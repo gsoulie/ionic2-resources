@@ -744,6 +744,9 @@ You can find the Firebase Auth REST API url here : https://firebase.google.com/d
 ```
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
 
 // GOOD PRACTICE : declare Interface for the response payload (this step is optional) 
 interface AuthInterface {
@@ -757,6 +760,8 @@ interface AuthInterface {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+	user = new Subject();
+	
 	constructor(private http: HttpClient) {}
 	
 	signup(email: string, password: string) {
@@ -800,6 +805,28 @@ onSignup(form: NgForm) {
 	error => {
 		// error handling
 	});
+}
+```
+
+**Memorize logged user**
+
+*user.model.ts*
+
+```
+export class User {
+	constructor(
+		public email: string,
+		public id: string,
+		public _token: string,
+		public _tokenExpirationDate: Date
+	) {}
+	
+	get token() {
+		if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
+			return null;
+		}
+		return this._token;
+	}
 }
 ```
 
