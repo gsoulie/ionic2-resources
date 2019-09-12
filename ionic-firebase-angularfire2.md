@@ -741,6 +741,7 @@ interface AuthInterface {
 	refreshToken: string;
 	expiresIn: string;
 	localId: string;
+	registered?: boolean;	//optional
 }
 
 @Injectable({ providedIn: 'root' })
@@ -757,9 +758,9 @@ export class AuthService {
 		}
 	}
 	
-	signup(email: string, password: string) {
+	signin(email: string, password: string) {
 		// note : casting response with AuthInterface is optional
-		return this.http.post<AuthInterface>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]',
+		return this.http.post<AuthInterface>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]',
 		{
 			email: email,
 			password: password,
@@ -784,8 +785,6 @@ onSignup(form: NgForm) {
 		// error handling
 	});
 }
-
-onSignin(
 ```
 
 ## Firebase rules
