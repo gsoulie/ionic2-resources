@@ -235,7 +235,7 @@ export class MyComponent {
 
 You can supply these with either a local variable or you can provide it with the class of the component you are attempting to grab. So, you could do something like this:
 
-```@ViewChildren(Item) items;```
+```@ViewChildren(Item, {static: false}) items;```
 
 so that you could access all of the ```<ion-item>``` elements in your template through this.items
 
@@ -243,11 +243,11 @@ This would return the ```<ion-item>``` elements that are inside of the ```<ion-c
 
 If I just wanted to grab the <ion-content> area, I could select it in a similar way to the way that I selected the Item‘s, but I could also use the #mycontent local variable that I added by doing this:
 
-```@ViewChild('mycontent') contentArea;``` or just ```@ViewChild(Content) contentArea;```
+```@ViewChild('mycontent', {static: false}) contentArea;``` or just ```@ViewChild(Content) contentArea;```
 
 Or you could do:
 
-```@ViewChild('someVariable') something;```
+```@ViewChild('someVariable', {static: false}) something;```
 
 to grab a reference to an element that you have set up a local template variable on, like this:
 
