@@ -774,6 +774,7 @@ interface AuthInterface {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 	user = new Subject<User>();
+	private tokenExpirationTimer: any;	// timer for auto logout method
 	
 	constructor(private http: HttpClient) {}
 	
@@ -832,10 +833,58 @@ export class AuthService {
 				expirationDate
 			); 
 			this.user.next(user);	// emit the new user
+			this.autoLogout(expiresIn * 1000);	// start auto logout timer
+			localStorage.setItem('userData', JSON.stringify(user));	// save current user in local storage
 	}
 	
+	autoLogin() {
+		const userData: {
+			email: string;
+			id: string;
+			_token: string;
+			_tokenExpirationDate: sttring;
+		} = JSON.parse(localStorage.getItem('userData'));
+
+		if (!userData) {
+			return;
+		}
+
+		const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+
+		if (loadedUser.token) {
+			// token valid
+			this.user.next(loaddedUser);
+			
+			// calculate expiration duration
+			const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+			this.autoLogout(expirationDuration); // start auto logout timer
+		}
+	}
+	
+	/**
+	* Manual logout method
+	*/ 
 	logout() {
 		this.user.next(null);
+		this.router.navigate(['/auth']);
+		localStorage.removeItem('userData');
+		
+		// Clear auto logout timer when logout
+		if (this.toneExpirationTimer) {
+			clearTimeout(this.toneExpirationTimer);
+		}
+		
+		this.toneExpirationTimer = null;
+	}
+	
+	/**
+	* Auto logout with timer (in milliseconds)
+	* Auto logout is called each time a new user is emitted
+	*/
+	autoLogout(expirationDuration: number) {
+		this.toneExpirationTimer = setTimeout(() => {
+			this.logout();
+		}, expirationDuration);
 	}
 }
 ```
