@@ -362,27 +362,34 @@ import { AlertComponent } from '../components/alert.component.ts';
 import { ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { PlaceholderDirective } from '../components/placeholder.directive.ts';
 
-constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
-
-@ViewChild(PlaceholderDirective, {static: false}) alertHost: PlaceholderDirective;
-
-private closeSub: Subscription;
-
-onShowErrorAlert(message: string) {
-	const alertCmpFactory = this.componentFactoryResolver
-	.resolveComponentFactory(AlertComponent);
+export class ParentComponent implements OnDestroy {
+	@ViewChild(PlaceholderDirective, {static: false}) alertHost: PlaceholderDirective;
+	private closeSub: Subscription;
 	
-	const hostViewContainerRef = this.alertHost.viewContainersRef;	// Reference of the placeholder
-	hostViewContainerRef.clear();
+	constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 	
-	const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);	// create the custom component to the place specified by hostViewContainerRef
-	
-	// manage component parameters and lsitener
-	componentRef.instance.message = messsage;
-	this.closeSub = componentRef.instance.close.subscribe(() => {
-		this.closeSub.unsubscibe();
-		hostViewContainerRef.clear();	// clean composant reference
-	});	
+	ngOnDestroy() {
+		if(this.closeSub) {
+			this.closeSub.unsubscribe();
+		}
+	}
+
+	onShowErrorAlert(message: string) {
+		const alertCmpFactory = this.componentFactoryResolver
+		.resolveComponentFactory(AlertComponent);
+
+		const hostViewContainerRef = this.alertHost.viewContainersRef;	// Reference of the placeholder
+		hostViewContainerRef.clear();
+
+		const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);	// create the custom component to the place specified by hostViewContainerRef
+
+		// manage component parameters and lsitener
+		componentRef.instance.message = messsage;
+		this.closeSub = componentRef.instance.close.subscribe(() => {
+			this.closeSub.unsubscibe();
+			hostViewContainerRef.clear();	// clean composant reference
+		});	
+	}
 }
 ```
 
