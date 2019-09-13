@@ -7,11 +7,17 @@
 
 ## Ionic 4 custom component
 
-*note :* It is recommended to put all the component in a **components** directory
+### Note
+
+> **entryComponent** : An entry component is any component that Angular loads imperatively, (which means you’re not referencing it in the template), by type. You specify an entry component by bootstrapping it in an NgModule, or including it in a routing definition.
+
+> To contrast the two types of components, there are components which are included in the template, which are declarative. Additionally, there are components which you load imperatively; that is, entry components.
 
 ### Generate component
 
 ```ionic g component components/my-component --export```
+
+*note :* It is recommended to put all the component in a **components** directory
 
 ### Create component module file
 
@@ -360,6 +366,8 @@ constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
 @ViewChild(PlaceholderDirective, {static: false}) alertHost: PlaceholderDirective;
 
+private closeSub: Subscription;
+
 onShowErrorAlert(message: string) {
 	const alertCmpFactory = this.componentFactoryResolver
 	.resolveComponentFactory(AlertComponent);
@@ -367,8 +375,23 @@ onShowErrorAlert(message: string) {
 	const hostViewContainerRef = this.alertHost.viewContainersRef;	// Reference of the placeholder
 	hostViewContainerRef.clear();
 	
-	hostViewContainerRef.createComponent(alertCmpFactory);	// create the custom component to the place specified by hostViewContainerRef
+	const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);	// create the custom component to the place specified by hostViewContainerRef
 	
+	// manage component parameters and lsitener
+	componentRef.instance.message = messsage;
+	this.closeSub = componentRef.instance.close.subscribe(() => {
+		this.closeSub.unsubscibe();
+		hostViewContainerRef.clear();	// clean composant reference
+	});	
 }
 ```
 
+> To avoid a execution error, you need to add your component declaration in the ```entryComponents``` section of your *app.module.ts*
+
+*app.module.ts*
+
+```
+entryComponents: [
+	AlertComponent
+]
+```
