@@ -1529,7 +1529,7 @@ export class HomePage {
   dataList: AngularFireList<any>;
   dataObservable: Observable<any[]>;
   dataSource: any[] = [];
-  @ViewChild(Content) content: Content; // ion-content 
+  @ViewChild(Content, {static: false}) content: Content; // ion-content 
   private direction: string = ""; // to get scroll direction
   private lastScrollTop: number = 0;
   private lastItem = null;	// last loaded item
