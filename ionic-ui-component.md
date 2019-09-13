@@ -385,7 +385,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
 export class HomePage {
 
     // variables pour la gestion du lazy loading
-    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+    @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
     
     constructor(...) {
       this.getData();
@@ -1281,7 +1281,7 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class ChartPage implements OnInit{
 
-  @ViewChild('lineCanvas') lineCanvas;
+  @ViewChild('lineCanvas', {static: false}) lineCanvas;
   lineChart: any;
   orientation;
   orientationPortrait: boolean = true;
