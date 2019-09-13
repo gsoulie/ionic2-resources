@@ -26,7 +26,7 @@ export class MyApp {
 	tabsPage = TabsPage;
 	signingPage = SigninPage;
 	signupPage = SignupPage;
-	@ViewChild('nav') nav: NavController; //if you are using a side menu
+	@ViewChild('nav', {static: false}) nav: NavController; //if you are using a side menu
 	isAuthenticated = false;
 
 	constructor(...) {
