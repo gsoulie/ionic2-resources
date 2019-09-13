@@ -75,7 +75,7 @@ declare var google; // !!! IMPORTANT
 })
 export class MapPage {
 
-  @ViewChild('map') mapElement: ElementRef; // Get reference to map object
+  @ViewChild('map', {static: false}) mapElement: ElementRef; // Get reference to map object
   map: any;
   
   // Testing data to add multiple markers
