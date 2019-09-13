@@ -222,7 +222,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'tab-ludo.html'
 })
 export class TabLudoPage {
-  @ViewChild(CompoComponent) myCompo: CompoComponent;	// Get access to the custom component
+  @ViewChild(CompoComponent, {static: false}) myCompo: CompoComponent;	// Get access to the custom component
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
@@ -241,11 +241,11 @@ Do not forget to import the component in the *app.module.ts*
 *alert.component.html*
 
 ```
-<div class="backdrop"></div>
+<div class="backdrop" (click)="onClose()"></div>
 <div class="alert-box">
 	<p>{{ message }}</p>
 	<div class="alert-box-actions">
-		<ion-button class="btn btn-primary">Close</ion-button>
+		<ion-button class="btn btn-primary" (click)="onClose()">Close</ion-button>
 	</div>
 </div>
 ```
@@ -260,6 +260,11 @@ Do not forget to import the component in the *app.module.ts*
 })
 export class AlertComponent {
 	@Input() message: string;
+	@Output() close = new EventEmitter<void>();
+	
+	onClose() {
+		this.close.emit();
+	}
 }
 ```
 
@@ -289,3 +294,11 @@ export class AlertComponent {
 	text-align: right;
 }
 ```
+
+*parent.component.html*
+
+```
+<app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+```
+
+*onHandleError()* is a function in the parent component
