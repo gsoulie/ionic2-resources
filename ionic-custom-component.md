@@ -316,6 +316,8 @@ export class AlertComponent {
 ### Solution 2 : Adding component dynamically by code
 [Back to top](#custom-component)
 
+[Official Documentation](https://angular.io/guide/dynamic-component-loader)
+
 With this solution, the custom component is not initially attached to the DOM. Instead, it's created dynamically by code. So you have to use *ComponentFactoryResolver* to let Angular create the component instance.
 
 To atatch the component to the DOM, Angular needs a view container ref like ```<ng-template myCompoRef></ng-template>```
