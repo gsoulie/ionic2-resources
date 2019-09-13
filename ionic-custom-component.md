@@ -3,6 +3,7 @@
 # Custom Component
 
 * [Ionic 4 Custom component](#ionic4-custom-component)    
+* [Alert component](#alert-component)    
 
 ## Ionic 4 custom component
 
@@ -230,4 +231,61 @@ export class TabLudoPage {
   }
 }
 
+```
+
+## Alert component
+[Back to top](#custom-component)
+
+Do not forget to import the component in the *app.module.ts*
+
+*alert.component.html*
+
+```
+<div class="backdrop"></div>
+<div class="alert-box">
+	<p>{{ message }}</p>
+	<div class="alert-box-actions">
+		<ion-button class="btn btn-primary">Close</ion-button>
+	</div>
+</div>
+```
+
+*alert.component.ts*
+
+```
+@Component({
+	selector: 'app-alert',
+	templateUrls: './alert.component.html',
+	styleUrls: ['./alert.componentcss']
+})
+export class AlertComponent {
+	@Input() message: string;
+}
+```
+
+*alert.component.css*
+
+```
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vw;
+	background: rgba(0, 0, 0, 0.75);
+	z-index: 50;
+}
+.alert-box {
+	position: fixed;
+	top: 30vh;
+	left: 20vw;
+	width: 60vw;
+	padding: 16px;
+	z-index: 100;
+	background: white;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+.alert-box-actions {
+	text-align: right;
+}
 ```
