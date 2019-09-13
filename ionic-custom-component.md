@@ -236,7 +236,11 @@ export class TabLudoPage {
 ## Alert component
 [Back to top](#custom-component)
 
-Do not forget to import the component in the *app.module.ts*
+### Solution 1 : Adding component by using ngIf 
+
+With this solution, the custom component is initially attached to the DOM and displayed by using *ngIf*
+
+Note : Do not forget to import the component in the *app.module.ts*
 
 *alert.component.html*
 
@@ -302,3 +306,69 @@ export class AlertComponent {
 ```
 
 *onHandleError()* is a function in the parent component
+
+### Solution 2 : Adding component dynamically by code
+[Back to top](#custom-component)
+
+With this solution, the custom component is not initially attached to the DOM. Instead, it's created dynamically by code. So you have to use *ComponentFactoryResolver* to let Angular create the component instance.
+
+To atatch the component to the DOM, Angular needs a view container ref like ```<ng-template myCompoRef></ng-template>```
+
+First remove the following declaration in the view file 
+
+*parent.component.html*
+
+```
+<app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+```
+
+In order to create a view container reference, we are going to create a new directive (create a new file in your components directory for example)
+
+*placeholder.directive.ts*
+
+```
+import { Directive, ViewContainerRef } from '@angular/core';
+
+@Directive({
+	selector: '[appPlaceholder]'
+})
+export class PlaceholderDirective {
+	constructor(public viewContainerRef: ViewContainerRef) {}
+}
+```
+
+**Important** : do not forget to expose ```viewContainerRef``` as a **public** property
+
+Now add this reference in the view file
+
+*parent.component.html*
+
+```
+<ng-template appPlaceholder></ng-template>
+```
+
+Now we are calling AlertComponent by code
+
+*parent.component.ts*
+
+```
+import { AlertComponent } from '../components/alert.component.ts';
+import { ComponentFactoryResolver, ViewChild } from '@angular/core';
+import { PlaceholderDirective } from '../components/placeholder.directive.ts';
+
+constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
+
+@ViewChild(PlaceholderDirective, {static: false}) alertHost: PlaceholderDirective;
+
+onShowErrorAlert(message: string) {
+	const alertCmpFactory = this.componentFactoryResolver
+	.resolveComponentFactory(AlertComponent);
+	
+	const hostViewContainerRef = this.alertHost.viewContainersRef;	// Reference of the placeholder
+	hostViewContainerRef.clear();
+	
+	hostViewContainerRef.createComponent(alertCmpFactory);	// create the custom component to the place specified by hostViewContainerRef
+	
+}
+```
+
