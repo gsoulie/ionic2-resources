@@ -313,7 +313,7 @@ import { Navbar } from 'ionic-angular';
   templateUrl: 'user.html'
 })
 export class UserPage {
- @ViewChild(Navbar) navbar: Navbar;
+ @ViewChild(Navbar, {static: false}) navbar: Navbar;
  
  ionViewWillEnter(){
  	this.navbar.setBacButtonText('Home');	// change back button title
