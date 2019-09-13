@@ -879,6 +879,46 @@ export class User {
 }
 ```
 
+### Auto login
+
+To create an auto login mecanism, you simply need to store the logged user in Local Storage and check it's token expiration date 
+
+*auth.service.ts*
+
+```
+autoLogin() {
+	const userData: {
+		email: string;
+		id: string;
+		_token: string;
+		_tokenExpirationDate: sttring;
+	} = JSON.parse(localStorage.getItem('userData'));
+	
+	if (!userData) {
+		return;
+	}
+	
+	const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+	
+	if (loadedUser.token) {
+		// token valid
+		this.user.next(loaddedUser);
+	}
+}
+```
+
+*app.component.ts*
+
+```
+export class AppComponent implements OnInit {
+	constructor (private authService: AuthService) {}
+	
+	ngOnInit() {
+		this.authService.autoLogin();
+	}
+}
+```
+
 ## Firebase rules
 [Back to top](#angularfire2) 
 
