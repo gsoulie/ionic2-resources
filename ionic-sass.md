@@ -11,7 +11,7 @@
 * [Positioning](#positioning)    
 * [Remove Android input green highlight](#remove-android-input-green-highlight)    
 * [Styling Searchbar](#styling-searchbar)    
-* [Overlay](#overlay)    
+* [Modale with overlay](#modale-with-overlay)    
 * [Remove ion-card shadow](#remove-ion-card-shadow)    
 * [Remove header shadow](#remove-header-shadow)     
 * [Dynamic class](#dynamic-class)     
@@ -712,10 +712,71 @@ To reduce the size of *ion-item* element you need to override *min-height* prope
     }
 ```
 
-## Overlay
+## Modale with overlay
 [Back to top](#sass)     
 
-Create an overlay
+Create modale with transparent black overlay
+
+### Solution 1
+
+*alert.component.html-
+
+```
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+	<p>{{ message }}</p>
+	<div class="alert-box-actions">
+		<ion-button class="btn btn-primary" (click)="onClose()">Close</ion-button>
+	</div>
+</div>
+```
+
+*alert.component.ts*
+
+```
+@Component({
+	selector: 'app-alert',
+	templateUrls: './alert.component.html',
+	styleUrls: ['./alert.componentcss']
+})
+export class AlertComponent {
+	@Input() message: string;
+	@Output() close = new EventEmitter<void>();
+	
+	onClose() {
+		this.close.emit();
+	}
+}
+```
+
+*alert.component.css*
+
+```
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vw;
+	background: rgba(0, 0, 0, 0.75);
+	z-index: 50;
+}
+.alert-box {
+	position: fixed;
+	top: 30vh;
+	left: 20vw;
+	width: 60vw;
+	padding: 16px;
+	z-index: 100;
+	background: white;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+.alert-box-actions {
+	text-align: right;
+}
+```
+
+### Solution 2
 
 *View file*
 
