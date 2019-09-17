@@ -719,7 +719,7 @@ Create modale with transparent black overlay
 
 ### Solution 1
 
-*alert.component.html-
+*alert.component.html*
 
 ```
 <div class="backdrop" (click)="onClose()"></div>
