@@ -23,6 +23,7 @@
 * [Picker](#picker)     
 * [alert controller](#alert-controller)    
 * [round progress bar](#round-progress-bar)     
+* [ion-slide](#ion-slide)    
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -1804,4 +1805,54 @@ round-progress {
       'font-size': this.radius / 3.5 + 'px'
     };
   }
+```
+
+## ion-slide
+[Back to top](#ui-components)  
+
+To make your *ion-slide* responsive when you resizing screen, you need to add the *breakpoints* property to your *ion-slide* configuration :
+
+*controller.ts*
+
+```
+export class HomePage {
+
+	sliderConfig = {
+		slidesPerView : 4, 	// default number of slide 
+		breakpoints: {
+			// when window width is >= 320px
+			320: {
+				slidesPerView : 1
+			},
+			// when window width is >= 768px
+			768: {
+				slidesPerView : 2
+				//spaceBetween: 40
+			},
+			// when window width is >= 1024px
+			1024: {
+				slidesPerView : 3
+				//spaceBetween: 20
+			},
+			// when window width is >= 1200px
+			1200: {
+				slidesPerView : 4
+				//spaceBetween: 10
+			}
+		},
+		initialSlide: 0,
+		spaceBetween: 8,
+		centeredSlides: false
+	};
+	
+	constructor() {}
+}
+```
+
+*view file*
+
+```
+<ion-slides [options]="sliderConfig">
+	<ion-slide *ngFor="let i of slides"></ion-slide>
+</ion-slides>
 ```
