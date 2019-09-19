@@ -118,6 +118,7 @@ Here's some data passed from my parent :
 ...
 export class MyComponentComponent implements OnInit {
 	@Input() passedData: string = '';
+	@Input() myObject: MyObjectType;
 	
 	constructor(){}
 	ngOnInit() {
@@ -130,14 +131,16 @@ export class MyComponentComponent implements OnInit {
 }
 ```
 
-> **IMPORTANT** : *@Input()* only takes **string** type   
 > **IMPORTANT** : passed data are available only in *ngAfterContentInit* or *ngAfterViewInit*    
+> **IMPORTANT** : use binding mode to pass complex object parameter
 
 *home.page.html*
 
 ```
-<app-my-component passedData="{{ someDataFromBinding }}"></app-my-component>
-<app-my-component passedData="hello"></app-my-component>
+<div *ngFor="let o of objects">
+	<app-my-component passedData="{{ someDataFromBinding }}" [myObject]="0"></app-my-component>
+	<app-my-component passedData="hello"></app-my-component>
+</div>
 ```
 
 
