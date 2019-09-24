@@ -138,7 +138,7 @@ export class MyComponentComponent implements OnInit {
 
 ```
 <div *ngFor="let o of objects">
-	<app-my-component passedData="{{ someDataFromBinding }}" [myObject]="0"></app-my-component>
+	<app-my-component passedData="{{ someDataFromBinding }}" [myObject]="o"></app-my-component>
 	<app-my-component passedData="hello"></app-my-component>
 </div>
 ```
