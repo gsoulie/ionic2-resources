@@ -28,7 +28,7 @@ In order to use a component in multiple page, you need to create a *components.m
 ```
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@ionic/forms';
-import { CommonModule } from '@ionic/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MyCustomComponent1 } from './my-custom-component1/my-custom-component1.component';
 import { MyCustomComponent2 } from './my-custom-component2/my-custom-component2.component';
