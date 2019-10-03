@@ -676,6 +676,10 @@ ngOnInit(){
         this.myListData = data;
     });
 }
+
+ngOnDestroy() {
+	this.myDataService.myData.unsubscribe();
+}
 ```
 
 Initially, the list will be empty because it will just receive an empty array, but as soon as the load method completes myListData will be instantly updated with the new data.
