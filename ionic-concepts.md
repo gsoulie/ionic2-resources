@@ -7,6 +7,7 @@
 * [Pipe](#pipe)    
 * [RxJS 6 Map operator](#map-operator)    
 * [Promise vs Observable](#promise-vs-observable)    
+* [BehaviorSubject](#behaviorsubject)    
 * [Arrow function](#arrow-function)     
 * [Async / Await functions](#await-async-functions)     
 * [Resolver](#resolver)     
@@ -621,6 +622,63 @@ this.myProvider.prompt({title: "Input value", message:"Enter your hexadecimal va
 	console.log("Returned : " + data);
 });
 ```
+
+## BehaviorSubject
+[Back to top](#concepts)  
+
+[link : josh morony tutorial](https://www.joshmorony.com/using-behaviorsubject-to-handle-asynchronous-loading-in-ionic/)
+
+BehaviorSubject is a type of Observable (ie : a stream of data that we can subscribe to like the observable returned from HTTP requests in Angular)
+
+It will always return a value, even if no data has been emitted from its stream yet. And, when you subscribe to it, it will immediately return the last value that was emitted immediately (or the initial value if no data has been emitted yet)
+
+*Example*
+
+```
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Storage } from '@ionic/storage';
+import { SomeType } from '../interfaces/movie-category';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+
+    public myData: BehaviorSubject<SomeType[]> = new BehaviorSubject<SomeType[]>([]);	// subject initialization
+    // public myData = new BehaviorSubject([]); // without custom type
+
+    constructor(private storage: Storage) {  }
+
+    load(): void {
+
+        this.storage.get('myData').then((data) => {
+            this.myData.next(data);	// update subject data with next()
+        });
+    }
+
+    updateData(data): void {
+        this.storage.set('myData', data);
+        this.myData.next(data);	// update subject data with next()
+    }
+}
+```
+
+**Anytime we want to update that data we just need to call the** ```next()```
+
+This will cause the BehaviorSubject to **emit the new value**, and **anything that is subscribed to it will be instantly notified**. 
+
+Let’s say that we were relying on this to populate a list in Ionic:
+
+```
+ngOnInit(){
+    this.myDataService.myData.subscribe((data) => {
+        this.myListData = data;
+    });
+}
+```
+
+Initially, the list will be empty because it will just receive an empty array, but as soon as the load method completes myListData will be instantly updated with the new data.
 
 ## Arrow function
 [Back to top](#concepts) 
