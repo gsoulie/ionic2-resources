@@ -324,7 +324,7 @@ export class UserPage {
 see more @ViewChild - @ViewChildren
 
 
-Switch statement with complex expression
+## Switch statement with complex expression
 [Back to top](#useful-functions)  
 
 If you need to use complex expression in switch statement like below :
