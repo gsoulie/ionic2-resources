@@ -12,6 +12,7 @@
 * [Checking network connection](#checking-network-connection)    
 * [Close modal](#close-modal)    
 * [Accessing DOM element @ViewChild](#accessing-dom-element)  
+* [Switch statement with complex expression](#switch-statement-with-complex-expression)    
 
 ## Find element in array
 
@@ -283,7 +284,6 @@ getMaxTrip() {
 }
 ```
 ## Accessing DOM element
-
 [Back to top](#useful-functions)  
 
 Here, we are going to see how to accessing to a DOM element with the directive ```@ViewChild```. In the following sample, we want to change the label of the top left back button.
@@ -322,3 +322,35 @@ export class UserPage {
 ```
 
 see more @ViewChild - @ViewChildren
+
+
+Switch statement with complex expression
+[Back to top](#useful-functions)  
+
+If you need to use complex expression in switch statement like below :
+
+```
+switch (value) {
+	case (value >= 0 && value < 10) :
+		...
+		break;
+	case (value >= 10 && value < 20) :
+		...
+		break;
+}
+```
+
+This is not working. To fix it, you have to set **true** as a value
+
+```
+let value = 15;
+
+switch (true) {
+	case (value >= 0 && value < 10) :
+		...
+		break;
+	case (value >= 10 && value < 20) :
+		...
+		break;
+}
+```
