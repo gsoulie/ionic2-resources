@@ -1726,6 +1726,8 @@ export class HomePage {
 ## Firestore
 [Back to top](#angularfire2) 
 
+(AngularFirestore documentation)[https://github.com/angular/angularfire/blob/master/docs/firestore/querying-collections.md]
+
 ### Initialisation
 
 ```npm install angularfire2 firebase --save```
