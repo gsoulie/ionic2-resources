@@ -1383,6 +1383,37 @@ page-chart {
 }
 ```
 
+### Pie chart
+[Back to top](#ui-components)  
+
+*view file* 
+```
+<canvas #myCanvas></canvas>
+```
+
+*controller file*
+```
+export class MyClass {
+	@ViewChild('myCanvas') myCanvas: ElementRef;
+	
+	initChart() {
+		const dataset = { 
+			datasets: [{
+				data: [5, 6, 18]
+			}],
+			labels: ['Red', 'Blue', 'Green']
+		};
+		
+		const ctx = this.myCanvas.nativeElement;
+		
+		const myChart = new Chart(ctx,{
+			type: 'pie',
+			data: dataset,
+			options: options
+		});
+	}
+}
+```
 
 ## grid
 [Back to top](#ui-components)  
