@@ -1399,7 +1399,8 @@ export class MyClass {
 	initChart() {
 		const dataset = { 
 			datasets: [{
-				data: [5, 6, 18]
+				data: [5, 6, 18],
+				backgroundColor: ['#ffcc55', '#a51231', '#44ff22']
 			}],
 			labels: ['Red', 'Blue', 'Green']
 		};
