@@ -1416,6 +1416,21 @@ export class MyClass {
 }
 ```
 
+**Define chart height**
+
+```
+const ctx = this.myCanvas.nativeElement;
+ctx.height = 150;
+
+const myChart = new Chart(ctx,{
+	type: 'pie',
+	data: dataset,
+	options: {
+		maintainAspectRatio: false,
+	}
+});
+```
+
 ## grid
 [Back to top](#ui-components)  
 
