@@ -24,6 +24,7 @@
 * [alert controller](#alert-controller)    
 * [round progress bar](#round-progress-bar)     
 * [ion-slide](#ion-slide)    
+* [Hiding header on scroll](#hiding-header-on-scroll)     
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -1902,4 +1903,136 @@ export class HomePage {
 <ion-slides [options]="sliderConfig">
 	<ion-slide *ngFor="let i of slides"></ion-slide>
 </ion-slides>
+```
+## Hiding header on scroll
+[Back to top](#ui-components)  
+
+[Hide header video](https://www.youtube.com/watch?v=rS5EYgFD2Kw)   
+
+### Create the directive
+
+```
+ionic g directive directives/hideHeader
+```
+
+*hide-header.directive.ts*
+
+```
+import { element } from 'protractor';
+import { Directive, Input, OnInit, Renderer2 } from '@angular/core';
+import { DomController } from '@ionic/angular';
+
+@Directive({
+  selector: '[appHideHeader]',
+  host: {
+    '(ionScroll)': 'onContentScroll($event)'
+  }
+})
+export class HideHeaderDirective implements OnInit{
+
+  @Input('header') header: any;
+  private lastY: number = 0;
+
+  constructor(private renderer: Renderer2,
+              private domCtrl: DomController) {}
+
+  ngOnInit() {
+    this.header = this.header.el;
+
+    this.domCtrl.write(() => {
+      this.renderer.setStyle(this.header, 'transition', 'margin-top 400ms');
+    });
+  }
+
+  onContentScroll(event: any) {
+    if (event.detail.scrollTop > this.lastY) {
+      console.log('down');
+      this.renderer.setStyle(this.header, 'margin-top', `-${this.header.clientHeight}px`);
+      
+    } else {
+      this.renderer.setStyle(this.header, 'margin-top', '0');
+    }
+    this.lastY = event.detail.scrollTop;
+  }
+}
+
+```
+
+### Create a global component
+
+It is recommended to create a global component containing the hideHeader directive. This component will be added in each other components. 
+
+=> Create a new directory 'components' containing the following file
+
+*components.module.ts*
+
+```
+import { HideHeaderDirective } from '../directives/hide-header.directive';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+
+@NgModule({
+	imports: [
+		CommonModule,
+		IonicModule
+	],
+	declarations: [
+		HideHeaderDirective
+	],
+	exports: [
+		HideHeaderDirective
+	],
+})
+export class ComponentsModule {}
+```
+
+### Add the ComponentsModule in other components
+
+In each page, add the componentsModule import into the *my-page.module.ts* file
+
+*home.module.ts*
+
+```
+import { ComponentsModule } from './../components/components.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+
+import { HomePage } from './home.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: HomePage
+  }
+];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    IonicModule,
+    ComponentsModule,
+    RouterModule.forChild(routes)
+  ],
+  declarations: [HomePage]
+})
+export class HomePageModule {}
+```
+
+### Link the directive to your header
+
+Finally, you need to add an id **#header** on your ```<ion-header>``` tag and link on the scroll event **appHideHeader scrollEvents="true" [header]="header"** on the ```<ion-content>``` tag.
+
+*home.html*
+
+```
+<ion-header #header>
+  <ion-toolbar color="primary">
+    <ion-title class="navTitle">Matchs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding appHideHeader scrollEvents="true" [header]="header">
 ```
