@@ -1915,6 +1915,8 @@ export class HomePage {
 ionic g directive directives/hideHeader
 ```
 
+This directive will trigger on the scroll event and apply a *margin-top* on the header element.
+
 *hide-header.directive.ts*
 
 ```
@@ -1960,7 +1962,7 @@ export class HideHeaderDirective implements OnInit{
 
 ### Create a global component
 
-It is recommended to create a global component containing the hideHeader directive. This component will be added in each other components. 
+It is recommended to create a global component containing the hideHeader directive to avoid multiple declaration in multiple pages. This component will be added in each other components. 
 
 => Create a new directory 'components' containing the following file
 
