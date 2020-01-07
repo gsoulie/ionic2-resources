@@ -5,6 +5,7 @@
 * [File storage](#file-storage)    
 * [File size](#file-size)    
 * [PWA : write file](#pwa-write-file)     
+* [Loading json file](#loading-json-file)    
 
 ## File storage
 [Back to top](#file)  
@@ -282,3 +283,37 @@ onWriteFile(){
     }
   }
 ```
+
+## Loading Json File
+[Back to top](#file)
+
+Add the following options into *tsconfig.json* config file
+
+*tsconfig.json*
+
+```
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		...
+		"resolveJsonModule": true,
+		"esModuleInterop": true
+	}
+}
+```
+Then import your json data as below 
+
+*controller file*
+
+```
+import MyJsonData from '../../assets/myJsonFile.json';
+
+export class MyClass {
+	getJsonData() {
+		return MyJsonData
+		//return MyJsonData.slice(0, 50)
+	}
+}
+```
+
+
