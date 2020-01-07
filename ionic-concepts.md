@@ -305,30 +305,47 @@ export class HelloWorld implements PipeTransform{
 
 **IMPORTANT** The first letter of the pipe class name must be in upper case. But notice that during the usage, you must use lower case on the first letter.
 
-### Using pipe in other page
+**Create Pipe module**
 
-Simply add the declaration of your pipe in your *app.module.ts*
+To use your pipe in all pages, you need to create a *pipes.module.ts* file into the pipes directory
 
-```javascript
-...
-import { datePipe } from './../pipe/datePipe';
+```
+import { MyCustomPipe } from './my-custom-pipe';
+import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    myPipe
-  ],
-  imports: [
-    IonicModule.forRoot(MyApp,{tabsPlacement: "top"})
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp
-  ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+	declarations: [MyCustomPipe],
+	imports: [],
+	exports: [MyCustomPipe],
 })
+
+export class PipesModule {}
+```
+
+**Add declaration in app.module.ts**
+
+```
+declarations:...,
+entryComponents: [],
+imports: [],
+providers: [PipesModule],
 ...
 ```
+
+**Add declaration in each page.module.ts**
+
+```
+@NgModule({
+	imports: [
+		CommonModule,
+		IonicModule,
+		PipesModule,
+		...
+	]
+})
+```
+
+**Usage**
 
 *View file*
 
