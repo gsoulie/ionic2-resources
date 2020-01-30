@@ -3,6 +3,7 @@
 # Sass
 
 * [Component variables](#component-variables)    
+* [Using variables](#using-variables)    
 * [Add color](#add-color)    
 * [Set transparent color to element](#set-transparent-color-to-element)     
 * [Set transparent NavBar](#configure-navbar-color)    
@@ -52,6 +53,35 @@ Since ionic 4, some component variables are available for styling it. You can fi
 --padding-start	Start padding of the item
 --padding-top	Top padding of the item
 --transition	Transition of the item
+```
+
+## Using variables
+[Back to top](#sass) 
+
+using sass variable in component's style sheet :
+
+First, define variable :
+
+*variable.scss*
+
+```
+$my-color-red: red;
+$my-custom-font-size: 14px;
+$my-custom-font-family: "Helvetica", Arial;
+...
+```
+Usage :
+
+*my-component.scss*
+
+```
+@import "src/app/styles/variables.scss";
+
+.my-custom-div {
+	color: $my-color-red;
+	font-size: $my-custom-font-size;
+	...
+}
 ```
 
 ## Add color
