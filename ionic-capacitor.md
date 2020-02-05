@@ -4,6 +4,8 @@
 Capacitor is the new Ionic's native web app container that runs your web app natively in iOS, Android, Electron, PWA...
 Capacitor is the successor of Cordova, it containerizes your web app and puts it into a managed native web view, then it exposes nativefunctionality to your web app in cross-platform way.
 
+[Documentation](https://capacitor.ionicframework.com/docs/getting-started/with-ionic/)    
+
 ### Requirements
 
 * XCode 10 minimum
