@@ -34,12 +34,20 @@ Capacitor uses the WKWebView
 ```npx cap add ios / npx cap add android```
 
 **copy code**
-Once web code is built, it needs to be copied to each native project
+Once web code is built (or if you make changes in your web-based code), it needs to be copied to each native project
 
 ```
 npx cap copy
 npx cap copy ios // to specify the native platform
 ```
+
+If some plugins were modified, you need to run 
+
+```
+npx cap update
+```
+
+You can also simply run ```npx sync``` to both copy your web code and update your plugins
 
 **open native IDE to build, run, and deploy**
 
@@ -77,3 +85,8 @@ if(!isAvailable) {
   Camera.getPhoto();
 }
 ```
+## Build Android Prod version
+
+From Android studio : Build > Generate Signed APK
+
+Then, Make sure to choose the **release** build type, and you should also tick both of the signature options **V1** and **V2**
