@@ -87,6 +87,8 @@ if(!isAvailable) {
 ```
 ## Build Android Prod version
 
+[Generate appicon and splashscreen](https://www.joshmorony.com/adding-icons-splash-screens-launch-images-to-capacitor-projects/)
+
 From Android studio : Build > Generate Signed APK
 
 Then, Make sure to choose the **release** build type, and you should also tick both of the signature options **V1** and **V2**
