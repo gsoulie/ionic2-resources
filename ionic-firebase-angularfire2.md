@@ -1788,6 +1788,10 @@ export class FirebaseService {
     deleteData(collectionName: string, recordID) {
         this.afs.doc(collectionName + '/' + recordID).delete();
     }
+    
+    customQueryWithWhereCondition(color: string) {
+    	return this.afs.collection('my-collection', ref => ref.where('color', '==', color)).snapshotChanges();
+    }
 }
 ```
 
@@ -1827,6 +1831,7 @@ export class HomePage implements OnInit {
     firstname = '';
     lastname = '';
     dataset: any;
+    items = [];
     
     constructor(private afs: AngularFirestore,
     private firebaseCRUDService: FirebaseCRUDService){ }
@@ -1875,6 +1880,22 @@ export class HomePage implements OnInit {
 		}
 	    }
 	}
+    }
+    
+    /**
+     * data structure like : [{id: -Xsd4546878798797, name: 'blabla', color: 'blue'}]
+     **/
+    onFilteringDataByColor(color) {
+    	this.firebaseCRUDService.customQueryWithWhereCondition(color)
+	.subscribe(res => {
+		this.items = res.map(e => {
+			return {
+				id: e.payload.doc.data()['id'],
+				name: e.payload.doc.data()['name'],
+				color: e.payload.doc.data()['color']
+			}
+		});
+	});
     }
  }
 ```
