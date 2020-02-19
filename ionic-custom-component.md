@@ -4,7 +4,7 @@
 
 * [Ionic 4 Custom component](#ionic4-custom-component)    
 * [Alert component](#alert-component)    
-* [Complete example](#complete-example)    
+* [Working example](#working-example)    
 
 ## Ionic 4 custom component
 
@@ -409,7 +409,7 @@ entryComponents: [
 ]
 ```
 
-## Complete example
+## Working example
 [Back to top](#custom-component)
 
 ### Custom component 
