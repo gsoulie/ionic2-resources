@@ -4,6 +4,7 @@
 
 * [Ionic 4 Custom component](#ionic4-custom-component)    
 * [Alert component](#alert-component)    
+* [Complete example](#complete-example)    
 
 ## Ionic 4 custom component
 
@@ -406,4 +407,171 @@ export class ParentComponent implements OnDestroy {
 entryComponents: [
 	AlertComponent
 ]
+```
+
+## Complete example
+[Back to top](#custom-component)
+
+### Custom component 
+
+**components/toolbar**
+
+*toolbar.component.html*
+
+```
+<ion-toolbar>
+  <ion-grid>
+    <ion-row class="ion-align-items-center" class="ion-text-center">
+      <ion-col class="ion-text-center">
+        <ion-button fill="clear" (click)="onFilterByColor('blanc')">
+          <div class="color-blanc color-div"></div>
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-button fill="clear" (click)="onFilterByColor('bleu')">
+          <div class="color-bleu color-div"></div>
+        </ion-button>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-button fill="clear" (click)="onFilterByColor('multi')">
+          <div class="color-multi color-div"></div>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>
+```
+
+*toolbar.component.ts*
+
+```
+import { Component, OnInit, Input, AfterContentInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-toolbar',
+  templateUrl: './toolbar.component.html',
+  styleUrls: ['./toolbar.component.scss'],
+})
+export class ToolbarComponent implements OnInit, AfterContentInit {
+
+  @Input() collectionName: string = '';	// passed parameter from parent
+  @Output() colorSelected: EventEmitter<string> = new EventEmitter();	// Event emitter
+
+  constructor() { }
+
+  ngOnInit() {
+    console.log('passed data : ' + this.collectionName); // => get Undefined !!!!
+  }
+
+  ngAfterContentInit() {
+    console.log('passed data : ' + this.collectionName);
+  }
+
+  // Event emitter
+  onFilterByColor(couleur: string) {
+    this.colorSelected.emit(couleur);
+  }
+
+}
+
+```
+
+**components/components.module.ts**
+
+*components.module.ts*
+
+```
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+
+@NgModule({
+	imports: [
+		CommonModule,
+		IonicModule
+	],
+	declarations: [
+		ToolbarComponent
+	],
+	exports: [
+		ToolbarComponent
+	],
+})
+export class ComponentsModule {}
+```
+
+### Add component in parent
+
+*home.module.ts*
+
+```
+import { ComponentsModule } from './../components/components.module';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HomePage } from './home.page';
+
+@NgModule({
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    ComponentsModule,	// <---- Import custom components
+    RouterModule.forChild([{ path: '', component: Tab2Page }])
+  ],
+  declarations: [HomePage]
+})
+export class HomePageModule {}
+
+```
+
+*home.component.html*
+
+```
+<ion-header no-border>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Wish list
+    </ion-title>
+  </ion-toolbar>
+  <app-toolbar collectionName="wish" (colorSelected)="onFetchData($event)"></app-toolbar>
+</ion-header>
+<ion-content>
+...
+</ion-content>
+```
+
+*home.component.ts*
+
+```
+import { DataService } from './../services/data.service';
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss']
+})
+export class HomePage implements OnInit {
+
+  items;
+
+  constructor(private dataService: DataService) {}
+
+  /**
+   * 'param' from event emitter
+   **/
+  onFetchData(param) {
+    this.items = [];
+
+      this.dataService.fetchCardByColor(param)
+      .subscribe(data => {...});
+      });
+  }
+}
+
 ```
