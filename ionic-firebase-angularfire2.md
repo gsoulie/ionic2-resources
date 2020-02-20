@@ -1921,6 +1921,8 @@ At this moment, Firestore does not allow to make fulltext queries on dataset. Yo
 
 #### Using array-contains operator
 
+> **WARNING** : This method is accent sensitive, the search is of type *equal to* and not of type *contains* and works ONLY on a SINGLE term search.  
+
 ```
 this.afs.collection(collectionName, ref => ref.where('search', 'array-contains', name.toLowerCase())).snapshotChanges();	
 ```
@@ -1967,9 +1969,9 @@ this.searchItemByTerm('Super');
 this.searchItemByTerm('Super item');	// => Doesn't work !!
 ```
 
-> **WARNING** : This method is accent sensitive and works ONLY on a SINGLE term search.  
-
 #### Using array-contains-any operator
+
+> **WARNING** : This method is accent sensitive, the search is of type *equal to* and not of type *contains* for each term
 
 You can improve *array-contains* query by using **array-contains-any** operator. This will return all the data wich match one of the passed terms. 
 
