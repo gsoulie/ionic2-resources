@@ -1923,22 +1923,23 @@ At this moment, Firestore does not allow to make fulltext queries on dataset. Yo
 this.afs.collection(collectionName, ref => ref.where('search', 'array-contains', name.toLowerCase())).snapshotChanges();	
 ```
 
-To achieve this, you first need to create an array in your dataset, which contains a list of string which will be used for the search method.
+To achieve this, you first need to create an array in your dataset, which contains a list of strings which will be used for the search method.
 
 You can do that with this kind of code
 
 ```
 addItem(name, description) {
+	// create array containing search terms
 	const searchTerm = name.toLowerCase().split(' '); // it's recommended to clean your 'name' by removing all specials characters
-      const item = {
-	name: name
-	description: description,
-	searchTerm: searchTerm
-      };
+	const item = {
+		name: name
+		description: description,
+		searchTerm: searchTerm
+	};
       
-      const id = this.afs.createId();	// create firestore ID
-      item['id'] = id;
-      this.afs.collection('item').doc(item.name.toUpperCase()).set(record);
+      	const id = this.afs.createId();	// create firestore ID
+      	item['id'] = id;
+      	this.afs.collection('item').doc(item.name.toUpperCase()).set(record);
 }
 ```
 
@@ -1946,11 +1947,11 @@ This will create the following collection/document in Firestore
 
 ```
 MY SUPER ITEM
-	{
-		name: 'My Super Item',
-		description: 'This is the description of my super item',
-		searchTerm: ['my', 'super', 'item']
-	}
+{
+	name: 'My Super Item',
+	description: 'This is the description of my super item',
+	searchTerm: ['my', 'super', 'item']
+}
 ```
 
 You can now make a research by using 
@@ -1959,4 +1960,6 @@ You can now make a research by using
 searchItemByTerm(myTerm) {
 	return this.afs.collection('item', ref => ref.where('searchTerm', 'array-contains', myTerm.toLowerCase())).snapshotChanges();
 }
+
+this.searchItemByTerm('Super');
 ```
