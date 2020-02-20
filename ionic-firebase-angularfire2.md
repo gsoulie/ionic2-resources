@@ -1917,7 +1917,7 @@ export class HomePage implements OnInit {
 ### Querying data
 [Back to top](#angularfire2) 
 
-At this moment, Firestore does not allow to make fulltext queries on dataset. You can however use *array_contains* operator with :
+At this moment, Firestore does not allow to make fulltext queries on dataset. You can however use *array-contains* operator with :
 
 ```
 this.afs.collection(collectionName, ref => ref.where('search', 'array-contains', name.toLowerCase())).snapshotChanges();	
