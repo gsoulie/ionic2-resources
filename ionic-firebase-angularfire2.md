@@ -1762,7 +1762,7 @@ export const firebaseConfig = {
 })
 ```
 
-### CRUD serrvice
+### CRUD service
 [Back to top](#angularfire2) 
 
 ```
