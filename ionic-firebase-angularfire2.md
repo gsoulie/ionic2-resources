@@ -1763,6 +1763,7 @@ export const firebaseConfig = {
 ```
 
 ### CRUD serrvice
+[Back to top](#angularfire2) 
 
 ```
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -1773,20 +1774,32 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class FirebaseService {
     constructor(private afs: AngularFirestore){}
     
-    fetchData(collectionName: string){
-        return this.afs.collection(collectionName).snapshotChanges();
+    fetchData(collectionName: string) {
+      return this.afs.collection(collectionName).snapshotChanges();
     }
-    
+
+    fetchCardByColor(collectionName: string, color: string) {
+      return this.afs.collection(collectionName, ref => ref.where('couleur', '==', color)).snapshotChanges();
+    }
+
+    searchCard(collectionName: string, name: string) {
+      return this.afs.collection(collectionName, ref => ref.where('search', 'array-contains', name.toLowerCase())).snapshotChanges();
+    }
+
     addData(collectionName: string, record: any = {}) {
-        return this.afs.collection(collectionName).add(record);
+      const id = this.afs.createId();
+      record['id'] = id;
+      //return this.afs.collection(collectionName).doc(id).set(record);
+      // NOTE : using item name as primary key permit to update dataset if already exists. If not it is created
+      return this.afs.collection(collectionName).doc(record.nom.toUpperCase()).set(record);
     }
-    
-    updateData(collectionName: string, recordID, record: any = {}) {
-        this.afs.doc(collectionName + '/' + recordID).update(record);
+
+    updateData(collectionName: string, record: any = {}) {
+      return this.afs.collection(collectionName).doc(record.nom.toUpperCase()).set(record);
     }
-    
+
     deleteData(collectionName: string, recordID) {
-        this.afs.doc(collectionName + '/' + recordID).delete();
+      this.afs.doc(collectionName + '/' + recordID).delete();
     }
     
     customQueryWithWhereCondition(color: string) {
@@ -1796,6 +1809,7 @@ export class FirebaseService {
 ```
 
 ### Usage
+[Back to top](#angularfire2) 
 
 *view file*
 
@@ -1898,4 +1912,51 @@ export class HomePage implements OnInit {
 	});
     }
  }
+```
+
+### Querying data
+[Back to top](#angularfire2) 
+
+At this moment, Firestore does not allow to make fulltext queries on dataset. You can however use *array_contains* operator with :
+
+```
+this.afs.collection(collectionName, ref => ref.where('search', 'array-contains', name.toLowerCase())).snapshotChanges();	
+```
+
+To achieve this, you first need to create an array in your dataset, which contains a list of string which will be used for the search method.
+
+You can do that with this kind of code
+
+```
+addItem(name, description) {
+	const searchTerm = name.toLowerCase().split(' '); // it's recommended to clean your 'name' by removing all specials characters
+      const item = {
+	name: name
+	description: description,
+	searchTerm: searchTerm
+      };
+      
+      const id = this.afs.createId();	// create firestore ID
+      item['id'] = id;
+      this.afs.collection('item').doc(item.name.toUpperCase()).set(record);
+}
+```
+
+This will create the following collection/document in Firestore
+
+```
+MY SUPER ITEM
+	{
+		name: 'My Super Item',
+		description: 'This is the description of my super item',
+		searchTerm: ['my', 'super', 'item']
+	}
+```
+
+You can now make a research by using 
+
+```
+searchItemByTerm(myTerm) {
+	return this.afs.collection('item', ref => ref.where('searchTerm', 'array-contains', myTerm.toLowerCase())).snapshotChanges();
+}
 ```
