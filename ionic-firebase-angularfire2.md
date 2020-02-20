@@ -1963,3 +1963,5 @@ searchItemByTerm(myTerm) {
 
 this.searchItemByTerm('Super');
 ```
+
+> **WARNING** : This method is accent sensitive and works only on single term search.  
