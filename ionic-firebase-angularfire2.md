@@ -1917,7 +1917,9 @@ export class HomePage implements OnInit {
 ### Querying data
 [Back to top](#angularfire2) 
 
-At this moment, Firestore does not allow to make fulltext queries on dataset. You can however use *array-contains* operator with :
+At this moment, Firestore does not allow to make fulltext queries on dataset. You can however use *array-contains* operator 
+
+#### Using array-contains operator
 
 ```
 this.afs.collection(collectionName, ref => ref.where('search', 'array-contains', name.toLowerCase())).snapshotChanges();	
@@ -1961,7 +1963,22 @@ searchItemByTerm(myTerm) {
 	return this.afs.collection('item', ref => ref.where('searchTerm', 'array-contains', myTerm.toLowerCase())).snapshotChanges();
 }
 
-this.searchItemByTerm('Super');
+this.searchItemByTerm('Super');	
+this.searchItemByTerm('Super item');	// => Doesn't work !!
 ```
 
-> **WARNING** : This method is accent sensitive and works only on single term search.  
+> **WARNING** : This method is accent sensitive and works ONLY on a SINGLE term search.  
+
+#### Using array-contains-any operator
+
+You can improve *array-contains* query by using **array-contains-any** operator. This will return all the data wich match one of the passed terms. 
+
+```
+searchItemByTerm(collectionName: string, name: string) {
+	const searchTerms = name.split(' ');	// create searched terms array
+      	return this.afs.collection(collectionName, ref => ref.where('searchTerm', 'array-contains-any', 	searchTerms)).snapshotChanges();
+}
+
+this.searchItemByTerm('my-collection', 'Super'); // => OK
+this.searchItemByTerm('my-collection', 'Super item'); // => OK
+```
