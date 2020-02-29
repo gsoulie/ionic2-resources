@@ -96,4 +96,25 @@ Then, Make sure to choose the **release** build type, and you should also tick b
 ## App icon and Splash screen
 
 [Generate appicon and splashscreen](https://www.joshmorony.com/adding-icons-splash-screens-launch-images-to-capacitor-projects/)
-[Configure splashscreen](https://capacitor.ionicframework.com/docs/apis/splash-screen/)    
+[Configure splashscreen](https://capacitor.ionicframework.com/docs/apis/splash-screen/)   
+
+## Local storage
+
+```
+import { Plugins } from '@capacitor/core';
+
+const { Storage } = Plugins;
+initializeApp() {
+  Storage.get({key: 'first_launch'}).then((val) => {
+        if (val.value !== null) {
+          // not first launch
+          this.router.navigateByUrl('/home');
+        } else {
+          // first launch
+          Storage.set({key: 'first_launch',
+          value: 'done'});
+          this.router.navigateByUrl('/tutorial');
+        }
+     });
+}
+```
