@@ -18,6 +18,7 @@
 * [Dynamic class](#dynamic-class)     
 * [Spacer](#spacer)    
 * [Increase ion-icon size](#increase-icon-size)    
+* [Remove header border](#remove-header-border)    
 
 Here are some tips to perform your scss.
 
@@ -900,3 +901,16 @@ Spacer will set the first span on the left side and the third span on the right 
 [Back to top](#sass)  
 
 *ion-icon* using font, so you just need to increase *font-size* to get bigger icons
+
+# Remove header border
+[Back to top](#sass)  
+
+In case of ```<ion-header no-border>``` is not working, here is a workaround
+
+```
+ion-header {
+  &.header-md:after {
+    background: none;
+  }
+}
+```
