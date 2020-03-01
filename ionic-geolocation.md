@@ -4,7 +4,8 @@
 
 * [Angular2 Google maps integration](angular2-google-maps-integration)    
 * [Customize map markers](#customize-map-markers)    
-* [reverse geocoding](#reverse-geocoding)    
+* [Reverse geocoding](#reverse-geocoding)    
+* [Geolocation on capacitor](#geolocation-on-capacitor)    
 
 ## See google map integration (full example)
 [Full example here](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-google-map-full.md)    
@@ -301,3 +302,24 @@ export class LocationPage {
 [back to top](#geolocation)   
 
 [Reverse geocoding with ionic](http://masteringionic.com/blog/2017-06-13-geocodingreverse-geocoding-with-ionic-native/)    
+
+## Geolocation on capacitor
+[back to top](#geolocation)  
+```
+import { Plugins } from '@capacitor/core';
+const { Geolocation } = Plugins;
+
+async getCurrentPosition() {
+    const options = {
+      enableHighAccuracy: true
+    };
+    const coordinates = await Geolocation.getCurrentPosition(options)
+    .then((data) => {
+      alert('location ok ' + JSON.stringify(data));
+    })
+    .catch(e => {
+      // no location available. invite user to activate geolocation on is device
+      alert('no location ? ' + JSON.stringify(e));
+    });
+  }
+```
