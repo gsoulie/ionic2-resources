@@ -8,18 +8,50 @@
 ## Phone call
 [Back to top](#phone-and-social-sharing) 
 
+### Cordova
 According to the official documentation, you can use the *call-number* native plugin. But you may encounter a problem with it.
 
 So you can use this workaround 
 
 ```
-let phoneNumber = "xxxxxxxx";
-setTimeout(() => {
-      window.open(`tel:${phoneNumber}`, '_system');
-    }, 100);
+call(phoneNumber: string = 'XXXXXXX') {
+      setTimeout(() => {
+          window.open(`tel:${phoneNumber}`, '_system');
+      }, 100);
+}
+```
+### Capacitor
+
+Capacitor using the native call number plugin
+
+```
+npm install call-number
+npm install @ionic-native/call-number
+ionic cap sync
+```
+
+Don't forget to add import into you *app.module.ts* in providers section.
+
+```
+import { CallNumber } from '@ionic-native/call-number/ngx';
+
+@Component({
+  selector: 'app-resultat-positif',
+  templateUrl: './resultat-positif.page.html',
+  styleUrls: ['./resultat-positif.page.scss'],
+})
+export class HomePage implements OnInit {
+  constructor(private callNumber: CallNumber) { }
+  
+  call(phoneNumber: string) {
+    this.callNumber.callNumber('XXXXXXXXXX', true)
+    .then(res => console.log('Launched dialer!', res))
+    .catch(err => console.log('Error launching dialer', err));
+  }
 ```
 
 ## Social sharing
+[Back to top](#phone-and-social-sharing) 
 
 ### Cordova
 
@@ -54,4 +86,29 @@ export class HomePage {
     });
   }
 }
+```
+
+### Capacitor
+[Back to top](#phone-and-social-sharing) 
+
+```
+import { Plugins } from '@capacitor/core';
+const { Share } = Plugins;
+
+@Component({
+  selector: 'app-resultat-positif',
+  templateUrl: './resultat-positif.page.html',
+  styleUrls: ['./resultat-positif.page.scss'],
+})
+export class HomePage implements OnInit {
+  constructor() { }
+
+  async sharingInfo() {
+    await Share.share({
+      title: 'My title',
+      text: 'Really awesome thing you need to see right meow',
+      url: 'http://ionicframework.com/',
+      dialogTitle: 'Share with buddies'
+    });
+  }
 ```
