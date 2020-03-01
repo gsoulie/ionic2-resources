@@ -7,7 +7,7 @@
 First of all, check your config.xml file and modify **id, author, name, description etc...**. Don't forget to add ```android-versionCode="xxx"``` in *config.xml* file like below :
 
 ```
-<widget android-versionCode="1" versio="1.0.1" id="com.mydomain.myapp"...>
+<widget android-versionCode="1" version="1.0.1" id="com.mydomain.myapp"...>
 ```
 
 more information about it's configuration [here](http://cordova.apache.org/docs/en/latest/config_ref/index.html)
@@ -61,3 +61,67 @@ $ zipalign -v 4 HelloWorld-release-unsigned.apk HelloWorld.apk
 ```
 
 Now we have our final release binary called HelloWorld.apk and we can release this on the Google Play Store
+
+
+# Full example
+
+**Compile in distribution mode**
+ 
+```ionic cordova build --release --prod android```
+ 
+This will generate an unsigned APK which will be located in *platforms/android/app/build/outputs/apk*
+
+**Generate keystore (to do only the first time)**
+ 
+```keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000```
+
+> my-release-key is the name you want to give to your keystore
+
+Then answer to asked questions :
+```
+What is your first and last name? :  xxxxxx
+What is the name of your organizational unit? :  xxxxxxxx
+What is the name of your organization? :  xxxxxxxxx
+What is the name of your City or Locality? :  xxxxxxx
+What is the name of your State or Province? :  xxxxx
+What is the two-letter country code for this unit? :  xxx
+``` 
+
+**APK Signin**
+
+Now you need to sign your unsigned apk with your fresh keystore. To achieve this, we use **jarsigner** which is available with JDK tools.
+
+**Be careful**, you must copy your unsigned apk in the same directory where the keystore was generated. Else you will encounter an error like *unable to open jar file: android-release-unsigned.apk)*
+ 
+Use the command bellow to sign your apk :
+ 
+```
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore <you_keystore_name>.keystore app-release-unsigned.apk you_app_alias
+Passphrase : <your_passphrase>
+```
+ 
+**Optimize apk**
+
+The final step is to use *zipalign* tool in order to optimize apk size. You will normally find *zipalign* tool in the Android SDK directory */path/to/Android/sdk/build-tools/VERSION/zipalign* for example on mac :
+
+```
+/Users/Username/Library/Android/sdk/build-tools/28.0.1/zipalign)
+```
+ 
+Use the command : 
+```
+zipalign -v 4 HelloWorld-release-unsigned.apk HelloWorld.apk
+```
+
+Example with full path :
+```
+/Users/formation/Library/Android/sdk/build-tools/28.0.3/
+zipalign -v 4 /Users/Username/Documents/ionic-workspace/MyProject/MyApp/deploiement/app-release-unsigned.apk myapp.apk
+```
+ 
+Or :
+```
+$ cd /Users/Username/Library/Android/sdk/build-tools/28.0.3/
+$ ./zipalign -v 4 /Users/Username/Documents/ionic-workspace/MyProject/myApp/deploiement/app-release-unsigned.apk /Users/Username/Documents/ionic-workspace/MyProject/myApp/deploiement/myApp.apk
+```
+
