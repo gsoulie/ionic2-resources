@@ -19,6 +19,7 @@
 * [Spacer](#spacer)    
 * [Increase ion-icon size](#increase-icon-size)    
 * [Remove header border](#remove-header-border)    
+* [Create CSS stepper](#create-css-stepper)    
 
 Here are some tips to perform your scss.
 
@@ -912,5 +913,46 @@ ion-header {
   &.header-md:after {
     background: none;
   }
+}
+```
+
+
+# Create css stepper
+[Back to top](#sass)  
+
+[Documentation W3C](https://www.w3schools.com/w3css/w3css_progressbar.asp)
+[W3C stylesheet](https://www.w3schools.com/w3css/4/w3.css)
+
+*html file*
+```
+<div class="w3-light-grey w3-tiny">
+  <div class="w3-green" style="height:8px;width:13%"></div>
+</div>
+```
+
+*scss file*
+```
+.w3-container,.w3-panel {
+    padding:0.01em 16px
+}
+.w3-panel {
+    margin-top:16px;
+    margin-bottom:16px
+}
+.w3-light-grey,.w3-hover-light-grey:hover,.w3-light-gray,.w3-hover-light-gray:hover {
+    color:#000!important;
+    background-color:#9EB8BE !important;
+    border-radius:20px;
+}
+.w3-tiny {
+    font-size:10px!important
+}
+.w3-small {
+    font-size:12px!important;
+}
+.w3-green,.w3-hover-green:hover {
+    color:#fff!important;
+    border-radius:20px;
+    background-color:#009DBE!important;
 }
 ```
