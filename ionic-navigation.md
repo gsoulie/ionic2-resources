@@ -138,6 +138,16 @@ export class HomePage {
 ### Navigate to the previous page
 [Back to top](#navigation)
 
+#### Easy way
+
+```
+import { Location } from '@angular/common';
+
+goBack() {
+	this.location.back();
+}
+```
+
 #### Classic way
 
 The classic way to navigate back is to manually manage a back button using *defaultHref* property
