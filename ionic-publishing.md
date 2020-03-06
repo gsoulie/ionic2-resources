@@ -2,6 +2,8 @@
 
 # Publishing app
 
+* [Android studio](#android-studio).   
+
 [link : publishing app](http://ionicframework.com/docs/guide/publishing.html)    
 
 First of all, check your config.xml file and modify **id, author, name, description etc...**. Don't forget to add ```android-versionCode="xxx"``` in *config.xml* file like below :
@@ -125,3 +127,21 @@ $ cd /Users/Username/Library/Android/sdk/build-tools/28.0.3/
 $ ./zipalign -v 4 /Users/Username/Documents/ionic-workspace/MyProject/myApp/deploiement/app-release-unsigned.apk /Users/Username/Documents/ionic-workspace/MyProject/myApp/deploiement/myApp.apk
 ```
 
+
+## Android studio
+
+### android:versionCode issue
+
+(https://stackoverflow.com/questions/24772407/upload-failed-you-need-to-use-a-different-version-code-for-your-apk-because-you)
+
+Sometimes, updating version into manifest is not working when building signed APK. To fix it, update the *versionCode* and *versionName* in the **build.gradle** file instead
+
+```
+defaultConfig {
+    applicationId "com.my.packageId"
+    minSdkVersion 15
+    targetSdkVersion 22
+    versionCode 2      <-- change this
+    versionName "2.0"  <-- change this
+}
+```
