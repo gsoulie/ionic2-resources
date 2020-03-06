@@ -5,6 +5,7 @@
 * [Ionic 4 Custom component](#ionic4-custom-component)    
 * [Alert component](#alert-component)    
 * [Working example](#working-example)    
+* [Popover example capacitor](#popover-example)    
 
 ## Ionic 4 custom component
 
@@ -574,4 +575,63 @@ export class HomePage implements OnInit {
   }
 }
 
+```
+
+## Popover example
+[Back to top](#custom-component)
+
+*components/popover/popover.component.html*
+
+```
+<div class="popover-container">
+  <ion-button fill="clear" (click)="about()">More information</ion-button>
+</div>
+```
+
+In this sample, we don't need to create and use a *components.module.ts*
+
+*home.module.ts*
+
+```
+import { PopoverComponent } from './../components/popover/popover.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+import { HomePage } from './home.page';
+
+@NgModule({
+  entryComponents: [PopoverComponent],	// <---
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: HomePage
+      }
+    ])
+  ],
+  declarations: [HomePage, PopoverComponent]	// <---
+})
+export class HomePageModule {}
+
+```
+
+*home.ts*
+
+```
+async about(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      event: ev,
+      backdropDismiss: true,
+      showBackdrop: true,
+      translucent: false
+    });
+    return await popover.present();
+  }
 ```
