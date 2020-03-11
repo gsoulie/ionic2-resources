@@ -194,6 +194,25 @@ page-map {
 ## Positioning
 [Back to top](#sass)  
 
+### Justify content center
+
+*View*
+```
+<div class="container">
+	<img src="/xxxx" />
+	<img src="/xxxx" />
+</div>
+```
+
+*Style*
+```
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+```
+
 ### Center a div
 
 Center (horizontally and vertically) a div containing a form :
