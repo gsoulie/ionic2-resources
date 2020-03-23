@@ -68,6 +68,57 @@
 
 ```<ion-button style="text-transform: none;">```
 
+### Mutli-line button
+
+*view file*
+```
+<ion-button class="btnValueChecked allowMultipleLines" fill="clear">My very very long text button with multiple line</ion-button>
+```
+
+*style file*
+```
+.btnValueUnchecked {
+    border-radius: 50px;
+    height: 60px;
+    border: 2px solid $theme-color;
+    background-color: white;
+    color: black;
+    padding-right: 8px;
+    padding-left: 8px;
+
+    text-align: center;
+    display: inline-grid;
+    vertical-align:middle;
+
+    &.allowMultipleLines {
+        text-overflow: visible;
+        white-space: inherit;
+        min-height: 60px;
+        height: auto;
+    }
+}
+.btnValueChecked {
+    border-radius: 50px;
+    height: 60px;
+    background: linear-gradient(154deg, rgba(0,157,190,1) 52%, rgba(29,164,152,1) 100%);
+    box-shadow: 0 20px 40px 0 rgba(0,157,190,0.3);
+    color: white;
+    padding-right: 8px;
+    padding-left: 8px;
+
+    text-align: center;
+    display: inline-grid;
+    vertical-align:middle;
+    
+    &.allowMultipleLines {
+        text-overflow: visible;
+        white-space: inherit;
+        min-height: 60px;
+        height: auto;
+    }
+}
+```
+
 ## Modal
 [Back to top](#ui-components)  
 
