@@ -2,6 +2,7 @@
 
 # Using image
 
+* [Background image](#background-image)    
 * [SVG](#svg)    
 * [Using cascading SVG](#using-cascading-svg)    
 * [Add blur](#add-blur-on-image)    
@@ -30,6 +31,22 @@ let item = {name:"my item", image:"./assets/imgs/my_image.png"}
 ```
 
 **Warning** when running serve, path must be *../assets/imgs/xxxx* but when running device, path must be *./assets/imgs/xxxxx*
+
+## Background image
+
+*View file*
+```
+<div class="div-img"></div>
+```
+
+*Style file*
+```
+background-image: url('/assets/imgs/picto_sr.png');
+background-repeat: no-repeat;
+background-position: center;
+background-size: contain;
+```
+
 ## SVG
 
 To use SVG image you must specify **./assets/imgs/xxxxxx.svg** instead of **../assets/imgs/xxxxx.svg**
