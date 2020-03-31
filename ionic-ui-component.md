@@ -1486,6 +1486,7 @@ const myChart = new Chart(ctx,{
 ### ng2-google-chart
 [Back to top](#ui-components)  
 
+[ng2-google-chart demo](https://www.devrandom.it/software/ng2-google-charts/demo/)    
 [ng2-google-chart](https://www.devrandom.it/software/ng2-google-charts/)    
 [Google GeoChart doc](https://developers.google.com/chart/interactive/docs/gallery/geochart#text-geocharts)    
 
