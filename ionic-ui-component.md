@@ -1285,7 +1285,7 @@ This snippet show how to fix floating button in front of a list
 [link : ng2-chart](http://valor-software.com/ng2-charts/)    
 [forum : related post](https://forum.ionicframework.com/t/solved-ionic-2-ng2-charts/42926)    
 
-### Sample code
+### ChartJS Sample code
 
 *View.html*
 
@@ -1435,7 +1435,7 @@ page-chart {
 }
 ```
 
-### Pie chart
+#### Pie chart
 [Back to top](#ui-components)  
 
 *view file* 
@@ -1483,7 +1483,96 @@ const myChart = new Chart(ctx,{
 });
 ```
 
-## grid
+### ng2-google-chart
+
+https://www.devrandom.it/software/ng2-google-charts/
+
+*installation*
+
+```
+npm install ng2-google-charts --save
+```
+
+The way this library works, you’ll have to import Google Charts in your *page.module.ts* using
+
+```import { Ng2GoogleChartsModule } from 'ng2-google-charts';```
+
+and also include *Ng2GoogleChartsModule* in the *@NgModule* imports in *app.module.ts*.
+
+#### colored world map sample
+
+*controller file*
+
+````
+import { Component, OnInit } from '@angular/core';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
+
+@Component({
+  selector: 'app-worldmap',
+  templateUrl: './worldmap.page.html',
+  styleUrls: ['./worldmap.page.scss'],
+})
+export class WorldmapPage implements OnInit {
+
+  public gChart: GoogleChartInterface;
+
+
+  public geoChart: GoogleChartInterface = {
+    chartType: 'GeoChart',
+    dataTable: [
+      ['Country', 'Population (2019)'],
+      ['Austria',	8858775],
+      ['Belgium',	11467923],
+      ['Bulgaria', 7000039],
+      ['Croatia',	4076246],
+      ['Cyprus',	875898],
+      ['Czech Republic', 10649800],
+      ['Denmark',	5806081],
+      ['Estonia',	1324820],
+      ['Finland',	5517919],
+      ['France',	67028048],
+      ['Germany',	83019214],
+      ['Greece',	10722287],
+      ['Hungary',	9797561],
+      ['Ireland',	4904226],
+      ['Italy',	60359546],
+      ['Latvia', 1919968],
+      ['Lithuania',	2794184],
+      ['Luxembourg', 613894],
+      ['Malta',	493559],
+      ['Netherlands',	17282163],
+      ['Poland', 37972812],
+      ['Portugal', 10276617],
+      ['Romania',	19401658],
+      ['Slovakia', 5450421],
+      ['Slovenia', 2080908],
+      ['Spain',	46934632],
+      ['Sweden', 10230185],
+    ],
+    options: {
+      //region: '150', // Europe
+      colorAxis: {colors: ['#ffc107', '#fd7e14', '#dc3545']},
+      /*backgroundColor: '#9cf',
+      datalessRegionColor: '#f8f9fa',*/
+      defaultColor: '#6c757d',
+      height: 600,
+    }
+  };
+  constructor() { }
+}
+````
+
+*View file*
+
+````
+<ion-content>
+  <google-chart [data]="geoChart"></google-chart>
+</ion-content>
+````
+
+
+## Grid
 [Back to top](#ui-components)  
 
 [link : complex layout using grid and flexbox](http://www.joshmorony.com/an-in-depth-look-at-the-grid-system-in-ionic-2/) 
