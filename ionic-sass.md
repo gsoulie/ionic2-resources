@@ -20,6 +20,8 @@
 * [Increase ion-icon size](#increase-icon-size)    
 * [Remove header border](#remove-header-border)    
 * [Create CSS stepper](#create-css-stepper)    
+* [Transparent scroll](#transparent scroll)   
+* [Create fixed menu with scrollable content](#create-fixed-menu-with-scrollable-content)    
 
 Here are some tips to perform your scss.
 
@@ -975,3 +977,68 @@ ion-header {
     background-color:#009DBE!important;
 }
 ```
+
+# Transparent scroll
+[Back to top](#sass)
+
+To make browser scrollbar transparent use 
+
+````
+::-webkit-scrollbar
+{
+    width: 0px;
+}
+::-webkit-scrollbar-track-piece
+{
+    background-color: transparent;
+    -webkit-border-radius: 6px;
+}
+````
+
+# Create fixed menu with scrollable content
+[Back to top](#sass)
+
+*View file*
+
+````
+<div class="main">
+    <!-- ----------------- LEFT PANEL ---------------------->
+    <div class="left-panel">
+  	<ion-list>
+		<ion-item *ngFor="let m of menu">{{ m.title }}</ion-item>
+	</ion-list>
+    </div>
+    <div class="right-panel">
+    	<ion-card *ngFor="let c of cards">
+		<ion-card-header>
+			<ion-card-title>{{ c.title }}</ion-card-title>
+		</ion-card-header>
+		<ion-card-content>
+			<p>{{ c.content }}</p>
+		</ion-card-content>
+	</ion-card>
+    </div>
+</div>
+````
+
+*Style file*
+
+````
+.left-panel {
+    position: fixed;
+    overflow: auto;
+    width: 21%;
+    float: left;
+    height: 100%;
+    background-color: transparent !important;
+    --background: transparent !important;
+}
+.right-panel {
+    position: relative;
+    margin-left: 21%;
+    float: left;
+    height: 100%;
+    width: 79%;
+    padding-left: 25px;
+}
+````
