@@ -1572,7 +1572,7 @@ export class WorldmapPage implements OnInit {
       /*backgroundColor: '#9cf',
       datalessRegionColor: '#f8f9fa',*/
       defaultColor: '#6c757d',
-      height: 600,
+      //height: 600, // => if you want to set a specific height (width is not necessary)
     }
   };
   constructor() { }
@@ -1587,6 +1587,77 @@ export class WorldmapPage implements OnInit {
 </ion-content>
 ````
 
+#### Make ng2-google-chart responsive
+
+> **Warning** : By default, ng2-google-chart are not responsive !
+
+To avoid this, here is a self-working example based on the previous colorised worldmap. To make google chart responsive, you need to listen for *window.onresize* event
+
+````
+export class WorldmapPage implements OnInit {
+  public geoChart: GoogleChartInterface;
+
+  constructor(private ngZone: NgZone) { 
+    window.onresize = (e) => {
+        this.ngZone.run(() => {
+            console.log("Width: " + window.innerWidth);
+            console.log("Height: " + window.innerHeight);
+            this.refreshMap(window.innerHeight);
+        });
+    };
+  }
+
+  ngOnInit() {
+    this.refreshMap(0, 600);
+  }
+
+  refreshMap(height) {
+    this.geoChart = {
+      chartType: 'GeoChart',
+      dataTable: [
+        ['Country', 'Population (2019)'],
+        ['Austria',	8858775],
+        ['Belgium',	11467923],
+        ['Bulgaria', 7000039],
+        ['Croatia',	4076246],
+        ['Cyprus',	875898],
+        ['Czech Republic', 10649800],
+        ['Denmark',	5806081],
+        ['Estonia',	1324820],
+        ['Finland',	5517919],
+        ['France',	67028048],
+        ['Germany',	83019214],
+        ['Greece',	10722287],
+        ['Hungary',	9797561],
+        ['Ireland',	4904226],
+        ['Italy',	60359546],
+        ['Latvia', 1919968],
+        ['Lithuania',	2794184],
+        ['Luxembourg', 613894],
+        ['Malta',	493559],
+        ['Netherlands',	17282163],
+        ['Poland', 37972812],
+        ['Portugal', 10276617],
+        ['Romania',	19401658],
+        ['Slovakia', 5450421],
+        ['Slovenia', 2080908],
+        ['Spain',	46934632],
+        ['Sweden', 10230185],
+      ],
+      options: {
+        //region: '150', // Europe
+        colorAxis: {colors: ['#ffc107', '#fd7e14', '#dc3545']},
+        /*backgroundColor: '#9cf',
+        datalessRegionColor: '#f8f9fa',*/
+        defaultColor: '#6c757d',
+        height: height,	// => remove if you want 100% page height chart
+      }
+    };
+  }
+}
+````
+
+> **To note** : If you remove the height property of geochart options, the chart will automatically fit the page
 
 ## Grid
 [Back to top](#ui-components)  
