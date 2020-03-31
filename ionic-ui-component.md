@@ -1493,6 +1493,22 @@ https://www.devrandom.it/software/ng2-google-charts/
 npm install ng2-google-charts --save
 ```
 
+*import library in index.html*
+
+````
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {
+      'packages':['geochart'],
+      // Note: you will need to get a mapsApiKey for your project.
+      // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+      'mapsApiKey': <YOUR_API_KEY>
+    });
+  
+  </script>
+````
+
+
 The way this library works, you’ll have to import Google Charts in your *page.module.ts* using
 
 ```import { Ng2GoogleChartsModule } from 'ng2-google-charts';```
