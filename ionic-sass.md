@@ -20,7 +20,7 @@
 * [Increase ion-icon size](#increase-icon-size)    
 * [Remove header border](#remove-header-border)    
 * [Create CSS stepper](#create-css-stepper)    
-* [Transparent scroll](#transparent scroll)   
+* [Transparent scroll](#transparent-scroll)   
 * [Create fixed menu with scrollable content](#create-fixed-menu-with-scrollable-content)    
 
 Here are some tips to perform your scss.
