@@ -1484,8 +1484,11 @@ const myChart = new Chart(ctx,{
 ```
 
 ### ng2-google-chart
+[Back to top](#ui-components)  
 
-https://www.devrandom.it/software/ng2-google-charts/
+[ng2-google-chart](https://www.devrandom.it/software/ng2-google-charts/)    
+[Google GeoChart doc](https://developers.google.com/chart/interactive/docs/gallery/geochart#text-geocharts)    
+
 
 *installation*
 
@@ -1516,6 +1519,7 @@ The way this library works, you’ll have to import Google Charts in your *page.
 and also include *Ng2GoogleChartsModule* in the *@NgModule* imports in *app.module.ts*.
 
 #### colored world map sample
+[Back to top](#ui-components)  
 
 *controller file*
 
@@ -1588,6 +1592,7 @@ export class WorldmapPage implements OnInit {
 ````
 
 #### Make ng2-google-chart responsive
+[Back to top](#ui-components)  
 
 > **Warning** : By default, ng2-google-chart are not responsive !
 
