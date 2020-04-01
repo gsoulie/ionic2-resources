@@ -1342,7 +1342,7 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class ChartPage implements OnInit{
 
-  @ViewChild('lineCanvas', {static: false}) lineCanvas;
+  @ViewChild('lineCanvas', {static: true}) lineCanvas;
   lineChart: any;
   orientation;
   orientationPortrait: boolean = true;
@@ -1454,7 +1454,7 @@ page-chart {
 *controller file*
 ```
 export class MyClass {
-	@ViewChild('myCanvas') myCanvas: ElementRef;
+	@ViewChild('myCanvas', {static: true}) myCanvas: ElementRef;
 	
 	initChart() {
 		const dataset = { 
