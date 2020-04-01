@@ -1287,6 +1287,14 @@ This snippet show how to fix floating button in front of a list
 
 ### ChartJS Sample code
 
+#### Installation
+
+````
+npm install chart.js --save
+````
+
+
+
 *View.html*
 
 ```
