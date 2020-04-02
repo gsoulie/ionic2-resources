@@ -22,6 +22,7 @@
 * [Create CSS stepper](#create-css-stepper)    
 * [Transparent scroll](#transparent-scroll)   
 * [Create fixed menu with scrollable content](#create-fixed-menu-with-scrollable-content)    
+* [Flex grid](#flex-grid)    
 
 Here are some tips to perform your scss.
 
@@ -1042,3 +1043,120 @@ To make browser scrollbar transparent use
     padding-left: 25px;
 }
 ````
+
+
+## Flex grid
+[Back to top](#sass)
+
+https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_flex-wrap_wrap
+
+According to the previous documentation, here is an example of a responsive grid with 3 columns containing 3 charts. When the screen size is over 1600px, each div has 33% width, then when screen size is between 1600px and 1344px, each div has 47% width. Finally when screen size is under 1024px, each div has 100% width.
+
+*View file*
+
+````
+<div class="flex-container">
+  <div class="flex-div">
+    <div class="tile chart-div2">
+      <div class="chart-title">
+        <ion-label>Line chart</ion-label>
+      </div>
+      <canvas #lineCanvas></canvas>
+    </div>
+  </div>
+  <div class="flex-div">
+    <div class="tile chart-div2">
+      <div class="chart-title">
+        <ion-label>Bar Chart 1</ion-label>
+      </div>
+      <canvas #barCanvas1></canvas>
+    </div>
+  </div>
+  <div class="flex-div">
+    <div class="tile chart-div2">
+      <div class="chart-title">
+        <ion-label>Bar Chart 2</ion-label>
+      </div>
+      <canvas #barCanvas2></canvas>
+    </div>
+  </div>  
+</div>
+````
+
+*Style file*
+
+````
+.tile {
+    -webkit-box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
+    border-radius: 10px;
+}
+.chart-title {
+    padding-left: 24px;
+    padding-top: 20px;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #555;
+
+    float: left;
+}
+.chart-div2 {
+    position: relative;
+    margin: auto;
+    height: 260px;
+    width: 100%;
+}
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: none;
+}
+.flex-div {
+    text-align: center;
+    //line-height: 75px;
+    //font-size: 30px;
+    margin-right: 20px;
+}
+@media screen and (min-width: 1600px) {
+    .flex-div {
+        width: 31%;
+    }
+    .chart-div2 {
+        height: 260px;
+        margin-top: 0px;
+    }
+}
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 1600px) {
+    .flex-div {
+        width: 48%;
+    }
+    .chart-div2 {
+        height: 320px;
+        margin-top: 20px;
+    }
+}
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 1344px) {
+    .flex-div {
+        width: 47%;
+    }
+    .chart-div2 {
+        height: 320px;
+        margin-top: 20px;
+    }
+}
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 1024px) {
+    .flex-div {
+        width: 100%;
+    }
+    .chart-div2 {
+        height: 400px;
+        margin-top: 20px;
+    }
+}
+````
+[Back to top](#sass)
+
