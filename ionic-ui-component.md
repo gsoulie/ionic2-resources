@@ -1491,6 +1491,23 @@ const myChart = new Chart(ctx,{
 });
 ```
 
+#### Customization
+
+https://blog.vanila.io/chart-js-tutorial-how-to-make-gradient-line-chart-af145e5c92f9
+https://codepen.io/nzuki/pen/oVmOOd
+https://medium.com/@ValeriaCortezVD/tutorial-this-is-why-you-should-use-gradient-charts-with-chart-js-f5be20e39c92
+
+**Gradient**
+
+````
+gradientStroke.addColorStop(0, firstColour);
+gradientStroke.addColorStop(0.3, secondColour);
+gradientStroke.addColorStop(0.6, thirdColour);
+gradientStroke.addColorStop(1, fourthColour);
+````
+
+The *addColorStop(stop, colour)* method specifies the colours and their position **(0–1)** in the gradient object.
+
 ### ng2-google-chart
 [Back to top](#ui-components)  
 
