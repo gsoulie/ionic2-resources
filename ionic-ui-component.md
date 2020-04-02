@@ -1492,6 +1492,7 @@ const myChart = new Chart(ctx,{
 ```
 
 #### Customization
+[Back to top](#ui-components)  
 
 https://blog.vanila.io/chart-js-tutorial-how-to-make-gradient-line-chart-af145e5c92f9
 https://codepen.io/nzuki/pen/oVmOOd
@@ -1507,6 +1508,403 @@ gradientStroke.addColorStop(1, fourthColour);
 ````
 
 The *addColorStop(stop, colour)* method specifies the colours and their position **(0–1)** in the gradient object.
+
+
+### Full example
+[Back to top](#ui-components)  
+
+In this example we create 1 line chart and two bar chart.
+
+*Controller file*
+
+````
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Chart } from 'chart.js';
+
+@Component({
+  selector: 'app-view-analytics',
+  templateUrl: './view-analytics.component.html',
+  styleUrls: ['./view-analytics.component.scss'],
+})
+export class ViewAnalyticsComponent implements OnInit {
+
+  @Input() dataset: any[] = [];
+  @ViewChild('lineCanvas', {static: true}) lineCanvas;
+  @ViewChild('barCanvas1', {static: true}) barCanvas1;
+  @ViewChild('barCanvas2', {static: true}) barCanvas2;
+  lineChart: any;
+  barChart1: any;
+  barChart2: any;
+  lineChartTitle = 'Results by year';
+  barChart1Title = 'Top NPI';
+  barChart2Title = 'Top Outcomes';
+  dataList = [5400, 5000, 4790, 4100, 3750, 3200, 2530, 2240, 2050];
+
+  constructor() { }
+
+  ngOnInit() {
+    this.refreshChart();
+  }
+
+  ngAfterContentInit() {
+    console.table(this.dataset);
+  }
+  updateData(data) {
+    this.dataset = data;
+    console.table(this.dataset);
+  }
+
+  refreshChart() {
+    this.generateLineChart();
+    this.generateBarChart1();
+    this.generateBarChart2();
+  }
+
+  generateLineChart() {
+    const ctx = this.lineCanvas.nativeElement.getContext('2d');
+    
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+      type: 'line',
+      data: {
+          labels: ['2012', '2013',
+        '2014', '2015', '2016',
+      '2017', '2018', '2019', '2020'],
+          datasets: [
+              {
+                  data: [1200, 1600, 2020, 1990, 2390, 1850, 2100, 2000, 2600],
+                  spanGaps: false,
+                  borderCapStyle: 'round',
+                  lineTension: 0.5,
+                  fill: false,
+                  backgroundColor: '#72B83B',
+                  borderColor: '#72B83B',
+                  pointRadius: 0,
+                  borderJoinStyle: 'miter'
+              }
+          ]
+      },
+      options: {
+        /*title: {
+          display: true,
+          text: this.lineChartTitle,
+        },*/
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        layout: {
+          padding: {
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: 50
+          }
+        },
+        scales: {
+            xAxes: [{
+              gridLines: {
+                display: false
+              },
+              scaleLabel: {
+                display: false // hide egend title on X
+              },
+              ticks: {
+                autoSkip: false,
+                maxRotation: 90,  // legend rotation
+                minRotation: 90  // legend rotation
+              }
+            }]
+        },
+      },
+    });
+  }
+
+  generateBarChart1() {
+    var ctx = this.barCanvas1.nativeElement.getContext('2d');
+    var grd = ctx.createLinearGradient(0, 0, 0, 400);
+    grd.addColorStop(0, '#72B83B');
+    grd.addColorStop(0.5, '#ADDB88');
+    grd.addColorStop(1, '#E2FACE');
+    this.barChart1 = new Chart(this.barCanvas1.nativeElement, {
+      type: 'horizontalBar',
+      data: {
+          labels: ['Chinese herbal drugs', 'Cognitive behaviour therapy',
+        'Health education', 'Physical activity', 'Screening',
+      'Massage', 'Beta carotene', 'Psychotherapy', 'Behavior therapy'],
+          datasets: [
+              {
+                  label: '',
+                  fillColor: grd,
+                  fill: true, 
+                  backgroundColor: grd,
+                  borderWidth: 0,
+                  borderColor: 'rgba(255,99,132,1)',  // tooltip square border
+                  borderCapStyle: 'round', //'butt',
+                  borderDash: [],
+                  barThickness: 'flex',
+                  data: this.dataList,
+                  spanGaps: false,
+                  showTooltips: false
+              }
+          ]
+      },
+      options: {
+        /*tooltips: {enabled: false},
+        hover: {mode: null},*/
+        legend: {
+          display: false
+        },
+        layout: {
+          padding: {
+              left: 20,
+              right: 50,
+              top: 0,
+              bottom: 10
+          }
+        },
+        scales: {
+            yAxes: [{
+              gridLines: {
+                display: false
+              },
+              scaleLabel: {
+                display: false // hide legend on Y
+              }
+            }],
+            xAxes: [{
+              gridLines: {
+                display: false
+              },
+              scaleLabel: {
+                display: false // hide legend on X
+              },
+              ticks: {
+                display: false // hide labels on X
+              }
+            }]
+        },
+        animation: {
+          duration: 1,
+          onComplete: () => {
+            // Display values at the end of the bars
+            const chartInstance = this.barChart1,
+            ctx = chartInstance.ctx;
+            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillStyle = '#000';
+            this.barChart1.data.datasets.forEach((dataset, i) => {
+              const meta = chartInstance.controller.getDatasetMeta(i);
+              meta.data.forEach((bar, index) => {
+                const data = dataset.data[index];
+                ctx.fillText(data, bar._model.x + 20, bar._model.y + 6);
+              });
+            });
+          }
+        },
+      },
+    });
+  }
+
+  generateBarChart2() {
+    var ctx = this.barCanvas2.nativeElement.getContext('2d');
+    var grd = ctx.createLinearGradient(0, 0, 0, 400);
+    grd.addColorStop(0, '#EB5E62');
+    grd.addColorStop(0.5, '#EE8E91');
+    grd.addColorStop(1, '#F2CACB');
+    this.barChart2 = new Chart(this.barCanvas2.nativeElement, {
+      type: 'horizontalBar',
+      data: {
+          labels: ['Adaptation, psychological', 'Return to work',
+                  'Quality of life', 'Self concept', 'Patient compliance',
+                  'Nausea', 'Body composition',
+                  'Anxiety', 'Gastrointestinal motility'],
+          datasets: [
+              {
+                  label: '',
+                  fillColor: grd,
+                  fill: true, // fill under chart area
+                  lineTension: 0.5, // curve smooth
+                  backgroundColor: grd,
+                  borderColor: 'rgba(255,99,132,1)',  // tooltip square border
+                  borderCapStyle: 'round', //'butt',
+                  borderDash: [],
+                  borderWidth: 0,
+                  barThickness: 'flex',
+                  data: this.dataList,
+                  spanGaps: false,
+              }
+          ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        layout: {
+          padding: {
+              left: 20,
+              right: 50,
+              top: 0,
+              bottom: 10
+          }
+        },
+        scales: {
+            yAxes: [{
+              gridLines: {
+                display: false
+              },
+              scaleLabel: {
+                display: false // hide legend on Y
+              }
+            }],
+            xAxes: [{
+              gridLines: {
+                display: false
+              },
+              scaleLabel: {
+                display: false // hide legend on X
+              },
+              ticks: {
+                display: false // hide labels on X
+              }
+            }]
+        },
+        animation: {
+          duration: 1,
+          onComplete: () => {
+            // Display values at the end of the bars
+            const chartInstance = this.barChart2,
+            ctx = chartInstance.ctx;
+            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillStyle = '#000';
+            this.barChart2.data.datasets.forEach((dataset, i) => {
+              const meta = chartInstance.controller.getDatasetMeta(i);
+              meta.data.forEach((bar, index) => {
+                const data = dataset.data[index];
+                ctx.fillText(data, bar._model.x + 20, bar._model.y + 6);
+              });
+            });
+          }
+        },
+      },
+    });
+  }
+}
+
+````
+[Back to top](#ui-components)  
+
+*View file*
+
+````
+<div class="flex-container">
+  <div class="flex-div">
+    <div class="tile chart-div2">
+      <div class="chart-title">
+        <ion-label>{{ lineChartTitle }}</ion-label>
+      </div>
+      <canvas #lineCanvas></canvas>
+    </div>
+  </div>
+  <div class="flex-div">
+    <div class="tile chart-div2">
+      <div class="chart-title">
+        <ion-label>{{ barChart1Title }}</ion-label>
+      </div>
+      <canvas #barCanvas1></canvas>
+    </div>
+  </div>
+  <div class="flex-div">
+    <div class="tile chart-div2">
+      <div class="chart-title">
+        <ion-label>{{ barChart2Title }}</ion-label>
+      </div>
+      <canvas #barCanvas2></canvas>
+    </div>
+  </div>  
+</div>
+````
+[Back to top](#ui-components)  
+
+
+*Style file*
+
+````
+.tile {
+    -webkit-box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
+    border-radius: 10px;
+}
+.chart-title {
+    padding-left: 24px;
+    padding-top: 20px;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #555;
+
+    float: left;
+}
+.chart-div2 {
+    position: relative;
+    margin: auto;
+    height: 260px;
+    width: 100%;
+}
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: none;
+}
+.flex-div {
+    text-align: center;
+    //line-height: 75px;
+    //font-size: 30px;
+    margin-right: 20px;
+}
+@media screen and (min-width: 1600px) {
+    .flex-div {
+        width: 31%;
+    }
+    .chart-div2 {
+        height: 260px;
+        margin-top: 0px;
+    }
+}
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 1600px) {
+    .flex-div {
+        width: 48%;
+    }
+    .chart-div2 {
+        height: 320px;
+        margin-top: 20px;
+    }
+}
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 1344px) {
+    .flex-div {
+        width: 47%;
+    }
+    .chart-div2 {
+        height: 320px;
+        margin-top: 20px;
+    }
+}
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 1024px) {
+    .flex-div {
+        width: 100%;
+    }
+    .chart-div2 {
+        height: 400px;
+        margin-top: 20px;
+    }
+}
+
+````
 
 ### ng2-google-chart
 [Back to top](#ui-components)  
