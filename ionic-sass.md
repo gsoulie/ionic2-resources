@@ -492,13 +492,33 @@ In the view file
 ### Vertical alignment
 [Back to top](#sass)  
 
+#### Using text-center
+
 ```html
 <div text-center>
 	<ion-button fill="outline" type="submit" text-center [disabled]="!f.valid">VALIDER</ion-button>
 </div>
 ```
 
-### ion-label vertical alignment
+#### Using display flex
+
+````
+<div>
+  <label for='name'>Name:</label>
+  <input type='text' id='name' />
+</div>
+````
+
+````
+div {
+  height: 50px;
+  background: grey;
+  display: flex;
+  align-items: center
+}
+````
+
+#### ion-label vertical alignment
 [Back to top](#sass)  
 
 To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you need to set ```display: flex;``` on the parent container (here the ion-item) and set ```margin:auto;``` on the ```<ion-label>```
@@ -522,7 +542,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
     }
 ```
 
-### ion-icon vertical alignment
+#### ion-icon vertical alignment
 [Back to top](#sass)  
 
 ```css
@@ -532,7 +552,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
     }
 ```
 
-### ion-col vertical alignment
+#### ion-col vertical alignment
 
 *view.html*
 ```
@@ -563,7 +583,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 ```
 
 
-### CSS vertical alignment
+#### CSS vertical alignment
 [Back to top](#sass)    
 
 ```html
@@ -585,7 +605,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 }
 ```
 
-### Vertical align text in div
+#### Using display table-cell
 
 ```
 <div class="container">
