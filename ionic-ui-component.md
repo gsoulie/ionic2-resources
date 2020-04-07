@@ -1906,6 +1906,244 @@ export class ViewAnalyticsComponent implements OnInit {
 
 ````
 
+### Chart grid 50%
+[Back to top](#ui-components)  
+
+Here is a sample code aimed to put 2 charts (line + bar) on the same grid line with 50% width each.
+
+*View file*
+
+````
+<div id="block_container">
+    <div class="left-chart-div">
+      <canvas #lineCanvas></canvas>
+    </div>
+    <div class="right-chart-div">
+      <canvas #barCanvas></canvas>
+    </div>
+</div>
+````
+[Back to top](#ui-components)  
+
+*Style file*
+
+````
+.block_container {
+    display: flex;
+    justify-content: center;
+}
+.left-chart-div {
+    width: 50%;
+    padding: 10px;
+    overflow: hidden;
+    float: left;
+}
+.right-chart-div {
+    float: right;
+    width: 50%;
+    padding: 10px;
+    overflow: hidden;
+}
+````
+[Back to top](#ui-components)  
+
+*Controller file*
+
+````
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Chart } from 'chart.js';
+import 'chartjs-top-round-bar';
+
+@Component({
+  selector: 'app-chart',
+  templateUrl: './chart.page.html',
+  styleUrls: ['./chart.page.scss'],
+})
+export class ChartPage implements OnInit {
+  @ViewChild('barCanvas', {static: true}) barCanvas;
+  barChart: any;
+  
+  @ViewChild('lineCanvas', {static: true}) lineCanvas;
+  lineChart: any;
+  
+  dataList = [5400, 5000, 4790, 4100, 3750, 3200, 2530, 2240, 2050];
+
+
+  horizontalBarChartData = {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [{
+      label: 'Dataset 1',
+      backgroundColor: "#ffcc00",
+      borderColor: 'red',
+      borderWidth: 1,
+      data: [
+        1,2,3,4,5,6,7
+      ]
+    }, {
+      label: 'Dataset 2',
+      backgroundColor: "orange",
+      borderColor: "orange",
+      data: [
+        8,9,10,11,12,13,14
+      ]
+    }]
+  };
+    
+  constructor() { }
+
+  ngOnInit() {
+    this.generateLineChart();
+    this.generateBarChart();
+  }
+
+  generateBarChart() {
+    var ctx = this.barCanvas.nativeElement.getContext('2d');
+    var grd = ctx.createLinearGradient(0, 0, 0, 400);
+    grd.addColorStop(0, '#72B83B');
+    grd.addColorStop(1, '#E2FACE');
+    this.barChart = new Chart(this.barCanvas.nativeElement, {
+      type: 'horizontalBar',
+      data: {
+          labels: ['Chinese herbal drugs', 'Cognitive behaviour therapy',
+        'Health education', 'Physical activity', 'Screening',
+      'Massage', 'Beta carotene', 'Psychotherapy', 'Behavior therapy'],
+          datasets: [
+              {
+                  label: '',
+                  fillColor: grd,
+                  fill: true, // remplissage de la zone sous le graphe
+                  lineTension: 0.5, // lissage de la courbe
+                  backgroundColor: grd,
+                  borderColor: 'rgba(255,99,132,1)',  // border du carré dans la tooltip
+                  borderCapStyle: 'round', //'butt',
+                  borderDash: [],
+                  barThickness: 'flex', // largeur des barres. 'flex' = définition automatique de la largeur la plus appropriée
+                  //barPercentage: 0.5,
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter', // jointure de courbe (arrondie, plate ou pointue)
+                  pointBorderColor: 'rgba(0,0,0,1)',
+                  pointBackgroundColor: '#fff',
+                  pointBorderWidth: 0,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: 'rgba(0,0,0,1)',
+                  pointHoverBorderColor: 'rgba(220,220,220,1)',
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                  data: this.dataList,
+                  spanGaps: false,
+              }
+          ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        scales: {
+            yAxes: [{
+              gridLines: {
+                color: 'white', // couleur des lignes de l'axe
+                display: false
+              },
+              scaleLabel: {
+                display: false // affichage de la légende des y
+              }
+            }],
+            xAxes: [{
+              gridLines: {
+                color: 'white', // couleur des lignes de l'axe
+              },
+              scaleLabel: {
+                display: false // affichage de la légende des x
+              },
+              ticks: {
+                display: false // affichage des labels de l'axe des x
+              }
+            }]
+        },
+        animation: {
+          duration: 1,
+          onComplete: () => {
+            const chartInstance = this.barChart,
+            ctx = chartInstance.ctx;
+            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillStyle = '#000';
+            this.barChart.data.datasets.forEach((dataset, i) => {
+              const meta = chartInstance.controller.getDatasetMeta(i);
+              meta.data.forEach((bar, index) => {
+                const data = dataset.data[index];
+                ctx.fillText(data, bar._model.x + 20, bar._model.y + 6);
+              });
+            });
+          }
+        },
+      },
+   });
+  }
+
+
+  generateLineChart() {
+    const ctx = this.lineCanvas.nativeElement.getContext('2d');
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+      type: 'line',
+      data: {
+          labels: ['2012', '2013',
+        '2014', '2015', '2016',
+      '2017', '2018', '2019', '2020'],
+          datasets: [
+              {
+                  data: [1200, 1600, 2020, 1990, 2390, 1850, 2100, 2000, 2600],
+                  spanGaps: false,
+                  borderCapStyle: 'round',
+                  lineTension: 0.5,
+                  fill: false,
+                  backgroundColor: '#72B83B',
+                  borderColor: '#72B83B',
+                  pointRadius: 0,
+                  borderJoinStyle: 'miter'
+              }
+          ]
+      },
+      options: {
+        legend: {
+          display: false
+        },
+        layout: {
+          padding: {
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: 20
+          }
+        },
+        scales: {
+            xAxes: [{
+              gridLines: {
+                color: 'white', // couleur des lignes de l'axe
+              },
+              scaleLabel: {
+                display: false // affichage de la légende des x
+              },
+              ticks: {
+                autoSkip: false,
+                maxRotation: 90,  // rotation de la légende
+                minRotation: 90  // rotation de la légende
+              }
+            }]
+        },
+      },
+   });
+  }
+
+}
+
+````
+[Back to top](#ui-components)  
+
+
+
 ### ng2-google-chart
 [Back to top](#ui-components)  
 
