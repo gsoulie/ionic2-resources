@@ -205,6 +205,10 @@ onClose(remove = false){
     }
   }
 ```
+### Positionning issues
+
+https://stackoverflow.com/questions/56596932/ionic-4-customize-ion-select
+
 
 ## ion-item
 [Back to top](#ui-components)  
