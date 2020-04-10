@@ -635,3 +635,5 @@ async about(ev: any) {
     return await popover.present();
   }
 ```
+
+> **IMPORTANT** : Do not forget to pass *$event* in your function call inside your view file. Else the popover will be always centered in the viewport
