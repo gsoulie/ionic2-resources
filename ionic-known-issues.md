@@ -19,6 +19,7 @@
 * [HTTP query issues](#http-query-issues)    
 * [Android build error](#android-build-error)    
 * [Android failed to execute aapt](#android-failed-to-execute-aapt)    
+* [ViewDestroyError](#viewdestroyerror)    
 
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
@@ -469,3 +470,32 @@ Add the following code in the config.xml file
 </platform>
  ```
 
+## ViewDestroyError
+[back to top](#common-errors) 
+
+If you are using *window.onresize* event in your page (*like below*)
+
+````
+ngOnInit() {
+    this.initializeCharts();
+    window.onresize = (e) => {
+      this.ngZone.run(() => {
+          this.generateGeoChart(window.innerHeight);
+      });
+   };
+}
+````
+
+you will probably get the following error when you will try to switch view :
+
+**ERROR Error: ViewDestroyedError: Attempt to use a destroyed view: detectChanges**
+
+The reason of that error is that you are deleting the reference of your object on the change event. But the detectChange method is waiting for 250 ms before firing the change detect, at that time your view and component will be destroyed.
+
+To prevent that issue, you need to implement the following code :
+
+````
+ ngOnDestroy() {
+    window.onresize = null;
+  }
+````
