@@ -6,6 +6,7 @@
 * [File size](#file-size)    
 * [PWA : write file](#pwa-write-file)     
 * [Loading json file](#loading-json-file)    
+* [Upload file with file explorer](#upload-file-with-file-explorer)     
 
 ## File storage
 [Back to top](#file)  
@@ -316,4 +317,81 @@ export class MyClass {
 }
 ```
 
+## Upload file with file explorer
+[Back to top](#file)
+
+*View file*
+
+````
+<div class="import-div">
+  <input type="file" accept=".json" (change)="change($event)" id="file" />
+  <label for="file">Import json file</label>
+</div>
+````
+
+*Controller file*
+
+````
+async change(event: any) {
+    const file = event.target.files[0];
+    const fileContent = await this.readFileContent(file);	
+    const convertedData = JSON.parse(fileContent) as any[]; // example : Convert string result as Json array
+}
+
+// Return file content in string format
+async readFileContent(file: File): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+        if (!file) {
+            resolve('');
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const text = reader.result.toString();
+            resolve(text);
+        };
+        reader.readAsText(file);
+    });
+}
+````
+
+*Style file*
+
+````
+
+.import-div {
+    width: 100%;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+[type="file"] {
+    height: 0;
+    overflow: hidden;
+    width: 0;
+}
+
+[type="file"] + label {
+    background: white;    
+    border-radius: 40px;
+    border: 3px solid #58b937;
+    color: #58b937;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    outline: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+    width: 100%;
+    &:hover {
+      background-color: #58b937;
+      color: white;
+    }
+}
+````
 
