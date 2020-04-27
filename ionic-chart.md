@@ -913,7 +913,8 @@ and also include *Ng2GoogleChartsModule* in the *@NgModule* imports in *app.modu
 ````
 import { Component, OnInit } from '@angular/core';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
-import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
+import { GoogleChartInterface } from 'ng2-google-charts';
+//import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
 
 @Component({
   selector: 'app-worldmap',
