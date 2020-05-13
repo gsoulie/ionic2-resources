@@ -2941,5 +2941,53 @@ Finally, you need to add an id **#header** on your ```<ion-header>``` tag and li
 ## Notification badge on icon
 [Back to top](#ui-components)  
 
+<img src="https://github.com/gsoulie/ionic2-resources/blob/master/notification-badge.png" align="center" width="250">
 
-<img src="https://github.com/gsoulie/ionic2-resources/blob/master/notification-badge.png" align="center" width="150">
+*View file*
+
+```
+<div class="notifications-badge">
+   <ion-badge color="accent">399</ion-badge>
+   <ion-icon slot="icon-only" class="box-shadow" name="list" mode="ios" (click)="onClick()"></ion-icon>
+</div>
+```
+
+*Style file*
+
+```
+.notifications-badge {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    
+    ion-badge {
+        background-color: #EB5C60;
+        top: -0.1rem;
+        right: -0.2rem;
+	opacity: 0.9;
+        text-align: center;
+        position: absolute;
+        z-index: 100;
+
+	& ~ ion-icon {
+            //margin-right: 1.2rem;
+            z-index: 90;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            border-radius: 200px;
+            background-color: white;
+            color: #179eb8;
+            font-size: 16pt !important;
+            padding: 10px;
+            cursor: pointer;
+        }
+    }
+}
+.box-shadow {
+    box-shadow: 1px 1px 4px #0000001A;
+}
+```
