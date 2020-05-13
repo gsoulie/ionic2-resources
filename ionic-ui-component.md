@@ -25,6 +25,7 @@
 * [round progress bar](#round-progress-bar)     
 * [ion-slide](#ion-slide)    
 * [Hiding header on scroll](#hiding-header-on-scroll)     
+* [Notification badge on icon](#notification-badge-on-icon)    
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -2936,3 +2937,9 @@ Finally, you need to add an id **#header** on your ```<ion-header>``` tag and li
 
 <ion-content padding appHideHeader scrollEvents="true" [header]="header">
 ```
+
+## Notification badge on icon
+[Back to top](#ui-components)  
+
+
+<img src="https://github.com/gsoulie/ionic2-resources/blob/master/notification-badge.png" align="center" width="150">
