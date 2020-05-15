@@ -7,6 +7,7 @@
 * [ion-select](#ion-select)    
 * [ion-item](#ion-item)    
 * [ion-list](#ion-list)  
+* [pagination](#pagination)  
 * [ion-label](#ion-label)    
 * [searchbar](#searchbar)    
 * [list filtering](#high-performance-list-filtering)    
@@ -921,6 +922,171 @@ groupPatients(patients){
       <p class="subtitle">{{ item.ville }}
 </ion-item>
 ```   
+
+## pagination
+[Back to top](#ui-components)  
+
+An easy way to manage pagination with dynamic data loading via webservices is to use https://www.npmjs.com/package/ngx-pagination
+
+````
+npm install ngx-pagination --save
+````
+
+*View file*
+
+````
+<pagination-controls class="my-pagination" (pageChange)="changePage($event)"></pagination-controls>    
+<div *ngFor="let item of filteredStudies | paginate: { 
+	itemsPerPage: pageSize,
+	currentPage: p,
+	totalItems: total }">
+	<ion-card mode="ios" class="ion-no-padding" class="result-card">
+		<ion-card-content class="ion-no-padding">
+		  <ion-card-header class="ion-no-padding">
+		    {{ item.name }}
+		  </ion-card-header>
+		</ion-card-content>
+	</ion-card>
+</div>
+<pagination-controls class="my-pagination" (pageChange)="changePage($event)"></pagination-controls>    
+````
+
+*Controller file*
+
+````
+import { DataService } from './../services/data.service';
+import { Component, OnInit } from '@angular/core';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { LoadingController } from '@ionic/angular';
+export interface IPeriodAnalytics {
+  periode: string;
+  data: any[];
+}
+export interface IServiceResult {
+  totalCount: string;
+  data: any[];
+  filters: {
+    method: any[],
+    out: any[],
+    pop: any[],
+    hg: any[],
+    cntry: any[],
+    npi: any[],
+    jns: any[],
+    part: string,
+    dis: any[]
+  };
+  periodAnalytics: IPeriodAnalytics;
+}
+
+@Component({
+  selector: 'app-pagination',
+  templateUrl: './pagination.page.html',
+  styleUrls: ['./pagination.page.scss'],
+})
+export class PaginationPage implements OnInit {
+  filteredStudies = []; // dataset
+  pageSize = 50;
+  p = 1;	// current page
+  total = 0;	// total pages
+  dataset: any = {};	// dataset returned by webservice
+  
+  constructor(private dataService: DataService,
+              private loadingController: LoadingController) { }
+
+  ngOnInit() {
+	this.fetchData();
+  }
+  
+  async fetchData(pageNumber: number = 0) {
+    const loading = await this.loadingController.create({
+      message: 'Searching data...'
+    });
+    await loading.present();
+
+    await this.dataService.getFullStudies(pageNumber)
+      .subscribe((result: any) => {
+        this.dataset = result;
+        this.filteredStudies = result.data as any[];
+        this.total = this.dataset.totalCount;	// Total count is given by the webservice
+        loading.dismiss();
+      });
+  }
+  
+  // Change page event
+  async changePage(e) {
+    this.p = e;
+    this.fetchData(this.p);	// call webservice for the selected page index
+  }
+}
+
+````
+
+*Service file*
+
+**Note :** Here, the service returns elements 50 by 50 starting from the passed page index
+````
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+
+  constructor(private http: HttpClient) { }
+  
+  getFullStudies(page = 0) {
+    
+    const url = 'https://my-service/GetScientificStudies';
+    const parameters = 'searchValue=test' +
+    '&StartIndex=' + page +
+    '&Length=50';
+
+    const httpOptions = {
+      headers: new HttpHeaders({'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'})
+    };
+
+    return this.http.get(url + '?' + parameters, httpOptions);
+  }
+}
+
+````
+
+*Style file*
+
+**Important :** put the pagination style inside de page style, not in the global.scss
+````
+// active page
+.my-pagination::ng-deep .ngx-pagination .current,
+  .btn-info {
+    background: transparent !important;
+    color: #707070;
+    font-weight: bold;
+    border-radius: 20px !important;
+  }
+// active page hover
+.my-pagination::ng-deep .ngx-pagination .current:hover {
+    background: transparent !important;
+    color: gold;
+    font-weight: bold;
+    border: transparent !important;
+}
+// inactive page
+.my-pagination::ng-deep .ngx-pagination a {
+    background: transparent !important;
+    color: #BEBDB8 !important;
+    font-weight: normal;
+    border: transparent !important;
+}
+// inactive page hover
+.my-pagination::ng-deep .ngx-pagination a:hover, .ngx-pagination button:hover {
+    background: transparent !important;
+    color: #707070 !important;
+    font-weight: normal;
+    border: transparent !important;
+}
+````
 
 ## ion-label
 [Back to top](#ui-components)  
