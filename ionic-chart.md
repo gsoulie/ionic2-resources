@@ -6,6 +6,7 @@
 * [ChartJS](#chartjs-sample-code)    
 * [Chart grid 50%](#chart-grid-50%)    
 * [World map ng2-google-chart](#ng2-google-chart)    
+* [Chart customization](#chart-customization)    
 
 ## Documentation
 [Back to top](#charts)  
@@ -1057,3 +1058,148 @@ export class WorldmapPage implements OnInit {
 ````
 
 > **To note** : If you remove the height property of geochart options, the chart will automatically fit the page
+
+## Chart customization
+[Back to top](#charts)
+
+### Trigger click event on barchart item
+
+*controller file*
+
+````
+...
+
+  @ViewChild('barCanvas', {static: true}) barCanvas;
+  barChart: any;
+  barChartTitle = 'Method';
+  barChartDataset = {
+    labels: [],
+    datasets: [{
+      label: '',
+      fillColor: '#72B83B',
+      fill: true,
+      lineTension: 0.5,
+      backgroundColor: '#72B83B',
+      borderColor: 'rgba(255,99,132,1)',
+      borderCapStyle: 'round',
+      borderDash: [],
+      borderWidth: 0,
+      barThickness: 'flex',
+      data: [],
+      spanGaps: false,
+    }]
+  };
+ 
+ngOnInit() {
+	generateBarChart();
+	generateData();
+}
+
+generateData() {
+    const data = [34, 17, 13, 8, 6];
+    const labels = ['first', 'second', 'third', 'fourth', 'fifth'];
+    this.barChartDataset.datasets[0].data = data;
+    this.barChartDataset.labels = labels;
+    // update chart data
+    this.barChart.update();
+}
+generateBarChart() {
+    var ctx = this.barCanvas.nativeElement.getContext('2d');
+    var grd = ctx.createLinearGradient(0, 0, 0, 400);
+    grd.addColorStop(0, '#07A0C0');
+    grd.addColorStop(0.5, '#5CC4DA');
+    grd.addColorStop(1, '#97DDEC');
+    this.barChartDataset.datasets[0].fillColor = grd;
+    this.barChartDataset.datasets[0].backgroundColor = grd;
+
+    this.barChart = new Chart(ctx, {
+      type: 'horizontalBar',
+      data: this.barChartDataset,
+      options: this.barChartOtions
+    });
+
+    // Add click event to get clicked label and value
+    this.barChart.options.onClick = (e) => {
+      const activePoints = this.barChart.getElementsAtEvent(e);
+      const firstPoint = activePoints[0];
+      const label = this.barChart.data.labels[firstPoint._index];
+      const value = this.barChart.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+      console.log(label + ': ' + value);
+    };
+}
+````
+
+### Customize item tooltip title and label
+
+By default, each item tooltip set the item label as tooltip title. Here's the solution to customize each item title :
+
+*controller file*
+
+````
+...
+
+  @ViewChild('barCanvas', {static: true}) barCanvas;
+  barChart: any;
+  barChartTitle = 'Method';
+  barChartDataset = {
+    labels: [],
+    datasets: [{
+      label: '',
+      fillColor: '#72B83B',
+      fill: true,
+      lineTension: 0.5,
+      backgroundColor: '#72B83B',
+      borderColor: 'rgba(255,99,132,1)',
+      borderCapStyle: 'round',
+      borderDash: [],
+      borderWidth: 0,
+      barThickness: 'flex',
+      data: [],
+      spanGaps: false,
+    }]
+  };
+ 
+ngOnInit() {
+	generateBarChart();
+	generateData();
+}
+
+generateData() {
+    const data = [34, 17, 13, 8, 6];
+    const labels = ['first', 'second', 'third', 'fourth', 'fifth'];
+    this.barChartDataset.datasets[0].data = data;
+    this.barChartDataset.labels = labels;
+    // update chart data
+    this.barChart.update();
+}
+generateBarChart() {
+    var ctx = this.barCanvas.nativeElement.getContext('2d');
+    var grd = ctx.createLinearGradient(0, 0, 0, 400);
+    grd.addColorStop(0, '#07A0C0');
+    grd.addColorStop(0.5, '#5CC4DA');
+    grd.addColorStop(1, '#97DDEC');
+    this.barChartDataset.datasets[0].fillColor = grd;
+    this.barChartDataset.datasets[0].backgroundColor = grd;
+
+    this.barChart = new Chart(ctx, {
+      type: 'horizontalBar',
+      data: this.barChartDataset,
+      options: this.barChartOtions
+    });
+
+    const customLabels = ['custom title 1', 'custom title 2', 'custom title 3', 'custom title 4', 'custom title 5'];
+    
+    this.barChart.options.tooltips = {
+      callbacks: {
+        title: (tooltipItem, data) => {
+          return customLabels[tooltipItem[0]['index']];
+        },
+        /*label: (tooltipItem, data) => {
+          const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+          const dataPoint = data.datasets[tooltipItem.datasetIndex];
+          return 'test' + ': ' + tooltipItem.datasetIndex;
+        }*/
+      }
+    };
+}
+````
