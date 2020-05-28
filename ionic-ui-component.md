@@ -124,6 +124,45 @@
 ## Modal
 [Back to top](#ui-components)  
 
+### Syntax
+
+*Parent Controller*
+
+````
+import { LoginModalComponent } from './../login-modal/login-modal.component';
+
+export class HomePage implements OnInit {
+	constructor(private modalCtrl: ModalController) {}
+	
+	async onLogin() {
+	 const modal = await this.modalCtrl.create({
+	    component: LoginModalComponent,
+	    cssClass: 'login-modal'
+	 });
+	 modal.onDidDismiss()
+	 .then((detail: any) => {
+	    if (detail.data === null) {
+	    } else {
+		this.userLogged = detail.data;
+	    }
+	 });
+		 return await modal.present();
+	 }
+ }
+````
+
+*modal controller*
+
+````
+constructor(private modalCtrl: ModalController) {}
+
+onClose() {
+	this.modalCtrl.dismiss(myUserIsLogged)
+}
+````
+
+### Other example
+
 Consider that we have a page (UserListPage for example) with a button wich open a modal based on UserPage controller.
 
 *UserListPage Controller file*
