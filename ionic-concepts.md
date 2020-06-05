@@ -859,6 +859,8 @@ Using *await/async* function is just syntactic sugar, it is not better or worst,
 ## Environments
 [Back to top](#concepts)  
 
+[Josh morony's tutorial](https://www.joshmorony.com/production-development-environment-variables-in-ionic-angular/)    
+
 You can manage development and production environments with the following files available in your *environments* folder
 
 ### Declaration
@@ -889,7 +891,7 @@ export const SERVER_URL = 'http://localost:8080';
 
 ### Usage
 
-Be careful of the import path
+Be careful of the import path, select the value from environment.ts **not** environment.prod.ts 
 
 *home.ts*
 
@@ -903,3 +905,16 @@ ngOnInit() {
 	
 }
 ```
+
+If you take a look at the angular.json file in your project, you will find the following configuration:
+````
+"production": {
+  "fileReplacements": [
+    {
+      "replace": "src/environments/environment.ts",
+      "with": "src/environments/environment.prod.ts"
+    }
+  ],
+````
+
+The production build configuration is set up to replace the environment.ts file with environment.prod.ts
