@@ -524,3 +524,5 @@ Does not change the default global package location.
 Allows easy upgrades and downgrades.
 Officially recommended by the NPM team.
 A list of versions matched between NPM and NODE (https://nodejs.org/en/download/releases/) - but you will need to download NODE INSTALLER and run that to update node (https://nodejs.org/en/)
+
+**set-executionpolicy unrestricted**
