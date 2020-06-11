@@ -20,6 +20,7 @@
 * [Android build error](#android-build-error)    
 * [Android failed to execute aapt](#android-failed-to-execute-aapt)    
 * [ViewDestroyError](#viewdestroyerror)    
+* [Updating NodeJS for window](#updating-nodejs-for-window)      
 
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
@@ -499,3 +500,27 @@ To prevent that issue, you need to implement the following code :
     window.onresize = null;
   }
 ````
+
+## Updating nodejs for window
+
+https://stackoverflow.com/questions/18412129/how-can-i-update-npm-on-windows
+
+
+This is the new best way to upgrade npm on Windows.
+
+**Run PowerShell as Administrator**
+
+````
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+npm install -g npm-windows-upgrade
+npm-windows-upgrade
+````
+Note: Do not run npm i -g npm. Instead use npm-windows-upgrade to update npm going forward. Also if you run the NodeJS installer, it will replace the node version.
+
+Upgrades npm in-place, where node installed it.
+Easy updating, update to the latest by running npm-windows-upgrade -p -v latest.
+Does not modify the default path.
+Does not change the default global package location.
+Allows easy upgrades and downgrades.
+Officially recommended by the NPM team.
+A list of versions matched between NPM and NODE (https://nodejs.org/en/download/releases/) - but you will need to download NODE INSTALLER and run that to update node (https://nodejs.org/en/)
