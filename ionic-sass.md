@@ -29,6 +29,7 @@
 * [Transparent scroll](#transparent-scroll)   
 * [Create fixed menu with scrollable content](#create-fixed-menu-with-scrollable-content)    
 * [Flex grid](#flex-grid)    
+* [Flex box](#flex-box)    
 
 Here are some tips to perform your scss.
 
@@ -1186,3 +1187,8 @@ According to the previous documentation, here is an example of a responsive grid
 ````
 [Back to top](#sass)
 
+
+## Flex box
+[Back to top](#sass)
+
+https://www.youtube.com/watch?v=KMvB08yNqlI&feature=youtu.be
