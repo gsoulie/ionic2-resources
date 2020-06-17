@@ -19,8 +19,7 @@
 * [Change ion-item height](#change-ion-item-height)    
 * [Split screen in two views](#split-screen-in-2-views)    
 * [Modale with overlay](#modale-with-overlay)    
-* [Remove ion-card shadow](#remove-ion-card-shadow)    
-* [Remove header shadow](#remove-header-shadow)     
+* [Remove ion-card shadow](#remove-ion-card-shadow) 
 * [Dynamic class](#dynamic-class)     
 * [Spacer](#spacer)    
 * [Increase ion-icon size](#increase-icon-size)    
@@ -906,15 +905,6 @@ ion-card, .card-ios, .card-md {
 }
 ```
 
-## Remove header shadow
-[Back to top](#sass)     
-
-```
-<ion-header no-border>
-	<ion-navbar>...</ion-navbar>
-</ion-header>
-```
-
 ## Dynamic class
 [Back to top](#sass)
 
@@ -955,7 +945,12 @@ Spacer will set the first span on the left side and the third span on the right 
 # Remove header border
 [Back to top](#sass)  
 
-In case of ```<ion-header no-border>``` is not working, here is a workaround
+````
+<ion-header class="ion-no-border">
+	<ion-toolbar></ion-toolbar>
+</ion-header>
+
+In case of ```<ion-header class="ion-no-border">``` is not working, here is a workaround
 
 ```
 ion-header {
