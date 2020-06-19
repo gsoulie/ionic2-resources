@@ -910,6 +910,10 @@ ion-card, .card-ios, .card-md {
 
 ```
   <div class="divCard" [ngClass]="item.show == true ? 'divCardExtand' : 'divCard'"></div>
+  
+  <div [ngClass]="{class1: text === 'titi', class2: text === 'toto', class3: text === 'tata'}">
+  my content here
+</div>
 ```
 
 ## Spacer
