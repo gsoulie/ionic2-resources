@@ -12,6 +12,7 @@
 * [Checking network connection](#checking-network-connection)    
 * [Close modal](#close-modal)    
 * [Accessing DOM element @ViewChild](#accessing-dom-element)  
+* [Show - Hide DOM element by screen size](#show-hide-dom-element-by-screen-size)    
 * [Switch statement with complex expression](#switch-statement-with-complex-expression)    
 
 ## Find element in array
@@ -323,6 +324,42 @@ export class UserPage {
 
 see more @ViewChild - @ViewChildren
 
+
+## Show Hide DOM element by screen size
+[Back to top](#useful-functions)  
+
+Sometimes you will need to show/hide some dom element switch screen size. You can achieve this with that following code :
+
+*controller file*
+````
+ngOnInit() {
+    if (window.screen.width <= 768) { // 768px portrait
+      this.smallScreen = true;
+    } else {
+      this.smallScreen = false;
+    }
+}
+````
+
+Then just use ````*ngIf```` directive on you item to display it or not
+
+You can also add a subscription on window resize event if you need to manage responsive behaviour
+
+````
+ngOnInit() {
+   window.onresize = (e) => {
+      this.ngZone.run(() => {
+          this.generateMap(window.innerHeight);
+          this.ref.detectChanges();
+      });
+    };
+}
+ngOnDestroy() {
+    // WARNING ! You need to remove the window resize listener
+    // or you will get a ViewDestroyError when you leave screen
+    window.onresize = null;
+}
+````
 
 ## Switch statement with complex expression
 [Back to top](#useful-functions)  
