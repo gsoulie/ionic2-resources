@@ -2,8 +2,96 @@
 
 # HTTP queries
 
+* [api-helper](#api-helper)     
 * [Http on PWA with HttpClient](#http-on-pwa)    
 * [CORS and CORB issue](#cors-and-corb-issue)    
+
+
+## api-helper
+
+The best way to manage http queries is to create a new layer (api-helper.ts service) aimed to manipulate HttpClient like this https://github.com/gsoulie/Ionic2-snippets/blob/master/api-helper.ts
+
+*api-helper.ts*
+
+````
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment, SERVER_URL } from './../../environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ApiHelperService {
+
+  private _url: string;
+
+  constructor(private http: HttpClient) {
+    this._url = SERVER_URL;
+  }
+
+  // Manage HTTP Quesries
+  requestApi({action, method = 'GET', datas = {}, httpHeader = {}}:
+  { action: string, method?: string, datas?: any, httpHeader?: any }): Promise<any> {
+    const methodWanted = method.toLowerCase();
+    const urlToUse = this.url + action;
+
+    const httpOptions = httpHeader !== {} ? httpHeader : {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    let req = null;
+
+    switch (methodWanted) {
+      case 'post' :
+        req = this.http.post(urlToUse, datas, httpOptions);
+        break;
+      case 'put' :
+        req = this.http.put(urlToUse, datas, httpOptions);
+        break;
+      case 'delete' :
+        req = this.http.delete(urlToUse, httpOptions);
+        break;
+      default:
+        req = this.http.get(urlToUse + '?' + datas, httpOptions);
+        break;
+    }
+
+    return req 
+            .toPromise(); // convert to promise
+  }
+
+  get url(): string {
+    return this._url;
+  }
+}
+
+````
+
+Then in your dataService :
+
+````
+  
+  fetchItems(userId = '') {
+    const httpOptions = {
+      headers: new HttpHeaders({'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.token})
+    };
+    
+    return this.apiHelper.requestApi({ action: '/getItems', method: 'get', httpHeader: httpOptions, datas: parameters });
+  }
+
+  deleteItem(itemId = -1) {
+    const httpOptions = {
+      headers: new HttpHeaders({'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.token})
+    };
+
+    return this.apiHelper.requestApi({ action: '/deleteItem/' + itemId,
+                                        method: 'delete', httpHeader: httpOptions });
+  }
+````
 
 ## Http on PWA
 
