@@ -93,6 +93,10 @@ Then in your dataService :
   }
 ````
 
+### Handle errors on dialog
+
+https://www.digitalocean.com/community/tutorials/how-to-use-angular-interceptors-to-manage-http-requests-and-error-handling
+
 ## Http on PWA
 
 Http queries requires *HttpClient* instead of Native Cordova Http module which is used for Android and iOS app.
