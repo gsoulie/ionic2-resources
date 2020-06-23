@@ -343,6 +343,26 @@ ngOnInit() {
 
 Then just use ````*ngIf```` directive on you item to display it or not
 
+### Detect window orientation change
+
+You can improve the user experience by detecting screen orientation change et show / hide DOM element when switching portrait/landscape
+
+*controller file*
+````
+ngOnInit() {...}
+
+@HostListener('window:orientationchange', ['$event'])
+    onOrientationChange(event) {
+      console.log('orientationChanged');
+      if (window.screen.width <= 768) { // 768px portrait
+        this.smallScreen = true;
+      } else {
+        this.smallScreen = false;
+      }
+}
+````
+
+### Listener on window resize
 You can also add a subscription on window resize event if you need to manage responsive behaviour
 
 ````
