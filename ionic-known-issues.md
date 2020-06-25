@@ -532,7 +532,7 @@ A list of versions matched between NPM and NODE (https://nodejs.org/en/download/
 [back to top](#common-errors) 
 
 <p align="center">
-<img src="https://github.com/gsoulie/ionic2-resources/blob/master/undefined-import.jpg" align="center" width="500">
+<img src="https://github.com/gsoulie/ionic2-resources/blob/master/undefined-import.png" align="center" width="500">
 </p>     
 
 This error occurs when there is a bad import in a module file. Generally when a xxxxComponent file is added to **imports** instead of **declarations**
