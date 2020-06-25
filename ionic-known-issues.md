@@ -21,6 +21,7 @@
 * [Android failed to execute aapt](#android-failed-to-execute-aapt)    
 * [ViewDestroyError](#viewdestroyerror)    
 * [Updating NodeJS for window](#updating-nodejs-for-window)      
+* [Cannot read property id of undefined](#cannot-read-property-id-of-undefined)    
 
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
@@ -526,3 +527,12 @@ Officially recommended by the NPM team.
 A list of versions matched between NPM and NODE (https://nodejs.org/en/download/releases/) - but you will need to download NODE INSTALLER and run that to update node (https://nodejs.org/en/)
 
 **set-executionpolicy unrestricted**
+
+## Cannot read property id of undefined
+[back to top](#common-errors) 
+
+<p align="center">
+<img src="https://github.com/gsoulie/ionic2-resources/blob/master/undefined-import.jpg" align="center" width="500">
+</p>     
+
+This error occurs when there is a bad import in a module file. Generally when a xxxxComponent file is added to **imports** instead of **declarations**
