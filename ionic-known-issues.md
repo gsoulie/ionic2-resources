@@ -235,6 +235,7 @@ window.addEventListener('native.keyboardhide', () => {
 
 
 ## Typescript error
+[Back to top](#known-issues)    
 
 Sometimes, you can get typescript error when you try to build / run with *--prod* flag
 
@@ -266,8 +267,7 @@ For example, if you create a page with ```ionic -g page <my-page>``` a new *my-p
 If you forget to delete it, you will get the error above when you will try to build / run with prod mode.
 
 ## xcassets error
-
-[back to top](#common-errors)    
+[Back to top](#known-issues)    
 
 Sometimes iOS build failed with ```Asset catalog - xcassets error``` and XCode throw a ```Distill failed for unknown reasons``` error.
 
@@ -337,7 +337,7 @@ To
 After that, iOS build should be ok
 
 ## declare-stylable error
-[back to top](#common-errors) 
+[Back to top](#known-issues)    
 
 Sometimes, Android build failed with 
 
@@ -359,7 +359,7 @@ ionic cordova platform add android@6.3.0
 ```
 
 ## DexArchiveMergerException
-[back to top](#common-errors) 
+[Back to top](#known-issues)    
 
 #### Error
 ```
@@ -393,20 +393,20 @@ allprojects {
 ```
 
 ## CORS issues
-[back to top](#common-errors) 
+[Back to top](#known-issues)    
 
 https://www.joshmorony.com/dealing-with-cors-cross-origin-resource-sharing-in-ionic-applications/
 
 ## HTTP query issues
-[back to top](#common-errors) 
+[Back to top](#known-issues)    
 
 Sometimes, Http GET queries with Angular can failed on iOS. To void that, it is recommanded to use ```httpIonic.get()``` instead of ```HttpAngular.get()```
 
 For Android, ```HttpAngular.get()``` still works fine when ```httpIonic.get()``` doesn't work.
 
 ## Android Build error
-[back to top](#common-errors) 
-
+[Back to top](#known-issues)    
+ 
 *Build Issue :app:debugCompileClasspath*
 ```
 Could not resolve all files for configuration ':app:debugCompileClasspath'.
@@ -447,7 +447,7 @@ cordova clean
 ```
 
 ## Android failed to execute aapt
-[back to top](#common-errors) 
+[Back to top](#known-issues)    
 
 #### Issue
 
@@ -473,7 +473,7 @@ Add the following code in the config.xml file
  ```
 
 ## ViewDestroyError
-[back to top](#common-errors) 
+[Back to top](#known-issues)    
 
 If you are using *window.onresize* event in your page (*like below*)
 
@@ -529,10 +529,10 @@ A list of versions matched between NPM and NODE (https://nodejs.org/en/download/
 **set-executionpolicy unrestricted**
 
 ## Cannot read property id of undefined
-[back to top](#common-errors) 
+[Back to top](#known-issues)    
 
 <p align="center">
-<img src="https://github.com/gsoulie/ionic2-resources/blob/master/undefined-import.png" align="center" width="500">
+<img src="https://github.com/gsoulie/ionic2-resources/blob/master/undefined-import.png" align="center" width="1024">
 </p>     
 
 This error occurs when there is a bad import in a module file. Generally when a xxxxComponent file is added to **imports** instead of **declarations**
