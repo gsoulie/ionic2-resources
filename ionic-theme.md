@@ -163,12 +163,14 @@ Next, add a *@font-face* for each font you want to use
     src: url("../assets/fonts/DINPro.otf") format("opentype");
     font-weight: 200;
     font-style: normal;
+    font-display: swap;	// Ensure text remains visible during webfont load 
 }
 @font-face {
     font-family: "DINPro-Italic";
     src: url("../assets/fonts/DINPro-Italic.otf") format("opentype");
     font-weight: 200;
     font-style: normal;
+    font-display: swap;	// Ensure text remains visible during webfont load 
 }
 :root {
     --ion-font-family: 'DINPro';
