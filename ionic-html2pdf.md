@@ -2,9 +2,9 @@
 
 # html2PDF
 
-* [Start with ionic](#start-with-ionic)  
-* [Visual Studio Code](#visual-studio-code)   
-* [Android debugging with logcat](#android-debugging-with-logcat)    
+* [Installation](#installation)  
+* [Resources](#resources)   
+* [Usage](#usage)    
 
 ## Installation
 
@@ -14,7 +14,7 @@ https://www.npmjs.com/package/html2pdf.js/v/0.9.0
 npm i html2pdf.js
 ````
 
-## Tutorial
+## Resources
 
 https://www.youtube.com/watch?v=7LoWmGMB7e4
 
