@@ -29,6 +29,7 @@
 * [Create fixed menu with scrollable content](#create-fixed-menu-with-scrollable-content)    
 * [Flex grid](#flex-grid)    
 * [Flex box](#flex-box)    
+* [Make modale flexible](#make-modale-flexible)    
 
 Here are some tips to perform your scss.
 
@@ -1190,4 +1191,26 @@ According to the previous documentation, here is an example of a responsive grid
 ## Flex box
 [Back to top](#sass)
 
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
 https://www.youtube.com/watch?v=KMvB08yNqlI&feature=youtu.be
+
+## Make modale flexible
+[Back to top](#sass)
+
+````
+ion-modal.auto-height {
+    --height: auto;
+    .modal-wrapper{
+      width: 90vw;
+      .ion-page {
+        position: relative;
+        contain: content;
+        max-height: 90vh;
+        .modal-content {
+          overflow: auto;
+        }
+      }
+    }
+  }
+````
