@@ -2568,7 +2568,7 @@ export class WorldmapPage implements OnInit {
 <ion-content padding>
   <ion-item>
     <ion-label>Tracking</ion-label>
-    <ion-toggle [(ngModel)]="val" black checked="false" (ionChange)="refreshTracking($event)"></ion-toggle>
+    <ion-toggle slot="end" [(ngModel)]="notificationToggled" (ngModelChange)="refreshNotification()"></ion-toggle>
   </ion-item>
 </ion-content>
 ```
@@ -2576,8 +2576,10 @@ export class WorldmapPage implements OnInit {
 *View.ts*
 
 ```javascript
-refreshTracking(e){
-   console.log("refreshTracking " + e.checked);
+notificationToggled = false;
+
+refreshNotification(){
+   console.log("notificationToggled " + this.notificationToggled);
 }
 ```
 
