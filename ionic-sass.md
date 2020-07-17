@@ -954,16 +954,17 @@ Spacer will set the first span on the left side and the third span on the right 
 <ion-header class="ion-no-border">
 	<ion-toolbar></ion-toolbar>
 </ion-header>
+````
 
-In case of ```<ion-header class="ion-no-border">``` is not working, here is a workaround
+In case of ````<ion-header class="ion-no-border">```` is not working, here is a workaround
 
-```
+````
 ion-header {
   &.header-md:after {
     background: none;
   }
 }
-```
+````
 
 
 # Create css stepper
@@ -973,14 +974,14 @@ ion-header {
 [W3C stylesheet](https://www.w3schools.com/w3css/4/w3.css)
 
 *html file*
-```
+````
 <div class="w3-light-grey w3-tiny">
   <div class="w3-green" style="height:8px;width:13%"></div>
 </div>
-```
+````
 
 *scss file*
-```
+````
 .w3-container,.w3-panel {
     padding:0.01em 16px
 }
@@ -1004,7 +1005,7 @@ ion-header {
     border-radius:20px;
     background-color:#009DBE!important;
 }
-```
+````
 
 # Transparent scroll
 [Back to top](#sass)
