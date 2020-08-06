@@ -2,6 +2,88 @@
 
 # Camera
 
+* [Using cordova](#using-cordova)    
+* [Taking photo with capacitor on mobile and PWA](#taking-photo-with-capacitor-on-mobile-and-pwa)     
+
+## Taking photo with capacitor on mobile and PWA
+
+[Tutorial](https://ionicframework.com/docs/angular/your-first-app/2-taking-photos)    
+
+First, create a photo service ````ionic g service services/photo````
+
+*photo-service.ts*
+
+````
+import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, 
+         CameraPhoto, CameraSource } from '@capacitor/core';
+
+const { Camera, Filesystem, Storage } = Plugins;
+
+interface Photo {
+  filepath: string;
+  webviewPath: string;
+  base64?: string;
+}
+
+export class PhotoService {
+  public photos: Photo[] = [];
+  
+  public async addNewToGallery() {
+      // Take a photo
+      const capturedPhoto = await Camera.getPhoto({
+        resultType: CameraResultType.Uri, 
+        source: CameraSource.Camera, 
+        quality: 100 
+      });
+      
+      this.photos.unshift({
+        filepath: "soon...",
+        webviewPath: capturedPhoto.webPath
+      });
+    }
+}
+````
+
+*home.page.ts*
+
+````
+import { PhotoService } from '../services/photo.service';
+
+export class HomePage {
+    photos = this.photoService.photos;
+    
+    constructor(public photoService: PhotoService) { }
+
+    addPhotoToGallery() {
+      this.photoService.addNewToGallery();
+    }
+}
+````
+
+*home.page.html*
+
+````
+<ion-content>
+   <ion-grid>
+    <ion-row>
+    <ion-col size="6" 
+      *ngFor="let photo of photos; index as position">
+        <ion-img src="{{ photo.webviewPath }}"></ion-img>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="addPhotoToGallery()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+````
+
+
+## Using Cordova
+
 [See documentation here](https://ionicframework.com/docs/developer-resources/guides/first-app-v4/ios-android-camera)    
 
 **plugin installation**
