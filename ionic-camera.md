@@ -2,12 +2,12 @@
 
 # Camera
 
-* [Using cordova](#using-cordova)    
 * [Taking photo with capacitor on mobile and PWA](#taking-photo-with-capacitor-on-mobile-and-pwa)     
+* [Using cordova](#using-cordova)    
 
 ## Taking photo with capacitor on mobile and PWA
 
-[Tutorial](https://ionicframework.com/docs/angular/your-first-app/2-taking-photos)    
+[Taking Photos with the Camera](https://ionicframework.com/docs/angular/your-first-app/2-taking-photos)    
 
 First, create a photo service ````ionic g service services/photo````
 
