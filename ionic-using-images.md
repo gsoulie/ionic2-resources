@@ -7,6 +7,7 @@
 * [Using cascading SVG](#using-cascading-svg)    
 * [Add blur](#add-blur-on-image)    
 * [Upload image](#upload-image)    
+* [Converting base64 string to blob](#converting-base64-string-to-blob)     
 
 To use image in your app, you can store them under ```src/assets/imgs/*.png```
 
@@ -137,3 +138,35 @@ input[type="file"] {
     visibility: hidden
 }
 ```
+
+## Converting base64 string to blob
+
+https://ionicframework.com/blog/converting-a-base64-string-to-a-blob-in-javascript/
+
+````
+const base64Data = "aGV5IHRoZXJl";
+const base64 = await fetch(base64Data);
+````
+Depending on the format of the base64 string, you might need to prepend content type data. For example, a JPEG image:
+````
+const base64Response = await fetch(`data:image/jpeg;base64,${base64Data}`);
+````
+Next, convert the response to a blob:
+````
+const blob = await base64Response.blob();
+````
+
+### Convert blob to base64 string
+
+````
+convertBlobToBase64 = (blob) => new Promise((resolve, reject) => {
+    const reader = new FileReader;
+    reader.onerror = reject;
+    reader.onload = () => {
+        resolve(reader.result);
+    };
+    reader.readAsDataURL(blob);
+});
+
+const base64String = await convertBlobToBase64(blob);
+````
