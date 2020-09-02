@@ -15,6 +15,7 @@
 * [Passing data Ionic 3](#passing-data-ionic-3)  
 * [Passing data on close event](#passing-data-on-close-event)    
 * [Disable Android hardware back button](#disable-android-hardware-back-button)    
+* [Navigating in modal with ion-nav](#navigating-in-modal)     
 
 
 ## Navigation by routing
@@ -786,3 +787,8 @@ initializeCustomBackButtonHandler(){
 }
 ```
 
+## Navigating in modal
+
+Using ````<ion-nav>````
+
+https://ionicframework.com/blog/how-to-navigate-in-ionic-modals-with-ion-nav/
