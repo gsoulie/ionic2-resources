@@ -665,6 +665,20 @@ $searchbar-ios-background-color: rgba(247,247,247,1);
 
 ### Remove border, add specific box shadow, resize
 
+*page.html*
+````
+<ion-searchbar 
+          mode="md"
+          debounce="500" 
+          animated
+          class="searchbar"
+          [(ngModel)]="searchTerm"
+          (ionChange)="searchbarListener($event)"
+          (ionClear)="onClearSearch()"
+          >          
+        </ion-searchbar>
+````
+
 *page.tss*
 ```
 ion-searchbar {
@@ -673,6 +687,13 @@ ion-searchbar {
 	margin-left: 20px;
 	margin-right: 20px;
 	width: auto;
+}
+.searchbar-input {
+  border: 0!important;
+  box-shadow: none !important;
+}
+.searchbar-ios .searchbar-input {
+    background-color: white !important;
 }
 ```
 
