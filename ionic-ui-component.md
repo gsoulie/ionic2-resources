@@ -27,6 +27,7 @@
 * [ion-slide](#ion-slide)    
 * [Hiding header on scroll](#hiding-header-on-scroll)     
 * [Notification badge on icon](#notification-badge-on-icon)    
+* [Input with autocomplete datalist](#input-with-autocomplete-datalist)     
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3198,3 +3199,52 @@ Finally, you need to add an id **#header** on your ```<ion-header>``` tag and li
     box-shadow: 1px 1px 4px #0000001A;
 }
 ```
+
+## Input with autocomplete datalist
+[Back to top](#ui-components)  
+
+Make an input field with autocomplete dropdown using html datalist
+
+### Standard autocomplete
+
+*View file*
+````
+<ion-item>
+  <input id="criteriaInput" list="autocompleteValues"  placeholder="Criteria" [(ngModel)]="searchValue">
+</ion-item>
+<datalist id="autocompletesValues">
+  <option *ngFor="let i of advancedFilters" value="{{i.name}}"></option>
+</datalist>
+````
+
+### Add some conditions when typing
+
+Now we want to show the dropdown only when user enters 1 character or more. 
+
+To achieve this, first **remove the *id*** attribute from your *datalist* tag
+
+*View file*
+````
+<ion-item>
+  <input id="criteriaInput" list="autocompleteValues"  placeholder="Criteria" [(ngModel)]="searchValue">
+</ion-item>
+<datalist>
+  <option *ngFor="let i of advancedFilters" value="{{i.name}}"></option>
+</datalist>
+````
+
+*Controller file*
+
+````
+ngAfterViewInit() {
+    // Adds a keyup listener on the input.
+    this.elementRef.nativeElement.querySelector('#criteriaInput').addEventListener('keyup', (e) => {
+        // If input value is longer or equal than 1 chars, adding "autocompleteValues" on ID attribute.
+        if (e.target.value.length >= 1) {
+            this.elementRef.nativeElement.querySelector('datalist').setAttribute('id', 'autocompleteValues');
+        } else {
+            this.elementRef.nativeElement.querySelector('datalist').setAttribute('id', '');
+        }
+      });
+  }
+````
