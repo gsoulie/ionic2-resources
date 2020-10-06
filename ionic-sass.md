@@ -30,6 +30,7 @@
 * [Flex grid](#flex-grid)    
 * [Flex box](#flex-box)    
 * [Make modale flexible](#make-modale-flexible)    
+* [2 columns layout](#2-columns-layout)      
 
 Here are some tips to perform your scss.
 
@@ -1235,4 +1236,58 @@ ion-modal.auto-height {
       }
     }
   }
+````
+
+## 2 columns layout
+[Back to top](#sass)
+
+CSS 2 columns layout with 100% height 
+
+*View file*
+````
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <div class="page-wrapper">
+      <div class="left-column"></div>
+      <div class="right-column">
+        This is the content.<br>This is the content.<br>This is the content.<br>
+        This is the content.<br>
+        This is the content.<br>
+        This is the content.<br>
+      </div>
+    </div>
+  </body>
+</html>
+````
+*style file*
+````
+html, body {
+/*Important*/
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.page-wrapper {
+  height: 100%;
+  position: relative;
+}
+
+.left-column {
+  position:fixed;
+  top:0;
+  left:0;
+  width:235px;
+  height:100%;
+  background:#090909;
+}
+
+.right-column {
+  margin-left:235px;
+  background:yellow;
+  min-height:100%;
+}
 ````
