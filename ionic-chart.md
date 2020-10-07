@@ -1122,9 +1122,21 @@ generateBarChart() {
     this.barChart.options.onClick = (e) => {
       const activePoints = this.barChart.getElementsAtEvent(e);
       const firstPoint = activePoints[0];
-      const label = this.barChart.data.labels[firstPoint._index];
-      const value = this.barChart.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
-      console.log(label + ': ' + value);
+      if (firstPoint != undefined) {
+	      const label = this.barChart.data.labels[firstPoint._index];
+	      const value = this.barChart.data.datasets[firstPoint._datasetIndex].data[firstPoint._index];
+	      console.log(label + ': ' + value);
+      }
+    };
+    
+    // Set Mouse pointer cursor on bar hover
+    this.barChart.options.onHover = (e) => {
+      const point = this.barChart.getElementAtEvent(e);
+      if (point.length) {
+        e.target.style.cursor = 'pointer';
+      } else {
+        e.target.style.cursor = 'default';
+      }
     };
 }
 ````
