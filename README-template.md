@@ -110,12 +110,15 @@ src
 |
 + maint.ts
 + index.html
++ style.scss
+|
++ ...
 ````
 
 
 ### Répertoire shared (src/app/shared)
 
-Ce répertoire contient les fichiers partagés de l'application et ou du composant :
+Ce répertoire contient les fichiers partagés de l'application et ou du composant. On peut retrouver un répertoire shared sous *app/shared* pour tout le code qui est partagé de manière globale à l'application et retrouver ce répertoire dans chaque composant *app/components/<mon-compo>* pour y mettre tout le code qui va être partagé par les sous-composants d'un même domaine fonctionnel / feature
 
 - répertoire interfaces : contient toutes les interfaces
 - répertoire models : contient toutes les classes
