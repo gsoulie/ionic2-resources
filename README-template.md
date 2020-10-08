@@ -20,6 +20,8 @@ La règle importante à toujours garder en tête que **chaque composant / servic
 
 ### Conventions et bonnes pratiques
 
+Voici quelques bonnes pratiques "officielles" (https://angular.io/guide/styleguide) et d'autres accumulées au fil de l'expérience :
+
 * Utiliser de préférence l'anglais pour les noms de variables, fonctions, classes etc... Les commentaires peuvent rester en français.
 * Les noms de classes commencent par une majuscule (Upper CameCalse)
 * Les noms d'interface on les préfixe avec I ex : IMonInterface
@@ -85,6 +87,8 @@ src
 |  |     |  |   + user.service.ts
 |  |     |  |   + user.service.spec.ts
 |  |     |  |   + user.model.ts
+|  |     |  |   + user.guard.ts
+|  |     |  |   + ...
 |  |     |  |
 |  |     |  + user.module.ts
 |  |     |  + user-routing.module.ts
@@ -111,6 +115,14 @@ src
 + maint.ts
 + index.html
 + style.scss
++ assets
+|   |
+|   + imgs
+|   |  |
+|   |  + icons
+|   |  + ...
+|   |  
+|   + fonts
 |
 + ...
 ````
@@ -137,25 +149,27 @@ Les fonts sont stockées dans le répertoire */src/assets/fonts*
 
 Les composants sont à créer dans le répertoire *src/app/components*. Créer si possible un sous-répertoire par domaine fonctionnel.
 
-````ng g c components/<monCompo> --module app````
+````ng g c components/<ma-feature>/<mon-composant> --module app````
 
 ### Création d'un service
 
-Les services sont à créer dans le répertoire *src/app/shared/services*. Créer **un service par domaine fonctionnel**
+Les services sont à créer dans le répertoire *shared/services* global à l'application si c'est un service partagé globalement ou dans le répertoire spécifique du composant lié. 
 
-````ng g s shared/services/<monService>````
+Créer **un service par domaine fonctionnel**
+
+````ng g s shared/services/<mon-service>````
 
 ### Création d'un pipe
 
-Les pipes sont à créer dans le répertoire *src/app/shared/services* 
+Les pipes sont à créer dans le répertoire *shared/pipe* global à l'application ou dans le répertoire spécifique du composant lié.
 
-````ng g p shared/pipes/<monPipe>````
+````ng g p shared/pipes/<mon-pipe>````
 
 ### Création d'un guard
 
-Les guards sont à créer dans le répertoire *src/app/shared/guards* 
+Les guards sont à créer dans le répertoire *shared/guards*  global à l'application ou dans le répertoire spécifique du composant lié.
 
-````ng g g shared/guards/<monQuard>````
+````ng g g shared/guards/<mon-guard>````
 
 ## Variables d'environnement DEV / PROD
 
