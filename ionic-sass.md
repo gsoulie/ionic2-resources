@@ -983,7 +983,7 @@ In case of ````<ion-header class="ion-no-border">```` is not working, here is a 
 ````
 ion-header {
   &.header-md:after {
-    background: none;
+    background: none !important;
   }
 }
 ````
