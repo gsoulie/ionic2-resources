@@ -184,7 +184,7 @@ import { environment, SERVER_URL } from '../../environments/environment';
 
 ## Ecriture et appels de fonctions
 
-Dans le cas d'une fonction utilisant beaucoup de paramètre dont certains sont facultatifs, préférer l'utilisation d'un paramètre unique de type objet json pour faciliter l'appel.
+Dans le cas d'une fonction utilisant beaucoup de paramètres dont certains sont facultatifs, préférer l'utilisation d'un paramètre unique de type objet json pour faciliter l'appel.
 
 ````
 // Préférer l'écriture suivante :
@@ -198,7 +198,7 @@ maFunct(param1, param2 = 0, param3, param4, param5, param6) {
 
 }
 
-// appel se fait de la manière suivante
+// l'appel se fait de la manière suivante
 maFunct({param1: 'toto', param5: 12});
 ````
 
@@ -213,20 +213,24 @@ maFunct({param1, param2 = 0, param3, param4, param5, param6}:
 
 ## Angular Material
 
-Pour faciliter l'intégration des modules Angular Material, un fichier *material.module.ts* est disponible dans le répertoire app. Il permet d'y inclure tous les imports dans un fichier centralisé. Attention, certains composants Angular Material n'ont pas le même chemin d'import ````from '@angular/material'```` selon votre version d'angular. Si vous constatez une erreur d'import vérifiez donc le chemin d'import et modifiez-le au besoin. 
+Pour faciliter l'intégration des modules Angular Material, il est conseillé de créer un fichier un fichier *material.module.ts* permettant d'y déclarer tous les imports des modules Angular Material. 
+Attention, certains composants Angular Material n'ont pas le même chemin d'import ````from '@angular/material'```` selon votre version d'angular. Si vous constatez une erreur d'import vérifiez donc le chemin d'import et modifiez-le au besoin. 
+
 
 ## Git
 
 ### Bonnes pratiques
  
-Pour récupérer le projet, utiliser la commande 
+Pour récupérer le projet depuis le dépôt distant, utiliser la commande 
 
 ````
 git clone <url-repos>
 ````
 
-On essaye de réintégrer tous les soirs ce qui est 
-On fait **TOUJOURS** un git pull **AVANT** de faire un git push pour ne pas risquer de tout péter dans le git et créer des conflits
+On essaye de réintégrer tous les soirs ce qui est fonctionnel.
+
+On fait **toujours** un ````git pull```` **avant** de faire un ````git push```` pour ne pas risquer de tout casser dans le git et créer des conflits.
+
 
 ### Intégration nouvelle branche
 
