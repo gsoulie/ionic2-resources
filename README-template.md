@@ -231,6 +231,17 @@ On essaye de réintégrer tous les soirs ce qui est fonctionnel.
 
 On fait **toujours** un ````git pull```` **avant** de faire un ````git push```` pour ne pas risquer de tout casser dans le git et créer des conflits.
 
+### Merge d'une branche
+
+Pour merger une branche, il faut se positionner sur la branche cible et lui merger la branche source : 
+
+Ex : on souhaite faire un merge de la branche *dev* sur la branche *master* :
+
+````
+git checkout master
+git merge dev
+git push
+````
 
 ### Intégration nouvelle branche
 
