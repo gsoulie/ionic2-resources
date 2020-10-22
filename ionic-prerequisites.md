@@ -163,14 +163,21 @@ Another very good alternative to Atom is [visual studio code] (https://code.visu
 
 ### Some useful extensions
 
-* [Ionic2 extension](https://marketplace.visualstudio.com/items?itemName=Thavarajan.ionic2)    
+* Angular schematics
 * [Auto Import extension](https://marketplace.visualstudio.com/items?itemName=steoates.autoimport)    
+* Auto Close Tag
+* Auto Rename Tag
+* typescript hero => permet de créer des compos / pipe etc... en faisant un clic droit plutôt que la console
+* Angular 10 snippets
+* Angular Essentials (Version 9)
+* [TSlint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)    
+* [sass lint](https://marketplace.visualstudio.com/items?itemName=glen-84.sass-lint)    
+* [custom icons theme](https://code.visualstudio.com/blogs/2016/09/08/icon-themes)    
+* [Ionic2 extension](https://marketplace.visualstudio.com/items?itemName=Thavarajan.ionic2)    
 * [Angular 2 - TypeScript snippets](https://marketplace.visualstudio.com/items?itemName=johnpapa.Angular2)    
 * [Git History] (https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)    
-* [custom icons theme](https://code.visualstudio.com/blogs/2016/09/08/icon-themes)    
 * [npm intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense)    
-* [sass lint](https://marketplace.visualstudio.com/items?itemName=glen-84.sass-lint)    
-* [TSlint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)    
+* [Template String Converter]
 
 ### Custom snippet code
 
