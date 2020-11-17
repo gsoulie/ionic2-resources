@@ -2,9 +2,39 @@
 
 # Prerequisites
 
+* [Update environment npm / nodejs](#update-environment)      
 * [Start with ionic](#start-with-ionic)  
 * [Visual Studio Code](#visual-studio-code)   
 * [Android debugging with logcat](#android-debugging-with-logcat)    
+
+
+## Update environment
+
+### npm
+
+````
+sudo npm install npm@latest -g
+````
+
+### nodejs
+
+````
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+````
+
+### ionic
+
+````
+sudo npm i -g @ionic/cli
+````
+
+### angular
+
+````
+npm install -g @angular/cli
+````
 
 ## Start with ionic
 
@@ -18,11 +48,6 @@ First, ensure you have latest version of node
 
 ```
 $ sudo npm install npm -g
-```
-**Install cordova**
-
-```
-$ sudo npm install -g cordova
 ```
 
 **Install ionic**
@@ -231,5 +256,6 @@ A code snippet is formatted as a JSON object where *prefix* is what is used to t
 
 You can visualize android logcat console by using **adb**. Open a terminal from */<your_android_sdk_path>/platform-tools/* and run :
 
-```
+````
 $<path-to-android-sdk>/platform-tools adb logcat
+````
