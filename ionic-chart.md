@@ -3,6 +3,7 @@
 # Charts
 
 * [Documentation](#documentations)    
+* [Angular issues](#angular-issues)      
 * [ChartJS](#chartjs-sample-code)    
 * [Chart grid 50%](#chart-grid-50%)    
 * [World map ng2-google-chart](#ng2-google-chart)    
@@ -19,6 +20,17 @@
 [Josh morony chartJS](https://www.joshmorony.com/adding-responsive-charts-graphs-to-ionic-2-applications/)    
 [link : ng2-chart](http://valor-software.com/ng2-charts/)    
 [forum : related post](https://forum.ionicframework.com/t/solved-ionic-2-ng2-charts/42926)    
+
+## Angular issues
+
+Using ChartJS on Angular project requires to use *ng2-chart* package in addition to ChartJS
+
+[package ng2-chart](https://www.npmjs.com/package/ng2-charts)       
+[explanation](https://medium.com/codingthesmartway-com-blog/angular-chart-js-with-ng2-charts-e21c8262777f)      
+[error after updating to v2.4.0](https://github.com/valor-software/ng2-charts/issues/1255)        
+
+In case of "error after updating to v2.4.0", add *ThemeService* in provider section in *app.module.ts*, this will resolve this error.
+
 
 ## ChartJS Sample code
 
