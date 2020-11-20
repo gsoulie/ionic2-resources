@@ -3,7 +3,7 @@
 # PDF Export
 
 * [html2pdf](#html2pdf)     
-* [css print](#css print)        
+* [css print](#css-print)        
 
 ## html2pdf
 
