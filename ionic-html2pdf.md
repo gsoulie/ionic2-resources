@@ -117,6 +117,7 @@ export class ChartPage implements OnInit {
 https://www.alsacreations.com/tuto/lire/586-feuille-style-css-print-impression.html       
 https://www.sitepoint.com/css-printer-friendly-pages/       
 https://timdeschryver.dev/blog/print-css-with-angular     
+basic css print stylesheet sample : https://www.alsacreations.com/astuce/lire/1160-une-feuille-de-styles-de-base-pour-le-media-print.html
 
 ### Dummy sample
 
