@@ -1,12 +1,13 @@
 [< Back to main Menu](https://github.com/gsoulie/Mobile-App-Development/blob/master/ionic2-test.md)    
 
-# html2PDF
+# PDF Export
 
-* [Installation](#installation)  
-* [Resources](#resources)   
-* [Usage](#usage)    
+* [html2pdf](#html2pdf)     
+* [css print](#css print)        
 
-## Installation
+## html2pdf
+
+### Installation
 
 https://www.npmjs.com/package/html2pdf.js/v/0.9.0
 
@@ -14,11 +15,11 @@ https://www.npmjs.com/package/html2pdf.js/v/0.9.0
 npm i html2pdf.js
 ````
 
-## Resources
+### Resources
 
 https://www.youtube.com/watch?v=7LoWmGMB7e4
 
-## Usage
+### Usage
 
 In this example, we have a div **#capture** which containing 2 charts. The goal is to export the 2 chart into pdf file
 
@@ -108,3 +109,10 @@ export class ChartPage implements OnInit {
 }
 
 ````
+
+## css print
+
+[back to top](#pdf-export)      
+
+https://www.alsacreations.com/tuto/lire/586-feuille-style-css-print-impression.html       
+https://www.sitepoint.com/css-printer-friendly-pages/       
