@@ -36,6 +36,14 @@ sudo npm i -g @ionic/cli
 npm install -g @angular/cli
 ````
 
+### migrating from Angular 8.3 to Angular 10 + Ionic 5
+
+````
+ng update @angular/cli@8 @angular/core@8 --allow-dirty
+npm install @ionic/angular@latest --save
+ng update @angular/core @angular/cli --allow-dirty --force
+````
+
 ## Start with ionic
 
 ### Typical installation
