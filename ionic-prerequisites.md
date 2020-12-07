@@ -6,6 +6,7 @@
 * [Start with ionic](#start-with-ionic)  
 * [Visual Studio Code](#visual-studio-code)   
 * [Android debugging with logcat](#android-debugging-with-logcat)    
+* [Using multiple version of Node with nvm](#using-multiple-version-of-node-with-nvm)     
 
 
 ## Update environment
@@ -267,3 +268,7 @@ You can visualize android logcat console by using **adb**. Open a terminal from 
 ````
 $<path-to-android-sdk>/platform-tools adb logcat
 ````
+## Using multiple version of node with nvm
+[Back to top](#prerequisites) 
+
+https://www.sitepoint.com/quick-tip-multiple-versions-node-nvm/
