@@ -16,6 +16,7 @@
 * [Passing data on close event](#passing-data-on-close-event)    
 * [Disable Android hardware back button](#disable-android-hardware-back-button)    
 * [Navigating in modal with ion-nav](#navigating-in-modal)     
+* [Routing static html file](#routing-static-html-file)     
 
 
 ## Navigation by routing
@@ -792,3 +793,12 @@ initializeCustomBackButtonHandler(){
 Using ````<ion-nav>````
 
 https://ionicframework.com/blog/how-to-navigate-in-ionic-modals-with-ion-nav/
+
+## Routing static html file
+[Back to top](#navigation)
+
+To achieve routing on html static file, put your static html in *src* directory
+
+````
+this.document.location.href = '/my-static-page.html?param=' + this.my-param;
+````
