@@ -802,3 +802,5 @@ To achieve routing on html static file, put your static html in *src* directory
 ````
 this.document.location.href = '/my-static-page.html?param=' + this.my-param;
 ````
+
+> IMPORTANT : if you need to use some assets like images etc... you must store your assets in the *assets* folder
