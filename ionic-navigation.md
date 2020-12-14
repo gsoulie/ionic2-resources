@@ -453,7 +453,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
 ```
 
-## Tab Routing
+## Tab Routing with routing back from modale
 [Back to top](#navigation)
 
 Here is a full sample of tab routing with routing back integration from child modale. 
