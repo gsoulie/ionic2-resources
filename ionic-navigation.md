@@ -6,7 +6,7 @@
 * [Routing params](#routing-params)    
 * [Reset routing params](#reset-routing-params)    
 * [Child routes](#child-routes)    
-* [Tab Routing with routing back from modal](#tab-routing-with-routing-back-from-modal)    
+* [Tab Routing with routing back from modale](#tab-routing-with-routing-back-from-modale)    
 * [Passing static data to a Route](#passing-static-data-to-a-route)     
 * [Passing dynamic data to a Route](#passing-dynamic-data-to-a-route)    
 * [Routing Guards](#routing-guards)    
@@ -453,7 +453,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
 ```
 
-## Tab Routing with routing back from modale
+## Tab routing with routing back from modale
 [Back to top](#navigation)
 
 Here is a full sample of tab routing with routing back integration from child modale. 
