@@ -2,8 +2,13 @@
 
 # PDF Export
 
+* [resources](#resources)      
 * [html2pdf](#html2pdf)     
 * [css print](#css-print)        
+
+## Resources
+
+https://www.youtube.com/watch?v=QZ-CRdhxQbI&feature=youtu.be&ab_channel=SimonGrimm
 
 ## html2pdf
 
