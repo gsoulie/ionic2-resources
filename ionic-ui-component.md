@@ -11,7 +11,7 @@
 * [ion-label](#ion-label)    
 * [searchbar](#searchbar)    
 * [list filtering](#high-performance-list-filtering)    
-* [ion-tab](#tab)       
+* [ion-tab](#ion-tab)       
 * [tab icon](#tab-icon)    
 * [ion-fab](#floating-button)  
 * [chart](#chart)    
@@ -1365,7 +1365,7 @@ A delay is fine, and an artificial delay is sometimes even beneficial, but you d
 
 We’re going to make a change now that won’t have any effect on performance, but it will have an impact on the user’s perception of the responsiveness of the app. We’re simply going to add a loading spinner that will display when a search is in progress.
 
-## Tab
+## ion-tab
 [Back to top](#ui-components)  
 
 According to the latest Android material guideline, you have to follow these rules :
@@ -1373,6 +1373,149 @@ According to the latest Android material guideline, you have to follow these rul
 - 3 to 5 destinations => use the bottom navigation
 - Less than 3 => use tab on the top
 - More than 5 => use another solution like slide menu
+
+### Basic structure
+
+In the sample below, we assume that we have 4 tabs. In each of them we have the possibility to open some child modals.
+We added the *handleTabSelect()* function to reset the route when switching tab in order to close all child modals.
+
+**Warning** : We don't care of potential "edit" state in child modals. So keep in mind to add a verification if you have a child modal in "edit" mode in order to prevent from losing data
+
+*tabs.page.html*
+
+````
+<ion-tabs #tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" (click)="handleTabSelect('home', $event)">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+      <ion-badge>6</ion-badge>
+    </ion-tab-button>  
+    <ion-tab-button tab="queries" (click)="handleTabSelect('queries', $event)">
+      <ion-icon name="options-outline"></ion-icon>
+      <ion-label>My queries</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="lists" (click)="handleTabSelect('lists', $event)">
+      <ion-icon name="star"></ion-icon>
+      <ion-label>My lists</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="settings">
+      <ion-icon name="person-circle"></ion-icon>
+      <ion-label>Settings</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+````
+
+*tabs.component.ts*
+
+````
+import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonTabs } from '@ionic/angular';
+
+@Component({
+  selector: 'app-home-tabs',
+  templateUrl: './home-tabs.page.html',
+  styleUrls: ['./home-tabs.page.scss'],
+})
+export class HomeTabsPage implements OnInit {
+
+  @ViewChild('tabs') tabs: IonTabs;
+
+  constructor(private router: Router) { }
+  ngOnInit(): void { }
+
+  /**
+   * Force route resetting when navigating in case of child modals
+   * are opnened in specific tab
+  **/ 
+  async handleTabSelect(tab: string, evt): Promise<boolean> {
+    const tabSelected = this.tabs.getSelected();
+    evt.stopImmediatePropagation();
+    evt.preventDefault();
+    return tabSelected !== tab ? await this.router.navigateByUrl(tab) : this.tabs.select(tab);      
+  }
+}
+````
+
+*tabs-routing.module.ts*
+
+````
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { QueriesPage } from '../pages/queries/queries.page';
+import { HomeTabsPage } from './home-tabs.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: HomeTabsPage,
+    children: [
+      {
+        path: 'home',
+        loadChildren: () => import('./../pages/home/home.module').then(m => m.HomePageModule)
+      },
+      {
+        path: 'queries',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./../pages/queries/queries.module').then(m => m.QueriesPageModule)
+          },
+          {
+            path: 'results/:queryId',
+            loadChildren: () => import('./../pages/results/results.module').then( m => m.ResultsPageModule)
+          },
+          {
+            path: 'results/:queryId/study/:idStudy',
+            loadChildren: () => import('./../pages/study-detail/study-detail.module').then( m => m.StudyDetailPageModule)
+          }
+        ]
+      },
+      {
+        path: 'lists',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./../pages/lists/lists.module').then(m => m.ListsPageModule)
+          },
+          {
+            path: 'results/:listId',
+            loadChildren: () => import('./../pages/results/results.module').then( m => m.ResultsPageModule)
+          }
+        ]
+        
+      },
+      {
+        path: 'settings',
+        loadChildren: () => import('./../pages/settings/settings.module').then(m => m.SettingsPageModule)
+      },
+     /* {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+      }*/
+    ]
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
+ 
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class HomeTabsPageRoutingModule {}
+
+````
+
+### tabs options
 
 So, by default, ionic 2 tabs project sample is using bottom navigation. To set top navigation, just change your bootstrap (in your **app.module.ts**) code by :
 
@@ -1401,7 +1544,7 @@ export class AppModule {}
 
 ```
 
-### Hide tab on sub pages
+#### Hide tab on sub pages
 
 To hide tabs on sub pages, modify your *app.module-ts* as following
 
@@ -1419,7 +1562,7 @@ To hide tabs on sub pages, modify your *app.module-ts* as following
 })
 ```
 
-### Hide tab on specific page
+#### Hide tab on specific page
 
 You can need to hide tabgroup just on a specific page with this :
 
