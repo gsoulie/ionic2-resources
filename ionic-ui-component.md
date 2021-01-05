@@ -1589,20 +1589,55 @@ export class MyClass implements OnInit{
 
 Customize tab icon
 
-It's pretty easy to do actually. When you set a tabIcon property, Ionic sets a class name on the tab, based on the name you provided. So for example, if you set ```tabIcon="customicon"```, then the resulting class names will be ```.ion-ios-hygglo-customicon``` and ```.ion-ios-hygglo-customicon-outline``` (for selected tabs) for iOS. On Android, the prefix will be ```.ion-md-``` instead of ```.ion-ios-```.
+You can set your own svg as tab-icon like below :
 
-Then just create a custom css, something like this:
+*View file*
 
-```css
-.ion-ios-customicon,
-.ion-md-customicon {
-  content: url(../../assets/img/ui/customicon.svg);
-  width: 24px;
-  height: 32px;
-  padding: 6px 4px 2px;
-  opacity: 0.9;
+````
+<ion-tabs #tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" (click)="handleTabSelect('home', $event)">
+      <ion-icon src="./assets/imgs/pictos/picto_menu_home.svg"></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>  
+    <ion-tab-button tab="queries" (click)="handleTabSelect('queries', $event)">
+      <ion-icon src="./assets/imgs/pictos/picto_menu_query.svg"></ion-icon>
+      <ion-label>My queries</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="lists" (click)="handleTabSelect('lists', $event)">
+      <ion-icon src="./assets/imgs/pictos/picto_menu_list.svg"></ion-icon>
+      <ion-label>My lists</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="settings">
+      <ion-icon name="person-circle"></ion-icon>
+      <ion-label>Settings</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+````
+
+**Important** in order to make icon automatically change color when selecting tab, you must remove **all** *fill* attribute inside your svg file 
+
+*svg file before modification*
+
+````
+<svg xmlns="http://www.w3.org/2000/svg" width="16.426" height="15" viewBox="0 0 16.426 15"><defs><style>.a{fill:#009dbe;}.b{fill:#fff;stroke:#009dbe;stroke-width:1.5px;}.c{stroke:none;}.d{fill:none;}</style></defs><g transform="translate(0)"><path class="a" d="M21.073,58.843H17.641a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h3.432a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -52.41)"/><path class="a" d="M21.073,58.843H13.839a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h7.234a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -47.41)"/><path class="a" d="M7.977,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h2.3a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,7.977,58.843Z" transform="translate(-5.163 -57.41)"/><path class="a" d="M13.1,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5H13.1a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,13.1,58.843Z" transform="translate(-5.163 -52.41)"/><path class="a" d="M9.234,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5H9.234a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,9.234,58.843Z" transform="translate(-5.163 -47.41)"/><path class="a" d="M21.073,58.843H14.081a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h6.992a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -57.41)"/></g><g class="b" transform="translate(1.855)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g><g class="b" transform="translate(9.855 5)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g><g class="b" transform="translate(5.855 10)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g></svg>
+````
+
+*svg file after modification*
+
+````
+<svg xmlns="http://www.w3.org/2000/svg" width="16.426" height="15" viewBox="0 0 16.426 15"><defs><style>.a{}.b{stroke:#009dbe;stroke-width:1.5px;}.c{stroke:none;}.d{}</style></defs><g transform="translate(0)"><path class="a" d="M21.073,58.843H17.641a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h3.432a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -52.41)"/><path class="a" d="M21.073,58.843H13.839a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h7.234a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -47.41)"/><path class="a" d="M7.977,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h2.3a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,7.977,58.843Z" transform="translate(-5.163 -57.41)"/><path class="a" d="M13.1,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5H13.1a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,13.1,58.843Z" transform="translate(-5.163 -52.41)"/><path class="a" d="M9.234,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5H9.234a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,9.234,58.843Z" transform="translate(-5.163 -47.41)"/><path class="a" d="M21.073,58.843H14.081a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h6.992a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -57.41)"/></g><g class="b" transform="translate(1.855)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g><g class="b" transform="translate(9.855 5)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g><g class="b" transform="translate(5.855 10)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g></svg>
+
+
+*Tab scss file*
+
+````
+ion-tab-button {
+    --color: black;
+    --color-selected: red;
 }
-```
+````
 
 ## Floating button
 [Back to top](#ui-components)  
