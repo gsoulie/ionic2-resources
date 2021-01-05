@@ -28,6 +28,7 @@
 * [Hiding header on scroll](#hiding-header-on-scroll)     
 * [Notification badge on icon](#notification-badge-on-icon)    
 * [Input with autocomplete datalist](#input-with-autocomplete-datalist)     
+* [Action sheet customization](#action-sheet-customization)        
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3246,6 +3247,7 @@ export class HideHeaderDirective implements OnInit{
 ```
 
 ### Create a global component
+[Back to top](#ui-components)  
 
 It is recommended to create a global component containing the hideHeader directive to avoid multiple declaration in multiple pages. This component will be added in each other components. 
 
@@ -3309,6 +3311,7 @@ export class HomePageModule {}
 ```
 
 ### Link the directive to your header
+[Back to top](#ui-components)  
 
 Finally, you need to add an id **#header** on your ```<ion-header>``` tag and link on the scroll event **appHideHeader scrollEvents="true" [header]="header"** on the ```<ion-content>``` tag.
 
@@ -3425,4 +3428,44 @@ ngAfterViewInit() {
         }
       });
   }
+````
+
+## Action sheet customization
+[Back to top](#ui-components)  
+
+Related to this issue (https://github.com/ionic-team/ionic-framework/issues/17300#issuecomment-627566107), in order to customize action sheet style, you must provide a css class at the end of your *global.scss* file.
+
+*controller file*
+````
+async openMenu(): Promise<void> {
+    const actionSheet = await this.actionSheetCtrl.create({
+      cssClass: 'match-item-action-sheet',
+      buttons: {
+        text: 'Check all as seen',
+        handler: () => {
+          this.checkAll();
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+````
+	
+*global.scss*
+````
+// style for container
+.match-item-action-sheet .action-sheet-group:first-of-type {
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+// style for item icon
+.action-sheet-icon {
+    color: #70B62C !important;
+}
+// style for item button text
+.action-sheet-button {
+    color: #70B62C !important;
+}
 ````
