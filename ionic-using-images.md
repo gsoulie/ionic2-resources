@@ -89,6 +89,48 @@ Then add it to your code (don't forget to adjust the real path for ionic)
 </ion-content>
 ```
 
+### Customize SVG
+
+In order to modify the fill or stroke color of your svg, you need to modify your svg file by removing all *fill* and *stroke* attributes which have a value
+
+*example of svg file*
+
+````
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16">
+  <g fill="#88AACC" fill-rule="evenodd" stroke-linecap="round" stroke="#555555" stroke-linejoin="round" stroke-width="2">
+     ...
+  </g>
+</svg>
+````
+
+*svg file modified by removing fill ans stroke attributes*
+
+````
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16">
+  <g fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+     ...
+  </g>
+</svg>
+````
+
+You are now able to control your svg stroke and fill attributes by adding css 
+
+*css file*
+
+````
+<ion-icon class="stroked" src="./assets/imgs/my-picto.svg"></ion-icon>
+<ion-icon class="filled" src="./assets/imgs/my-picto.svg"></ion-icon>
+
+.stroked {
+	stroke: red !important;
+	fill: transparent !important;
+}
+.filled {
+	stroke: red !important;
+	fill: red !important;
+}
+````
+
 ### Sprite automation
 
 Install sprity
