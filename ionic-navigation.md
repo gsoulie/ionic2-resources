@@ -17,6 +17,7 @@
 * [Disable Android hardware back button](#disable-android-hardware-back-button)    
 * [Navigating in modal with ion-nav](#navigating-in-modal)     
 * [Routing static html file](#routing-static-html-file)     
+* [Routing back](#routing-back)      
 
 
 ## Navigation by routing
@@ -890,3 +891,36 @@ this.document.location.href = '/my-static-page.html?param=' + this.my-param;
 ````
 
 > IMPORTANT : if you need to use some assets like images etc... you must store your assets in the *assets* folder
+
+## Routing back
+[Back to top](#navigation)
+
+There is a mutliple ways to routing back by code from a modal :
+
+*view file*
+````
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button id="backBtn"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+````
+
+*controller file*
+````
+import {Location} from '@angular/common';
+...
+
+constructor(private location: Location,
+           private elementRef: ElementRef) { }
+	  
+routingBack() {
+     this.location.back();
+     window.history.back();
+     this.elementRef.nativeElement.querySelector('#backBtn').click();
+}
+````
+
+> IMPORTANT : *location.back()* and *window.history.back()* seems to lose the navigation history when you have multiple pages opened. So it seems better to trigger *ion-back-button* click to keep a better native routing management
