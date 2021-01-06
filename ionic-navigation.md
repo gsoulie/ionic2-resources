@@ -895,7 +895,7 @@ this.document.location.href = '/my-static-page.html?param=' + this.my-param;
 ## Routing back
 [Back to top](#navigation)
 
-There is a mutliple ways to routing back by code from a modal :
+There is a mutliple ways to routing back by code :
 
 *view file*
 ````
@@ -914,13 +914,15 @@ import {Location} from '@angular/common';
 ...
 
 constructor(private location: Location,
-           private elementRef: ElementRef) { }
+           private elementRef: ElementRef,
+	   private router: Router) { }
 	  
 routingBack() {
-     this.location.back();
-     window.history.back();
-     this.elementRef.nativeElement.querySelector('#backBtn').click();
+     this.location.back();	// solution 1
+     window.history.back();	// solution 2
+     this.router.navigate(['..']);	// solution 3
+     this.elementRef.nativeElement.querySelector('#backBtn').click();	// solution 4
 }
 ````
 
-> IMPORTANT : *location.back()* and *window.history.back()* seems to lose the navigation history when you have multiple pages opened. So it seems better to trigger *ion-back-button* click to keep a better native routing management
+> IMPORTANT : *location.back()* and *window.history.back()* seems to lose the navigation history when you have multiple pages opened. So it seems better to use the solutions 3 and 4 to keep a better native behavior
