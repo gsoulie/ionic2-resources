@@ -926,3 +926,22 @@ routingBack() {
 ````
 
 > IMPORTANT : *location.back()* and *window.history.back()* seems to lose the navigation history when you have multiple pages opened. So it seems better to use the solutions 3 and 4 to keep a better native behavior
+
+**Solution 3 details** : this will only work when the list component is registered as the child with an empty path like I've done in the route configuration below. Otherwise you'd have to append the dots with the child route that you're targeting (e.g. ../list). Basically, this approach just navigates one layer up in the the routing hierarchy.
+
+````
+const routes: Routes = [
+  {
+    path: 'users',
+    component: UsersComponent,
+    children: [
+      { path: '', component: UserListComponent },
+      { path: 'active', component: ActiveUsersComponent },
+      { path: ':id', component: UserDetailComponent },
+    ],
+  },
+  { path: '**', redirectTo: 'users' },
+]
+````
+
+You can find more informations here : https://nils-mehlhorn.de/posts/angular-navigate-back-previous-page
