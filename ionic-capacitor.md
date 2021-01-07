@@ -16,6 +16,7 @@ Capacitor is the successor of Cordova, it containerizes your web app and puts it
 Capacitor uses the WKWebView
 
 ### Usage
+[Back to top](#capacitor)     
 
 **Create new ionic capacitor project**
 
@@ -71,6 +72,7 @@ npx cap update
 ```
 
 ## Capacitor and PWA
+[Back to top](#capacitor)     
 
 To add PWA support to your app, you'll need an App manifest *manifest.json* that sits alongside your *index.html*. Next you just need to enable service worker.
 
@@ -88,6 +90,7 @@ if(!isAvailable) {
 }
 ```
 ## Build Android Prod version
+[Back to top](#capacitor)     
 
 From Android studio : Build > Generate Signed APK
 
@@ -99,7 +102,7 @@ Then, Make sure to choose the **release** build type, and you should also tick b
 [Configure splashscreen](https://capacitor.ionicframework.com/docs/apis/splash-screen/)   
 
 ## Local storage
-
+[Back to top](#capacitor)     
 ```
 import { Plugins } from '@capacitor/core';
 
