@@ -3144,6 +3144,101 @@ round-progress {
 ## ion-slide
 [Back to top](#ui-components)  
 
+[Video : How to build Dynamic Ionic 4 Slides with Shopping Cart](https://www.youtube.com/watch?v=6sXz2swm6Sw&ab_channel=SimonGrimm)      
+[Web : How to build Dynamic Ionic 4 Slides with Shopping Cart](https://devdactic.com/dynamic-ionic-4-slides/)      
+
+*view sample*
+
+````
+<ion-content>
+  <div *ngFor="let cat of items" class="category-block">
+ 
+    <ion-row no-padding class="category-banner">
+      <ion-col text-left button tappable (click)="cat.expanded = !cat.expanded" align-self-center>
+        {{ cat.category }}
+      </ion-col>
+    </ion-row>
+ 
+    <ion-slides [options]="sliderConfig">
+      <ion-slide *ngFor="let product of cat.products">
+        <div *ngIf="cat.expanded">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                {{ product.name }} - ${{ product.price }}
+              </ion-card-title>
+              <ion-card-content>
+                <img src="https://via.placeholder.com/300x300">
+                <ion-button expand="full" (click)="addToCart(product)">Add to Cart</ion-button>
+              </ion-card-content>
+            </ion-card-header>
+          </ion-card>
+        </div>
+      </ion-slide>
+    </ion-slides>
+ 
+  </div>
+</ion-content>
+````
+
+*controller sample*
+
+````
+export class HomePage implements OnInit {
+ 
+  cart = [];
+  items = [];
+ 
+  sliderConfig = {
+    slidesPerView: 1.6,
+    spaceBetween: 10,
+    centeredSlides: true
+  };
+ 
+  constructor(private router: Router, private cartService: CartService) { }
+ 
+  ngOnInit() {
+    this.items = this.cartService.getProducts();
+    this.cart = this.cartService.getCart();
+  }
+ 
+  addToCart(product) {
+    this.cartService.addProduct(product);
+  }
+ 
+  openCart() {
+    this.router.navigate(['cart']);
+  }
+}
+````
+
+> Note : you can set slidesPerView: 1.6 to see the start of the next comming card
+
+*sample styling*
+````
+ion-badge {
+    color: #fff;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-radius: 100%;
+} 
+.category-block {
+    margin-bottom: 4px;
+} 
+.category-banner {
+    border-left: 8px solid var(--ion-color-secondary);
+    background: var(--ion-color-light);
+    height: 40px;
+    padding: 10px;
+    font-weight: 500;
+}
+````
+
+
+
+### Make ion-slide responsive
+
 To make your *ion-slide* responsive when you resizing screen, you need to add the *breakpoints* property to your *ion-slide* configuration :
 
 *controller.ts*
@@ -3190,6 +3285,7 @@ export class HomePage {
 	<ion-slide *ngFor="let i of slides"></ion-slide>
 </ion-slides>
 ```
+
 ## Hiding header on scroll
 [Back to top](#ui-components)  
 
