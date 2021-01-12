@@ -143,11 +143,26 @@ You are now able to control your svg stroke and fill attributes by adding css
 *style file*
 
 ````
+
+.stroke-icon:active {
+    ion-icon {
+        stroke: var(--ion-color-primary) !important;
+    }    
+}
+.stroke-icon:link {
+    ion-icon {
+        stroke: var(--ion-color-primary) !important;
+    }
+}
 .stroke-icon:focus {
-    stroke: var(--ion-color-primary) !important;
+    ion-icon {
+        stroke: var(--ion-color-primary) !important;
+    }
 }
 .stroke-icon {
-    stroke: var(--ion-color-text-light-grey) !important;
+    ion-icon {
+        stroke: var(--ion-color-text-light-grey) !important;
+    }
 }
 ````
 
