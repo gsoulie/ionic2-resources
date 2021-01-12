@@ -131,6 +131,26 @@ You are now able to control your svg stroke and fill attributes by adding css
 }
 ````
 
+#### Customizing ion-icon on ion-tab
+
+````
+<ion-tab-button tab="search" class="stroke-icon" (click)="handleTabSelect('search', $event)">
+      <ion-icon src="./assets/imgs/pictos/picto_menu_search.svg"></ion-icon>
+      <ion-label>Search</ion-label>
+</ion-tab-button>
+````
+
+*style file*
+
+````
+.stroke-icon:focus {
+    stroke: var(--ion-color-primary) !important;
+}
+.stroke-icon {
+    stroke: var(--ion-color-text-light-grey) !important;
+}
+````
+
 ### Sprite automation
 
 Install sprity
