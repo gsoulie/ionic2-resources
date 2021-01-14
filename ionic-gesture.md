@@ -221,7 +221,6 @@ export class ResultsPage implements OnInit {
             style.transform = `translate3d(${windowWidth}px, 0, 0)`;
             hostDeleteAnimation.play();
             document.getElementById("action-div"+i).remove();
-            this.studies.splice(i, 1);
             hostDeleteAnimation.onFinish(() => {
             // this.deleted.emit(true);
             });
