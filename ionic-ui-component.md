@@ -29,6 +29,7 @@
 * [Notification badge on icon](#notification-badge-on-icon)    
 * [Input with autocomplete datalist](#input-with-autocomplete-datalist)     
 * [Action sheet customization](#action-sheet-customization)        
+* [ion-toast](#ion-toast)       
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3564,4 +3565,32 @@ async openMenu(): Promise<void> {
 .action-sheet-button {
     color: #70B62C !important;
 }
+````
+
+## ion-toast
+[Back to top](#ui-components)  
+
+Avoid mutli-toast stacking
+
+In order to avoid toast stacking, you could store your Toast object in a variable outside your function, and call the dismiss() method before showing the next toast
+
+*Controller file*
+
+````
+ toast: HTMLIonToastElement; 
+ 
+ async presentToast() {
+ try {
+	this.toast.dismiss();
+      } catch(e) {}
+
+      this.toast = this.toastController.create({
+        message: message,
+        position: 'top',
+        duration: 5000,
+        color: 'danger',
+        showCloseButton: true
+      });
+      await this.toast.present();
+ }
 ````
