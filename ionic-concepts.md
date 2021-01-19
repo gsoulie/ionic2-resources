@@ -12,6 +12,7 @@
 * [Async / Await functions](#await-async-functions)     
 * [Resolver](#resolver)     
 * [Environments DEV/PROD](#environments)    
+* [Function declaration](#function-declaration)       
 
 ## Angular 2
 [Back to top](#concepts)  
@@ -918,3 +919,13 @@ If you take a look at the angular.json file in your project, you will find the f
 ````
 
 The production build configuration is set up to replace the environment.ts file with environment.prod.ts
+
+## Function declaration
+
+Best practice to declare function with multiple parameters
+
+````
+async saveUserQuery(
+{ mode = Cst.CRUD_MODE.create, searchTerm = '', activeFilters = '', filtersSelected, callback = () => {}} :
+{mode?: number, searchTerm?: string, activeFilters?: string, filtersSelected?: any, callback?: () => void }) { ... }
+````
