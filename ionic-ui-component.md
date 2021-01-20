@@ -30,6 +30,7 @@
 * [Input with autocomplete datalist](#input-with-autocomplete-datalist)     
 * [Action sheet customization](#action-sheet-customization)        
 * [ion-toast](#ion-toast)       
+* [ion-sliding-item swipe to delete](#ion-sliding-item-swipe-to-delete)       
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3593,4 +3594,43 @@ In order to avoid toast stacking, you could store your Toast object in a variabl
       });
       await this.toast.present();
  }
+````
+
+## ion-sliding-item swipe to delete
+[Back to top](#ui-components)  
+
+If you don't want to use gesture with animation to achieve swipe to delete action on item list, you can use the basic *ion-item-sliding* element 
+
+[Gesture with animation](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-gesture.md)       
+
+The inconvenient to use the basic *ion-item-sliding* with delete on swipe is that there is no animation and the item removing is not smooth.
+
+*View file*
+
+````
+  <ion-list>
+    <ion-item-sliding *ngFor="let study of studies; let idx = index" (ionSwipe)="delete(idx)">  
+      <ion-item>
+      	<!-- you can put a ion-card here !! -->
+        {{ study.name }}
+      </ion-item>           
+      <ion-item-options side="start">
+        <ion-item-option color="danger" expandable>Delete</ion-item-option>
+      </ion-item-options>   
+      <ion-item-options side="end">
+        <ion-item-option expandable>Bookmark</ion-item-option>
+      </ion-item-options>   
+    </ion-item-sliding>
+  </ion-list>
+````
+
+*Controller file*
+
+````
+delete(idx) {
+// TODO : check the swipe side to delete or doing an other action
+	if (idx < this.studies.length) {
+		this.studies.splice(idx, 1);
+	}
+}
 ````
