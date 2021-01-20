@@ -180,6 +180,7 @@ export class ResultsPage implements OnInit {
       const gesture: Gesture = await this.gestureCtrl.create({
         el: card.nativeElement,
         gestureName: 'swipe',
+        gesturePriority: 100, // needed if using pull to refresh
         onStart: ev => {
           style.transition = "";
         },
