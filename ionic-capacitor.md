@@ -2,6 +2,11 @@
 
 # Capacitor
 
+[Capacitor and PWA](#capacitor-and-pwa)        
+[Build Android Prod version](#build-android-prod-version)       
+[App icon and Splashscreen](#app-icon-and-splashscreen)        
+[Local storage](#local-storage)      
+
 ## What is capacitor
 Capacitor is the new Ionic's native web app container that runs your web app natively in iOS, Android, Electron, PWA...
 Capacitor is the successor of Cordova, it containerizes your web app and puts it into a managed native web view, then it exposes nativefunctionality to your web app in cross-platform way.
@@ -96,7 +101,7 @@ From Android studio : Build > Generate Signed APK
 
 Then, Make sure to choose the **release** build type, and you should also tick both of the signature options **V1** and **V2**
 
-## App icon and Splash screen
+## App icon and Splashscreen
 
 [Generate appicon and splashscreen](https://www.joshmorony.com/adding-icons-splash-screens-launch-images-to-capacitor-projects/)       
 [Configure splashscreen](https://capacitor.ionicframework.com/docs/apis/splash-screen/)         
