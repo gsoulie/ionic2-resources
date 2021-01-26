@@ -98,8 +98,9 @@ Then, Make sure to choose the **release** build type, and you should also tick b
 
 ## App icon and Splash screen
 
-[Generate appicon and splashscreen](https://www.joshmorony.com/adding-icons-splash-screens-launch-images-to-capacitor-projects/)
-[Configure splashscreen](https://capacitor.ionicframework.com/docs/apis/splash-screen/)   
+[Generate appicon and splashscreen](https://www.joshmorony.com/adding-icons-splash-screens-launch-images-to-capacitor-projects/)       
+[Configure splashscreen](https://capacitor.ionicframework.com/docs/apis/splash-screen/)         
+[9 patch splashscreen](https://www.joshmorony.com/creating-a-dynamic-universal-splash-screen-for-capacitor-android/)         
 
 ## Local storage
 [Back to top](#capacitor)     
