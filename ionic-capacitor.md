@@ -102,6 +102,7 @@ From Android studio : Build > Generate Signed APK
 Then, Make sure to choose the **release** build type, and you should also tick both of the signature options **V1** and **V2**
 
 ## App icon and Splashscreen
+[Back to top](#capacitor)  
 
 [Generate appicon and splashscreen](https://www.joshmorony.com/adding-icons-splash-screens-launch-images-to-capacitor-projects/)       
 [Configure splashscreen](https://capacitor.ionicframework.com/docs/apis/splash-screen/)         
