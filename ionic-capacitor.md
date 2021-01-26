@@ -102,6 +102,40 @@ Then, Make sure to choose the **release** build type, and you should also tick b
 [Configure splashscreen](https://capacitor.ionicframework.com/docs/apis/splash-screen/)         
 [9 patch splashscreen](https://www.joshmorony.com/creating-a-dynamic-universal-splash-screen-for-capacitor-android/)         
 
+### Create 9-patch Android splashscreen
+
+#### 1 - create splashscreens
+
+First, you have to create your splashscreen for each portrait mode resolution (see res/drawable-port-xxxx directory). You can also delete all the *drawable-land-xxxx* repository, they will be useless.
+
+#### 2 - convert png splashscreen to 9-patch image
+
+Then, in Android Studio, go to *app > res > drawable* and for each resolution, click on your *.png* splashscreen and do *right click > create 9-patch image*. Do **Not** rename file, keep default *splash.9* filename.
+
+#### 3 - define stretch zones
+
+Now, you have a 9-patch image for each resolution. Always from Android Studio, open each of your 9-patch image (one at time) and you are going to define the stretch zones.
+
+- First, select the 9-patch tab and check the "show patches" option. This will display all your image in pink, indicates that all the image is stretchable. 
+
+- Grab the vertical right line and drag it to the left until it touch the left side of your logo. You will see a pink column on the left of your logo.
+
+- Then, click and drag on the grey background from the middle top to the right to create a new stretcheable zone. Adjust it to start from the right of your logo, to the right edge of the image. Now, you must have 2 pink columns on each logo's sides.
+
+- Next, grab the bottom horizontal line and drag it until the top edge of your logo.
+
+- Finally, click and drag to the bottom from the left grey background to create a new stretch zone. Adjust it to touch the bottom of your logo until the bottom of the image.
+
+> IMPORTANT : You may use the zoom feature to get more easily to click and drag from the grey background.
+
+At this point, you must have pink rectangles on the top-left, top-right, bottom-left and bottom-right of your image, green rectangles on the top-center, left-center, right-center and bottom-center of your logo.
+
+> IMPORTANT : You must have black pixel lines only on top and left sides (top-left, top-right, bottom-left, bottom-right corners) and nowhere else ! You must not have black pixels on bottom and right edges
+
+#### 4 - clean repository and build
+
+The final step consists in delete all of your old splashscreens *.png* files from each directories to keep only *splash.9* files. After that *build > clean project* and you can run on your device
+
 ## Local storage
 [Back to top](#capacitor)     
 ```
