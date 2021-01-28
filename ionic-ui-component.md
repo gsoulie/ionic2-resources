@@ -3237,7 +3237,14 @@ ion-badge {
 }
 ````
 
+*Remove automatic fixed size*
 
+This will set the ion-slide width with the content width
+````
+ion-slide {
+    width: unset !important;
+}
+````
 
 ### Make ion-slide responsive
 
