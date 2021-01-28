@@ -22,7 +22,8 @@
 * [ViewDestroyError](#viewdestroyerror)    
 * [Updating NodeJS for window](#updating-nodejs-for-window)      
 * [Cannot read property id of undefined](#cannot-read-property-id-of-undefined)    
-
+* [npm ERR! code EINVALIDPACKAGENAME](#npm-err!-code-einvalidpackagename)            
+ 
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
 [Back to top](#known-issues)    
@@ -536,3 +537,15 @@ A list of versions matched between NPM and NODE (https://nodejs.org/en/download/
 </p>     
 
 This error occurs when there is a bad import in a module file. Generally when a xxxxComponent file is added to **imports** instead of **declarations**
+
+## npm ERR! code EINVALIDPACKAGENAME
+[Back to top](#known-issues)    
+
+````
+Error: npm: Command failed with exit code 1 Error output:
+npm ERR! code EINVALIDPACKAGENAME
+npm ERR! Invalid package name "__ngcc_entry_points__.json": name cannot start with an underscore
+````
+
+This issue occurs when you add space in your **package.json**'s **name** attribute
+
