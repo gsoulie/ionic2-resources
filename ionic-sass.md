@@ -986,6 +986,10 @@ ion-header {
     background: none !important;
   }
 }
+// IOS --> 
+ion-toolbar {
+    border: none !important;
+}
 ````
 
 
