@@ -4,9 +4,10 @@
 
 * [Firebase Cloud Messaging](#fcm-push-notification)    
 * [Phonegap plugin push](#push-notification-with-phonegap-plugin-push-need-to-be-updated)    
+* [OneSignal](#onesignal)       
 
 ## FCM push notification
-
+[Full Devdactic tutorial](https://devdactic.com/push-notifications-ionic-capacitor/)    
 [Official plugin documentation](https://github.com/fechanique/cordova-plugin-fcm)    
 [tutorial 1](http://simonwillshire.com/blog/Ionic-2-FCM-Notifications/)    
 [tutorial 2](https://www.djamware.com/post/58a1378480aca7386754130a/ionic-2-fcm-push-notification)    
@@ -257,4 +258,120 @@ module.exports = {
         console.log("Device token:", data.token);
     });
 ```
+
+## OneSignal
 [Back to top](#push-notification) 
+ 
+[Capacitor documentation](https://capacitorjs.com/docs/apis/push-notifications)       
+[OneSignal documentation](https://documentation.onesignal.com/docs/ionic-sdk-setup)     
+
+### Requirements
+
+When you create your project on the OneSignal dashboard, you are invited to create a Firebase project to get a Firebase Sender ID and you must provide Apple push notification certificate (**note** : provide a new Key is better way than push notification certificate) with .p12 file.
+
+After downloading this .p8 (apple key) file, you need to upload it to Firebase.
+
+To do so, open the Cloud Messaging tab inside your Firebase project settings, upload the file and enter the details for the Key ID (which is already inside the name of the file) and your Team ID from iOS (you can find it usually in the top right corner below your name).
+
+> Important : Do not forget to enable push notification capability for iOS when you create your certificates
+
+### Installation
+
+````
+npm install onesignal-cordova-plugin
+npm install @ionic-native/onesignal
+ionic cap sync
+````
+
+### Usage
+
+*capacitor.config.json*
+You can specify some badge's options
+````
+
+{
+  "appId": "com.xxx.xxx",
+  "appName": "pushApp",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  },
+  "cordova": {}
+}
+````
+
+*app.module.ts*
+
+````
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  providers: [
+    ...
+    OneSignal,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent]
+})
+````
+
+*home.component.ts*
+
+````
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage implements OnInit {
+  oneSignalAppID = 'xxxxxxxx-xxxx-xxxx-xxxx-3aded1b78d09';
+  firebaseSenderID = 'xxxxxxxxxxxx';
+  
+  constructor(private oneSignal: OneSignal) {}
+  ngOnInit() {
+    this.oneSignal.setLogLevel({logLevel: 6, visualLevel: 0});
+    this.oneSignal.startInit(this.oneSignalAppID, this.firebaseSenderID);
+
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+    // create channel. 
+    // Then, from onesignal dashboard : create a segment with => User Tag : channel is query
+    this.oneSignal.sendTag('channel', 'query'); 
+    
+    // Handle notification received
+    this.oneSignal.handleNotificationReceived().subscribe((jsonData) => {
+      
+      jsonData.included_segments['perso'];
+      // do something when notification is received
+      alert('notification received ' + JSON.stringify(jsonData));
+      // jsonData.payload.data.notification_topic
+      /*jsonData.payload.title;
+      jsonData.payload.body;
+      jsonData.payload.additionalData;*/
+      this.trace += jsonData.payload.additionalData.task + '\r\n';
+      
+    });
+
+    // Handle notification opened
+    this.oneSignal.handleNotificationOpened().subscribe((jsonData) => {
+      // do something when a notification is opened
+      alert('notification opened');
+      //jsonData.notification.payload.additionalData;
+    });
+
+    this.oneSignal.endInit();
+  }
+}
+
+````
