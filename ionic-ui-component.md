@@ -31,6 +31,7 @@
 * [Action sheet customization](#action-sheet-customization)        
 * [ion-toast](#ion-toast)       
 * [ion-sliding-item swipe to delete](#ion-sliding-item-swipe-to-delete)       
+* [iOS keyboard scroll](#ios-keyboard-scroll)     
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3641,3 +3642,20 @@ delete(idx) {
 	}
 }
 ````
+
+## iOS keyboard scroll
+[Back to top](#ui-components)  
+
+To prevent iOS keyboard scrolling screen when entering in input field, add the following configuration in the *capacitor.config.json*
+
+*capacitor.config.json*
+
+````
+"plugins": {
+    "Keyboard": {
+      "resize": "ionic"
+    }
+  },
+````
+
+In addition you can add **<ion-content scrollY="false">** 
