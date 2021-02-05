@@ -2,7 +2,53 @@
 
 # Publishing app
 
-* [Android studio](#android-studio).   
+* [Android](#android).   
+* [Publishing with cordova (old)](#publishing-with-cordova)      
+
+## Android
+
+Android : déployer une release en mode Test fermés (alpha)
+
+Android Studio 
+### Android studio generate build
+
+The first step is to generate your release build.
+
+Go to **Build > Generate Signed Bundle / APK** and according to the last google recommandation, choose the **Android App Bundle** option (or you can still using APK option if you want to manage your keys yourself).
+
+During the first time you need to fill the information to create your keystore. A the end step, select **release** option if you want to rollout for test mode on google play store
+
+### Google Play Console
+
+> Notice : Even for testing mode, you must fill the play store app general information
+
+Then, go to the "Test" section and choose your test mode (closed test "alpha" for example), follow the intructions and upload your *app-relsease.aab* file
+
+> Notice : alpha test doesn't accept build in *debug* mode
+
+Fill the information of the test build and save.
+
+Finally click on *Review the release*
+
+
+### android:versionCode issue
+
+(https://stackoverflow.com/questions/24772407/upload-failed-you-need-to-use-a-different-version-code-for-your-apk-because-you)
+
+Sometimes, updating version into manifest is not working when building signed APK. To fix it, update the *versionCode* and *versionName* in the **build.gradle** file instead
+
+```
+defaultConfig {
+    applicationId "com.my.packageId"
+    minSdkVersion 15
+    targetSdkVersion 22
+    versionCode 2      <-- change this
+    versionName "2.0"  <-- change this
+}
+```
+
+## Publishing with cordova (old)  
+[Back to top](#publishing-app)     
 
 [link : publishing app](http://ionicframework.com/docs/guide/publishing.html)    
 
@@ -18,10 +64,6 @@ more information about it's configuration [here](http://cordova.apache.org/docs/
 Now that we have a working app, we are ready to push it live to the world! Since the Ionic team already submitted the Todo app from this guide to the app store, chances are you’ll want to follow this chapter with a new app that you make on your own.
 
 So first, we need to generate a release build of our app, targeted at each platform we wish to deploy on. Before we deploy, we should take care to adjust plugins needed during development that should not be in production mode.
-
-## Android publishing
-
-  
 
 To generate a release build for Android :
 
@@ -65,7 +107,7 @@ $ zipalign -v 4 HelloWorld-release-unsigned.apk HelloWorld.apk
 Now we have our final release binary called HelloWorld.apk and we can release this on the Google Play Store
 
 
-# Full example
+### Full example
 
 **Compile in distribution mode**
  
@@ -125,23 +167,4 @@ Or :
 ```
 $ cd /Users/Username/Library/Android/sdk/build-tools/28.0.3/
 $ ./zipalign -v 4 /Users/Username/Documents/ionic-workspace/MyProject/myApp/deploiement/app-release-unsigned.apk /Users/Username/Documents/ionic-workspace/MyProject/myApp/deploiement/myApp.apk
-```
-
-
-## Android studio
-
-### android:versionCode issue
-
-(https://stackoverflow.com/questions/24772407/upload-failed-you-need-to-use-a-different-version-code-for-your-apk-because-you)
-
-Sometimes, updating version into manifest is not working when building signed APK. To fix it, update the *versionCode* and *versionName* in the **build.gradle** file instead
-
-```
-defaultConfig {
-    applicationId "com.my.packageId"
-    minSdkVersion 15
-    targetSdkVersion 22
-    versionCode 2      <-- change this
-    versionName "2.0"  <-- change this
-}
 ```
