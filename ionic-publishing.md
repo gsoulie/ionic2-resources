@@ -2,14 +2,12 @@
 
 # Publishing app
 
-* [Android](#android).   
+* [Android](#android)   
 * [Publishing with cordova (old)](#publishing-with-cordova)      
+* [iOS](#ios)      
 
 ## Android
 
-Android : déployer une release en mode Test fermés (alpha)
-
-Android Studio 
 ### Android studio generate build
 
 The first step is to generate your release build.
@@ -20,7 +18,7 @@ During the first time you need to fill the information to create your keystore. 
 
 ### Google Play Console
 
-> Notice : Even for testing mode, you must fill the play store app general information
+> Notice : Even for testing mode, you must fill the play store app general information and note that your users must have a google email with **@gmail**.
 
 Then, go to the "Test" section and choose your test mode (closed test "alpha" for example), follow the intructions and upload your *app-relsease.aab* file
 
@@ -30,6 +28,9 @@ Fill the information of the test build and save.
 
 Finally click on *Review the release*
 
+> Recommandation : It's recommanded to start with *internal testing*, then *closed tests*, and finally go to *opened tests*
+
+> Notice : Internal testing is quicker to deploy than the other way because its review is lighter thant the other modes.
 
 ### android:versionCode issue
 
@@ -46,6 +47,13 @@ defaultConfig {
     versionName "2.0"  <-- change this
 }
 ```
+
+### Update build
+
+Remind to update the following informations when you push a new build
+
+- Increase **version** in *package.json*
+- Increase **versionCode** and **versionName** in *build.gradle* and *manifest.xml*
 
 ## Publishing with cordova (old)  
 [Back to top](#publishing-app)     
@@ -168,3 +176,18 @@ Or :
 $ cd /Users/Username/Library/Android/sdk/build-tools/28.0.3/
 $ ./zipalign -v 4 /Users/Username/Documents/ionic-workspace/MyProject/myApp/deploiement/app-release-unsigned.apk /Users/Username/Documents/ionic-workspace/MyProject/myApp/deploiement/myApp.apk
 ```
+
+## iOS
+[Back to top](#publishing-app)     
+
+### Deploy with TestFlight
+
+Deploying for test with TestFlight is similar to build for production. You must build with production certificat and production app store profile.
+
+After building app, export to app store and fill the section Testfilght. Add external testers and send invitation.
+
+### Update testflight build
+
+When you publish an update, you must force the previous build expiration when the new build is validated by apple, then resend invitations.
+
+
