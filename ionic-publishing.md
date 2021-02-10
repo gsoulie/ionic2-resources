@@ -18,7 +18,7 @@ During the first time you need to fill the information to create your keystore. 
 
 ### Google Play Console
 
-> Notice : Even for testing mode, you must fill the play store app general information and note that your users must have a google email with **@gmail**.
+> Notice : Even for testing mode, you must fill the play store app general information and note that your users must provide your main google account  **@gmail** address.
 
 Then, go to the "Test" section and choose your test mode (closed test "alpha" for example), follow the intructions and upload your *app-relsease.aab* file
 
