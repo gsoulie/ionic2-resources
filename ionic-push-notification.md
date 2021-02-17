@@ -280,7 +280,7 @@ To do so, open the Cloud Messaging tab inside your Firebase project settings, up
 ````
 npm install onesignal-cordova-plugin
 npm install @ionic-native/onesignal
-ionic cap sync
+npx cap sync
 ````
 
 ### Usage
