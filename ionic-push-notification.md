@@ -264,6 +264,7 @@ module.exports = {
  
 [Capacitor documentation](https://capacitorjs.com/docs/apis/push-notifications)       
 [OneSignal documentation](https://documentation.onesignal.com/docs/ionic-sdk-setup)     
+[Simon Grimm tutorial](https://www.youtube.com/watch?v=0j0Jz5ka5Co&ab_channel=SimonGrimm)     
 
 ### Requirements
 
