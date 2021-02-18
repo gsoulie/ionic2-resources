@@ -376,3 +376,26 @@ export class HomePage implements OnInit {
 }
 
 ````
+
+### Using Onesignal API to send notifications
+
+Once push notification mechanism is set, you can use the onseignal apis to send push notifications to specific device, using external_id like below :
+
+*http with postman sample*
+````
+POST /api/v1/notifications HTTP/1.1
+Host: onesignal.com
+Authorization: Basic xxxxxxyODgtMDY1Ny00NjUxLWJjM2YtMjA1N2UxZmYzZDJj
+Content-Type: application/json
+Cookie: __cfduid=xxxxxc3fe5051e621eec02b888559d81451613577414
+Content-Length: 395 
+
+{
+  "app_id": "<YOUR_ONESIGNAL_APPID>",
+  "include_external_user_ids": ["467c2908-c660-4fab-832a-1eb9db31c0fa","8afbebbb-f84c-4699-9b8b-1d576f391e4a"],
+  "channel_for_external_user_ids": "push",
+  "headings": {"en": "Your notification title here"},
+  "contents": {"en": "Your notification message here"},
+  "data": {}
+}
+````
