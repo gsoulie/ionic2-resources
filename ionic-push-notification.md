@@ -270,11 +270,7 @@ module.exports = {
 
 When you create your project on the OneSignal dashboard, you are invited to create a Firebase project to get a Firebase Sender ID and you must provide Apple push notification certificate (**note** : provide a new Key is better way than push notification certificate) with .p12 file.
 
-After downloading this .p8 (apple key) file, you need to upload it to Firebase.
-
-To do so, open the Cloud Messaging tab inside your Firebase project settings, upload the file and enter the details for the Key ID (which is already inside the name of the file) and your Team ID from iOS (you can find it usually in the top right corner below your name).
-
-> Important : Do not forget to enable push notification capability for iOS when you create your certificates
+> Important : Do not forget to enable push notification capability for iOS when you create your certificates, and activate background mode capabilities in XCode
 
 ### Installation
 
