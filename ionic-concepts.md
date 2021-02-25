@@ -7,6 +7,7 @@
 * [Pipe](#pipe)    
 * [RxJS 6 Map operator](#map-operator)    
 * [Promise vs Observable](#promise-vs-observable)    
+* [Observable and operators](#observable-and-operators)      
 * [BehaviorSubject](#behaviorsubject)    
 * [Arrow function](#arrow-function)     
 * [Async / Await functions](#await-async-functions)     
@@ -640,6 +641,87 @@ this.myProvider.prompt({title: "Input value", message:"Enter your hexadecimal va
 	console.log("Returned : " + data);
 });
 ```
+## Observable and operators
+[Back to top](#concepts) 
+
+### Resources 
+
+[RxJS operators](https://www.learnrxjs.io/learn-rxjs/operators)     
+[RxJS Best practices](https://blog.strongbrew.io/rxjs-best-practices-in-angular/)     
+
+### Chaining observables
+
+In this example, we "chain" a promise converted as an observable with an other observable.
+
+Use case : The *requestApi* function return an observable which is the result of a http request. But, all of our http requests need a bearer token to secure the api. So, before sending the http request, we need to fetch the user's accessToken which is stored into the local storage. 
+Fetching data from local storage is an asynchonous task and is performed by using a Promise.
+
+The problem : Waiting the end of the promise before sending the http request.
+
+The solution : Converting the promise and chain it with the http obsevable by using **switchMap** RxJS operator
+
+````
+// Manage HTTP Quesries
+  requestApi({action, method = 'GET', datas = {}}:
+  { action: string, method?: string, datas?: any}): Observable<any> {
+    const methodWanted = method.toLowerCase();
+    const urlToUse = this.url + action;
+    let req: Observable<any>;// = null;
+
+    return from(this.auth.getValidToken()).pipe(switchMap((res: TokenResponse) => {
+      console.debug(res.accessToken);
+      const httpOptions = {
+        headers: new HttpHeaders({'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + res.accessToken})
+      };      
+  
+      switch (methodWanted) {
+        case 'post' :
+          req = this.http.post(urlToUse, datas, httpOptions);
+          break;
+        case 'put' :
+          req = this.http.put(urlToUse, datas, httpOptions);
+          break;
+        case 'delete' :
+          req = this.http.delete(urlToUse, httpOptions);
+          break;
+        case 'patch' :
+          req = this.http.patch(urlToUse, datas, httpOptions);
+          break;
+        default:
+          req = this.http.get(urlToUse + '?' + datas, httpOptions);
+          break;
+      }
+      return req;
+    }));
+  }
+````
+
+*data.service.ts*
+
+````
+fetchNewPublications({filterUserQueryIds = [], start = 0, size = apiConfig.defaultLength, sortBy = apiConfig.SORT.idte, disableStats = true}:
+  {filterUserQueryIds?: number[], start?: number, size?: number, sortBy?: string, disableStats?: boolean}): Observable<ServiceResult> {
+
+    let parameters = `SortOrder=${sortBy}&StartIndex=${start}&Length=${size}`;
+    parameters += filterUserQueryIds.length > 0 ? `&filterUserQueryIds=${filterUserQueryIds}` : '';
+
+    return this.apiHelper.requestApi({
+      action: apiConfig.services.scientificstudy.getNewScientificStudies,
+      method: 'get', datas: parameters});
+  }
+````
+
+*controller.ts*
+
+````
+ngOnInit(): void {
+	this.dataService.fetchNewPublications()
+	.subscribe((res) => {
+		// some stuff here
+	});
+}
+````
 
 ## BehaviorSubject
 [Back to top](#concepts)  
