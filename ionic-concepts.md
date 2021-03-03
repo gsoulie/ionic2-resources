@@ -6,7 +6,6 @@
 * [Decorators](#decorators)    	
 * [Pipe](#pipe)    
 * [RxJS operators](#rxjs-operators)      
-* [RxJS 6 Map operator](#map-operator)    
 * [Promise vs Observable](#promise-vs-observable)    
 * [Observable and operators](#observable-and-operators)      
 * [BehaviorSubject](#behaviorsubject)    
