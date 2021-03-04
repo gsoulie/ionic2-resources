@@ -6,6 +6,7 @@
 [Build Android Prod version](#build-android-prod-version)       
 [App icon and Splashscreen](#app-icon-and-splashscreen)        
 [Local storage](#local-storage)      
+[Listening internet connection](#listening-internet-connection)         
 
 ## What is capacitor
 Capacitor is the new Ionic's native web app container that runs your web app natively in iOS, Android, Electron, PWA...
@@ -162,3 +163,41 @@ initializeApp() {
      });
 }
 ```
+
+## Listening Internet connection
+[Back to top](#capacitor)  
+
+As an example, when a user is on a slower connection, they get an alert that performance may be degraded:
+
+````
+if (navigator.connection.effectiveType != '4g') {
+  console.log('slow connection!');
+  // show modal dialog warning user that video will be loaded at lower resolution
+}
+else {
+  console.log('ready to go!');
+  // immediate load video file
+}
+````
+
+
+Another option is Capacitor’s Network API. It extends the Network Information API to provide even more useful features for web and mobile apps, such as monitoring the network for status changes, which your app can then react to.
+
+````
+import { Plugins } from '@capacitor/core';
+
+const { Network } = Plugins;
+
+let handler = Network.addListener('networkStatusChange', (status) => {
+  console.log("Network status changed", status);
+});
+
+// Get the current network status
+let status = await Network.getStatus();
+
+// Example output:
+{
+  "connected": true,
+  "connectionType": "wifi"
+}
+````
