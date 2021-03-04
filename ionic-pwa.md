@@ -2,6 +2,10 @@
 
 # PWA
 
+* [Resources](#resources)     
+* [Make a PWA](#make-a-pwa)     
+* [PWA Builder](#pwa-builder)      
+
 ## Resources
 
 [PWA stencil](https://stenciljs.com/pwa/)    
@@ -15,6 +19,222 @@
 [discussion - pwa-my-experience](https://forum.ionicframework.com/t/pwa-my-experience-creating-a-pwa-with-ionic-from-scratch-to-deployment/94541)    
 [discussion - deploying-pwa](https://forum.ionicframework.com/t/deploying-pwa/73749)   
 [firebase hosting](https://coryrylan.com/blog/deploy-angular-cli-apps-to-firebase)   
+
+## Make a PWA
+
+````
+// Start a blank new Ionic app
+ionic start ionicPwa blank --type=angular --capacitor
+
+// Run the Angular schematic for PWAs
+ng add @angular/pwa
+````
+
+If you now check out your updated app/app.module.ts you’ll see that the Service Worker will be injected into our app when built for production:
+
+````
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(),
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js',
+      { enabled: environment.production }
+    )],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  bootstrap: [AppComponent],
+})
+export class AppModule { }
+````
+
+### Capturing Photos with PWA Elements
+
+> Warning :  there’s no decent web UI when capturing an image, and so we install another package called PWA Elements next to the camera plugin in our app now
+
+````
+npm i @capacitor/camera
+
+// Overlay for image capturing on the web
+npm install @ionic/pwa-elements
+To enable those elements, we need to import the defineCustomElements and call it inside our src/main.ts like this:
+
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+// Add the import
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.log(err));
+
+// Call the loader
+defineCustomElements(window);
+````
+
+Now we can import everything we need from the package and call getPhoto() to capture an image and set the resulting webPath to a local variable.
+
+*home.page.ts*
+````
+import { Component } from '@angular/core';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage {
+
+  myImage = null;
+
+  constructor() {}
+
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera
+    });
+
+    this.myImage = image.webPath;
+  }
+
+````
+
+Finally we need a simple button and ion-img to display the captured image inside our app, so change the home/home.page.html to:
+
+````
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Capacitor PWA
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="takePicture()" expand="block">
+    <ion-icon name="camera" slot="start"></ion-icon>
+    Capture image
+  </ion-button>
+
+  <ion-img *ngIf="myImage" [src]="myImage"></ion-img>
+</ion-content>
+````
+
+### Geolocation
+
+To show that the usage of every Capacitor plugin is really that easy, let’s install two more plugins to get the current user location and natively share it:
+
+````
+// Install the geolocation plugin
+npm i @capacitor/geolocation
+
+// Install the share plugin
+npm i @capacitor/
+````
+
+Just like before we can directly import the necessary functions from the two packages to first grab the position by calling getCurrentPosition() and then store that value so we can share it later with the share plugin.
+
+*home.page.ts*
+````
+import { Component } from '@angular/core';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Geolocation, Position } from '@capacitor/geolocation';
+import { Share } from '@capacitor/share';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage {
+
+  myImage: string = null;
+  position: Position = null;
+
+  constructor() {}
+
+  async takePicture() { ... }
+
+  async getCurrentPosition() {
+    const coordinates = await Geolocation.getCurrentPosition();
+
+    this.position = coordinates;
+  }
+
+  async share() {
+    await Share.share({
+      title: 'Come and find me',
+      text: `Here's my current location: 
+        ${this.position.coords.latitude}, 
+        ${this.position.coords.longitude}`,
+      url: 'http://ionicacademy.com/'
+    });
+  }
+}
+````
+
+Now we need some additional buttons to trigger our new functionality and to display the result, which we can easily do inside an ion-card.
+
+*home.page.html*
+````
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Capacitor PWA
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button (click)="takePicture()" expand="block">
+    <ion-icon name="camera" slot="start"></ion-icon>
+    Capture image
+  </ion-button>
+
+  <ion-img *ngIf="myImage" [src]="myImage"></ion-img>
+
+  <ion-button (click)="getCurrentPosition()" expand="block">
+    <ion-icon name="locate" slot="start"></ion-icon>
+    Get position
+  </ion-button>
+
+  <!-- present the geolocation information -->
+  <ion-card *ngIf="position">
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="location" slot="start"></ion-icon>
+        Lat: {{ position.coords.latitude }}
+      </ion-item>
+      <ion-item>
+        <ion-icon name="location" slot="start"></ion-icon>
+        Lng: {{ position.coords.longitude }}
+      </ion-item>
+
+      <ion-button (click)="share()" expand="block" color="secondary">
+        <ion-icon name="share" slot="start"></ion-icon>
+        Share!
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+````
+
+With those two functionalities you might get into some trouble, because:
+
+Only recent browser versions support the new Web Share API
+Safari doesn’t capture a location on unsecure URLs (http), which localhost normally is
+That means, we really need to run our PWA on a real device soon.
+
 
 ## PWA Builder
 
