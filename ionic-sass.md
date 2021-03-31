@@ -1102,6 +1102,78 @@ To make browser scrollbar transparent use
 ## Flex grid
 [Back to top](#sass)
 
+### Angular flex-layout
+
+````
+import { FlexLayoutModule } from '@angular/flex-layout';
+````
+
+Example of responsive grid with mat-card
+
+*card-component*
+
+````
+<mat-toolbar color="primary">
+    <span>Card view demo</span>
+    <div fxHide.lt-md>
+      <span class="column-label">Columns</span>
+      <mat-slider [max]="6" [min]="3" [(ngModel)]="gridColumns" [thumbLabel]="true">
+      </mat-slider>
+    </div>
+  </mat-toolbar>
+<div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7]">
+        
+        <!-- Utiliser le redimenssionnement classique sans le slider -->
+            <!-- <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7]"> -->
+            <mat-card class="mat-elevation-z4">
+            <mat-card-header>
+                <mat-card-title>Himalayan Peaks</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="./../assets/images/2-chtulhu.jpg">
+            <mat-card-content>
+                <p>
+                The Himalayas is a mountain range in Asia.
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+            </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+  </div>
+
+````
+
+*card-component.scss*
+
+````
+.content {
+    padding: 16px;
+}
+
+.content > mat-card {
+    width: 200px;
+}
+
+mat-toolbar {
+    justify-content: space-between;
+}
+.content > mat-card {
+    margin-bottom: 16px;
+}
+
+.column-label {
+    margin-right: 8px;
+    font-size: 1rem;
+}
+````
+
+### flex-box css example
+
 https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_flex-wrap_wrap
 
 According to the previous documentation, here is an example of a responsive grid with 3 columns containing 3 charts. When the screen size is over 1600px, each div has 33% width, then when screen size is between 1600px and 1344px, each div has 47% width. Finally when screen size is under 1024px, each div has 100% width.
@@ -1219,7 +1291,7 @@ According to the previous documentation, here is an example of a responsive grid
 [Back to top](#sass)
 
 https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-
+https://makina-corpus.com/blog/metier/2017/introduction-a-flexbox
 https://www.youtube.com/watch?v=KMvB08yNqlI&feature=youtu.be
 
 ## Make modale flexible
