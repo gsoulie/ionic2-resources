@@ -27,7 +27,7 @@
 * [Create CSS stepper](#create-css-stepper)    
 * [Transparent scroll](#transparent-scroll)   
 * [Create fixed menu with scrollable content](#create-fixed-menu-with-scrollable-content)    
-* [Flex grid](#flex-grid)    
+* [Responsive Flex grid with angular flex-layout](#flex-grid)    
 * [Flex box](#flex-box)    
 * [Make modale flexible](#make-modale-flexible)    
 * [2 columns layout](#2-columns-layout)      
@@ -1103,6 +1103,9 @@ To make browser scrollbar transparent use
 [Back to top](#sass)
 
 ### Angular flex-layout
+
+https://zoaibkhan.com/blog/create-a-responsive-card-grid-in-angular-using-flex-layout-part-1/        
+https://medium.com/angular-in-depth/angular-flex-layout-flexbox-and-grid-layout-for-angular-component-6e7c24457b63         
 
 ````
 import { FlexLayoutModule } from '@angular/flex-layout';
