@@ -51,3 +51,32 @@ export class ColorDirective {
 ````
 <div mat-subheader [appColor]="'red'">Directives typescript</div>
 ````
+
+### Example 2 
+
+````
+import { Directive, ElementRef, Renderer2 } from '@angular/core';
+
+@Directive({
+  selector: '[cardContent]'
+})
+export class CardContentDirective {
+
+  constructor(
+    readonly elementRef: ElementRef,
+    private readonly renderer: Renderer2,
+  ) {}
+  toggleClass(addClass: boolean) {
+      if (addClass) {
+          this.renderer.addClass(
+              this.elementRef.nativeElement, 'content-active'
+          );
+      } else {
+          this.renderer.removeClass(
+              this.elementRef.nativeElement, 'content-active'
+          );
+      }
+  }
+}
+
+````
