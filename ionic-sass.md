@@ -1,6 +1,11 @@
 [< Back to main Menu](https://github.com/gsoulie/Mobile-App-Development/blob/master/ionic2-test.md)    
 
-# Sass
+# Stylesheet
+
+## Astuces et ressources utiles
+
+https://blog.dorianguilmain.com/astuces/page/2/
+
 
 * [Component variables](#component-variables)    
 * [Using variables](#using-variables)    
