@@ -12,7 +12,6 @@
 * [Using variables](#using-variables)    
 * [Add color](#add-color)    
 * [Get color variables from variable.scss](#get-color-variables-from-variables.scss)    
-* [Set transparent color to element](#set-transparent-color-to-element)     
 * [Configure NavBar color](#configure-navbar-color)    
 * [Set transparent NavBar](#configure-navbar-color)    
 * [Set background image to content](#set-background-image-to-content)    
@@ -37,6 +36,7 @@
 * [Flex box](#flex-box)    
 * [Make modale flexible](#make-modale-flexible)    
 * [2 columns layout](#2-columns-layout)      
+* [Images](#images)      
 
 Here are some tips to perform your scss.
 
@@ -156,18 +156,6 @@ Or other solution, put the code below in your css file
       }
 ```
 
-## Set transparent color to element
-[Back to top](#sass)  
-
-Add new transparent color in your *variable.scss* and use it as a standard color
-```css
-$colors: (
-  primary:    #ed2f2f,
-  secondary:  #be2625,
-  hide: transparent,
-);
-```
-
 ## Configure NavBar color
 [Back to top](#sass)  
 
@@ -189,7 +177,7 @@ Put the following code in your *variable.scss* : ```$toolbar-background: transpa
 
 
 ## Set background image to content
-
+[Back to top](#sass)  
 ```css
 page-map {
     .main {
@@ -620,24 +608,6 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 }
 ```
 
-#### Using display table-cell
-
-```
-<div class="container">
-	<div class="text">My text</div>
-</div>
-```
-
-```
-.container{
-	display: table;
-}
-.text{
-	display: table-cell;
-    	vertical-align: middle;
-}
-```
-
 ### Add button at the bottom of listview
 [Back to top](#sass)  
 
@@ -761,7 +731,7 @@ Tips to avoid ion-label truncate
 
 ```html
 <ion-item>
-	<ion-label>my very long text labe</ion-label>
+	<ion-label>my very long text label</ion-label>
 </ion-item>
 ```
 
@@ -1375,5 +1345,19 @@ html, body {
   margin-left:235px;
   background:yellow;
   min-height:100%;
+}
+````
+
+## Images
+[Back to top](#sass)
+
+````
+img {
+	width: 400px;
+	height: 300px;
+	/** keep aspect ratio **/
+	object-fit: cover;
+	/** adjust alignment **/
+	object-position: bottom center;
 }
 ````
