@@ -198,6 +198,7 @@ page-map {
 ## Lock screen orientation
 [Back to top](#sass)  
 
+[Source intéressante](https://blog.dorianguilmain.com/centrer-du-contenu-avec-css/)       
 [Documentation screen orientation](https://ionicframework.com/docs/native/screen-orientation/)    
 
 **Warning** You can not test the screen orientation on ionic serve, this will throw an exception
