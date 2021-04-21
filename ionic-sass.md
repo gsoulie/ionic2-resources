@@ -2,10 +2,11 @@
 
 # Stylesheet
 
-## Astuces et ressources utiles
+## Very userful tips
 
-https://blog.dorianguilmain.com/astuces/page/2/
+> https://blog.dorianguilmain.com/astuces/page/2/
 
+## Sections
 
 * [Component variables](#component-variables)    
 * [Using variables](#using-variables)    
