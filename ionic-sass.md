@@ -4,7 +4,7 @@
 
 ## Very userful tips
 
-> https://blog.dorianguilmain.com/astuces/page/2/
+> https://blog.dorianguilmain.com/astuces/
 
 ## Sections
 
@@ -37,6 +37,7 @@
 * [Make modale flexible](#make-modale-flexible)    
 * [2 columns layout](#2-columns-layout)      
 * [Images](#images)      
+* [&::before and &::after](#before-and-after)       
 
 Here are some tips to perform your scss.
 
@@ -1361,3 +1362,8 @@ img {
 	object-position: bottom center;
 }
 ````
+
+## before and after
+[Back to top](#sass)
+
+https://blog.dorianguilmain.com/bien-comprendre-after-before/
