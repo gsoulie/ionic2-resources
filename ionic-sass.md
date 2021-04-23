@@ -38,6 +38,7 @@
 * [2 columns layout](#2-columns-layout)      
 * [Images](#images)      
 * [&::before and &::after](#before-and-after)       
+* [:nth-of-type](#nth-of-type)      
 
 Here are some tips to perform your scss.
 
@@ -1367,3 +1368,23 @@ img {
 [Back to top](#sass)
 
 https://blog.dorianguilmain.com/bien-comprendre-after-before/
+
+## nth-of-type
+
+````
+// Apply absolute position to all childs reflexion-shape
+.reflexion-shape:nth-of-type(n) {
+	position: absolute;
+}
+
+// target a specifi child
+.reflexion-shape:nth-of-type(1) {
+	background-color: #fca054;
+	width: 35%;
+}
+.reflexion-shape:nth-of-type(2) {
+	background-color: blue;
+	width: 35%;
+	height: 80px;
+}
+````
