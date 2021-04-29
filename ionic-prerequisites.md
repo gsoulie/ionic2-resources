@@ -15,6 +15,8 @@
 
 ````
 sudo npm install npm@latest -g
+//or
+sudo npm install npm@6.8.9 -g // for specific version
 ````
 
 ### nodejs
