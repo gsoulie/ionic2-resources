@@ -3,7 +3,7 @@
 # UI Components
 
 * [ion-button](#ion-button)    
-* [modal](#modal)    
+* [modale](#modale)    
 * [ion-select](#ion-select)    
 * [ion-item](#ion-item)    
 * [ion-list](#ion-list)  
@@ -126,7 +126,7 @@
 }
 ```
 
-## Modal
+## Modale
 [Back to top](#ui-components)  
 
 ### Syntax
