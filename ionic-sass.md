@@ -77,7 +77,7 @@ Since ionic 4, some component variables are available for styling it. You can fi
 ```
 
 ## Using variables
-[Back to top](#sass) 
+[Back to top](#stylesheet) 
 
 using sass variable in component's style sheet :
 
@@ -106,7 +106,7 @@ Usage :
 ```
 
 ## Add color
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 Note : It's recommanded to use https://ionicframework.com/docs/theming/color-generator to generate your custom color
 
@@ -124,7 +124,7 @@ To add a new color, create a class that defines all of the variations using CSS 
 ```
 
 ## Get color variables from *variable.scss*
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 **Ionic 4 syntax**
 
@@ -159,7 +159,7 @@ Or other solution, put the code below in your css file
 ```
 
 ## Configure NavBar color
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ### ionic 4 translucent toolbar
 
@@ -179,7 +179,7 @@ Put the following code in your *variable.scss* : ```$toolbar-background: transpa
 
 
 ## Set background image to content
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 ```css
 page-map {
     .main {
@@ -192,7 +192,7 @@ page-map {
 ```
 
 ## Lock screen orientation
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 [Source intéressante](https://blog.dorianguilmain.com/centrer-du-contenu-avec-css/)       
 [Documentation screen orientation](https://ionicframework.com/docs/native/screen-orientation/)    
@@ -200,7 +200,7 @@ page-map {
 **Warning** You can not test the screen orientation on ionic serve, this will throw an exception
 
 ## Positioning
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ### Justify content center
 
@@ -386,7 +386,7 @@ export class PopupComponent implements OnInit{
 ```
 
 ### Center image
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ```css
 .image {
@@ -400,7 +400,7 @@ export class PopupComponent implements OnInit{
 ```
 
 ### Center overlayed images
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 *View file*
 
@@ -444,7 +444,7 @@ export class PopupComponent implements OnInit{
 ```
 
 ### Center image
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ```css
 img {
@@ -459,7 +459,7 @@ img {
 ```
 
 ### Center component
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 vertical center in row
 
@@ -478,7 +478,7 @@ vertical center in row
 ```
 
 ### Center button text
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ```css
 .myButtonStyle{
@@ -487,7 +487,7 @@ vertical center in row
 ```
 
 ### Center text inside ion-input
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 In the view file
 ```xml
@@ -495,7 +495,7 @@ In the view file
 ```
 
 ### Vertical alignment
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 #### Using text-center
 
@@ -524,7 +524,7 @@ div {
 ````
 
 #### ion-label vertical alignment
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you need to set ```display: flex;``` on the parent container (here the ion-item) and set ```margin:auto;``` on the ```<ion-label>```
 
@@ -548,7 +548,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 ```
 
 #### ion-icon vertical alignment
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ```css
     ion-icon{
@@ -589,7 +589,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 
 
 #### CSS vertical alignment
-[Back to top](#sass)    
+[Back to top](#stylesheet)    
 
 ```html
 <div class="box">
@@ -611,7 +611,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 ```
 
 ### Add button at the bottom of listview
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ```html
 <ion-content>
@@ -624,7 +624,7 @@ To set vertical alignment for ```<ion-label>``` inside ```<ion-item>```, you nee
 ```
 
 ## Remove Android input green highlight
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 add the following to your *variable.scss*
 
@@ -635,7 +635,7 @@ $text-input-md-show-invalid-highlight: $text-input-md-show-focus-highlight !defa
 ```
 
 ## Styling Searchbar
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 To change ios searchbar background color, add the following code to your *variable.scss* file :
 
@@ -678,7 +678,7 @@ ion-searchbar {
 ```
 
 ## Disable scrolling on ion-content
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ### Old method
 
@@ -701,7 +701,7 @@ ion-searchbar {
 ```
 
 ### New solution
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ```
 $ ionic cordova plugin add ionic-plugin-keyboard
@@ -727,7 +727,7 @@ providers: [
 ```
 
 ## Label with full width inside ion-item
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 Tips to avoid ion-label truncate
 
@@ -745,7 +745,7 @@ ion-label{
 ```
 
 ## Change ion-item height
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 To reduce the size of *ion-item* element you need to override *min-height* property in your css. Then apply your size in pixels.
 
@@ -757,7 +757,7 @@ To reduce the size of *ion-item* element you need to override *min-height* prope
 ```
 
 ## Split screen in 2 views
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 *View File*
 ```css
@@ -795,7 +795,7 @@ To reduce the size of *ion-item* element you need to override *min-height* prope
 ```
 
 ## Modale with overlay
-[Back to top](#sass)     
+[Back to top](#stylesheet)     
 
 Create modale with transparent black overlay
 
@@ -899,7 +899,7 @@ export class AlertComponent {
 ```
 
 ## Remove ion-card shadow
-[Back to top](#sass)     
+[Back to top](#stylesheet)     
 
 ```
 ion-card, .card-ios, .card-md {
@@ -908,7 +908,7 @@ ion-card, .card-ios, .card-md {
 ```
 
 ## Dynamic class
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 ```
   <div class="divCard" [ngClass]="item.show == true ? 'divCardExtand' : 'divCard'"></div>
@@ -919,7 +919,7 @@ ion-card, .card-ios, .card-md {
 ```
 
 ## Spacer
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 *View file*
 ```
@@ -944,12 +944,12 @@ a {
 Spacer will set the first span on the left side and the third span on the right side of the screen
 
 # Increase icon size
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 *ion-icon* using font, so you just need to increase *font-size* to get bigger icons
 
 # Remove header border
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 ````
 <ion-header class="ion-no-border">
@@ -973,7 +973,7 @@ ion-toolbar {
 
 
 # Create css stepper
-[Back to top](#sass)  
+[Back to top](#stylesheet)  
 
 [Documentation W3C](https://www.w3schools.com/w3css/w3css_progressbar.asp)
 [W3C stylesheet](https://www.w3schools.com/w3css/4/w3.css)
@@ -1013,7 +1013,7 @@ ion-toolbar {
 ````
 
 # Transparent scroll
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 To make browser scrollbar transparent use 
 
@@ -1030,7 +1030,7 @@ To make browser scrollbar transparent use
 ````
 
 # Create fixed menu with scrollable content
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 *View file*
 
@@ -1079,7 +1079,7 @@ To make browser scrollbar transparent use
 
 
 ## Flex grid
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 ### Angular flex-layout
 
@@ -1266,18 +1266,18 @@ According to the previous documentation, here is an example of a responsive grid
     }
 }
 ````
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 
 ## Flex box
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 https://makina-corpus.com/blog/metier/2017/introduction-a-flexbox
 https://www.youtube.com/watch?v=KMvB08yNqlI&feature=youtu.be
 
 ## Make modale flexible
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 ````
 ion-modal.auto-height {
@@ -1297,7 +1297,7 @@ ion-modal.auto-height {
 ````
 
 ## 2 columns layout
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 CSS 2 columns layout with 100% height 
 
@@ -1351,7 +1351,7 @@ html, body {
 ````
 
 ## Images
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 ````
 img {
@@ -1365,7 +1365,7 @@ img {
 ````
 
 ## before and after
-[Back to top](#sass)
+[Back to top](#stylesheet)
 
 https://blog.dorianguilmain.com/bien-comprendre-after-before/
 
