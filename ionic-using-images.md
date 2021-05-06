@@ -8,6 +8,7 @@
 * [Add blur](#add-blur-on-image)    
 * [Upload image](#upload-image)    
 * [Converting base64 string to blob](#converting-base64-string-to-blob)     
+* [Lazy loading](https://github.com/gsoulie/angular-resources/blob/master/ng-image.md#lazy-loading)     
 
 To use image in your app, you can store them under ```src/assets/imgs/*.png```
 
