@@ -2,11 +2,22 @@
 
 # Capacitor
 
+[Capacitor 3.0](#capacitor-3-0)      
 [Capacitor and PWA](#capacitor-and-pwa)        
 [Build Android Prod version](#build-android-prod-version)       
 [App icon and Splashscreen](#app-icon-and-splashscreen)        
 [Local storage](#local-storage)      
-[Listening internet connection](#listening-internet-connection)         
+[Listening internet connection](#listening-internet-connection)     
+
+## Capacitor 3.0
+
+[Ionic blog](https://ionicframework.com/blog/announcing-capacitor-3-0/)      
+
+- Official Plugins Separated from Capacitor Core, you can use only the features you need
+- lazy-load web plugins
+- New CLI command : ````npx cap run [options] <platform>```` now run **copy** action before perfoming **run**
+- Typescript configuration file : allow to specify different configurations based on the development environment (such as development, QA, and production)
+- update persmission API 
 
 ## What is capacitor
 Capacitor is the new Ionic's native web app container that runs your web app natively in iOS, Android, Electron, PWA...
