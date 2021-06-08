@@ -6,6 +6,7 @@
 * [Customize map markers](#customize-map-markers)    
 * [Reverse geocoding](#reverse-geocoding)    
 * [Geolocation on capacitor](#geolocation-on-capacitor)    
+* [Alternative to Google Map with leaflet - mapbox](#alternative-to-google-map)       
 
 ## See google map integration (full example)
 [Full example here](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-google-map-full.md)    
@@ -305,7 +306,7 @@ export class LocationPage {
 
 ## Geolocation on capacitor
 [back to top](#geolocation)  
-```
+```typescript
 import { Plugins } from '@capacitor/core';
 const { Geolocation } = Plugins;
 
@@ -323,3 +324,11 @@ async getCurrentPosition() {
     });
   }
 ```
+
+## Alternative to Google map
+[back to top](#geolocation)  
+
+**Leaflet** is a javascript library which based on **Mapbox**
+
+https://leafletjs.com/examples/quick-start/
+
