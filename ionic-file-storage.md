@@ -22,7 +22,7 @@ $ npm install --save @ionic-native/file
 
 Then declare your module in the *app.module.ts*
 
-```javascript
+```typescript
 import {File} from '@ionic-native/file';
 
 @NgModule({
@@ -76,7 +76,7 @@ Next, lets see an example of easy read/write
 
 *home.ts*
 
-```javascript
+```typescript
 import { DataServiceProvider } from './../../providers/data-service/data-service';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -143,7 +143,7 @@ Next let see an other example of photo storage in a new file
 
 *Controller file*
 
-```javascipt
+```typescript
 import { ModalController } from "ionic-angular";
 import { Camera, File, Entry, FileError } from "ionic-native";
 
@@ -208,7 +208,7 @@ export class HomePage {
 [Back to top](#file)  
 
 
-```javascript
+```typescript
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Camera } from '@ionic-native/camera';
@@ -264,7 +264,7 @@ Here's how to write file in a PWA
 
 *Controller file*
 
-```javascript
+```typescript
 onWriteFile(){
     let filename = "myfile.csv"
     let data = "my text to write in file. Could be anything you want";
@@ -292,7 +292,7 @@ Add the following options into *tsconfig.json* config file
 
 *tsconfig.json*
 
-```
+```json
 {
 	"compileOnSave": false,
 	"compilerOptions": {
@@ -306,7 +306,7 @@ Then import your json data as below
 
 *controller file*
 
-```
+```typescript
 import MyJsonData from '../../assets/myJsonFile.json';
 
 export class MyClass {
@@ -322,7 +322,7 @@ export class MyClass {
 
 *View file*
 
-````
+````html
 <div class="import-div">
   <input type="file" accept=".json" (change)="change($event)" id="file" />
   <label for="file">Import json file</label>
@@ -331,7 +331,7 @@ export class MyClass {
 
 *Controller file*
 
-````
+````typescript
 async change(event: any) {
     const file = event.target.files[0];
     const fileContent = await this.readFileContent(file);	
@@ -356,8 +356,7 @@ async readFileContent(file: File): Promise<string> {
 
 *Style file*
 
-````
-
+````css
 .import-div {
     width: 100%;
     padding-left: 7px;
