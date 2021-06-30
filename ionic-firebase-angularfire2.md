@@ -36,7 +36,7 @@ First, install angularfire2 plugin ```npm install angularfire2 firebase```
 After you created your Firebase project, retieve your Firebase project credentials and create a constant in the *app.module.ts* to store them
 
 *app.module.ts*
-```javascript
+```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -115,7 +115,7 @@ It’s also using the *async* pipe, because AngularFire2 returns Observables, wh
 
 *Home.ts*
 
-```javascript
+```typescript
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
@@ -253,7 +253,6 @@ export class HomePage {
     actionSheet.present();
   }
 }
-
 ```
 
 
@@ -263,7 +262,7 @@ It could be useful to work with ```any[]``` instead of ```Observable<any[]>```
 
 Simply use the following code
 
-```javascript
+```typescript
 songs: Observable<any[]>;
 songsArray: any[] = [];
 
@@ -284,7 +283,7 @@ Then you can use ```songsArray``` in your view file as usual.
 
 In order to improve the querying performance, it is recommanded to add *.indexOn* rule in your firebase rules like below :
 
-```javascript
+```typescript
 {
     "rules": {
         ".read": "auth != null",
@@ -301,7 +300,7 @@ In order to improve the querying performance, it is recommanded to add *.indexOn
 
 Go further with filtering data on attribute :
 
-```javascript
+```typescript
 onFetchData(){
     // Querying data on title
     this.songsList = this.afDB.list('/songs', ref => ref.orderByChild('title').equalTo('<YOUR_TITLE>'));
@@ -315,7 +314,7 @@ onFetchData(){
 
 After retieving your dataset, you can sort it with *.map* function like below 
 
-```javascript
+```typescript
 onFetchData(){
     // Querying data on title and sort by artist
     this.songsList = this.afDB.list('/songs', ref => ref.orderByChild('title').equalTo('<YOUR_TITLE>'));
@@ -350,7 +349,7 @@ The following example shows how to add data for the current logged user.
 ---- song 1
 ```
 
-```javascript
+```typescript
 ...
 constructor(...){
     // Get the logged user	
@@ -377,7 +376,7 @@ fetchData(type){
 [Back to top](#angularfire2) 
 
 *app.module.ts*
-```javascript
+```typescript
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 ...
@@ -459,7 +458,7 @@ export class AppModule {}
 
 *home.ts*
 
-```javascript
+```typescript
 import { FirebaseServiceProvider } from './../../providers/firebase-service/firebase-service';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
@@ -583,7 +582,7 @@ export class HomePage {
 
 *firebase-service.ts*
 
-```javascript
+```typescript
 import { AuthProvider } from './../auth/auth';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
@@ -672,7 +671,7 @@ export class FirebaseServiceProvider {
 
 ### Overwrite data in firebase with http PUT request
 
-```
+```typescript
 storeRecipes() {
 	const recipes = [<some data>];
 	return this.http.put('https://<my-firebase-project-url>/recipes.json', recipes)
@@ -684,7 +683,7 @@ Here, the PUT method will create or overwrite the content of the *recipes* fireb
 
 ### Fetch data with http GET request
 
-```
+```typescript
 getRecipes() {
 	this.http.get('https://<my-firebase-project-url>/recipes.json')
 	.subscribe(recipes => {
@@ -698,7 +697,7 @@ Here, the GET method will fetch the content of the *recipes* firebase's node
 ### Send data with http POST request
 
 
-```
+```typescript
 postRecipe(recipe: Recipe) {
 	this.http.post('https://<my-firebase-project-url>/recipes.json', recipe)
 	.subscribe(response => {
@@ -754,7 +753,7 @@ You can find the Firebase Auth REST API url here : https://firebase.google.com/d
 
 *auth.service.ts*
 
-```
+```typescript
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
@@ -891,7 +890,7 @@ export class AuthService {
 
 *controller.ts*
 
-```
+```typescript
 onSignup(form: NgForm) {
 	const email = form.value.email;
 	const password = form.value.password;
@@ -910,7 +909,7 @@ onSignup(form: NgForm) {
 
 *user.model.ts*
 
-```
+```typescript
 export class User {
 	constructor(
 		public email: string,
@@ -934,7 +933,7 @@ To create an auto login mecanism, you simply need to store the logged user in Lo
 
 *auth.service.ts*
 
-```
+```typescript
 autoLogin() {
 	const userData: {
 		email: string;
@@ -958,7 +957,7 @@ autoLogin() {
 
 *app.component.ts*
 
-```
+```typescript
 export class AppComponent implements OnInit {
 	constructor (private authService: AuthService) {}
 	
@@ -1006,7 +1005,7 @@ Imagine the following data structure [tweets/user/tweet]:
 
 To optimize the tweet querying, you can set your database rules as the following :
 
-```javascript
+```typescript
 {
 "rules": {
    "tweets": {
@@ -1024,7 +1023,7 @@ To optimize the tweet querying, you can set your database rules as the following
 
 An other example 
 
-```
+```typescript
 {
     games: {
         game1_ID :{
@@ -1064,7 +1063,7 @@ When you use **push** function, firebase generate automatic unique uid like -Lz3
 
 To doing this you need to use **child** function associated to **set** method instead of **add**/**push** methods that generate unique uid.
 
-```javascript
+```typescript
 var content = {
 	"user":"me",
 	"email":"email",
@@ -1124,7 +1123,7 @@ Here's some help to querying more easily on firebase
 
 We'll start off with the basics and build from here. In Firebase queries, records are stored in a "path", which is simply a URL in the data hierarchy. In our sample data, we've stored our users at /user. So to retrieve record by it's id, we just append it to the URL:
 
-```javascript
+```typescript
 new Firebase('https://example-data-sql.firebaseio.com/user/1').once('value', function(snap) {
    console.log('I fetched a user!', snap.val());
 });
@@ -1136,7 +1135,7 @@ Selecting an ID is all good and fine. But what if I want to look up an account b
 
 Well this is where ordered data becomes our friend. Since we know that email addresses will be a common lookup method, we can call *setPriority()* whenever we add a new record. Then we can use that priority to look them up later.
 
-```javascript
+```typescript
 new Firebase("https://examples-sql-queries.firebaseio.com/user")
     .startAt('kato@firebase.com')
     .endAt('kato@firebase.com')
@@ -1149,7 +1148,7 @@ new Firebase("https://examples-sql-queries.firebaseio.com/user")
 
 Pagination for small, static data sets (less than 1MB) can be done entirely client side. For larger static data sets, things get a bit more challenging. Assuming we're writing append-only data, we can use our ordered data examples above and assign each message a page number or a unique incremental counter and then use *startAt()/endAt()*.
 
-```javascript
+```typescript
 // fetch page 2 of messages
 new Firebase("https://examples-sql-queries.firebaseio.com/messages")
     .startAt(2) // assumes the priority is the page number
@@ -1163,7 +1162,7 @@ new Firebase("https://examples-sql-queries.firebaseio.com/messages")
 
 Firebase is a real-time sync platform. It's built for speed and efficiency. You don't need to worry about creating extra references, and can listen to as many paths as you'd like to retrieve your data:
 
-```javascript
+```typescript
 var fb = new Firebase("https://examples-sql-queries.firebaseio.com/");
 fb.child('user/123').once('value', function(userSnap) {
    fb.child('media/123').once('value', function(mediaSnap) {
@@ -1202,7 +1201,7 @@ tags
      |- tagID: "2"
 ```
 
-```
+```typescript
   dataList: AngularFireList<any>; // realtime datasource
   dataset: Observable<any[]>; // data to display
   searchTerm: string = '';  // text from searchbar
@@ -1342,7 +1341,7 @@ Considering we are in november 1st, the goal is to remove all data before octobe
 
 The function below, do that job !
 
-```
+```typescript
 const functions = require('firebase-functions');
 
 // The Firebase Admin SDK to access the Firebase Realtime Database.
@@ -1378,7 +1377,7 @@ To finish, just run firebase **deploy command**
 
 ### Using the same function with Https trigger
 
-```
+```typescript
 exports.deleteOldItemsHttpTEST = functions.https.onRequest((req, res) =>{
   var dbRef = admin.database().ref('/data/');
 
@@ -1436,7 +1435,7 @@ npm install -g firebase-tools
 
 Update your firebase.json with the following AFTER running *firebase init* !!!
 
-```
+```typescript
 {
   "hosting": {
     "public": "platforms/browser/www",
@@ -1496,7 +1495,7 @@ To fix it, run ```firebase use --add``` before running ```firebase deploy```. Yo
 
 *View.html*
 
-```
+```html
 <ion-header>
   <ion-navbar>
  	...
@@ -1516,7 +1515,7 @@ To fix it, run ```firebase use --add``` before running ```firebase deploy```. Yo
 
 *Controller.ts*
 
-```javascript
+```typescript
 import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController, LoadingController, Content } from 'ionic-angular';
 
@@ -1607,7 +1606,7 @@ Connect mutliple Firebase app to your Ionic app :
 By default, we initialize AngularFire with the first Firebase app in *app.module.ts*
 
 *app.module.ts*
-```
+```typescript
 ...
 @NgModule({
   declarations: [AppComponent],
@@ -1628,7 +1627,7 @@ By default, we initialize AngularFire with the first Firebase app in *app.module
 
 *firebase-config.ts*
 
-```
+```typescript
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -1659,7 +1658,7 @@ export class FirebaseConf {
 
 *home.html*
 
-```
+```html
 <ion-content>
   <ion-item>
     <ion-button (click)="onConnectDB1()">Firebase config 1</ion-button>
@@ -1674,7 +1673,7 @@ export class FirebaseConf {
 
 *home.page.ts*
 
-```
+```typescript
 import { FirebaseConf } from './../config/firebase-config';
 import { Component } from '@angular/core';
 import { AngularFireList, AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
@@ -1734,7 +1733,7 @@ export class HomePage {
 
 After installed, we need to initialize Firebase. For that go to *src/app/app.module.ts* and import everything you will need:
 
-```
+```typescript
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { firebaseConfig } from './credentials';
@@ -1765,7 +1764,7 @@ export const firebaseConfig = {
 ### CRUD service
 [Back to top](#angularfire2) 
 
-```
+```typescript
 import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable({
@@ -1813,7 +1812,7 @@ export class FirebaseService {
 
 *view file*
 
-```
+```html
 <ion-card>
     <ion-card-content>
         <ion-item>
@@ -1838,7 +1837,7 @@ export class FirebaseService {
 
 *controller file*
 
-```
+```typescript
 import { AngularFirestore } from 'angularfire2/firestore';
 
 export class HomePage implements OnInit {
@@ -1933,7 +1932,7 @@ To achieve this, you first need to create an array in your dataset, which contai
 
 You can do that with this kind of code
 
-```
+```typescript
 addItem(name, description) {
 	// create array containing search terms
 	const searchTerm = name.toLowerCase().split(' '); // it's recommended to clean your 'name' by removing all specials characters
@@ -1951,7 +1950,7 @@ addItem(name, description) {
 
 This will create the following collection/document in Firestore
 
-```
+```typescript
 MY SUPER ITEM
 {
 	name: 'My Super Item',
@@ -1962,7 +1961,7 @@ MY SUPER ITEM
 
 You can now make a research by using 
 
-```
+```typescript
 searchItemByTerm(myTerm) {
 	return this.afs.collection('item', ref => ref.where('searchTerm', 'array-contains', myTerm.toLowerCase())).snapshotChanges();
 }
@@ -1977,7 +1976,7 @@ this.searchItemByTerm('Super item');	// => Doesn't work !!
 
 You can improve *array-contains* query by using **array-contains-any** operator. This will return all the data wich match one of the passed terms. 
 
-```
+```typescript
 searchItemByTerm(collectionName: string, name: string) {
 	const searchTerms = name.split(' ');	// create searched terms array
       	return this.afs.collection(collectionName, ref => ref.where('searchTerm', 'array-contains-any', 	searchTerms)).snapshotChanges();
