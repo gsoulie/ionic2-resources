@@ -2,13 +2,15 @@
 
 # Authentication
 
-## Ionic appauth
+## Ionic appauth with capacitor redirection after authentication
 
 [Installation](https://www.npmjs.com/package/ionic-appauth)       
 [Sample project](https://github.com/wi3land/ionic-appauth-capacitor-demo)      
-[Source code](https://github.com/wi3land/ionic-appauth/blob/eec2889df0b526b56161a193ff54e3e1d2547776/src/auth-service.ts)      
+[Source code](https://github.com/wi3land/ionic-appauth/blob/eec2889df0b526b56161a193ff54e3e1d2547776/src/auth-service.ts)     
 
-````
+Using ionic appauth with Identity server
+
+````typescript
 auth_config: {
   client_id: 'my-client-id',
   server_host: 'https://sso.my-server.com',
@@ -17,7 +19,10 @@ auth_config: {
   scopes: 'openid profile email roles my.api offline_access',
   pkce: true
 }
- 
+````
+
+*capacitor.conf.json*
+````typescript
 // capacitor.conf.json => empty
 {
   "appId": "com.appauth.demo",
@@ -36,7 +41,7 @@ auth_config: {
 }
 ````
 
-Then create the following routes on your server : *com.appauth.demo://callback* and *com.appauth.demo://ensession*
+Then create the following routes on your server (in redirect Uris and Cors sections) : **com.appauth.demo://callback** and **com.appauth.demo://ensession**
 
 ## Ionic auth
 https://ionicframework.com/blog/ionic-auth-connect-single-sign-on-made-easy/
