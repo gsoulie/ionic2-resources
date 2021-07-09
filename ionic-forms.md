@@ -172,7 +172,7 @@ First, you need to import FormsModule and ReactiveFormsModule in your *app.modul
 
 *app.module.ts*
 
-```
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -206,7 +206,7 @@ export class AppModule {}
 ```
 
 *view file of your form page*
-```
+```html
 <!-- if[UserInterface]-->
 <ion-content no-padding class="window">
     <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
@@ -226,13 +226,13 @@ export class AppModule {}
 ```
 you can also import FormsModule and ReactiveFormsModule to yourFormPage.page.ts
 
-```
+```typescript
 import { FormGroup, FormArray, FormBuilder, Validators,ReactiveFormsModule } from '@angular/forms';
 ```
 
 *yourFormPage.page.ts*
 
-```
+```typescript
 import { FormGroup, FormArray, FormBuilder, Validators,ReactiveFormsModule } from '@angular/forms';
 
 export class LoginPage implements OnInit {
@@ -250,7 +250,7 @@ export class LoginPage implements OnInit {
 Then you must import FormsModule and ReactiveFormsModule to *yourFormPage.module.ts* file
 
 *yourFormPage.module.ts*
-```
+```typescript
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -284,7 +284,7 @@ export class LoginPageModule {}
 
 **Important** your form cannot be rendered until is not instanciated. You must declare your FormGroup into your controller like below :
 
-```
+```typescript
 ngOnInit() {
     let firstName, lastName = '';
     this.loginForm = new FormGroup({
@@ -298,7 +298,7 @@ ngOnInit() {
 [Back to top](#forms)    
 
 *View file*
-```
+```html
 <!-- <textarea rows="6" [value]="newPost" #postInput></textarea> -->
 <mat-card>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
@@ -338,7 +338,7 @@ ngOnInit() {
 ```
 
 *style file*
-```
+```css
 mat-card{
     margin-top: 20px;
 }
@@ -365,7 +365,7 @@ input[type="file"] {
 ```
 
 *controller file*
-```
+```typescript
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PostService } from '../post.service';
