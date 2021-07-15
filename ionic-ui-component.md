@@ -3687,6 +3687,7 @@ delete(idx) {
 *item.html*
 
 ````html
+<!-- Hidden wrapper (visible after swiping) containing action buttons -->
 <div class="wrapper" #wrapper>
   <div class="column">
       <ion-icon name="trash-outline" color="light" class="ion-margin-start" #trash></ion-icon>
@@ -3695,6 +3696,7 @@ delete(idx) {
     <ion-icon name="archive-outline" color="light" class="ion-margin-end" #archive></ion-icon>
   </div>
 </div>
+
 <ion-item class="email" lines="none">
   <ion-row class="ion-align-items-center">
     <ion-col size="2" (click)="openDetail(email.id)">
