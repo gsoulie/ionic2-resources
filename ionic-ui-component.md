@@ -31,6 +31,7 @@
 * [Action sheet customization](#action-sheet-customization)        
 * [ion-toast](#ion-toast)       
 * [ion-sliding-item swipe to delete](#ion-sliding-item-swipe-to-delete)       
+* [swipe to delete with gesture](#swipe-to-delete-with-gesture)       
 * [iOS keyboard scroll](#ios-keyboard-scroll)     
 
 ## ion-button
@@ -3641,6 +3642,294 @@ delete(idx) {
 		this.studies.splice(idx, 1);
 	}
 }
+````
+
+## Swipe to delete with gesture
+
+*parent.html*
+
+````html
+ <ion-list>
+    <ion-list-header>Inbox</ion-list-header>
+    <app-swipe-item *ngFor="let e of emails"
+      [email]="e"
+      (delete)="deleteEmail(e.id)">
+    </app-swipe-item>
+  </ion-list>
+````
+
+*parent.controller.ts*
+
+````typescript
+  emails: Email[];
+  emailSubscription: Subscription;
+  
+  constructor(private dataService: DataService) { }
+
+  ngOnInit() {
+    this.emailSubscription = this.dataService.fetchEmail()
+    .subscribe((res: Email[]) => {
+      	this.emails = res
+      });
+    });
+  }
+  ngOnDestroy(): void {
+    this.emailSubscription.unsubscribe();
+  }
+  
+  deleteEmail(ev): void {
+    this.emails = this.emails.filter(e => e.id !== ev);
+  }
+````
+
+### Swipe item component
+
+*item.html*
+
+````html
+<div class="wrapper" #wrapper>
+  <div class="column">
+      <ion-icon name="trash-outline" color="light" class="ion-margin-start" #trash></ion-icon>
+  </div>
+  <div class="column" class="ion-text-right">
+    <ion-icon name="archive-outline" color="light" class="ion-margin-end" #archive></ion-icon>
+  </div>
+</div>
+<ion-item class="email" lines="none">
+  <ion-row class="ion-align-items-center">
+    <ion-col size="2" (click)="openDetail(email.id)">
+      <div [style.background]="email.color" class="email-circle">{{ email.from | slice:0:1}}</div>
+    </ion-col>
+    <ion-col size="8" (click)="openDetail(email.id)">
+      <ion-label
+        color="dark"
+        class="ion-text-capitalize ion-text-wrap"
+        [style.font-weight]="!email.read ? 'bold' : ''">
+          {{ email.from.split('@')[0] }}
+          <p class="excerpt">
+            {{ (email.content.length > 50) ? (email.content | slice:0:50)+'...' : (email.content)}}
+          </p>
+      </ion-label>
+    </ion-col>
+    <ion-col size="2">
+      <div class="ion-text-right" tappable (click)="email.star = !email.star;">
+        <p class="date">{{ email.date | date: 'dd. MMM' }}</p>
+        <ion-icon
+        [name]="email.star ? 'star' : 'star-outline'"
+        [color]="email.star ? 'warning' : 'medium'"></ion-icon>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-item>
+
+````
+
+*item.scss*
+
+````css
+$row-height: 89px;
+
+.email {
+  //margin-bottom: 6px;
+  height: $row-height;
+  display: flex;
+  background: white;
+
+  .excerpt {
+    padding-top: 4px;
+  }
+  .date { font-size: small;}
+}
+ion-item {
+  --width: 100%;
+}
+.email-circle {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: #efefef;
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: $row-height;
+  position: absolute;
+  background: red;
+}
+.column {
+  display: flex;
+  flex: 1;
+  flex-basis: 100%;
+  flex-direction: column;
+}
+// active sur swipe
+.rounded {
+  border-radius: 10px;
+  z-index: 2;
+  box-shadow: 0px 6px 13px -5px rgb(0 0 0 / 28%);
+}
+
+````
+
+*item.ts*
+
+````typescript
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
+import { AnimationController, GestureController, IonItem, Animation } from '@ionic/angular';
+
+const ANIMATION_BREAKPOINT = 70;
+
+@Component({
+  selector: 'app-swipe-item',
+  templateUrl: './swipe-item.component.html',
+  styleUrls: ['./swipe-item.component.scss'],
+})
+export class SwipeItemComponent implements AfterViewInit {
+  @Input() email: any;
+
+  @ViewChild(IonItem, {read: ElementRef }) item: ElementRef;
+  @ViewChild('wrapper') wrapper: ElementRef;
+  @ViewChild('trash', {read: ElementRef}) trashIcon: ElementRef;
+  @ViewChild('archive', {read: ElementRef}) archiveIcon: ElementRef;
+
+  @Output() delete: EventEmitter<any> = new EventEmitter();
+
+  bigIcon = false;
+  trashAnimation: Animation;
+  archiveAnimation: Animation;
+  deleteAnimation: Animation;
+
+  constructor(
+    private router: Router,
+    private gestureCtrl: GestureController,
+    private animationCtrl: AnimationController) { }
+
+  ngAfterViewInit() {
+    this.setupAnimations();
+    this.initializeGesture();
+  }
+
+  initializeGesture(): void {
+    const style = this.item.nativeElement.style;
+    const windowWidth = window.innerWidth;
+
+    const moveGesture = this.gestureCtrl.create({
+      el: this.item.nativeElement,
+      gestureName: 'move',
+      threshold: 0,
+      onStart: ev => {
+        style.transition = '';
+      },
+      onMove: ev => {
+        style.transform = `translate3d(${ev.deltaX}px, 0, 0)`;
+        this.item.nativeElement.classList.add('rounded');
+
+        if (ev.deltaX > 0) {
+          // swipe right
+          this.wrapper.nativeElement.style['background-color'] = 'var(--ion-color-primary)';
+
+        } else if (ev.deltaX < 0) {
+          // swipe left
+          this.wrapper.nativeElement.style['background-color'] = 'green';
+        }
+
+        // Animation icône de gauche
+        if (ev.deltaX > ANIMATION_BREAKPOINT && !this.bigIcon) {
+          this.animateTrash(true);
+        } else if (ev.deltaX > 0 && ev.deltaX < ANIMATION_BREAKPOINT && this.bigIcon) {
+          this.animateTrash(false);
+        }
+
+        // Animation icône de droite
+        if (ev.deltaX < -ANIMATION_BREAKPOINT && !this.bigIcon) {
+          this.animateArchive(true);
+        } else if (ev.deltaX < 0 && ev.deltaX > -ANIMATION_BREAKPOINT && this.bigIcon) {
+          this.animateArchive(false);
+        }
+      },
+      onEnd: ev => {
+        this.item.nativeElement.classList.remove('rounded');
+        style.transition = '0.2s ease-out';
+        if (ev.deltaX > ANIMATION_BREAKPOINT) {
+          style.transform = `translate3d(${windowWidth}px, 0, 0)`;
+          this.animateDelete();
+
+        } else if (ev.deltaX < -ANIMATION_BREAKPOINT) {
+          style.transform = `translate3d(-${windowWidth}px, 0, 0)`;
+            this.animateDelete();
+          } else {
+            style.transform = '';
+        }
+      }
+    });
+
+
+    moveGesture.enable();
+  }
+
+  setupAnimations() {
+    this.deleteAnimation = this.animationCtrl.create('trash-animation')
+    .addElement(this.item.nativeElement)
+    .duration(300)
+    .easing('ease-out')
+    .fromTo('height', '89px', '0')
+    .afterStyles({'display': 'none'});
+
+    this.trashAnimation = this.animationCtrl.create('trash-animation')
+    .addElement(this.trashIcon.nativeElement)
+    .duration(300)
+    .easing('ease-in')
+    .fromTo('transform', 'scale(1)', 'scale(1.5)');
+
+    this.archiveAnimation = this.animationCtrl.create('archive-animation')
+    .addElement(this.archiveIcon.nativeElement)
+    .duration(300)
+    .easing('ease-in')
+    .fromTo('transform', 'scale(1)', 'scale(1.5)');
+  }
+
+  // animation icône
+  animateTrash(zoomIn) {
+    this.bigIcon = zoomIn;
+    if (zoomIn) {
+      this.trashAnimation.direction('alternate').play();
+    } else {
+      this.trashAnimation.direction('reverse').play();
+    }
+    Haptics.impact({ style: ImpactStyle.Light }); // retour haptic pour mobile
+  }
+  animateArchive(zoomIn) {
+    this.bigIcon = zoomIn;
+    if (zoomIn) {
+      this.archiveAnimation.direction('alternate').play();
+    } else {
+      this.archiveAnimation.direction('reverse').play();
+    }
+    Haptics.impact({ style: ImpactStyle.Light }); // retour haptic pour mobile
+  }
+  animateDelete(): void {
+    this.deleteAnimation.play();
+    // Envoyer l'évènement une fois l'animation terminée pour éviter la suppression de l'item
+    // avant que l'animation ne soit terminée
+    this.deleteAnimation.onFinish(() => {
+      this.delete.emit(true);
+    });
+  }
+
+  openDetail(id) {
+    this.router.navigate(['tabs', 'mail', id]);
+  }
+}
+
 ````
 
 ## iOS keyboard scroll
