@@ -3861,11 +3861,11 @@ export class SwipeItemComponent implements AfterViewInit {
       onEnd: ev => {
         this.item.nativeElement.classList.remove('rounded');
         style.transition = '0.2s ease-out';
-        if (ev.deltaX > ANIMATION_BREAKPOINT) {
+        if (ev.deltaX > ANIMATION_BREAKPOINT) {	// pour plus de confort (ANIMATION_BREAKPOINT + 50)
           style.transform = `translate3d(${windowWidth}px, 0, 0)`;
           this.animateDelete();
 
-        } else if (ev.deltaX < -ANIMATION_BREAKPOINT) {
+        } else if (ev.deltaX < -ANIMATION_BREAKPOINT) {	// pour plus de confort -(ANIMATION_BREAKPOINT + 50)
           style.transform = `translate3d(-${windowWidth}px, 0, 0)`;
             this.animateDelete();
           } else {
