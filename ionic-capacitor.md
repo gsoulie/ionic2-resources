@@ -2,12 +2,13 @@
 
 # Capacitor
 
-[Capacitor 3.0](#capacitor-3-0)      
-[Capacitor and PWA](#capacitor-and-pwa)        
-[Build Android Prod version](#build-android-prod-version)       
-[App icon and Splashscreen](#app-icon-and-splashscreen)        
-[Local storage](#local-storage)      
-[Listening internet connection](#listening-internet-connection)     
+* [Capacitor 3.0](#capacitor-3-0)      
+* [Capacitor and PWA](#capacitor-and-pwa)        
+* [Build Android Prod version](#build-android-prod-version)       
+* [App icon and Splashscreen](#app-icon-and-splashscreen)        
+* [Local storage](#local-storage)      
+* [Listening internet connection](#listening-internet-connection)     
+* [Haptics](#haptics)      
 
 ## Capacitor 3.0
 
@@ -95,7 +96,7 @@ To add PWA support to your app, you'll need an App manifest *manifest.json* that
 
 ### Check if plugin is available
 
-```
+```typescript
 import { Capacitor } from '@capacitor/core';
 
 const isAvailable = Capacitor.isPluginAvailable('Camera');
@@ -156,7 +157,8 @@ The final step consists in delete all of your old splashscreens *.png* files fro
 
 ## Local storage
 [Back to top](#capacitor)     
-```
+
+```typescript
 import { Plugins } from '@capacitor/core';
 
 const { Storage } = Plugins;
@@ -180,7 +182,7 @@ initializeApp() {
 
 As an example, when a user is on a slower connection, they get an alert that performance may be degraded:
 
-````
+````typescript
 if (navigator.connection.effectiveType != '4g') {
   console.log('slow connection!');
   // show modal dialog warning user that video will be loaded at lower resolution
@@ -194,7 +196,7 @@ else {
 
 Another option is Capacitor’s Network API. It extends the Network Information API to provide even more useful features for web and mobile apps, such as monitoring the network for status changes, which your app can then react to.
 
-````
+````typescript
 import { Plugins } from '@capacitor/core';
 
 const { Network } = Plugins;
@@ -212,3 +214,13 @@ let status = await Network.getStatus();
   "connectionType": "wifi"
 }
 ````
+
+[Back to top](#capacitor)   
+
+## Haptics
+
+Provide physical feeback to the user
+
+https://capacitorjs.com/docs/apis/haptics
+
+[Back to top](#capacitor)     
