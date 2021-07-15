@@ -3,7 +3,7 @@
 # Prerequisites
 
 * [Update environment npm / nodejs](#update-environment)      
-* [Start with ionic](#start-with-ionic)  
+* [CLI](#start-with-ionic)  
 * [Visual Studio Code](#visual-studio-code)   
 * [Android debugging with logcat](#android-debugging-with-logcat)    
 * [Using multiple version of Node with nvm](#using-multiple-version-of-node-with-nvm)     
@@ -90,7 +90,7 @@ $ source .bash_profile
 Then, restart your computer and test ANDROID_HOME ```$ANDROID_HOME``` don't forget **$** on the command
 
 
-### Start with ionic
+## CLI
 
 **ionic 2 project creation**
 
@@ -108,27 +108,13 @@ ionic start myApp sidemenu
 $ ionic cordova platform add android
 ```
 
-**Generate new page**
+**Generate new page** ```$ ionic g page myNewPage```
 
-It creates new folder in the project treeview with js, html and scss files
+**Generate new provider** ```$ ionic g service myProvider```
 
-```
-$ ionic g page myNewPage
-```
+**Generate module** ````ionic g module components/shared-component --flat````
 
-**Generate new provider**
-
-It creates new folder in the project treeview
-
-```
-$ ionic g service myProvider
-```
-
-**Generate new component**
-
-```
-$ ionic g component myComponent
-```
+**Generate new component** ```$ ionic g component myComponent```
 
 You can use it with 
 
@@ -154,27 +140,6 @@ $ ionic serve -l -s -c
 [--nolivereload|-r] .....  Do not start live reload
 [--noproxy|-x] ..........  Do not add proxies
 ```
-
-**Testing app on multiple screen sizes and platform**
-
-```
-$ ionic serve --lab
-```
-
-**Running Emulator**
-
-```
-$ ionic cordova build ios
-$ ionic cordova emulate ios
-```
-
-You can debugging faster on devices by using these commands :
-
-```
-$ ionic cordova build ios -lc
-$ ionic cordova emulate ios -lc
-```
-Which is directly deploying the app on your connected device plus automatically reloading whenever you change something.
 
 **Run on device**
 
