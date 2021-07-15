@@ -260,9 +260,9 @@ https://stackoverflow.com/questions/56596932/ionic-4-customize-ion-select
 ## ion-item
 [Back to top](#ui-components)  
 
-- show right arrow : add ```detail``` property on ion-item ```<ion item detail>```
-- hide right arrow : add ```detail="false"``` property on ion-item  ```<ion item detail="false">```
-- hide item line : add ```lines="none"``` property on ion-item  ```<ion item lines="none">```
+- show right arrow : add ```detail``` property on ion-item ```<ion-item detail>```
+- hide right arrow : add ```detail="false"``` property on ion-item  ```<ion-item detail="false">```
+- hide item line : add ```lines="none"``` property on ion-item  ```<ion-item lines="none">```
 
 *Different type of lines*
 
@@ -294,21 +294,10 @@ https://stackoverflow.com/questions/56596932/ionic-4-customize-ion-select
 </ion-list>
 ```
 
-### ion-item slots
-
-Since Ionic 4, ion-item uses *slot* in replacement of *item-left* and *item-right*
-
-Now use slots instead :
-
-```html
-<ion-button slot="start">
-<ion-button slot="end">
-<ion-icon slot="icon-only">
-```
-
 ### ion-item router-direction
 
-It is possible to add a *router-direction* when clicking on ion-item. It's value could be : "back" | "forward" | "root"
+It is possible to add a ````router-direction```` when clicking on ion-item. It's value could be : "back" | "forward" | "root"
+
 ### ion-item with multiple lines
 
 ```html
