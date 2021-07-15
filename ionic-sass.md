@@ -39,6 +39,7 @@
 * [Images](#images)      
 * [&::before and &::after](#before-and-after)       
 * [:nth-of-type](#nth-of-type)      
+* [Popover](#popover)      
 
 Here are some tips to perform your scss.
 
@@ -1388,3 +1389,23 @@ https://blog.dorianguilmain.com/bien-comprendre-after-before/
 	height: 80px;
 }
 ````
+
+## Popover
+[Back to top](#stylesheet)
+
+*global.scss*
+````css
+.custom-popover {
+  --ion-backdrop-opacity: 0.6;
+  .popover-arrow {
+      display: none;
+  }
+
+  .popover-content {
+      left: 10px !important;
+      width: calc(100% - 20px);
+  }
+}
+````
+
+[Back to top](#stylesheet)
