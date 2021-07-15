@@ -38,7 +38,7 @@
 
 ### options
 
-```
+```html
 <!-- Expand -->
 <ion-button expand="full">Full Button</ion-button>
 <ion-button expand="block">Block Button</ion-button>
@@ -78,12 +78,12 @@
 ### Mutli-line button
 
 *view file*
-```
+```html
 <ion-button class="btnValueChecked allowMultipleLines" fill="clear">My very very long text button with multiple line</ion-button>
 ```
 
 *style file*
-```
+```css
 .btnValueUnchecked {
     border-radius: 50px;
     height: 60px;
@@ -133,7 +133,7 @@
 
 *Parent Controller*
 
-````
+````typescript
 import { LoginModalComponent } from './../login-modal/login-modal.component';
 
 export class HomePage implements OnInit {
@@ -158,7 +158,7 @@ export class HomePage implements OnInit {
 
 *modal controller*
 
-````
+````typescript
 constructor(private modalCtrl: ModalController) {}
 
 onClose() {
@@ -172,7 +172,7 @@ Consider that we have a page (UserListPage for example) with a button wich open 
 
 *UserListPage Controller file*
 
-```javascript
+```typescript
 import { ModalController } from 'ionic/angular';
 ...
 users: User[];
@@ -206,7 +206,7 @@ openMyModal(user: User){
 
 *UserPage controller file*
 
-```javascript
+```typescript
 ...
 constructor(private viewCtrl: ViewController, private navParams: NavParams){}
 
@@ -228,7 +228,7 @@ onClose(remove = false){
 [Back to top](#ui-components)  
 
 *View file*
-```xml
+```html
  <ion-item>
     <ion-label>Profession</ion-label>
 	 <ion-select (ionChange)="onFiltering($event.detail.value)"
@@ -240,7 +240,7 @@ onClose(remove = false){
 
 *Controller file*
 
-```javascript
+```typescript
   onFilteringTag(selectedItem){
     this.currentTag = selectedTag;	// contains item.id
 
@@ -265,7 +265,7 @@ https://stackoverflow.com/questions/56596932/ionic-4-customize-ion-select
 
 *Different type of lines*
 
-```
+```html
 <!-- Item Inset Lines -->
 <ion-item lines="inset">
   <ion-label>Item Lines Inset</ion-label>
@@ -299,7 +299,7 @@ Since Ionic 4, ion-item uses *slot* in replacement of *item-left* and *item-righ
 
 Now use slots instead :
 
-```
+```html
 <ion-button slot="start">
 <ion-button slot="end">
 <ion-icon slot="icon-only">
@@ -310,7 +310,7 @@ Now use slots instead :
 It is possible to add a *router-direction* when clicking on ion-item. It's value could be : "back" | "forward" | "root"
 ### ion-item with multiple lines
 
-```
+```html
 <ion-item>
     <ion-label text-wrap>
     ...
@@ -326,13 +326,13 @@ To show the right arrow (like ios list item), just add ```detail``` property on 
 
 *View File*
 
-```xml
+```html
 <ion-item *ngFor="let item of group.patients" detail>{{ item }}</ion-item>
 ```
 
 And modify your *variable.sass* file to reflect the following 
 
-```javascript
+```typescript
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
@@ -343,7 +343,7 @@ After that refresh your browser
 
 ### Standard dynamic ion-list item
 
-```xml
+```html
 <ion-list> 
     <ion-item *ngFor="let item of items">{{item.fullname}}</ion-item> 
 </ion-list>
@@ -351,7 +351,7 @@ After that refresh your browser
 
 For clickable list you have to use **button ion-item**
 
-```xml
+```html
 <ion-list> 
     <button ion-item *ngFor="let item of items">{{item.fullname}}</button> 
 </ion-list>
@@ -361,7 +361,7 @@ For clickable list you have to use **button ion-item**
 
 Consider a ion-list in which we want to hide every items which property "deleted" is set to true
 
-```xml
+```html
 <ion-list>
   <ion-item-sliding *ngFor="let item of getActiveItems()" #slidingItem>
     <ion-item>{{item.fach}} ({{item.kuerzel}})</ion-item>
@@ -373,7 +373,7 @@ Consider a ion-list in which we want to hide every items which property "deleted
 </ion-list>
 ```
 
-```javascript
+```typescript
 @Component(
     // ...
 )
@@ -389,7 +389,7 @@ export class TestPage {
 
 Second solution, in case that you prefer to do the filtering in the template then you can do it this way:
 
-```xml
+```html
 <ion-list>
   <template ngFor #item="$implicit" [ngForOf]="items">
     <ion-item-sliding *ngIf="!item.deleted" #slidingItem>
@@ -408,7 +408,7 @@ Second solution, in case that you prefer to do the filtering in the template the
 
 *View file*
 
-```xml
+```html
 <ion-list>
     <ion-item-sliding *ngFor="let post of posts">
     	<ion-item>
@@ -425,7 +425,7 @@ Second solution, in case that you prefer to do the filtering in the template the
 
 *Controller file*
 
-```javascript
+```typescript
 removePost(post){
     let index = this.posts.indexOf(post);
 
@@ -437,7 +437,7 @@ removePost(post){
 
 ### ion-item-sliding
 
-```xml
+```html
 <ion-content class="home">
   <ion-list>
     <ion-item-sliding  *ngFor="#item of notes" >
@@ -460,7 +460,7 @@ removePost(post){
 
 *View file*
 
-```
+```html
 <ion-header>
   ...
 </ion-header>
@@ -477,7 +477,7 @@ removePost(post){
 
 *Controller file*
 
-```
+```typescript
 import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
@@ -576,7 +576,7 @@ ionic start virtual-scroll tabs --v2
 
 Modify Page1 and Page2 controller with :
 
-```javascript
+```typescript
 import {Component} from '@angular/core';
 
 @Component({
@@ -607,7 +607,7 @@ export class Page1 {
 First we’re going to set up a standard list to display the data we created in the constructor.
 
 Modify **page1.html** to reflect the following:
-```xml
+```html
 <ion-header>
 	<ion-navbar>
 	  <ion-title>
@@ -638,7 +638,7 @@ Now we’re going to create a list that uses virtual scroll.
 
 Modify **page2.html** to reflect the following:
 
-```xml
+```html
 <ion-header>
 	<ion-navbar>
 	  <ion-title>
@@ -670,7 +670,7 @@ It’s important for the virtual scroll to know approximately how big your items
 
 *View file*
 
-```xml
+```html
 <ion-content>
  <ion-list>
    <ion-item *ngFor="let i of items"></ion-item>
@@ -687,7 +687,7 @@ It’s important for the virtual scroll to know approximately how big your items
 
 *Controller file*
 
-```javascript
+```typescript
 @Component({...})
 export class NewsFeedPage {
 
@@ -717,7 +717,7 @@ export class NewsFeedPage {
 
 *View file*
 
-```xml
+```html
 <ion-list>
 	<ion-item *ngFor="let item of items" (click)="openDetail(item.idDevice, item.nom)">
 		<ion-button color="clear" slot="end" (click)="pickDevice($event,item.idDevice)">
@@ -732,7 +732,7 @@ export class NewsFeedPage {
 
 *Controller file*
 
-```javascript
+```typescript
 export class Page1 {
   public items: any[];
 
@@ -772,7 +772,7 @@ export class Page1 {
 
 *Change button backgroundColor dynamically*
 
-```xml
+```html
 <ion-button[style.backgroundColor]="enable ? '#00CC00' : '#FF0000'">Test</ion-button>
 ```
 
@@ -781,7 +781,7 @@ export class Page1 {
 
 *View file*
 
-```xml
+```html
 <ion-content padding>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -800,7 +800,7 @@ export class Page1 {
 
 *Controller file*
 
-```javascript
+```typescript
 doRefresh(refresher){
     this.users = getUsers();
     setTimeout(() => { refresher.complete(); console.log('Async operation has ended'); }, 2000); 
@@ -812,7 +812,7 @@ doRefresh(refresher){
 
 *View file*
 
-```xml
+```html
 <ion-header>
   <ion-navbar>
     <ion-title>Contacts</ion-title>
@@ -829,7 +829,7 @@ doRefresh(refresher){
 
 *Controller file*
 
-```javascript
+```typescript
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
  
@@ -916,7 +916,7 @@ export class Contacts {
 
 *JSON objects list*
 
-```javascript
+```typescript
 ...
 
 this.patients = [{nom:"ABBANTI", prenom:"OLIVIER", ville: "Castelnau-le-lez (34)"},{nom:"ABIDAL",  prenom:"GEORGES", ville: "Montpellier (34)"},
@@ -960,7 +960,7 @@ groupPatients(patients){
 
 *View file*
 
-```xml
+```html
 <ion-item *ngFor="let item of group.patients" (click)="onSelectPatient(item)"> 
       {{ item.nom }} {{ item.prenom }}
       <p class="subtitle">{{ item.ville }}
@@ -978,7 +978,7 @@ npm install ngx-pagination --save
 
 *View file*
 
-````
+````html
 <pagination-controls class="my-pagination" (pageChange)="changePage($event)"></pagination-controls>    
 <div *ngFor="let item of filteredStudies | paginate: { 
 	itemsPerPage: pageSize,
@@ -997,7 +997,7 @@ npm install ngx-pagination --save
 
 *Controller file*
 
-````
+````typescript
 import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -1069,7 +1069,7 @@ export class PaginationPage implements OnInit {
 *Service file*
 
 **Note :** Here, the service returns elements 50 by 50 starting from the passed page index
-````
+````typescript
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
@@ -1100,7 +1100,7 @@ export class DataService {
 *Style file*
 
 **Important :** put the pagination style inside de page style, not in the global.scss
-````
+````css
 // active page
 .my-pagination::ng-deep .ngx-pagination .current,
   .btn-info {
@@ -1135,7 +1135,7 @@ export class DataService {
 ## ion-label
 [Back to top](#ui-components)  
 
-```
+```html
 <ion-label position="floating">Datetime</ion-label>
 ```
 
@@ -1143,7 +1143,7 @@ export class DataService {
 
 To show long label, add the following css to your ion-label
 
-```
+```css
 .longLabel {
     white-space: pre-warp !important;
 }
@@ -1156,7 +1156,7 @@ To show long label, add the following css to your ion-label
 
 *View file*
 
-```xml
+```html
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
@@ -1181,7 +1181,7 @@ To show long label, add the following css to your ion-label
 > It's recommanded to use *ionChange* event instead of *ionInput* to gives enough time to the user for tiping. In completion, use *debounce* option
 
 *Some options*
-```
+```html
 <!-- Searchbar with danger color -->
 <ion-searchbar color="danger"></ion-searchbar>
 
@@ -1203,7 +1203,7 @@ To show long label, add the following css to your ion-label
 
 *Controller file*
 
-```javascript
+```typescript
 constructor(public nav: NavController) {
     this.nav = nav;
     this.getAllDevices();
@@ -1256,7 +1256,7 @@ To increase list filtering, we can use Observable instead of basic filtering sho
 
 *View file*
 
-```xml
+```html
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
@@ -1283,7 +1283,7 @@ To increase list filtering, we can use Observable instead of basic filtering sho
 
 *Controller file*
 
-```javascript
+```typescript
 import { Component } from '@angular/core';
 import { Control } from '@angular/common';
 import { NavController } from 'ionic-angular';
@@ -1336,7 +1336,7 @@ export class HomePage {
 
 *Data.ts provider*
 
-```javascript
+```typescript
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -1387,7 +1387,7 @@ We added the *handleTabSelect()* function to reset the route when switching tab 
 
 *tabs.page.html*
 
-````
+````html
 <ion-tabs #tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home" (click)="handleTabSelect('home', $event)">
@@ -1414,7 +1414,7 @@ We added the *handleTabSelect()* function to reset the route when switching tab 
 
 *tabs.component.ts*
 
-````
+````typescript
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonTabs } from '@ionic/angular';
@@ -1446,7 +1446,7 @@ export class HomeTabsPage implements OnInit {
 
 *tabs-routing.module.ts*
 
-````
+````typescript
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { QueriesPage } from '../pages/queries/queries.page';
@@ -1523,7 +1523,7 @@ export class HomeTabsPageRoutingModule {}
 
 So, by default, ionic 2 tabs project sample is using bottom navigation. To set top navigation, just change your bootstrap (in your **app.module.ts**) code by :
 
-```
+```typescript
 import { TabsPage } from './../pages/tabs/tabs';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -1554,7 +1554,7 @@ To hide tabs on sub pages, modify your *app.module-ts* as following
 
 *app.module.ts*
 
-```javascript
+```typescript
 @NgModule({
   declarations: [...],
   imports: [
@@ -1570,7 +1570,7 @@ To hide tabs on sub pages, modify your *app.module-ts* as following
 
 You can need to hide tabgroup just on a specific page with this :
 
-```javascript
+```typescript
 export class MyClass implements OnInit{
 
   tabBarElement: any;
@@ -1597,7 +1597,7 @@ You can set your own svg as tab-icon like below :
 
 *View file*
 
-````
+````html
 <ion-tabs #tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home" (click)="handleTabSelect('home', $event)">
@@ -1624,19 +1624,19 @@ You can set your own svg as tab-icon like below :
 
 *svg file before modification*
 
-````
+````html
 <svg xmlns="http://www.w3.org/2000/svg" width="16.426" height="15" viewBox="0 0 16.426 15"><defs><style>.a{fill:#009dbe;}.b{fill:#fff;stroke:#009dbe;stroke-width:1.5px;}.c{stroke:none;}.d{fill:none;}</style></defs><g transform="translate(0)"><path class="a" d="M21.073,58.843H17.641a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h3.432a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -52.41)"/><path class="a" d="M21.073,58.843H13.839a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h7.234a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -47.41)"/><path class="a" d="M7.977,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h2.3a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,7.977,58.843Z" transform="translate(-5.163 -57.41)"/><path class="a" d="M13.1,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5H13.1a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,13.1,58.843Z" transform="translate(-5.163 -52.41)"/><path class="a" d="M9.234,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5H9.234a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,9.234,58.843Z" transform="translate(-5.163 -47.41)"/><path class="a" d="M21.073,58.843H14.081a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h6.992a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -57.41)"/></g><g class="b" transform="translate(1.855)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g><g class="b" transform="translate(9.855 5)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g><g class="b" transform="translate(5.855 10)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g></svg>
 ````
 
 *svg file after modification*
 
-````
+````html
 <svg xmlns="http://www.w3.org/2000/svg" width="16.426" height="15" viewBox="0 0 16.426 15"><defs><style>.a{}.b{stroke:#009dbe;stroke-width:1.5px;}.c{stroke:none;}.d{}</style></defs><g transform="translate(0)"><path class="a" d="M21.073,58.843H17.641a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h3.432a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -52.41)"/><path class="a" d="M21.073,58.843H13.839a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h7.234a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -47.41)"/><path class="a" d="M7.977,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h2.3a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,7.977,58.843Z" transform="translate(-5.163 -57.41)"/><path class="a" d="M13.1,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5H13.1a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,13.1,58.843Z" transform="translate(-5.163 -52.41)"/><path class="a" d="M9.234,58.843H5.68a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5H9.234a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,9.234,58.843Z" transform="translate(-5.163 -47.41)"/><path class="a" d="M21.073,58.843H14.081a.508.508,0,0,0-.516.5v1a.508.508,0,0,0,.516.5h6.992a.508.508,0,0,0,.516-.5v-1A.508.508,0,0,0,21.073,58.843Z" transform="translate(-5.163 -57.41)"/></g><g class="b" transform="translate(1.855)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g><g class="b" transform="translate(9.855 5)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g><g class="b" transform="translate(5.855 10)"><circle class="c" cx="2.5" cy="2.5" r="2.5"/><circle class="d" cx="2.5" cy="2.5" r="1.75"/></g></svg>
 
 
 *Tab scss file*
 
-````
+````css
 ion-tab-button {
     --color: black;
     --color-selected: red;
@@ -1648,7 +1648,7 @@ ion-tab-button {
 
 This snippet show how to fix floating button in front of a list
 
-```xml
+```html
  <!-- Fixed Floating Action Button that does not scroll with the content -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
@@ -1690,7 +1690,7 @@ npm install chart.js --save
 
 *View.html*
 
-```
+```html
 <ion-header>
   <ion-navbar color="dark">
     <ion-title>
@@ -1722,7 +1722,7 @@ npm install chart.js --save
 
 *Controller.ts*
 
-```javascript
+```typescript
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Chart } from 'chart.js';
@@ -1824,7 +1824,7 @@ export class ChartPage implements OnInit{
 ```
 *Style.scss*
 
-```
+```css
 page-chart {
     .scroll-content {
         background-color: map-get($colors, light);
@@ -1840,12 +1840,12 @@ page-chart {
 [Back to top](#ui-components)  
 
 *view file* 
-```
+```html
 <canvas #myCanvas></canvas>
 ```
 
 *controller file*
-```
+```typescript
 export class MyClass {
 	@ViewChild('myCanvas', {static: true}) myCanvas: ElementRef;
 	
@@ -1871,7 +1871,7 @@ export class MyClass {
 
 **Define chart height**
 
-```
+```typescript
 const ctx = this.myCanvas.nativeElement;
 ctx.height = 150;
 
@@ -1893,7 +1893,7 @@ https://medium.com/@ValeriaCortezVD/tutorial-this-is-why-you-should-use-gradient
 
 **Gradient**
 
-````
+````typescript
 gradientStroke.addColorStop(0, firstColour);
 gradientStroke.addColorStop(0.3, secondColour);
 gradientStroke.addColorStop(0.6, thirdColour);
@@ -1910,7 +1910,7 @@ In this example we create 1 line chart and two bar chart.
 
 *Controller file*
 
-````
+````typescript
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 
@@ -2191,7 +2191,7 @@ export class ViewAnalyticsComponent implements OnInit {
 
 *View file*
 
-````
+````html
 <div class="flex-container">
   <div class="flex-div">
     <div class="tile chart-div2">
@@ -2224,7 +2224,7 @@ export class ViewAnalyticsComponent implements OnInit {
 
 *Style file*
 
-````
+````css
 .tile {
     -webkit-box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
@@ -2306,7 +2306,7 @@ Here is a sample code aimed to put 2 charts (line + bar) on the same grid line w
 
 *View file*
 
-````
+````html
 <div id="block_container">
     <div class="left-chart-div">
       <canvas #lineCanvas></canvas>
@@ -2320,7 +2320,7 @@ Here is a sample code aimed to put 2 charts (line + bar) on the same grid line w
 
 *Style file*
 
-````
+````css
 .block_container {
     display: flex;
     justify-content: center;
@@ -2342,7 +2342,7 @@ Here is a sample code aimed to put 2 charts (line + bar) on the same grid line w
 
 *Controller file*
 
-````
+````typescript
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
 import 'chartjs-top-round-bar';
@@ -2553,7 +2553,7 @@ npm install ng2-google-charts --save
 
 *import library in index.html*
 
-````
+````html
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load('current', {
@@ -2578,7 +2578,7 @@ and also include *Ng2GoogleChartsModule* in the *@NgModule* imports in *app.modu
 
 *controller file*
 
-````
+````typescript
 import { Component, OnInit } from '@angular/core';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
@@ -2640,7 +2640,7 @@ export class WorldmapPage implements OnInit {
 
 *View file*
 
-````
+````html
 <ion-content>
   <google-chart [data]="geoChart"></google-chart>
 </ion-content>
@@ -2653,7 +2653,7 @@ export class WorldmapPage implements OnInit {
 
 To avoid this, here is a self-working example based on the previous colorised worldmap. To make google chart responsive, you need to listen for *window.onresize* event
 
-````
+````typescript
 export class WorldmapPage implements OnInit {
   public geoChart: GoogleChartInterface;
 
@@ -2724,7 +2724,7 @@ export class WorldmapPage implements OnInit {
 
 [link : complex layout using grid and flexbox](http://www.joshmorony.com/an-in-depth-look-at-the-grid-system-in-ionic-2/) 
 
-```
+```html
 <ion-grid>
 	<ion-row>
 		<ion-col size="6" sizeMd="4" sizeXl="3" *ngFor="let i of dataset">
@@ -2746,7 +2746,7 @@ export class WorldmapPage implements OnInit {
 
 *View.html*
 
-```xml
+```html
 ...
 <ion-content padding>
   <ion-item>
@@ -2758,7 +2758,7 @@ export class WorldmapPage implements OnInit {
 
 *View.ts*
 
-```javascript
+```typescript
 notificationToggled = false;
 
 refreshNotification(){
@@ -2771,7 +2771,7 @@ refreshNotification(){
 
 You can dynamically change the UI component style with condition like below :
 
-```xml
+```html
 <ion-button [style.backgroundColor]="enable ? '#00CC00' : '#FF0000'">Test</ion-button>
 ```
 
@@ -2781,7 +2781,7 @@ You can dynamically change the UI component style with condition like below :
 To add a toggle menu in your pages, follow the example below
 
 *myPage.html*
-```xml
+```html
 <!-- here is the menu -->
 <ion-menu [content]="content">
   <ion-content>
@@ -2872,7 +2872,7 @@ First, create a new component in your ionic project ```ionic g component expanda
 
 *expandableHeader.ts*
 
-```javascript
+```typescript
 import { Component, Input, ElementRef, Renderer} from '@angular/core';
 
 classe du composant
@@ -2946,7 +2946,7 @@ First install the component with the following comand line ```npm install ion-mu
 
 *app.module.ts*
 
-```javascript
+```typescript
 import { MultiPickerModule } from 'ion-multi-picker';
 
 @NgModule({
@@ -2976,7 +2976,7 @@ export class AppModule {}
 
 *Controller file*
 
-```javascript
+```typescript
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -3023,7 +3023,7 @@ export class HomePage {
 [Back to top](#ui-components)  
 
 Ionic 4 Alert Controller syntax
-```
+```typescript
 import { AlertController } from '@ionic/angular';
 
 const alert = await this.alertCtrl.create({
@@ -3046,7 +3046,7 @@ npm install angular-svg-round-progressbar --save
 
 **Configure your home.module.ts**
 
-```
+```typescript
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { HomePage } from './home.page';
 
@@ -3068,7 +3068,7 @@ import { HomePage } from './home.page';
 export class HomePageModule {}
 ```
 **View file**
-```
+```html
  <div class="progress-wrapper">
       <div class="current" [ngStyle]="getOverlayStyle()">{{ current }}/{{ max }}</div>
   
@@ -3091,7 +3091,7 @@ export class HomePageModule {}
 ```
 
 **Style file**
-```
+```css
 .current {
     position: absolute;
     color: #bbb;
@@ -3109,7 +3109,7 @@ round-progress {
 ```
 
 **Controller file**
-```
+```typescript
   max = 100;
   current = 35;
   color = '#45ccce';
@@ -3152,7 +3152,7 @@ round-progress {
 
 *view sample*
 
-````
+````html
 <ion-content>
   <div *ngFor="let cat of items" class="category-block">
  
@@ -3186,7 +3186,7 @@ round-progress {
 
 *controller sample*
 
-````
+````typescript
 export class HomePage implements OnInit {
  
   cart = [];
@@ -3218,7 +3218,7 @@ export class HomePage implements OnInit {
 > Note : you can set slidesPerView: 1.6 to see the start of the next comming card
 
 *sample styling*
-````
+````css
 ion-badge {
     color: #fff;
     position: absolute;
@@ -3241,7 +3241,7 @@ ion-badge {
 *Remove automatic fixed size*
 
 This will set the ion-slide width with the content width
-````
+````css
 ion-slide {
     width: unset !important;
 }
@@ -3253,7 +3253,7 @@ To make your *ion-slide* responsive when you resizing screen, you need to add th
 
 *controller.ts*
 
-```
+```typescript
 export class HomePage {
 
 	sliderConfig = {
@@ -3290,7 +3290,7 @@ export class HomePage {
 
 *view file*
 
-```
+```html
 <ion-slides [options]="sliderConfig">
 	<ion-slide *ngFor="let i of slides"></ion-slide>
 </ion-slides>
@@ -3311,7 +3311,7 @@ This directive will trigger on the scroll event and apply a *margin-top* on the 
 
 *hide-header.directive.ts*
 
-```
+```typescript
 import { element } from 'protractor';
 import { Directive, Input, OnInit, Renderer2 } from '@angular/core';
 import { DomController } from '@ionic/angular';
@@ -3361,7 +3361,7 @@ It is recommended to create a global component containing the hideHeader directi
 
 *components.module.ts*
 
-```
+```typescript
 import { HideHeaderDirective } from '../directives/hide-header.directive';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -3388,7 +3388,7 @@ In each page, add the componentsModule import into the *my-page.module.ts* file
 
 *home.module.ts*
 
-```
+```typescript
 import { ComponentsModule } from './../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -3423,7 +3423,7 @@ Finally, you need to add an id **#header** on your ```<ion-header>``` tag and li
 
 *home.html*
 
-```
+```html
 <ion-header #header>
   <ion-toolbar color="primary">
     <ion-title class="navTitle">Matchs</ion-title>
@@ -3440,7 +3440,7 @@ Finally, you need to add an id **#header** on your ```<ion-header>``` tag and li
 
 *View file*
 
-```
+```html
 <div class="notifications-badge">
    <ion-badge color="accent">399</ion-badge>
    <ion-icon slot="icon-only" class="box-shadow" name="list" mode="ios" (click)="onClick()"></ion-icon>
@@ -3449,7 +3449,7 @@ Finally, you need to add an id **#header** on your ```<ion-header>``` tag and li
 
 *Style file*
 
-```
+```css
 .notifications-badge {
     width: 50px;
     height: 50px;
@@ -3495,7 +3495,7 @@ Make an input field with autocomplete dropdown using html datalist
 ### Standard autocomplete
 
 *View file*
-````
+````html
 <ion-item>
   <input id="criteriaInput" list="autocompleteValues"  placeholder="Criteria" [(ngModel)]="searchValue">
 </ion-item>
@@ -3511,7 +3511,7 @@ Now we want to show the dropdown only when user enters 1 character or more.
 To achieve this, first **remove the *id*** attribute from your *datalist* tag
 
 *View file*
-````
+````html
 <ion-item>
   <input id="criteriaInput" list="autocompleteValues"  placeholder="Criteria" [(ngModel)]="searchValue">
 </ion-item>
@@ -3522,7 +3522,7 @@ To achieve this, first **remove the *id*** attribute from your *datalist* tag
 
 *Controller file*
 
-````
+````typescript
 ngAfterViewInit() {
     // Adds a keyup listener on the input.
     this.elementRef.nativeElement.querySelector('#criteriaInput').addEventListener('keyup', (e) => {
@@ -3542,7 +3542,7 @@ ngAfterViewInit() {
 Related to this issue (https://github.com/ionic-team/ionic-framework/issues/17300#issuecomment-627566107), in order to customize action sheet style, you must provide a css class at the end of your *global.scss* file.
 
 *controller file*
-````
+````typescript
 async openMenu(): Promise<void> {
     const actionSheet = await this.actionSheetCtrl.create({
       cssClass: 'match-item-action-sheet',
@@ -3558,7 +3558,7 @@ async openMenu(): Promise<void> {
 ````
 	
 *global.scss*
-````
+````css
 // style for container
 .match-item-action-sheet .action-sheet-group:first-of-type {
     border-top-left-radius: 20px !important;
@@ -3585,7 +3585,7 @@ In order to avoid toast stacking, you could store your Toast object in a variabl
 
 *Controller file*
 
-````
+````typescript
  toast: HTMLIonToastElement; 
  
  async presentToast() {
@@ -3615,7 +3615,7 @@ The inconvenient to use the basic *ion-item-sliding* with delete on swipe is tha
 
 *View file*
 
-````
+````html
   <ion-list>
     <ion-item-sliding *ngFor="let study of studies; let idx = index" (ionSwipe)="delete(idx)">  
       <ion-item>
@@ -3634,7 +3634,7 @@ The inconvenient to use the basic *ion-item-sliding* with delete on swipe is tha
 
 *Controller file*
 
-````
+````typescript
 delete(idx) {
 // TODO : check the swipe side to delete or doing an other action
 	if (idx < this.studies.length) {
@@ -3650,7 +3650,7 @@ To prevent iOS keyboard scrolling screen when entering in input field, add the f
 
 *capacitor.config.json*
 
-````
+````typescript
 "plugins": {
     "Keyboard": {
       "resize": "ionic"
