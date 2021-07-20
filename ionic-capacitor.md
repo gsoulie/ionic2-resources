@@ -196,22 +196,154 @@ else {
 
 Another option is Capacitor’s Network API. It extends the Network Information API to provide even more useful features for web and mobile apps, such as monitoring the network for status changes, which your app can then react to.
 
+*NetworkState.service.ts
+
 ````typescript
-import { Plugins } from '@capacitor/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ConnectionStatus, Network } from '@capacitor/network';
+import { PluginListenerHandle } from '@capacitor/core';
+import { Platform, ToastController } from '@ionic/angular';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NetworkStateService {
+
+  networkStatus$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  private networkListener: PluginListenerHandle;
+
+  constructor(
+    private toastController: ToastController,
+    private plt: Platform) {
+
+    this.plt.ready().then(() => {
+      // initialize network listerner at platform start
+      this.initializeNetworkEvents();
+    });
+  }
+
+  private async initializeNetworkEvents() {
+    this.networkListener = Network.addListener('networkStatusChange', (status) => {
+      this.networkStatus$.next(status.connected); // update network status
+      this.presentToast('You are ' + (status.connected ? 'Online' : 'Offline'));
+    });
+
+    await this.networkStatus$.next((await Network.getStatus()).connected);  // set initial state
+  }
+
+  public networkIsConnected(): boolean {
+    return this.networkStatus$.getValue();
+  }
+
+  /**
+   * Return full ConnectionStatus object
+   * @returns
+   */
+  public async currentNetworkStatus(): Promise<ConnectionStatus> {
+    return await Network.getStatus();
+  }
+
+  logCurrentNetworkStatus = async () => {
+    const status = await Network.getStatus();
+    alert('Network status:' + status.connected);
+    console.log('Network status:', status);
+  };
+
+  private async presentToast(message = '') {
+    if (message !== '') {
+      const toast = await this.toastController.create({
+        message,
+        duration: 3000,
+        position: 'bottom'
+      });
+      await toast.present();
+      const { role } = await toast.onDidDismiss();
+    }
+  }
+  public removeNetworkListener() {
+    this.networkListener.remove();
+  }
+
+}
+````
+
+*home.ts*
+
+````typescript
+import { Subscription } from 'rxjs';
+import { NetworkStateService } from './../shared/services/network-state.service';
+import { Menu } from './../shared/models/menu.model';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  template: `
+  <ion-content [fullscreen]="true">
+    <h1>Network status: {{ networkStatus }}</h1>
+    <ion-button (click)="isConnected()">Is connected ?</ion-button>
+  </ion-content>
+  `,
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage implements OnInit {
+
+  subscriber$: Subscription;
+  networkStatus: boolean;
+
+  constructor(
+    public network: NetworkStateService,
+    private ref: ChangeDetectorRef) {}
+
+  async ngOnInit() {
+
+    this.subscriber$ = this.network.networkStatus$
+    .subscribe(() => {
+      this.networkStatus = this.network.networkStatus$.getValue();
+      this.network.logCurrentNetworkStatus();
+      this.ref.detectChanges(); // important to update the view
+    });
+  }
+
+  isConnected(): void {
+    alert(this.network.networkIsConnected());
+  }
+  ngOnDestroy() {
+    this.subscriber$.unsubscribe();
+    this.network.removeNetworkListener();
+  }
+}
+````
+
+### Minimal code
+
+````typescript
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Plugins, NetworkStatus, PluginListenerHandle } from '@capacitor/core';
 
 const { Network } = Plugins;
 
-let handler = Network.addListener('networkStatusChange', (status) => {
-  console.log("Network status changed", status);
-});
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage implements OnInit, OnDestroy {
+  networkStatus: NetworkStatus;
+  networkListener: PluginListenerHandle;
 
-// Get the current network status
-let status = await Network.getStatus();
+  async ngOnInit() {
+    this.networkListener = Network.addListener('networkStatusChange', (status) => {
+      console.log("Network status changed", status);
+      this.networkStatus = status;
+    });
 
-// Example output:
-{
-  "connected": true,
-  "connectionType": "wifi"
+    this.networkStatus = await Network.getStatus();
+  }
+
+  ngOnDestroy() {
+    this.networkListener.remove();
+  }
 }
 ````
 
