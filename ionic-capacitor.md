@@ -6,7 +6,7 @@
 * [Capacitor and PWA](#capacitor-and-pwa)        
 * [Build Android Prod version](#build-android-prod-version)       
 * [App icon and Splashscreen](#app-icon-and-splashscreen)        
-* [Local storage](#local-storage)      
+* [Storage](#local-storage)      
 * [Listening internet connection](#listening-internet-connection)     
 * [Haptics](#haptics)      
 
@@ -155,8 +155,12 @@ At this point, you must have pink rectangles on the top-left, top-right, bottom-
 
 The final step consists in delete all of your old splashscreens *.png* files from each directories to keep only *splash.9* files. After that *build > clean project* and you can run on your device
 
-## Local storage
+## Storage
 [Back to top](#capacitor)     
+
+### Local storage
+
+Store simple key-value data 
 
 ```typescript
 import { Plugins } from '@capacitor/core';
@@ -176,6 +180,16 @@ initializeApp() {
      });
 }
 ```
+
+### Caching Api response with storage SQLite
+
+[Simon grimm tutorial](https://www.youtube.com/watch?v=ysPxIVZGZTw&ab_channel=SimonGrimm)      
+[Simon grimm code](https://devdactic.com/cache-api-response-ionic/)     
+
+### SQLite ionic app with capacitor
+
+[Simon grimm tutorial](https://www.youtube.com/watch?v=2kTT3k8ztL8&ab_channel=SimonGrimm)     
+[Simon grimm code](https://devdactic.com/sqlite-ionic-app-with-capacitor/)     
 
 ## Listening Internet connection
 [Back to top](#capacitor)  
