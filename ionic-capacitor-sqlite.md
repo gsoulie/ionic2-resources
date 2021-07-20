@@ -3,7 +3,8 @@
 # Building an SQLite Ionic App with Capacitor
 
 [Simon grimm tutorial](https://www.youtube.com/watch?v=2kTT3k8ztL8&ab_channel=SimonGrimm)     
-[Simon grimm code](https://devdactic.com/sqlite-ionic-app-with-capacitor/)   
+[Simon grimm code](https://devdactic.com/sqlite-ionic-app-with-capacitor/)      
+[capacitor-community/sqlite](https://github.com/capacitor-community/sqlite)      
 
 ## Install the Capacitor plugin
 ````npm install @capacitor-community/sqlite````
