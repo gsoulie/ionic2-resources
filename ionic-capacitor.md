@@ -191,7 +191,7 @@ initializeApp() {
 [Simon grimm tutorial](https://www.youtube.com/watch?v=2kTT3k8ztL8&ab_channel=SimonGrimm)     
 [Simon grimm code](https://devdactic.com/sqlite-ionic-app-with-capacitor/)     
 
-> Important : Prévu pour fonctionner sur un device, pas dans le navigateur car le plugin SQLite est un plugin capacitor
+> IMPORTANT : Works on real device (and emulator) but not on web browser because SQLite plugin is a capacitor plugin
 
 ## Listening Internet connection
 [Back to top](#capacitor)  
