@@ -180,6 +180,8 @@ initializeApp() {
 ## Listening Internet connection
 [Back to top](#capacitor)  
 
+https://developer.school/ionic-5-network-detection-with-capacitor/      
+
 As an example, when a user is on a slower connection, they get an alert that performance may be degraded:
 
 ````typescript
