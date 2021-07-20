@@ -45,7 +45,7 @@ Capacitor uses the WKWebView
 ```ionic integrations enable capacitor```
 
 **initialize capacitor with app information** 
-```npx cap init [appName] [appId]```
+```npx cap init```
 
 **You must build your ionic app at least once before adding any native platforms**
 ```ionic build```
