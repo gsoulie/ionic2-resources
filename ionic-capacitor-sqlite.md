@@ -7,6 +7,8 @@
 
 ## Install the Capacitor plugin
 ````npm install @capacitor-community/sqlite````
+````npm install @capacitor/storage````
+````npm install @capacitor/device````
 
 ## Add sqlite plugin into Android MainActivity
 
@@ -111,7 +113,9 @@ import { BehaviorSubject, from, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
  
 import { JsonSQLite } from '@capacitor-community/sqlite';
-const { CapacitorSQLite, Device, Storage } = Plugins;
+const { CapacitorSQLite } = Plugins;
+import { Storage } from '@capacitor/storage';
+import { Device } from '@capacitor/device';
  
 const DB_SETUP_KEY = 'first_db_setup';
 const DB_NAME_KEY = 'db_name';
