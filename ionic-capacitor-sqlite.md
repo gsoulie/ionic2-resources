@@ -181,45 +181,45 @@ export class DatabaseService {
   }
   
   getProductList() {
-	  return this.dbReady.pipe(
-		switchMap(isReady => {
-		  if (!isReady) {
-			return of({ values: [] });
-		  } else {
-			const statement = 'SELECT * FROM products;';
-			return from(CapacitorSQLite.query({ statement, values: [] }));
-		  }
-		})
-	  )
-	}
+      return this.dbReady.pipe(
+	switchMap(isReady => {
+	  if (!isReady) {
+		return of({ values: [] });
+	  } else {
+		const statement = 'SELECT * FROM products;';
+		return from(CapacitorSQLite.query({ statement, values: [] }));
+	  }
+	})
+       )
+   }
 	 
-	async getProductById(id) {
-	  const statement = `SELECT * FROM products LEFT JOIN vendors ON vendors.id=products.vendorid WHERE products.id=${id} ;`;
-	  return (await CapacitorSQLite.query({ statement, values: [] })).values[0];
-	}
-	 
-	getDatabaseExport(mode) {
-	  return CapacitorSQLite.exportToJson({ jsonexportmode: mode });
-	}
-	 
-	addDummyProduct(name) {
-	  const randomValue = Math.floor(Math.random() * 100) + 1;
-	  const randomVendor = Math.floor(Math.random() * 3) + 1
-	  const statement = `INSERT INTO products (name, currency, value, vendorid) VALUES ('${name}','EUR', ${randomValue}, ${randomVendor});`;
-	  return CapacitorSQLite.execute({ statements: statement });
-	}
-	 
-	deleteProduct(productId) {
-	  const statement = `DELETE FROM products WHERE id = ${productId};`;
-	  return CapacitorSQLite.execute({ statements: statement });
-	}
-	 
-	// For testing only..
-	async deleteDatabase() {
-	  const dbName = await Storage.get({ key: DB_NAME_KEY });
-	  await Storage.set({ key: DB_SETUP_KEY, value: null });
-	  return CapacitorSQLite.deleteDatabase({ database: dbName.value });
-	}
+   async getProductById(id) {
+       const statement = `SELECT * FROM products LEFT JOIN vendors ON vendors.id=products.vendorid WHERE products.id=${id} ;`;
+       return (await CapacitorSQLite.query({ statement, values: [] })).values[0];
+   }
+
+   getDatabaseExport(mode) {
+       return CapacitorSQLite.exportToJson({ jsonexportmode: mode });
+   }
+
+   addDummyProduct(name) {
+       const randomValue = Math.floor(Math.random() * 100) + 1;
+       const randomVendor = Math.floor(Math.random() * 3) + 1
+       const statement = `INSERT INTO products (name, currency, value, vendorid) VALUES ('${name}','EUR', ${randomValue}, ${randomVendor});`;
+       return CapacitorSQLite.execute({ statements: statement });
+   }
+
+   deleteProduct(productId) {
+       const statement = `DELETE FROM products WHERE id = ${productId};`;
+       return CapacitorSQLite.execute({ statements: statement });
+   }
+
+   // For testing only..
+   async deleteDatabase() {
+       const dbName = await Storage.get({ key: DB_NAME_KEY });
+       await Storage.set({ key: DB_SETUP_KEY, value: null });
+       return CapacitorSQLite.deleteDatabase({ database: dbName.value });
+   }
 }
 ````
 
