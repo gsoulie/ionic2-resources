@@ -193,6 +193,11 @@ initializeApp() {
 
 > IMPORTANT : Works on real device (and emulator) but not on web browser because SQLite plugin is a capacitor plugin
 
+### SQLite Queries and pre-populated database
+
+[Simon grimm tutorial](https://www.youtube.com/watch?v=E6h8PFHMLIU&ab_channel=SimonGrimm)     
+[Simon grimm code](https://devdactic.com/ionic-sqlite-queries-database/)       
+
 ## Listening Internet connection
 [Back to top](#capacitor)  
 
