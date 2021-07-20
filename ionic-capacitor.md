@@ -186,6 +186,11 @@ initializeApp() {
 [Simon grimm tutorial](https://www.youtube.com/watch?v=ysPxIVZGZTw&ab_channel=SimonGrimm)      
 [Simon grimm code](https://devdactic.com/cache-api-response-ionic/)     
 
+### LocalForage
+
+https://github.com/localForage/localForage
+
+
 ### SQLite ionic app with capacitor
 
 [SAMPLE CODE HERE](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-sqlite.md)      
