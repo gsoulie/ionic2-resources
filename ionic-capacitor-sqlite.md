@@ -1,4 +1,4 @@
-[< Back](https://github.com/gsoulie/ionic2-resources/edit/master/ionic-capacitor.md)    
+[< Back](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor.md#sqlite-ionic-app-with-capacitor)    
 
 # Building an SQLite Ionic App with Capacitor
 
