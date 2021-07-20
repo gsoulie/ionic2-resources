@@ -188,8 +188,7 @@ initializeApp() {
 
 ### SQLite ionic app with capacitor
 
-[Simon grimm tutorial](https://www.youtube.com/watch?v=2kTT3k8ztL8&ab_channel=SimonGrimm)     
-[Simon grimm code](https://devdactic.com/sqlite-ionic-app-with-capacitor/)     
+[Sample code](https://github.com/gsoulie/Mobile-App-Development/blob/master/ionic-capacitor-sqlite.md)      
 
 > IMPORTANT : Works on real device (and emulator) but not on web browser because SQLite plugin is a capacitor plugin
 
