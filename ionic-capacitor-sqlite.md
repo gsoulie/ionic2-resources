@@ -231,7 +231,7 @@ Note: As a reader pointed out, it might be required to call this to open the dat
 
 *app.component.ts*
 
-````typescrpt
+````typescript
 import { Component } from '@angular/core';
 import { LoadingController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
