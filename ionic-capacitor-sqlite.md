@@ -10,6 +10,8 @@
 
 ## Add sqlite plugin into Android MainActivity
 
+*android/app/src/main/java/io/ionic/starter/MainActivity.java*
+
 ````java
 package io.ionic.starter;
 import com.getcapacitor.community.database.sqlite.CapacitorSQLite;
