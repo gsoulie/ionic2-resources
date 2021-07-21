@@ -200,6 +200,8 @@ https://github.com/localForage/localForage
 
 [SAMPLE CODE HERE](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-sqlite.md)      
 
+[other source](https://www.youtube.com/watch?v=j7hpGoODD_k&ab_channel=CodeForYou)     
+
 > IMPORTANT : Works on real device (and emulator) but not on web browser because SQLite plugin is a capacitor plugin
 
 ### SQLite Queries and pre-populated database
