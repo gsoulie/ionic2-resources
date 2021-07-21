@@ -186,6 +186,8 @@ initializeApp() {
 [Simon grimm tutorial](https://www.youtube.com/watch?v=ysPxIVZGZTw&ab_channel=SimonGrimm)      
 [Simon grimm code](https://devdactic.com/cache-api-response-ionic/)     
 
+This solution use **Ionic storage** and on a device the underlying SQLite database, for which we need to Cordova plugin **cordova-sqlite-storage**
+
 ### LocalForage
 
 https://github.com/localForage/localForage
