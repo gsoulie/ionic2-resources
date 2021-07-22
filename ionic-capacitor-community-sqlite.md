@@ -491,8 +491,9 @@ export class SqlLiteApiService {
     const values: Array<any>  = [user.name,user.email,user.age];
 
     /*
-    // Ne peut pas fonctionner car nous n'avons pas l'id du nouveau user
-    // il faudrait faire une requête select avec les infos qu'on a pour récupérer l'user entier
+    // Ne peut pas fonctionner car à ce niveau nous ne connaissons pas l'id du nouveau user
+    // il faudrait faire une requête select après l'ajout, avec les infos que l'on a 
+    // pour récupérer l'user entier et mettre à jour le BehaviourSubject
     let items = this.users$.getValue(); // récupère les dernières valeurs connues
 		items.push(user);
 		this.users$.next(items);*/
