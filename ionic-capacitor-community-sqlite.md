@@ -18,6 +18,7 @@ npx cap add ios
 ````
 
 ## sqlite service
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 *sqlite.service.ts*
 
@@ -341,6 +342,7 @@ export class SQLiteService {
 ````
 
 ## User model
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 ````typescript
 export class User {
@@ -355,6 +357,7 @@ export class User {
 ````
 
 ## sqlite api service
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 *db-config.ts*
 
@@ -375,6 +378,7 @@ export const dbConfigWithEncryption = {
 ````
 
 *sqlite-api.service.ts*
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 ````typescript
 import { BehaviorSubject } from 'rxjs';
@@ -545,6 +549,7 @@ export class SqlLiteApiService {
 ````
 
 *no-encryption-utils.ts*
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 ````typescript
 import { capSQLiteSet } from '@capacitor-community/sqlite';
@@ -620,6 +625,7 @@ INSERT INTO users (name,email,age) VALUES ("${row[1][0]}","${row[1][1]}",${row[1
 ````
 
 ## Initialization
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 *app.module.ts*
 
@@ -645,6 +651,7 @@ export class AppModule {}
 ````
 
 *app.component.ts*
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 ````typescript
 import { SQLiteService } from './shared/services/sqlite/sqlite.service';
@@ -686,6 +693,7 @@ export class AppComponent {
 ````
 
 ## Home page
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 *home.ts*
 ````typescript
@@ -769,6 +777,8 @@ export class HomePage implements AfterViewInit, OnDestroy {
 ````
 
 *home.html*
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
+
 ````html
 <ion-header>
   <ion-toolbar>
@@ -817,6 +827,7 @@ export class HomePage implements AfterViewInit, OnDestroy {
 ````
 
 ## Detail page
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 *detail.ts*
 ````typescript
@@ -868,6 +879,8 @@ export class DetailPage implements OnInit, AfterViewInit {
 ````
 
 *detail.html*
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
+
 ````html
 <ion-header>
   <ion-toolbar>
@@ -894,3 +907,5 @@ export class DetailPage implements OnInit, AfterViewInit {
   <ion-button expand="block" (click)="saveUser()">Save user</ion-button>
 </ion-content>
 ````
+
+[Back to top](#ionic-capacitor-community-sqlite-working-example)       
