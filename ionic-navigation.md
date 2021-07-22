@@ -28,7 +28,7 @@ The root configuration for the router lives in the *src/app/app-routing.module.t
 
 > **IMPORTANT** : route definition order is very important     
 
-```
+```typescript
 import { NgModule } from '@angular/core'; 
 import { Routes, RouterModule } from '@angular/router'; 
 
@@ -65,7 +65,7 @@ export class AppRoutingModule { }
 
 ### Navigate by view file
 
-```
+```html
 <ion-button href="/hello">Hello</ion-button>
 
 // with parameter
@@ -76,7 +76,7 @@ export class AppRoutingModule { }
 
 You can specify router direction to set a specific animation
 
-```
+```html
 <ion-button expand="block" routerLink="/" routerDirection="root">
    Logout
 </ion-button>
@@ -96,7 +96,7 @@ Mutliple solutions are available to navigate by code. You can use **router.navig
 
 When you use ```router.navigateByUrl``` Angular fully rebuild the path from the root. So you need to specify the complete path for rooting
 
-```
+```typescript
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -114,7 +114,7 @@ export class HomePage {
 
 When you use ```router.navigate```, you can specify the current route to Angular. By doing this, you just need to set the endpoint of the target route
 
-```
+```typescript
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -130,20 +130,20 @@ export class HomePage {
 ```
 
 
-```this.router.navigate(['new']);``` is equal to ```this.router.navigateByUrl(['new']);``` and gives the route **/new**
+```typescript this.router.navigate(['new']);``` is equal to ```typescript this.router.navigateByUrl(['new']);``` and gives the route **/new**
 
-```this.router.navigate(['new'], {relativeTo: this.activatedRoute});``` gives the route **/<current_route>/new**
+```typescript this.router.navigate(['new'], {relativeTo: this.activatedRoute});``` gives the route **/<current_route>/new**
 
-```this.router.navigate(['edit'], {relativeTo: this.activatedRoute});``` from ```/recipes/<id>``` is equal to ```this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.activatedRoute);``` and gives the route **/recipes/**<id>**/edit**
+```typescript this.router.navigate(['edit'], {relativeTo: this.activatedRoute});``` from ```/recipes/<id>``` is equal to ```this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.activatedRoute);``` and gives the route **/recipes/**<id>**/edit**
 
-```this.router.navigate(['../'], {relativeTo: this.activatedRoute});```	// return to parent route
+```typescript this.router.navigate(['../'], {relativeTo: this.activatedRoute});```	// return to parent route
 
 ### Navigate to the previous page
 [Back to top](#navigation)
 
 #### Easy way
 
-```
+```typescript
 import { Location } from '@angular/common';
 
 goBack() {
@@ -154,7 +154,7 @@ goBack() {
 #### Classic way
 
 The classic way to navigate back is to manually manage a back button using *defaultHref* property
-```
+```html
 <ion-header>
  <ion-toolbar color="primary">
    <ion-buttons slot="start">
@@ -176,7 +176,7 @@ The classic way to navigate back is to manually manage a back button using *defa
 The trick consists in create a new service like below : 
 
 *previous-routing-service*
-```
+```typescript
 import { Router, NavigationEnd } from '@angular/router';
 import { Injectable } from '@angular/core';
 
@@ -206,13 +206,13 @@ export class PreviousRouteServiceService {
 
 Then, just instanciate this service in each page which call a subpage
 
-```
+```typescript
 constructor(private previousRouteService: PreviousRouteServiceService) { }
 ```
 
 And call the ```getPreviousUrl()``` function in sub page to get the last route and redirect to it
 
-```
+```typescript
 backFwd(){
     this.router.navigateByUrl(this.previousRouteService.getPreviousUrl());
 }
@@ -226,7 +226,7 @@ backFwd(){
 
 *app-routing.module.ts*
 
-```
+```typescript
 ...
 { path: 'pubication/:id', loadChildren :'./publication/publication.module#PublicationPageModule'}
 ...
@@ -234,7 +234,7 @@ backFwd(){
 
 *Home.html*
 
-```
+```html
 <ion-button routerLink="/publication/54" routerDirection="forward">Go to Detail<ion-button>
 
 <!-- USING CONSTANT OR VALUE -->
@@ -244,7 +244,7 @@ backFwd(){
 
 *Detail.ts*
 
-```
+```typescript
 ...
 selectedId = null;
 
@@ -311,7 +311,7 @@ export class DetailPage implements OnInit {
 
 *dataService.ts*
 
-```
+```typescript
 export class DataService {
 	dataset = [
 		{id: 1, title: 'item 1'},
@@ -340,7 +340,7 @@ export class DataService {
 
 *data-resolver.service.ts*
 
-```
+```typescript
 constructor(private dataService: DataService) { }
 resolve(route: ActivatedRouteSnapshot) {
 	const id = route.paramMap.get('id');
@@ -352,7 +352,7 @@ resolve(route: ActivatedRouteSnapshot) {
 
 *app-routing.module.ts*
 
-```
+```typescript
 const routes: Routes = {
 	...
 	{	path: 'detail', loadChildren: './detail/detail.module#DetailPageModule},
@@ -366,7 +366,7 @@ const routes: Routes = {
 
 ### Solution 2 : Using Query Params (bad)
 
-```
+```typescript
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -385,7 +385,7 @@ export class ProfileComponent implements OnInit {
 
 It is also possible to react to changes by using Observable
 
-```
+```typescript
 ngOnInit() {
   this.route.params.subscribe(...);
 }
@@ -395,7 +395,7 @@ ngOnInit() {
 
 It could be useful to test if a specific parameter exists. For example to determinate which opening mode to use for in a detail page.
 
-```
+```typescript
 this.route.paramMap.subscribe((paramMap: ParamMap) => {
 	if(paramMap.has('postId')) {
 		// EDIT mode
@@ -419,7 +419,7 @@ We can regroupe them like below :
 
 *app-routing.module.ts*
 
-```
+```typescript
 { path: 'servers', component: ServersComponent, children: [
     { path: '', component: ServerStartComponent},	// default path when no specific server is selected
     { path: 'new', component: ServerEditComponent},
@@ -430,7 +430,7 @@ We can regroupe them like below :
 ## Reset Routing params
 [Back to top](#navigation)
 
-```
+```typescript
 import { Subscription } from 'rxjs/Subscription';
 
 export class UserComponent implements OnInit, OnDestroy {
@@ -462,7 +462,7 @@ Here is a full sample of tab routing with routing back integration from child mo
 Use case : main page *home-tabs* gets 3 tabs (home, queries, lists). From *queries* and *lists* tabs we have a button which open a new modale named *results*
 
 *app.routing.module.ts*
-```
+```typescript
 // Contains the route of the home-tabs page
 const routes: Routes = [
  
@@ -475,7 +475,7 @@ const routes: Routes = [
 
 *home-tabs-routing.module.ts*
 
-````
+````typescript
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { QueriesPage } from '../pages/queries/queries.page';
@@ -537,7 +537,7 @@ export class HomeTabsPageRoutingModule {}
 
 Navigate on *results* modale 
 
-````
+````typescript
 // Navigating from queries page 
 <ion-item tappable routerLink="results/{{ item.queryId }}" routerDirection="forward">
 
@@ -547,7 +547,7 @@ Navigate on *results* modale
 
 Routing back from modale to current tab
 
-````
+````html
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -562,7 +562,7 @@ Routing back from modale to current tab
 
 *app-routing.module.ts*
 
-```
+```typescript
 ...
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full'},
@@ -573,13 +573,13 @@ const routes: Routes = [
 
 *error-page.html*
 
-```
+```html
 <p>{{ errorMessage }}</p>
 ```
 
 *error-page.ts*
 
-```
+```typescript
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -609,7 +609,7 @@ export class ErrorPageComponent implements OnInit {
 
 *server-resolver.service.ts*
 
-```
+```typescript
 import { ServersService } from './../servers.service';
 import { Injectable } from "@angular/core";
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
@@ -637,7 +637,7 @@ Adding *resolve* param into routing file
 
 *app-routing.module.ts
 
-```
+```typescript
 import { ServerResolver } from './servers/server/server-resolver.service';
 ...
 
@@ -658,7 +658,7 @@ export class AppRoutingModule { }
 
 *server.component.ts*
 
-```
+```typescript
 import { ActivatedRoute, Params, Router, Data } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ServersService } from '../servers.service';
@@ -694,7 +694,7 @@ ionic g guard guards/auth
 ```
 
 *Example of guard*
-```
+```typescript
 @Injectable({
   providedIn: 'root'
 })
@@ -719,7 +719,7 @@ export class AuthGuard implements CanActivate {
 
 Now you can apply this rule to as many routes as you need in the router config.
 
-```
+```typescript
 const routes: Routes = [
   { path: 'special', component: SpecialPage, canActivate: [AuthGuard] },
 ];
@@ -729,7 +729,7 @@ const routes: Routes = [
 
 ### Example of guard with AngularFireAuth
 
-```
+```typescript
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
@@ -765,7 +765,7 @@ export class AuthGuardGuard implements CanActivate {
 To manage unwanted routes with 404 status, you must define a wildcard route into your *app-routing.module.ts* like below
 
 *app-routing.module.ts*
-```
+```typescript
 const routes: Routes = [
 	{ path: 'home', component: HomeComponent },
 	// ... here some other routes
@@ -778,13 +778,13 @@ const routes: Routes = [
 
 First, you need to create a specific route for not existing route (here 'not-found' route) wich load a new component used to load a specific UI.
 
-```
+```typescript
 { path: 'not-found', component: <YourSpecificPageNotFoundComponent> },
 ```
 
 Next you must specify the wildcard route with ```**``` string wich redirect to the component used to display the 'not found' route
 
-```
+```typescript
 { path: '**', redirectTo: '/not-found' }
 ```
 
@@ -797,7 +797,7 @@ Next you must specify the wildcard route with ```**``` string wich redirect to t
 
 In many scenarios we have data in one view that we need to pass to another. Luckily, the push method accepts a second parameter which is an object of data to pass to the ```@Component``` passed into the first parameter.
 
-```javascript
+```typescript
 this.nav.push(AboutPage,{
 	username: "andrewmcgivery",
 	blogger: true
@@ -806,7 +806,7 @@ this.nav.push(AboutPage,{
 
 This data is then accessible in the pushed ```@Component``` via navParams which is similar to $stateParams in 1.0.
 
-```javascript
+```typescript
 import {Component, NavParams} from 'ionic-angular';
 
 @Component({
@@ -827,7 +827,7 @@ Let's see how to return value from child page to parent
 
 *Parent controller*
 
-```javascript
+```typescript
 returnedValue;
 
 onOpenChild(){
@@ -840,7 +840,7 @@ onOpenChild(){
 
 *Child controller*
 
-```javascript
+```typescript
 
 onSelectItem(e){
 	this.navCtrl.pop()
@@ -886,7 +886,7 @@ https://ionicframework.com/blog/how-to-navigate-in-ionic-modals-with-ion-nav/
 
 To achieve routing on html static file, put your static html in *src* directory
 
-````
+````typescript
 this.document.location.href = '/my-static-page.html?param=' + this.my-param;
 ````
 
@@ -898,7 +898,7 @@ this.document.location.href = '/my-static-page.html?param=' + this.my-param;
 There is a mutliple ways to routing back by code :
 
 *view file*
-````
+````html
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -909,7 +909,7 @@ There is a mutliple ways to routing back by code :
 ````
 
 *controller file*
-````
+````typescript
 import {Location} from '@angular/common';
 ...
 
@@ -929,7 +929,7 @@ routingBack() {
 
 **Solution 3 details** : this will only work when the list component is registered as the child with an empty path like I've done in the route configuration below. Otherwise you'd have to append the dots with the child route that you're targeting (e.g. ../list). Basically, this approach just navigates one layer up in the the routing hierarchy.
 
-````
+````typescript
 const routes: Routes = [
   {
     path: 'users',
