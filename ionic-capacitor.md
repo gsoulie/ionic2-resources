@@ -198,11 +198,12 @@ https://github.com/localForage/localForage
 
 ### SQLite ionic app with capacitor
 
-[SAMPLE CODE HERE](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-sqlite.md)      
+[Simon Grimm based Code - not functionnal with Capacitor 3.0 at this time](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-sqlite.md)      
+[Capacitor community based code - functionnal](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-sqlite.md)      
 
 [other source](https://www.youtube.com/watch?v=j7hpGoODD_k&ab_channel=CodeForYou)     
 
-> IMPORTANT : Works on real device (and emulator) but not on web browser because SQLite plugin is a capacitor plugin
+````IMPORTANT```` : Works on real device (and emulator) but not on web browser because SQLite plugin is a capacitor plugin
 
 ### SQLite Queries and pre-populated database
 
