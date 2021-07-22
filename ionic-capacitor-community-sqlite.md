@@ -2,6 +2,10 @@
 
 # Ionic Capacitor Community sqlite working example
 
+## Source
+
+https://github.com/capacitor-community/sqlite/blob/master/docs/Ionic-Angular-Usage.md
+
 ## Installation
 
 ````
