@@ -4,7 +4,8 @@
 
 ## Source
 
-https://github.com/capacitor-community/sqlite/blob/master/docs/Ionic-Angular-Usage.md
+https://github.com/capacitor-community/sqlite/blob/master/docs/Ionic-Angular-Usage.md       
+permission issue : https://github.com/capacitor-community/sqlite/issues/55      
 
 ## Installation
 
