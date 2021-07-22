@@ -228,10 +228,12 @@ else {
 }
 ````
 
+### Solution with Capacitor Network API
+[Back to top](#capacitor)   
 
 Another option is Capacitor’s Network API. It extends the Network Information API to provide even more useful features for web and mobile apps, such as monitoring the network for status changes, which your app can then react to.
 
-*NetworkState.service.ts
+*NetworkState.service.ts*
 
 ````typescript
 import { Injectable } from '@angular/core';
