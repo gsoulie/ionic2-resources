@@ -377,6 +377,7 @@ export const dbConfigWithEncryption = {
 *sqlite-api.service.ts*
 
 ````typescript
+import { BehaviorSubject } from 'rxjs';
 import { twoUsers } from './../utils/no-encryption-utils';
 import { dbConfig } from './sqlite/db-config';
 import { capSQLiteChanges, SQLiteDBConnection } from '@capacitor-community/sqlite';
@@ -389,7 +390,9 @@ import { User } from '../models/user.model';
 })
 export class SqlLiteApiService {
 
+  users$: BehaviorSubject<User[]> = new BehaviorSubject([]);
   private db: SQLiteDBConnection;
+
 
   constructor(
     private sqliteService: SQLiteService) { }
@@ -449,6 +452,7 @@ export class SqlLiteApiService {
     const ret = await this.db.query('SELECT * FROM users;');
     console.log('$$$ ret query ' + JSON.stringify(ret));
     console.log('$$$ ret query length ' + ret.values.length);
+    this.users$.next(ret.values);
     return ret.values as User[];
   }
 
@@ -459,6 +463,7 @@ export class SqlLiteApiService {
                                   ret.values[1].name !== 'Jones') {
       return Promise.reject(new Error('Query2 Users where Company null failed'));
     }
+    this.users$.next(ret.values);
     return ret.values as User[];
   }
 
@@ -467,7 +472,6 @@ export class SqlLiteApiService {
     console.log('$$$ ret query ' + JSON.stringify(ret));
     console.log('$$$ ret query length ' + ret.values.length);
 
-    // Be careful, ret.values always return an array !!
     if(ret.values.length <= 0) {
       console.log('$$$ ret fetchUserById Error ');
       return Promise.reject(new Error(`fetchUserById where id=${id} failed`));
@@ -480,6 +484,14 @@ export class SqlLiteApiService {
     // add one user with statement and values
     const sqlcmd = 'INSERT INTO users (name,email,age) VALUES (?,?,?)';
     const values: Array<any>  = [user.name,user.email,user.age];
+
+    /*
+    // Ne peut pas fonctionner car nous n'avons pas l'id du nouveau user
+    // il faudrait faire une requête select avec les infos qu'on a pour récupérer l'user entier
+    let items = this.users$.getValue(); // récupère les dernières valeurs connues
+		items.push(user);
+		this.users$.next(items);*/
+
     return await this.db.run(sqlcmd,values);
   }
 
@@ -499,16 +511,29 @@ export class SqlLiteApiService {
     size = ${user.size},
     age = ${user.age}
     WHERE id = ${user.id}`;
+    const us = this.users$.getValue();
+    const index = us.findIndex(findUser => findUser.id === user.id);
+    if (index >= 0) {
+      us[index] = user;
+      this.users$.next(us);
+    }
     return await this.db.run(sqlcmd);
   }
 
   async deleteUser(user: User): Promise<capSQLiteChanges> {
     const sqlcmd = `DELETE FROM users WHERE id = ${user.id};`;
+
+    let items = this.users$.getValue();
+		items = items.filter(i => i !== user);
+		this.users$.next(items);
+
     return await this.db.run(sqlcmd);
   }
 
   async deleteAllUsers(): Promise<capSQLiteChanges> {
     const sqlcmd = `DELETE FROM users`;
+
+    this.users$.next([]);
     return await this.db.execute(sqlcmd);
   }
 
@@ -516,6 +541,7 @@ export class SqlLiteApiService {
     await this.sqliteService.closeConnection('testEncryption');
   }
 }
+
 ````
 
 *no-encryption-utils.ts*
@@ -663,9 +689,9 @@ export class AppComponent {
 
 *home.ts*
 ````typescript
+import { BehaviorSubject } from 'rxjs';
 import { SqlLiteApiService } from './../shared/services/sqlite-api.service';
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
-import { SQLiteDBConnection } from '@capacitor-community/sqlite';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../shared/models/user.model';
 
 @Component({
@@ -676,14 +702,17 @@ import { User } from '../shared/models/user.model';
 export class HomePage implements AfterViewInit, OnDestroy {
 
   sqlite: any;
-  users: User[] = [];
+  //users: User[] = [];
   username = '';
   useremail = '';
   userage = null;
-  private db: SQLiteDBConnection;
+  users$: BehaviorSubject<User[]> = new BehaviorSubject([]);
 
   constructor(private sqliteApi: SqlLiteApiService) { }
 
+  ngOnInit() {
+    this.users$ = this.sqliteApi.users$;
+  }
   async ngAfterViewInit() {
     await this.sqliteApi.initializeDBConnection()
     .then(() => {
@@ -691,26 +720,24 @@ export class HomePage implements AfterViewInit, OnDestroy {
     });
   }
 
-  async ngOnDestroy() {
-    await this.sqliteApi.closeConnection();
-  }
+  async ngOnDestroy() { await this.sqliteApi.closeConnection(); }
 
   async intializeFirstData() {
     await this.sqliteApi.populateMockData()
     .then(async () => {
-      //this.user = new User();
       await this.fetchUsers();
     });
   }
 
-  async deleteUser(user: User) {
+  async deleteUser(user: User, event) {
+    event.stopPropagation();
     this.sqliteApi.deleteUser(user)
-    .then(() => this.fetchUsers());
+    /*.then(() => this.fetchUsers())*/;
   }
 
   async deleteAllUsers(): Promise<void> {
-    await this.sqliteApi.deleteAllUsers()
-    .then(() => this.fetchUsers());
+    await this.sqliteApi.deleteAllUsers()/*
+    .then(() => this.fetchUsers())*/;
   }
 
   async addUserWithStatementAndValues(): Promise<void> {
@@ -724,7 +751,7 @@ export class HomePage implements AfterViewInit, OnDestroy {
         this.username = '';
         this.useremail = '';
         this.userage = null;
-        this.fetchUsers();
+        this.fetchUsers();  // obligatoire si on veut connaître l'id du nouveau user
       });
   }
 
@@ -737,10 +764,8 @@ export class HomePage implements AfterViewInit, OnDestroy {
 
   async fetchUsers() {
     await this.sqliteApi.fetchUsers()
-    .then((res) => this.users = res );
+    /*.then((res) => this.users = res )*/;
   }
-}
-
 ````
 
 *home.html*
@@ -764,7 +789,7 @@ export class HomePage implements AfterViewInit, OnDestroy {
     <ion-button expand="block" (click)="intializeFirstData()" color="dark">Initialize data</ion-button>
     <ion-item>
       <ion-label position="floating">Name</ion-label>
-      <ion-input [(ngModel)]="username" placeholder="Name"></ion-input>
+      <ion-input autocapitalize="on" [(ngModel)]="username" placeholder="Name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Email</ion-label>
@@ -776,12 +801,12 @@ export class HomePage implements AfterViewInit, OnDestroy {
     </ion-item>
     <ion-button expand="block" (click)="addUserWithStatementAndValues()">Add user</ion-button>
     <ion-list>
-      <ion-item *ngFor="let user of users" [routerLink]="['detail', user.id]">
-        <div>
-          <h2 class="ion-text-capitalize">#{{ user?.id }} {{ user?.name }}</h2> {{ user?.age }} years
+      <ion-item *ngFor="let user of users$ | async">
+        <div class="user-item" [routerLink]="['detail', user.id]">
+          <h4 class="ion-text-capitalize">#{{ user?.id }} {{ user?.name }}</h4> {{ user?.age }} years
           <p>{{ user?.email }} </p>
         </div>
-        <ion-button fill="clear" (click)="deleteUser(user)" slot="end">
+        <ion-button fill="clear" (click)="deleteUser(user, $event)" slot="end">
           <ion-icon name="trash" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-item>
