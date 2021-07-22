@@ -377,8 +377,9 @@ export const dbConfigWithEncryption = {
 };
 ````
 
+[Back to top](#ionic-capacitor-community-sqlite-working-example)    
+
 *sqlite-api.service.ts*
-[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 ````typescript
 import { BehaviorSubject } from 'rxjs';
@@ -547,9 +548,9 @@ export class SqlLiteApiService {
 }
 
 ````
+[Back to top](#ionic-capacitor-community-sqlite-working-example)    
 
 *no-encryption-utils.ts*
-[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 ````typescript
 import { capSQLiteSet } from '@capacitor-community/sqlite';
@@ -650,8 +651,9 @@ export class AppModule {}
 
 ````
 
+[Back to top](#ionic-capacitor-community-sqlite-working-example)    
+
 *app.component.ts*
-[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 ````typescript
 import { SQLiteService } from './shared/services/sqlite/sqlite.service';
@@ -776,8 +778,9 @@ export class HomePage implements AfterViewInit, OnDestroy {
   }
 ````
 
+[Back to top](#ionic-capacitor-community-sqlite-working-example)    
+
 *home.html*
-[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 ````html
 <ion-header>
@@ -878,8 +881,9 @@ export class DetailPage implements OnInit, AfterViewInit {
 
 ````
 
+[Back to top](#ionic-capacitor-community-sqlite-working-example)    
+
 *detail.html*
-[Back to top](#ionic-capacitor-community-sqlite-working-example)       
 
 ````html
 <ion-header>
