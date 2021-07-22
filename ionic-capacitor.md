@@ -269,6 +269,7 @@ export class NetworkStateService {
     await this.networkStatus$.next((await Network.getStatus()).connected);  // set initial state
   }
 
+  // Return only "connected" value
   public networkIsConnected(): boolean {
     return this.networkStatus$.getValue();
   }
