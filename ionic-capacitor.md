@@ -183,13 +183,7 @@ initializeApp() {
 
 ### Caching Api response with storage SQLite
 
-[Simon grimm tutorial](https://www.youtube.com/watch?v=ysPxIVZGZTw&ab_channel=SimonGrimm)      
-[Simon grimm code](https://devdactic.com/cache-api-response-ionic/)     
-
-This solution use **Ionic storage** and on a device the underlying SQLite database, for which we need to Cordova plugin **cordova-sqlite-storage** and the driver for SQLite since Ionic Storage version 3, and we need to define the order in which storage engines are selected within our *app.module.ts*
-
-[ionic-storage installation documentation](https://github.com/ionic-team/ionic-storage#sqlite-installation)        
-[ionic-storage documentation](https://github.com/ionic-team/ionic-storage)     
+````Source code```` [Personnal working](https://github.com/gsoulie/ionic-angular-snippets/tree/master/cachingApiResponse)      
 
 ### LocalForage
 
