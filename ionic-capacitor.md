@@ -359,7 +359,7 @@ export class HomePage implements OnInit {
 }
 ````
 
-### Minimal code
+### Minimal code (less cleaner than above)
 
 ````typescript
 import { Component, OnInit, OnDestroy } from '@angular/core';
