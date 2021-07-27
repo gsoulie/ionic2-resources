@@ -183,7 +183,7 @@ initializeApp() {
 
 ### Caching Api response with storage SQLite
 
-````Source code```` [Personnal working](https://github.com/gsoulie/ionic-angular-snippets/tree/master/cachingApiResponse)      
+````Working sample code```` [here](https://github.com/gsoulie/ionic-angular-snippets/tree/master/cachingApiResponse)      
 
 ### LocalForage
 
