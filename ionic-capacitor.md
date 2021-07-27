@@ -188,12 +188,12 @@ initializeApp() {
 
 This solution use **Ionic storage** and on a device the underlying SQLite database, for which we need to Cordova plugin **cordova-sqlite-storage** and the driver for SQLite since Ionic Storage version 3, and we need to define the order in which storage engines are selected within our *app.module.ts*
 
-https://github.com/ionic-team/ionic-storage#sqlite-installation
-https://github.com/ionic-team/ionic-storage
+[ionic-storage installation documentation](https://github.com/ionic-team/ionic-storage#sqlite-installation)        
+[ionic-storage documentation](https://github.com/ionic-team/ionic-storage)     
 
 ### LocalForage
 
-https://github.com/localForage/localForage
+[LocalForage documentation](https://github.com/localForage/localForage)      
 
 
 ### SQLite ionic app with capacitor
