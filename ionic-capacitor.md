@@ -199,7 +199,7 @@ https://github.com/localForage/localForage
 ### SQLite ionic app with capacitor
 
 ````correction needed capacitor 3.0 issue```` [Simon Grimm based Code - not functionnal](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-sqlite.md)      
-````basic community working sample```` [Capacitor community based code - functionnal](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-sqlite.md)      
+````basic community working sample```` [Capacitor community based code - functionnal](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-community-sqlite.md)      
 ````personnal customized community based sample```` [Personnal customized community based code with helper](https://github.com/gsoulie/capacitor-sqlite)      
 
 [other source](https://www.youtube.com/watch?v=j7hpGoODD_k&ab_channel=CodeForYou)     
