@@ -200,6 +200,7 @@ https://github.com/localForage/localForage
 
 [Simon Grimm based Code - not functionnal with Capacitor 3.0 at this time](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-sqlite.md)      
 [Capacitor community based code - functionnal](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-capacitor-sqlite.md)      
+[**Personnal customized community based code with helper**](https://github.com/gsoulie/capacitor-sqlite)      
 
 [other source](https://www.youtube.com/watch?v=j7hpGoODD_k&ab_channel=CodeForYou)     
 
