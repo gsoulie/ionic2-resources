@@ -17,9 +17,9 @@
 
 ## Find element in array
 
-```
+```typescript
 getPost(id: string) {
-    return{...this.posts.find(p => p.id === id)};
+    return {...this.posts.find(p => p.id === id)};
 }
 ```
 
