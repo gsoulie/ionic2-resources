@@ -11,7 +11,12 @@
 ## Capacitor filesystem
 [Back to top](#file)  
 
-[File Documentation here]()    
+[File Documentation here](https://capacitorjs.com/docs/apis/filesystem)    
+
+**2021 - android permission issues**
+
+* https://github.com/ionic-team/capacitor-plugins/issues/169
+* https://github.com/ionic-team/capacitor/issues/4117
 
 ### Installation
 
