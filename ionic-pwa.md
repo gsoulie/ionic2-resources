@@ -22,6 +22,7 @@
 
 ## Make a PWA
 
+### Installation
 ````
 // Start a blank new Ionic app
 ionic start ionicPwa blank --type=angular --capacitor
@@ -30,9 +31,9 @@ ionic start ionicPwa blank --type=angular --capacitor
 ng add @angular/pwa
 ````
 
-If you now check out your updated app/app.module.ts you’ll see that the Service Worker will be injected into our app when built for production:
+If you now check out your updated *app.module.ts* you’ll see that the Service Worker will be injected into our app when built for production:
 
-````
+````typescript
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -56,8 +57,11 @@ npm i @capacitor/camera
 
 // Overlay for image capturing on the web
 npm install @ionic/pwa-elements
+````
+
 To enable those elements, we need to import the defineCustomElements and call it inside our src/main.ts like this:
 
+````typescript
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
@@ -81,7 +85,7 @@ defineCustomElements(window);
 Now we can import everything we need from the package and call getPhoto() to capture an image and set the resulting webPath to a local variable.
 
 *home.page.ts*
-````
+````typescript
 import { Component } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -103,15 +107,13 @@ export class HomePage {
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera
     });
-
     this.myImage = image.webPath;
   }
-
 ````
 
 Finally we need a simple button and ion-img to display the captured image inside our app, so change the home/home.page.html to:
 
-````
+````html
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
@@ -145,7 +147,7 @@ npm i @capacitor/
 Just like before we can directly import the necessary functions from the two packages to first grab the position by calling getCurrentPosition() and then store that value so we can share it later with the share plugin.
 
 *home.page.ts*
-````
+````typescript
 import { Component } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation, Position } from '@capacitor/geolocation';
@@ -186,7 +188,7 @@ export class HomePage {
 Now we need some additional buttons to trigger our new functionality and to display the result, which we can easily do inside an ion-card.
 
 *home.page.html*
-````
+````html
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
@@ -254,7 +256,7 @@ what functionalities are already supported by browser ?
 
 Uncomment the following code in the index.html to activate service worker to enabling caching resources
 
-```
+```typescript
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js')
@@ -266,7 +268,7 @@ Uncomment the following code in the index.html to activate service worker to ena
 
 And change the title of the app
 
-```
+```html
   <title>My app</title>
 ```
 
@@ -274,7 +276,7 @@ Don't forget to change the favicon in *src/assets/ico*, notice that the favicon 
 
 Finally, if you use Google map, be sure that the google map api url is in *https*
 
-```
+```html
 <script src="https://maps.google.com/maps/api/js?key=YOUR_KEY"></script>
 ```
 
@@ -282,13 +284,13 @@ Finally, if you use Google map, be sure that the google map api url is in *https
 Let’s do some other tweaks to remove unnecessary things. These steps aren’t necessary but are good to do if you are deploying your app only as a PWA.
 
 Currently, right above that service worker script is the script to call *cordova.js*. If you are **only going to run the app as a PWA** and not a cordova app, go ahead and comment it out.
-```
+```html
 <!-- cordova.js required for cordova apps -->
 <!--<script src="cordova.js"></script>-->
 ```
 If your only deploying this as a PWA you can go inside *app.component.ts*, and remove the platform and plugin calls:
 
-```
+```typescript
 import { Component } from '@angular/core';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -307,7 +309,7 @@ You can also go into the *app.module.ts* file and remove the imports for the *St
 The web manifest and Service Worker are what officially make our app a PWA. Let’s take a look at these two features.
 
 Let’s examine the web manifest and the service worker to see what’s going on. First, open src/manifest.json
-```
+```typescript
 {
   "name": "Ionic",
   "short_name": "Ionic",
