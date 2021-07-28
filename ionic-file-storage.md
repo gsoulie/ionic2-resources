@@ -11,7 +11,7 @@
 ## Capacitor filesystem
 [Back to top](#file)  
 
-[File Documentation here](https://capacitorjs.com/docs/apis/filesystem)    
+[Capacitor FileSystem Documentation](https://capacitorjs.com/docs/apis/filesystem)    
 
 **2021 - android permission issues**
 
