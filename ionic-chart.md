@@ -42,7 +42,7 @@ npm install chart.js --save
 
 *View.html*
 
-```
+```html
 <ion-header>
   <ion-navbar color="dark">
     <ion-title>
@@ -173,7 +173,7 @@ export class ChartPage implements OnInit{
 ```
 *Style.scss*
 
-```
+```css
 page-chart {
     .scroll-content {
         background-color: map-get($colors, light);
@@ -189,12 +189,12 @@ page-chart {
 [Back to top](#charts)  
 
 *view file* 
-```
+```html
 <canvas #myCanvas></canvas>
 ```
 
 *controller file*
-```
+```typescript
 export class MyClass {
 	@ViewChild('myCanvas', {static: true}) myCanvas: ElementRef;
 	
@@ -220,7 +220,7 @@ export class MyClass {
 
 **Define chart height**
 
-```
+```typescript
 const ctx = this.myCanvas.nativeElement;
 ctx.height = 150;
 
@@ -242,7 +242,7 @@ https://medium.com/@ValeriaCortezVD/tutorial-this-is-why-you-should-use-gradient
 
 **Gradient**
 
-````
+````typescript
 gradientStroke.addColorStop(0, firstColour);
 gradientStroke.addColorStop(0.3, secondColour);
 gradientStroke.addColorStop(0.6, thirdColour);
@@ -259,7 +259,7 @@ In this example we create 1 line chart and two bar chart.
 
 *Controller file*
 
-````
+````typescript
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 
@@ -540,7 +540,7 @@ export class ViewAnalyticsComponent implements OnInit {
 
 *View file*
 
-````
+````html
 <div class="flex-container">
   <div class="flex-div">
     <div class="tile chart-div2">
@@ -573,7 +573,7 @@ export class ViewAnalyticsComponent implements OnInit {
 
 *Style file*
 
-````
+````css
 .tile {
     -webkit-box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 12px -4px rgba(0,0,0,0.75);
@@ -645,7 +645,6 @@ export class ViewAnalyticsComponent implements OnInit {
         margin-top: 20px;
     }
 }
-
 ````
 
 ## Chart grid 50%
@@ -655,7 +654,7 @@ Here is a sample code aimed to put 2 charts (line + bar) on the same grid line w
 
 *View file*
 
-````
+````html
 <div id="block_container">
     <div class="left-chart-div">
       <canvas #lineCanvas></canvas>
@@ -669,7 +668,7 @@ Here is a sample code aimed to put 2 charts (line + bar) on the same grid line w
 
 *Style file*
 
-````
+````css
 .block_container {
     display: flex;
     justify-content: center;
@@ -691,7 +690,7 @@ Here is a sample code aimed to put 2 charts (line + bar) on the same grid line w
 
 *Controller file*
 
-````
+````typescript
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
 import 'chartjs-top-round-bar';
@@ -880,7 +879,6 @@ export class ChartPage implements OnInit {
   }
 
 }
-
 ````
 
 ## ng2-google-chart
@@ -898,7 +896,7 @@ npm install ng2-google-charts --save
 
 *import library in index.html*
 
-````
+````html
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load('current', {
@@ -923,7 +921,7 @@ and also include *Ng2GoogleChartsModule* in the *@NgModule* imports in *app.modu
 
 *controller file*
 
-````
+````typescript
 import { Component, OnInit } from '@angular/core';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { GoogleChartInterface } from 'ng2-google-charts';
@@ -986,7 +984,7 @@ export class WorldmapPage implements OnInit {
 
 *View file*
 
-````
+````html
 <ion-content>
   <google-chart [data]="geoChart"></google-chart>
 </ion-content>
@@ -999,7 +997,7 @@ export class WorldmapPage implements OnInit {
 
 To avoid this, here is a self-working example based on the previous colorised worldmap. To make google chart responsive, you need to listen for *window.onresize* event
 
-````
+````typescript
 export class WorldmapPage implements OnInit {
   public geoChart: GoogleChartInterface;
 
@@ -1078,7 +1076,7 @@ export class WorldmapPage implements OnInit {
 
 *controller file*
 
-````
+````typescript
 ...
 
   @ViewChild('barCanvas', {static: true}) barCanvas;
@@ -1159,7 +1157,7 @@ By default, each item tooltip set the item label as tooltip title. Here's the so
 
 *controller file*
 
-````
+````typescript
 ...
 
   @ViewChild('barCanvas', {static: true}) barCanvas;
