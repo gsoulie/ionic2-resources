@@ -5,7 +5,7 @@
 
 *view file*
 
-```
+```html
 <ion-grid>
 	<ion-row>
 		<ion-col size="6" sizeMd="4" sizeXl="3" *ngFor="let i of dataset">
@@ -18,7 +18,7 @@
 
 *style file*
 
-```
+```css
 .image-container {
 	min-height: 200px;
 	background-size: cover;
