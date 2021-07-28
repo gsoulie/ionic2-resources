@@ -13,7 +13,7 @@ First, create a photo service ````ionic g service services/photo````
 
 *photo-service.ts*
 
-````
+````typescript
 import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, 
          CameraPhoto, CameraSource } from '@capacitor/core';
 
@@ -46,7 +46,7 @@ export class PhotoService {
 
 *home.page.ts*
 
-````
+````typescript
 import { PhotoService } from '../services/photo.service';
 
 export class HomePage {
@@ -62,7 +62,7 @@ export class HomePage {
 
 *home.page.html*
 
-````
+````html
 <ion-content>
    <ion-grid>
     <ion-row>
@@ -97,7 +97,7 @@ ionic cordova plugin add cordova-plugin-camera
 
 The next step is only required for iOS users. As of iOS 10, developers must provide a reason for why the app wishes to access the device camera. Add this to the bottom of config.xml:
 
-```
+```html
 <!-- Required for iOS 10: Camera permission prompt -->
 <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
     <string>Used to take pictures</string>
@@ -106,7 +106,7 @@ The next step is only required for iOS users. As of iOS 10, developers must prov
 
 **Add plugin to app module**
 
-```
+```typescript
 import { Camera } from '@ionic-native/camera/ngx';
 
 Then, add it as a Provider:
@@ -123,7 +123,7 @@ providers: [
 
 *View.html*
 
-```
+```html
 <ion-fab vertical="bottom" horizontal="center" slot="fixed">
   <ion-fab-button (click)="takePicture()">
     <ion-icon name="camera"></ion-icon>
@@ -134,7 +134,7 @@ providers: [
 
 *Controller.ts*
 
-```
+```typescript
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 export class Tab2Page {
