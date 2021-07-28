@@ -2,6 +2,44 @@
 
 # Screen Orientation
 
+* [Capacitor](#capacitor)      
+* [Cordova](#cordova)     
+
+## Capacitor
+
+### Installation
+
+````
+npm install cordova-plugin-screen-orientation
+npm install @ionic-native/screen-orientation
+ionic cap sync
+````
+
+### Usage
+
+````typescript
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
+constructor(private screenOrientation: ScreenOrientation) { }
+...
+
+// get current
+console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
+
+// set to landscape
+this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+
+// allow user rotate
+this.screenOrientation.unlock();
+
+// detect orientation changes
+this.screenOrientation.onChange().subscribe(
+   () => { console.log("Orientation Changed"); }
+);
+````
+
+## Cordova
+
 ### Plugin installation
 
 ```
