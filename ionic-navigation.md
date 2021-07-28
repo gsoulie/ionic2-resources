@@ -11,7 +11,6 @@
 * [Passing dynamic data to a Route](#passing-dynamic-data-to-a-route)    
 * [Routing Guards](#routing-guards)    
 * [Wildcard route (404)](#wildcard-route)    
-* [Using NavController](#using-navcontroller)   
 * [Passing data Ionic 3](#passing-data-ionic-3)  
 * [Passing data on close event](#passing-data-on-close-event)    
 * [Disable Android hardware back button](#disable-android-hardware-back-button)    
@@ -69,6 +68,7 @@ export class AppRoutingModule { }
 <ion-button href="/hello">Hello</ion-button>
 
 // with parameter
+<ion-button [routerLink]="['/hello','detail', id]">Hello</ion-button>
 <ion-button href="/hello/me">Hello</ion-button>	<!-- WARNING you must define hello/id route in your app-routing.module.ts file
 ```
 
@@ -263,7 +263,7 @@ ngOnInit() {
 
 ### Solution 1 : Service and Resolve Function (legit)
 
-Best practices : [https://ionicacademy.com/pass-data-angular-router-ionic-4/]
+Best practices : https://ionicacademy.com/pass-data-angular-router-ionic-4/
 
 *Home.html*
 
@@ -308,7 +308,6 @@ export class DetailPage implements OnInit {
 }
 ```
 
-
 *dataService.ts*
 
 ```typescript
@@ -317,8 +316,6 @@ export class DataService {
 		{id: 1, title: 'item 1'},
 		{id: 2, title: 'item 2'},
 		{id: 3, title: 'item 3'},
-		{id: 4, title: 'item 4'},
-		{id: 5, title: 'item 5'},
 	];
 	
 	constructor() { }
@@ -789,66 +786,6 @@ Next you must specify the wildcard route with ```**``` string wich redirect to t
 ```
 
 > **IMPORTANT** : You **MUST** set the wildcard route at the **END** of the app-routing.module.ts file !!
-
-## Using NavController
-
-### Passing Data Ionic 3
-[Back to top](#navigation)
-
-In many scenarios we have data in one view that we need to pass to another. Luckily, the push method accepts a second parameter which is an object of data to pass to the ```@Component``` passed into the first parameter.
-
-```typescript
-this.nav.push(AboutPage,{
-	username: "andrewmcgivery",
-	blogger: true
-});
-```
-
-This data is then accessible in the pushed ```@Component``` via navParams which is similar to $stateParams in 1.0.
-
-```typescript
-import {Component, NavParams} from 'ionic-angular';
-
-@Component({
-	templateUrl: 'build/pages/About/About.html',
-})
-export class AboutPage {
-	constructor(navParams: NavParams){
-		this.username = navParams.get("username"); // "andrewmcgivery"
-		this.blogger = navParams.get("blogger"); // true
-	}
-}
-```
-
-### Passing data on close event
-[Back to top](#navigation)
-
-Let's see how to return value from child page to parent
-
-*Parent controller*
-
-```typescript
-returnedValue;
-
-onOpenChild(){
-	this.navCtrl.push(ChildPage, {id: this.myId, callback: (data) => {
-		this.returnedValue = data}
-	});
-}
-```
-
-
-*Child controller*
-
-```typescript
-
-onSelectItem(e){
-	this.navCtrl.pop()
-	.then(() => {
-		this.navParams.get("callback")(e);
-	});
-}
-```
 
 ## Disable Android hardware back button
 [Back to top](#navigation)
