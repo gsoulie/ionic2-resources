@@ -30,7 +30,6 @@
 
 **Note** : You can also use ```sizeLg,  sizeSm sizeXs```
 
-`
 # Gallery
 
 **cordova plugin installation**
