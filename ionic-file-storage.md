@@ -36,6 +36,7 @@ If using ````Directory.Documents```` or ````Directory.ExternalStorage````, this 
 
 ### Directories
 
+|Directory|Detail|
 |-|-|
 |Documents|The Documents directory On iOS it’s the app’s documents directory. Use this directory to store user-generated content. On Android it’s the Public Documents folder, so it’s accessible from other apps. It’s not accesible on **Android 10** unless the app enables legacy External Storage by adding ````android:requestLegacyExternalStorage="true"```` in the application tag in the AndroidManifest.xml. It’s **not accesible on Android 11 or newer**|
 |Data|The Data directory On iOS it will use the Documents directory On Android it’s the directory holding application files. Files will be deleted when the application is uninstalled.|
