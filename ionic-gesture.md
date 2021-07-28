@@ -22,7 +22,7 @@ To achieve this, when we are going to change the css "visible" property of the t
 In this example, on the right swipe, we remove the card from the list like in gmail mobile app (delete item and animate list to collapse the rest of the list). On left swipe, we just show an alert.
 *View file*
 
-````
+````html
 <ion-list>
   <div *ngFor="let study of studies; let i = index" id="swipe-div">
     <div [id]="'action-div' + i " class="action-div">
@@ -48,8 +48,7 @@ In this example, on the right swipe, we remove the card from the list like in gm
 
 *Style file*
 
-````
-
+````css
 app-study-tile {
     width: 100% !important;
 }
@@ -113,7 +112,7 @@ ion-list {
 
 *Controller file*
 
-````
+````typescript
 import { DataService } from './../../shared/services/data.service';
 import { Study } from './../../shared/models/study.model';
 import { ServiceResult } from './../../shared/models/serviceResult.model';
@@ -239,6 +238,5 @@ export class ResultsPage implements OnInit {
       gesture.enable(true);
     }
   }
-}
- 
+} 
 ````
