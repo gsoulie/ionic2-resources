@@ -2,142 +2,70 @@
 
 # File
 
-* [File storage](#file-storage)    
+* [Capacitor FileSystem](#capacitor-filesystem)    
 * [File size](#file-size)    
 * [PWA : write file](#pwa-write-file)     
 * [Loading json file](#loading-json-file)    
 * [Upload file with file explorer](#upload-file-with-file-explorer)     
 
-## File storage
+## Capacitor filesystem
 [Back to top](#file)  
 
-[File Documentation here](https://ionicframework.com/docs/v2/native/file/)    
+[File Documentation here]()    
 
-First install the plugin :
-
-```
-$ ionic cordova plugin add cordova-plugin-file
-$ npm install --save @ionic-native/file
-```
-
-Then declare your module in the *app.module.ts*
-
-```typescript
-import {File} from '@ionic-native/file';
-
-@NgModule({
-  declarations: [
-    MyApp,
-    HomePage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage
-  ],
-  providers: [
-    File,
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataServiceProvider
-  ]
-})
-export class AppModule {}
-```
-
-Next, lets see an example of easy read/write
-
-*home.html*
-
-```html
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  <ion-button (click)="onWriteFile()">WRITE FILE</ion-button>
-  <ion-button (click)="onReadFile()">READ FILE</ion-button>
-  <ion-button (click)="onDeleteFile()">DELETE FILE</ion-button>
-  <p>
-    {{ filecontent }}
-  </p>
-</ion-content>
-```
-
-*home.ts*
-
-```typescript
-import { DataServiceProvider } from './../../providers/data-service/data-service';
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import {File} from '@ionic-native/file';
-
-@Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
-})
-export class HomePage {
-
-  filecontent: string = "";
-  filename: string = "log.txt";
-
-  constructor(public navCtrl: NavController, 
-              private file: File) {
-  }
-
-  onWriteFile(){
-    // Create file if does not exists
-    this.file.createFile(this.file.externalDataDirectory,this.filename,false);
-
-    // Write some text
-    this.file.writeFile(this.file.externalDataDirectory,this.filename,'test ' + new Date() + "\r\n", {replace: false, append: true})
-    .then(() => {
-      console.log('write success');
-    })
-    .catch((err) => console.log("error " + JSON.stringify(err)))
-  }
-
-  onReadFile(){
-    this.filecontent = "";
-    this.file.readAsText(this.file.externalDataDirectory,this.filename)
-    .then((data) => {
-      this.filecontent += data;
-    })
-    .catch((err) => {
-      console.log("Error " + JSON.stringify(err))
-    })
-  }
-
-  onDeleteFile(filename: string){
-    if(filename !== ""){
-      this.file.checkFile(this.file.externalDataDirectory, filename)
-      .then((data) => {
-        if(data){
-          this.file.removeFile(this.file.externalDataDirectory, filename)
-          .then(()=> {})
-          .catch((error) => this.logError("File deletion error : " + JSON.stringify(error)))
-        }
-      })
-    }
-  }
-
-}
+### Installation
 
 ```
+npm install @capacitor/filesystem
+npx cap sync
+```
 
-**Note :** In the example, we are using **exertnalDataDirectory** wich is not a private repository allows us to see the file with a file browser in the app repository. You can also use **dataDirectory** which is a private directory in order to hide your file in the file browser.
+### Android permissions
 
-[Cordova plugin file documentation](https://github.com/apache/cordova-plugin-file)    
+If using ````Directory.Documents```` or ````Directory.ExternalStorage````, this API requires the following permissions be added to your **AndroidManifest.xml**
+
+````
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+````
+
+### Directories
+
+|-|-|
+|Documents|The Documents directory On iOS it’s the app’s documents directory. Use this directory to store user-generated content. On Android it’s the Public Documents folder, so it’s accessible from other apps. It’s not accesible on **Android 10** unless the app enables legacy External Storage by adding ````android:requestLegacyExternalStorage="true"```` in the application tag in the AndroidManifest.xml. It’s **not accesible on Android 11 or newer**|
+|Data|The Data directory On iOS it will use the Documents directory On Android it’s the directory holding application files. Files will be deleted when the application is uninstalled.|
+|Cache|The Cache directory Can be deleted in cases of low memory, so use this directory to write app-specific files that your app can re-create easily|
+|External|The external directory On iOS it will use the Documents directory On Android it’s the directory on the primary shared/external storage device where the application can place persistent files it owns. These files are internal to the applications, and not typically visible to the user as media. Files will be deleted when the application is uninstalled.|
+|ExternalStorage|The external storage directory On iOS it will use the Documents directory On Android it’s the primary shared/external storage directory. It’s not accesible on **Android 10** unless the app enables legacy External Storage by adding ````android:requestLegacyExternalStorage="true"```` in the application tag in the AndroidManifest.xml. It’s **not accesible on Android 11 or newer**|
+
+### Usage
+
+````typescript
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+...
+
+async writeTestFile () {
+    await Filesystem.writeFile({
+      path: 'text.txt',
+      data: "This is a test",
+      directory: Directory.External,	// --> stored in \Phone\Android\data\com.myapp.myapp\files
+      //directory: Directory.Documents,	// --> stored in public \Phone\Documents (unsafe)
+      encoding: Encoding.UTF8,
+    });
+  };
+
+  async readTestFile () {
+    const contents = await Filesystem.readFile({
+      path: 'text.txt',
+      directory: Directory.External,
+      encoding: Encoding.UTF8,
+    });
+
+    console.log('secrets:', contents);
+  };
+````
+
+### Photo storage (old example need to be updated with Capacitor 3.0)
 
 Next let see an other example of photo storage in a new file
 
