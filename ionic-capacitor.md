@@ -9,6 +9,7 @@
 * [Storage](#local-storage)      
 * [Listening internet connection](#listening-internet-connection)     
 * [Haptics](#haptics)      
+* [Android permissions](#android-permissions)      
 
 ## Capacitor 3.0
 
@@ -392,5 +393,79 @@ export class HomePage implements OnInit, OnDestroy {
 Provide physical feeback to the user
 
 https://capacitorjs.com/docs/apis/haptics
+
+## Android permissions
+[Back to top](#capacitor)     
+
+[Official documentation](https://ionicframework.com/docs/native/android-permissions)       
+[Tutorial](https://www.youtube.com/watch?v=ZqOiGBUmL60&ab_channel=RealApps)      
+
+### Installation
+
+````
+npm install cordova-plugin-android-permissions
+npm install @ionic-native/android-permissions
+ionic build
+ionic cap sync
+````
+
+### initialization
+
+*app.module.ts*
+
+````typescript
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
+@NgModule({
+  declarations: [AppComponent,
+    PhotoComponent,
+    HeaderComponent
+  ],
+  entryComponents: [],
+  imports: [...],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AndroidPermissions],
+    bootstrap: [AppComponent],
+})
+export class AppModule {}
+
+````
+
+### Usage
+
+*home.component.ts*
+
+````typescript
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
+constructor(private androidPermissions: AndroidPermissions) { }
+
+save(): void {
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
+    .then(
+      result => {
+        if (result.hasPermission) {
+          // do some stuff here to save image to gallery for example
+        }
+        else {
+          this.requestPermissions();
+        }
+      },
+      err => this.requestPermissions()
+    );
+  }
+requestPermissions() {
+    this.androidPermissions.requestPermissions([
+      this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
+      this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE])
+    .then(
+      res => {
+        console.log('Saved image to gallery ', res);
+        this.save();
+      },
+      err => console.log('Error saving image to gallery ', err)
+    );
+  }
+````
 
 [Back to top](#capacitor)     
