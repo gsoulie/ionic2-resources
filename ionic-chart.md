@@ -236,9 +236,9 @@ const myChart = new Chart(ctx,{
 ### Customization
 [Back to top](#charts)  
 
-https://blog.vanila.io/chart-js-tutorial-how-to-make-gradient-line-chart-af145e5c92f9
-https://codepen.io/nzuki/pen/oVmOOd
-https://medium.com/@ValeriaCortezVD/tutorial-this-is-why-you-should-use-gradient-charts-with-chart-js-f5be20e39c92
+https://blog.vanila.io/chart-js-tutorial-how-to-make-gradient-line-chart-af145e5c92f9        
+https://codepen.io/nzuki/pen/oVmOOd          
+https://medium.com/@ValeriaCortezVD/tutorial-this-is-why-you-should-use-gradient-charts-with-chart-js-f5be20e39c92         
 
 **Gradient**
 
