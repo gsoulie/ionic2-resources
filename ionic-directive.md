@@ -15,7 +15,7 @@ Create directive with ````ng g d directives/<your-directive>```` and import it i
 
 *directive.ts*
 
-````
+````typescript
 import { Directive, ElementRef, Renderer2, Input, HostListener } from '@angular/core';
 
 @Directive({
@@ -43,18 +43,17 @@ export class ColorDirective {
   }
 
 }
-
 ````
 
 *app.component.html*
 
-````
+````html
 <div mat-subheader [appColor]="'red'">Directives typescript</div>
 ````
 
-### Example 2 
+### Example 2 - Change element css class 
 
-````
+````typescript
 import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
 @Directive({
