@@ -8,18 +8,6 @@
 ## Phone call
 [Back to top](#phone-and-social-sharing) 
 
-### Cordova
-According to the official documentation, you can use the *call-number* native plugin. But you may encounter a problem with it.
-
-So you can use this workaround 
-
-```
-call(phoneNumber: string = 'XXXXXXX') {
-      setTimeout(() => {
-          window.open(`tel:${phoneNumber}`, '_system');
-      }, 100);
-}
-```
 ### Capacitor
 
 Capacitor using the native call number plugin
@@ -32,7 +20,7 @@ ionic cap sync
 
 Don't forget to add import into you *app.module.ts* in providers section.
 
-```
+```typescript
 import { CallNumber } from '@ionic-native/call-number/ngx';
 
 @Component({
@@ -53,47 +41,17 @@ export class HomePage implements OnInit {
 ## Social sharing
 [Back to top](#phone-and-social-sharing) 
 
-### Cordova
+### Installation
 
-Cordova uses *SocialSharing* plugin (https://ionicframework.com/docs/v3/native/social-sharing/)
+````
+npm install @capacitor/share
+npx cap sync
+````
 
-*controller file*
+### Usage
 
-```
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-
-export class HomePage {
-  constructor(private socialSharing: SocialSharing){ }
-  
-  sharingInfo() {
-    const options = {
-      message: 'share this', // not supported on some apps (Facebook, Instagram)
-      subject: 'the subject', // fi. for email
-      url: 'https://www.website.com/foo/#bar?a=b',
-      chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
-      //appPackageName: 'com.apple.social.facebook', // Android only, you can provide id of the App you want to share with
-      //iPadCoordinates: '0,0,0,0' //IOS only iPadCoordinates for where the popover should be point.  Format with x,y,width,height
-    };
-    
-    // Method for sharing with all installed app
-    this.socialSharing.share('this is message content',
-    'message title', 'files', 'http://wwww.xxx.xxx')
-    .then(() => {
-      // ok
-    })
-    .catch((e) => {
-      // error
-    });
-  }
-}
-```
-
-### Capacitor
-[Back to top](#phone-and-social-sharing) 
-
-```
-import { Plugins } from '@capacitor/core';
-const { Share } = Plugins;
+```typescript
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-resultat-positif',
@@ -105,10 +63,10 @@ export class HomePage implements OnInit {
 
   async sharingInfo() {
     await Share.share({
-      title: 'My title',
+      title: 'See cool stuff',
       text: 'Really awesome thing you need to see right meow',
       url: 'http://ionicframework.com/',
-      dialogTitle: 'Share with buddies'
-    });
+      dialogTitle: 'Share with buddies',
+      });
   }
 ```
