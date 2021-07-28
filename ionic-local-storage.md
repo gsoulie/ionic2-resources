@@ -3,7 +3,6 @@
 # Local Storage
 
 * [Offline storage](#offline-storage)       
-* [Cordova](#cordova)  
 * [Capacitor](#capacitor)    
 
 ## Offline Storage
@@ -15,7 +14,7 @@ How you save data locally is another important consideration. There are several 
 
 localStorage contains built-in methods to create and store key -> value pairs. These are persisted offline and when a browser is closed. You can declare and retrieve data using setItem and getItem. The following code sets a ‘name’ value and returns it when called.
 
-````
+````typescript
 var offlineStore = window.localStorage;
 offlineStore.setItem('name', 'John');
 var name = localStorage.getItem('name');
@@ -23,7 +22,7 @@ var name = localStorage.getItem('name');
 
 Use the clear method to delete data.
 
-````
+````typescript
 localStorage.clear('name');
 ````
 
@@ -34,7 +33,7 @@ localStorage is great for storing strings, but what if you want to store more co
 
 When creating an IndexedDB you create a “store” for your data and IndexedDB lets you go from there. Here’s an example of creating an IndexedDB of books and their authors:
 
-````
+````typescript
 // creates a new version of the database if needed
 const dbName = "books_db";
 let request = window.indexedDB.open(dbName, 1),db,tx,store, index;
@@ -84,7 +83,7 @@ For more advanced, robust data storage needs, check out Ionic’s Offline Storag
 
 Since it’s based on the industry-standard SQL, it’s easy for developers to add to their project. For example, creating a new table then inserting initial data:
 
-````
+````typescript
 this.database.transaction((tx) => {
   tx.executeSql('CREATE TABLE IF NOT EXISTS software (name, company)');
   tx.executeSql('INSERT INTO software VALUES (?,?)', ['offline', "ionic"]);
@@ -107,54 +106,11 @@ this.database.transaction((tx) => {
 });
 ````
 
-## Cordova
-[Back to top](#local-storage)  
-
-Cordova use *Storage* plugin
-
-*Exemple first launch detection*
-
-```
-import { Storage } from '@ionic/storage';
-
-export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private storage: Storage,
-    private router: Router
-  ) {
-    this.initializeApp();
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.storage.get('first_launch').then((val) => {
-        if (val !== null) {
-          // not first launch
-          this.router.navigateByUrl('/home');
-        } else {
-          // first launch
-          this.storage.set('first_launch', 'done');
-          this.router.navigateByUrl('/tutorial');
-        }
-     });
-
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
-}
-```
-
-
 ## Capacitor
 [Back to top](#local-storage) 
 
-*Same example as above*
-
-```
+*controller file*
+```typescript
 import { Plugins } from '@capacitor/core';
 import { Router } from '@angular/router';
 const { Storage } = Plugins;
