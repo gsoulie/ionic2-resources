@@ -13,7 +13,7 @@ The best way to manage http queries is to create a new layer (api-helper.ts serv
 
 *api-helper.ts*
 
-````
+````typescript
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment, SERVER_URL } from './../../environments/environment';
@@ -71,8 +71,7 @@ export class ApiHelperService {
 
 Then in your dataService :
 
-````
-  
+````typescript  
   fetchItems(userId = '') {
     const httpOptions = {
       headers: new HttpHeaders({'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json',
@@ -105,7 +104,7 @@ Http queries requires *HttpClient* instead of Native Cordova Http module which i
 
 *app.module.ts*
 
-```
+```typescript
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -125,7 +124,7 @@ npm install -g corsproxy
 
 *data.service.ts*
 
-```
+```typescript
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 constructor(private http: HttpClient) { }
@@ -144,7 +143,7 @@ fetchData(params) {
 
 *home.page.ts*
 
-```
+```typescript
 async fetchData() {
   await this.dataService.fetchData()
   .subscribe( data => {
@@ -161,7 +160,7 @@ async fetchData() {
 
 *data.service.ts*
 
-```
+```typescript
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 ...
 
@@ -195,8 +194,6 @@ onLogin(login, password) {
 }
 ```
 
-
-
 [link : using http](http://www.joshmorony.com/using-http-to-fetch-remote-data-from-a-server-in-ionic-2/)
 
 [link : reddit API url for testing app](https://www.reddit.com/r/gifs/top/.json?limit=10&sort=hot)
@@ -205,7 +202,7 @@ onLogin(login, password) {
 
 *app.module.ts*
 
-```
+```typescript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -223,7 +220,7 @@ import { HttpModule } from '@angular/http';
 
 First, create a provider with the code below :
 
-```javascript
+```typescript
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -248,7 +245,7 @@ export class httpProvider {
 **Usage**
 
 In your controller, inject your provider like below :
-```javascript
+```typescript
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {httpProvider} from '../../providers/http-provider';
@@ -271,7 +268,7 @@ export class HomePage {
 
 As the same way, you can retrieve local data. First, create a "data" sub folder under *assets* folder which contain a *localData.json*. Then use the http with the local path
 
-```javascript
+```typescript
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -301,7 +298,7 @@ export class httpProvider {
 
 In order to avoid *http.put* query issue when sending binary file, you can use *FileTransfer*(https://ionicframework.com/docs/native/file-transfer/) to send your *PUT* query like below :
  
-```javascript
+```typescript
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 @Injectable()
