@@ -15,6 +15,7 @@
 
 **2021 - android permission issues**
 
+* Android documentation : https://developer.android.com/training/data-storage/use-cases#migrate-legacy-storage
 * https://github.com/ionic-team/capacitor-plugins/issues/169
 * https://github.com/ionic-team/capacitor/issues/4117
 
