@@ -27,7 +27,7 @@ In order to use a component in multiple page, you need to create a *components.m
 
 *components.module.ts*
 
-```
+```typescript
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@ionic/forms';
 import { CommonModule } from '@angular/common';
@@ -61,7 +61,7 @@ In order to use your customs components in differents pages, you must import the
 
 *home.module.ts*
 
-```
+```typescript
 @NgModule({
 	imports: [
 		CommonModule,
@@ -78,7 +78,7 @@ export class HomePageModule {}
 
 *detail.module.ts*
 
-```
+```typescript
 @NgModule({
 	imports: [
 		CommonModule,
@@ -96,7 +96,7 @@ Then finally simply add your component selector into your ```<page>.page.html```
 
 *home.page.html*
 
-```
+```html
 <ion-content>
 	<app-my-custom-component1 customValue="{{ title }}"></app-my-custom-component1>
 </ion-content>
@@ -106,7 +106,7 @@ Then finally simply add your component selector into your ```<page>.page.html```
 
 *my-component.component.html*
 
-```
+```html
 <h2>Hellow from component !</h2>
 <p> 
 Here's some data passed from my parent : 
@@ -116,7 +116,7 @@ Here's some data passed from my parent :
 
 *my-component.component.ts*
 
-```
+```typescript
 ...
 export class MyComponentComponent implements OnInit {
 	@Input() passedData: string = '';
@@ -138,7 +138,7 @@ export class MyComponentComponent implements OnInit {
 
 *home.page.html*
 
-```
+```html
 <div *ngFor="let o of objects">
 	<app-my-component passedData="{{ someDataFromBinding }}" [myObject]="o"></app-my-component>
 	<app-my-component passedData="hello"></app-my-component>
@@ -160,7 +160,7 @@ First, create your custom component with ```ionic g component components/my-comp
 
 *Controller file*
 
-```javascript
+```typescript
 import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'compo',
@@ -223,7 +223,7 @@ In our example, we want to call the *onFectchData* component function, from the 
 
 *Home.ts*
 
-```javascript
+```typescript
 import { CompoComponent } from './../../components/compo/compo';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
@@ -255,7 +255,7 @@ Note : Do not forget to import the component in the *app.module.ts*
 
 *alert.component.html*
 
-```
+```html
 <div class="backdrop" (click)="onClose()"></div>
 <div class="alert-box">
 	<p>{{ message }}</p>
@@ -267,7 +267,7 @@ Note : Do not forget to import the component in the *app.module.ts*
 
 *alert.component.ts*
 
-```
+```typescript
 @Component({
 	selector: 'app-alert',
 	templateUrls: './alert.component.html',
@@ -285,7 +285,7 @@ export class AlertComponent {
 
 *alert.component.css*
 
-```
+```css
 .backdrop {
 	position: fixed;
 	top: 0;
@@ -312,7 +312,7 @@ export class AlertComponent {
 
 *parent.component.html*
 
-```
+```html
 <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
 ```
 
@@ -331,7 +331,7 @@ First remove the following declaration in the view file
 
 *parent.component.html*
 
-```
+```html
 <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
 ```
 
@@ -339,7 +339,7 @@ In order to create a view container reference, we are going to create a new dire
 
 *placeholder.directive.ts*
 
-```
+```typescript
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
@@ -356,7 +356,7 @@ Now add this reference in the view file
 
 *parent.component.html*
 
-```
+```html
 <ng-template appPlaceholder></ng-template>
 ```
 
@@ -364,7 +364,7 @@ Now we are calling AlertComponent by code
 
 *parent.component.ts*
 
-```
+```typescript
 import { AlertComponent } from '../components/alert.component.ts';
 import { ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { PlaceholderDirective } from '../components/placeholder.directive.ts';
@@ -404,7 +404,7 @@ export class ParentComponent implements OnDestroy {
 
 *app.module.ts*
 
-```
+```typescript
 entryComponents: [
 	AlertComponent
 ]
@@ -419,7 +419,7 @@ entryComponents: [
 
 *toolbar.component.html*
 
-```
+```html
 <ion-toolbar>
   <ion-grid>
     <ion-row class="ion-align-items-center" class="ion-text-center">
@@ -445,7 +445,7 @@ entryComponents: [
 
 *toolbar.component.ts*
 
-```
+```typescript
 import { Component, OnInit, Input, AfterContentInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
@@ -482,7 +482,7 @@ export class ToolbarComponent implements OnInit, AfterContentInit {
 
 *components.module.ts*
 
-```
+```typescript
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -507,7 +507,7 @@ export class ComponentsModule {}
 
 *home.module.ts*
 
-```
+```typescript
 import { ComponentsModule } from './../components/components.module';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
@@ -532,7 +532,7 @@ export class HomePageModule {}
 
 *home.component.html*
 
-```
+```html
 <ion-header no-border>
   <ion-toolbar color="primary">
     <ion-title>
@@ -548,7 +548,7 @@ export class HomePageModule {}
 
 *home.component.ts*
 
-```
+```typescript
 import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -582,7 +582,7 @@ export class HomePage implements OnInit {
 
 *components/popover/popover.component.html*
 
-```
+```html
 <div class="popover-container">
   <ion-button fill="clear" (click)="about()">More information</ion-button>
 </div>
@@ -592,7 +592,7 @@ In this sample, we don't need to create and use a *components.module.ts*
 
 *home.module.ts*
 
-```
+```typescript
 import { PopoverComponent } from './../components/popover/popover.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -623,7 +623,7 @@ export class HomePageModule {}
 
 *home.ts*
 
-```
+```typescript
 async about(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
