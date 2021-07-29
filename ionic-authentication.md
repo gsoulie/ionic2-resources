@@ -43,10 +43,80 @@ auth_config: {
 
 Then create the following routes on your server (in redirect Uris and Cors sections) : **com.appauth.demo://callback** and **com.appauth.demo://ensession**
 
+*app.component.ts*
+
+````typescript
+import { Router } from '@angular/router';
+import { AuthService, IAuthAction, AuthObserver, AuthActions } from 'ionic-appauth';
+import { Component } from '@angular/core';
+import { Platform, LoadingController } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
+})
+export class AppComponent {
+  action: IAuthAction;
+  observer: AuthObserver;
+  
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private statusBar: StatusBar,
+    private auth: AuthService,
+    private router: Router,
+    private loadingCtrl: LoadingController
+  ) {
+    this.initializeApp();
+  }
+
+  initializeApp(): void {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      this.initializeAuth();
+    });
+  }
+
+  async initializeAuth(): Promise<void> {
+    const loading = await this.loadingCtrl.create({ message: 'Authenticate...' });
+    await loading.present();
+    this.auth.loadTokenFromStorage();
+    this.observer = this.auth.addActionListener((action) => {
+      this.action = action;
+      if (action.action === AuthActions.SignInSuccess ||
+        action.action === AuthActions.LoadTokenFromStorageSuccess) {        
+        loading.dismiss();
+        this.router.navigate(['/home']);
+      } else {
+        loading.dismiss();
+        this.signIn();
+      }
+    });
+  }
+  
+  ngOnDestroy(): void {
+    this.auth.removeActionObserver(this.observer);
+  }
+
+  public signIn(): void {
+    this.auth.signIn();
+  }
+}
+````
+
+
 ## Ionic auth
 https://ionicframework.com/blog/ionic-auth-connect-single-sign-on-made-easy/
 
 **!! see pricing**
+
+## angular-oauth2-oidc
+
+### WARNING !! angular-oauth2-oidc seems doesn’t work with capacitor for mobile app. There is an issue to get the token back after authenticate.
 
 ## Login with Angular 2
 [devdactic login with Angular 2](https://devdactic.com/login-ionic-2/)    
