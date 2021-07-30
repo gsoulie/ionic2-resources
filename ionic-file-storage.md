@@ -45,6 +45,8 @@ If using ````Directory.Documents```` or ````Directory.ExternalStorage````, this 
 |External|The external directory On iOS it will use the Documents directory On Android it’s the directory on the primary shared/external storage device where the application can place persistent files it owns. These files are internal to the applications, and not typically visible to the user as media. Files will be deleted when the application is uninstalled.|
 |ExternalStorage|The external storage directory On iOS it will use the Documents directory On Android it’s the primary shared/external storage directory. It’s not accesible on **Android 10** unless the app enables legacy External Storage by adding ````android:requestLegacyExternalStorage="true"```` in the application tag in the AndroidManifest.xml. It’s **not accesible on Android 11 or newer**|
 
+````WARNING```` Note that ````Directory.Documents```` and ````Directory.ExternalStorage```` are only available on ````Android 9 or older````
+
 ### Usage
 
 ````typescript
