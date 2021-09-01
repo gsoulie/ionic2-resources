@@ -231,6 +231,8 @@ else {
 }
 ````
 
+Do not forget **Android permission** ````<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />````
+
 ### Solution with Capacitor Network API
 [Back to top](#capacitor)   
 
