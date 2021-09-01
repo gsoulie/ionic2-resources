@@ -40,6 +40,7 @@
 * [&::before and &::after](#before-and-after)       
 * [:nth-of-type](#nth-of-type)      
 * [Popover](#popover)      
+* [Accessing shadow parts)(#accessing-shadow-parts      
 
 Here are some tips to perform your scss.
 
@@ -1405,6 +1406,33 @@ https://blog.dorianguilmain.com/bien-comprendre-after-before/
       left: 10px !important;
       width: calc(100% - 20px);
   }
+}
+````
+
+## Accessing shadow parts
+[Back to top](#stylesheet)
+
+*global.scss* 
+
+````css
+ion-modal::part(content) {
+	backdrop-filter: blur(12px);
+}
+
+// or
+
+.my-custom-class {
+    &::part(content) {
+    	font-weight: 600;
+    }
+    
+    &::part(arrow) {
+    	background: red;
+    }
+    
+    &::part(backdrop) {
+    	backdrop-filter: blur(12px);
+    }
 }
 ````
 
