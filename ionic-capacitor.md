@@ -187,6 +187,7 @@ initializeApp() {
 Local Storage on web and mobile with IndexedDB and CordovaSQLite driver
 
 https://www.youtube.com/watch?v=vCfAe2esboU&ab_channel=SimonGrimm
+https://ionicacademy.com/ionic-storage-v3-with-angular/
 
 ### Caching Api response with storage SQLite
 
