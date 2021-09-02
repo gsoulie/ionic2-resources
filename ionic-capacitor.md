@@ -169,7 +169,7 @@ https://ionicacademy.com/ionic-storage-v3-with-angular/
 *Installation*
 
 ````
-npm - @ionic/storage-angular
+npm i @ionic/storage-angular
 ````
 
 *app.module.ts*
