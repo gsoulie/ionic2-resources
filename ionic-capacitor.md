@@ -159,35 +159,156 @@ The final step consists in delete all of your old splashscreens *.png* files fro
 ## Storage
 [Back to top](#capacitor)     
 
-### Local storage
-
-Store simple key-value data 
-
-```typescript
-import { Plugins } from '@capacitor/core';
-
-const { Storage } = Plugins;
-initializeApp() {
-  Storage.get({key: 'first_launch'}).then((val) => {
-        if (val.value !== null) {
-          // not first launch
-          this.router.navigateByUrl('/home');
-        } else {
-          // first launch
-          Storage.set({key: 'first_launch',
-          value: 'done'});
-          this.router.navigateByUrl('/tutorial');
-        }
-     });
-}
-```
-
 ### Ionic Storage V3
 
 Local Storage on web and mobile with IndexedDB and CordovaSQLite driver
 
 https://www.youtube.com/watch?v=vCfAe2esboU&ab_channel=SimonGrimm
 https://ionicacademy.com/ionic-storage-v3-with-angular/
+
+*Installation*
+
+````
+npm - @ionic/storage-angular
+````
+
+*app.module.ts*
+
+````typescript
+import { IonicStorageModule } from '@ionic/storage-angular';
+import * as cordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
+import { Drivers } from '@ionic/storage';
+
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot({
+      name: 'localstorage-testDB',  // name of your database
+      driverOrder: [cordovaSQLiteDriver._driver, Drivers.IndexedDB, Drivers.LocalStorage] // drivers used for mobile and web app (order is important)
+    })],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+````
+
+*storage.service.ts*
+
+````typescript
+import { filter, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, from, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
+import * as cordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
+
+const STORAGE_KEY = 'myTestKey';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StorageService {
+
+  private storageReady = new BehaviorSubject(false);
+
+  constructor(private storage: Storage) {
+    this.init();
+  }
+
+  async init() {
+    await this.storage.defineDriver(cordovaSQLiteDriver); // For mobile target
+    await this.storage.create();
+    this.storageReady.next(true);
+  }
+
+  getData() {
+    // Only return result if storage is initialized
+
+    return this.storageReady.pipe(
+      filter(ready => ready),
+      switchMap(_ => {
+        return from(this.storage.get(STORAGE_KEY)) || of([]);
+      })
+    );
+  }
+
+  async addData(item: any) {
+    const storedData = await this.storage.get(STORAGE_KEY) || [];
+    storedData.push(item);
+    return this.storage.set(STORAGE_KEY, storedData);
+  }
+
+  async removeData(index) {
+    let storedData = await this.storage.get(STORAGE_KEY) || [];
+    storedData.splice(index, 1);
+    return this.storage.set(STORAGE_KEY, storedData);
+  }
+}
+````
+
+*home.page.html*
+
+````html
+<ion-button (click)="addRandomData()">Add user</ion-button>
+<ion-list>
+    <ion-item lines="none" *ngFor="let user of listData; let i = index">
+      {{ user.name }}
+      <ion-button (click)="removeItem(i)" fill="clear" slot="end">
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+</ion-list>
+````
+
+*home.controller.ts*
+
+````typescript
+import { Subscription } from 'rxjs';
+import { StorageService } from './../../shared/services/storage.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+export class User {
+  constructor(public name: string, public surname: string) {}
+}
+
+@Component({
+  selector: 'app-localstorage',
+  templateUrl: './localstorage.page.html',
+  styleUrls: ['./localstorage.page.scss'],
+})
+export class LocalstoragePage implements OnInit, OnDestroy {
+
+  listData = [];
+  subscriptions: Subscription;
+  constructor(private dataService: StorageService) { }
+
+  ngOnInit() { this.loadData(); }
+
+  loadData() {
+    this.subscriptions = this.dataService.getData()
+    .subscribe(res => {
+      this.listData = res;
+    })
+  }
+
+  async addRandomData() {
+    await this.dataService.addData(new User('John', 'Doe'));
+    this.loadData();  // pas otpimisé, il faudrait garder une copie des données dans une variable du service et faire un push
+    // pour éviter de tout recharger
+  }
+
+  async removeItem(index) {
+    this.dataService.removeData(index);
+    this.listData.splice(index, 1);
+  }
+
+  ngOnDestroy(): void { this.subscriptions.unsubscribe(); }
+}
+````
 
 ### Caching Api response with storage SQLite
 
