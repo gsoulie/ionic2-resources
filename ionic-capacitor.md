@@ -6,7 +6,7 @@
 * [Capacitor and PWA](#capacitor-and-pwa)        
 * [Build Android Prod version](#build-android-prod-version)       
 * [App icon and Splashscreen](#app-icon-and-splashscreen)        
-* [Storage](#local-storage)      
+* [Storage](#storage)      
 * [Listening internet connection](#listening-internet-connection)     
 * [Haptics](#haptics)      
 * [Android permissions](#android-permissions)      
