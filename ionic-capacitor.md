@@ -10,6 +10,7 @@
 * [Listening internet connection](#listening-internet-connection)     
 * [Haptics](#haptics)      
 * [Android permissions](#android-permissions)      
+* [Photo](#photo)      
 
 ## Capacitor 3.0
 
@@ -596,6 +597,157 @@ requestPermissions() {
       err => console.log('Error saving image to gallery ', err)
     );
   }
+````
+
+## Photo
+[Back to top](#capacitor)    
+
+https://ionicframework.com/docs/angular/your-first-app/2-taking-photos
+
+````
+npm install @capacitor/camera
+npm install @ionic/pwa-elements   // for PWA mode
+````
+
+> Notice : for mobile usage we need to manage android and ios permissions https://capacitorjs.com/docs/apis/camera?_gl=1*1kply45*_ga*MTY0MjE2NzMwMy4xNjA0NDgxMjA5*_ga_REH9TJF6KF*MTYzMDU4NzY5MC4xMzAuMS4xNjMwNTg3NzExLjA.
+
+### PWA mode 
+
+*main.ts* // for pwa support
+
+````typescript
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
+
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch(err => console.log(err));
+
+// Call the element loader after the platform has been bootstrapped
+defineCustomElements(window);
+````
+
+*photo.component.ts*
+
+````typescript
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { LocalstorageService } from './../../shared/services/localstorage.service';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+
+@Component({
+  selector: 'app-photo',
+  templateUrl: './photo.component.html',
+  styleUrls: ['./photo.component.scss'],
+})
+export class PhotoComponent implements OnInit {
+
+  converted_image = '';
+  constructor(private localStorage: LocalstorageService) { }
+
+  ngOnInit() {}
+
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Base64
+    });
+
+    const base64Result = image.base64String;
+    this.converted_image= "data:image/jpeg;base64,"+base64Result;
+    this.localStorage.addData({image: base64Result});
+  }
+
+  resetPicture(): void {
+    this.converted_image = '';
+  }
+}
+````
+
+*photo.component.html*
+
+````html
+<div class="container">
+  <ion-toolbar>
+    <ion-button (click)="takePicture()">Take picture</ion-button>
+    <ion-button (click)="resetPicture()">Reset picture</ion-button>
+  </ion-toolbar>
+  <p>Taking photo with Camera plugin in PWA mode and store result as base64 image in Ionic Storage V3</p>
+  <div class="picture">
+    <img  [src]="converted_image" alt="Select Image"/>
+  </div>
+</div>
+````
+
+### Mobile mode
+
+````typescript
+	export class PhotoComponent implements OnInit {
+
+  imagePath = '';
+  @ViewChild('picture') imageElement: ElementRef;
+
+  constructor(private localStorage: LocalstorageService) { }
+
+  ngOnInit() {}
+
+  async takePicture() {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Uri
+    });
+
+    // image.webPath will contain a path that can be set as an image src.
+    // You can access the original file using image.path, which can be
+    // passed to the Filesystem API to read the raw data of the image,
+    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+
+    const imageUrl = image.webPath;
+
+    // Can be set to the src of an image now
+    this.imageElement.nativeElement.src = imageUrl;
+    this.imagePath = imageUrl;
+
+    this.localStorage.addData({imageUrl: imageUrl});
+  }
+
+  resetPicture(): void {
+    this.imagePath = '';
+    this.imageElement.nativeElement.src = '';
+  }
+
+  checkPermission(): void {
+    Camera.checkPermissions()
+    .then((res) => {
+      alert(JSON.stringify(res));
+    });
+  }
+
+  requestPermission() {
+    Camera.requestPermissions()
+    .then(() => {});
+
+  }
+}
+````
+
+*photo.component.html*
+
+````html
+...
+<div class="picture">
+    <img #picture>
+  </div>
 ````
 
 [Back to top](#capacitor)     
