@@ -160,6 +160,8 @@ The final step consists in delete all of your old splashscreens *.png* files fro
 ## Storage
 [Back to top](#capacitor)     
 
+MAKE THE GOOD CHOICE : https://ionicframework.com/blog/choosing-a-data-storage-solution-ionic-storage-capacitor-storage-sqlite-or-ionic-secure-storage/
+
 ### Ionic Storage V3
 
 Local Storage on web and mobile with IndexedDB and CordovaSQLite driver
