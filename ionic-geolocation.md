@@ -303,7 +303,35 @@ export class LocationPage {
 ## Reverse geocoding
 [back to top](#geolocation)   
 
+[Official documentation](https://ionicframework.com/docs/native/native-geocoder)     
 [Reverse geocoding with ionic](http://masteringionic.com/blog/2017-06-13-geocodingreverse-geocoding-with-ionic-native/)    
+
+*Capacitor installation*
+````
+npm install cordova-plugin-nativegeocoder
+npm install @ionic-native/native-geocoder
+ionic cap sync
+````
+
+*Usage*
+````typescript
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+
+constructor(private nativeGeocoder: NativeGeocoder) { }
+
+let options: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+};
+
+this.nativeGeocoder.reverseGeocode(52.5072095, 13.1452818, options)
+  .then((result: NativeGeocoderResult[]) => console.log(JSON.stringify(result[0])))
+  .catch((error: any) => console.log(error));
+
+this.nativeGeocoder.forwardGeocode('Berlin', options)
+  .then((result: NativeGeocoderResult[]) => console.log('The coordinates are latitude=' + result[0].latitude + ' and longitude=' + result[0].longitude))
+  .catch((error: any) => console.log(error));
+````
 
 ## Geolocation on capacitor
 [back to top](#geolocation)  
