@@ -298,9 +298,9 @@ export class LocationPage {
 ## Customize map markers
 [back to top](#geolocation)    
 
-[Official gogole map documentation](https://developers.google.com/maps/documentation/javascript/custom-markers)    
+[Official google map documentation](https://developers.google.com/maps/documentation/javascript/custom-markers)    
 
-##Reverse geocoding
+## Reverse geocoding
 [back to top](#geolocation)   
 
 [Reverse geocoding with ionic](http://masteringionic.com/blog/2017-06-13-geocodingreverse-geocoding-with-ionic-native/)    
