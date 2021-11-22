@@ -325,6 +325,15 @@ async getCurrentPosition() {
   }
 ```
 
+## Using google map navigation
+[back to top](#geolocation)  
+
+Using google map app to start navigating
+
+[tutorial part 1](https://www.youtube.com/watch?v=gSaDDxLbKSs&ab_channel=CodeSwag)      
+[tutorial part 2 - navigation](https://www.youtube.com/watch?v=N8jqxFj9als&ab_channel=CodeSwag)       
+
+
 ## Alternative to Google map
 [back to top](#geolocation)  
 
