@@ -6,6 +6,7 @@
 * [Customize map markers](#customize-map-markers)    
 * [Reverse geocoding](#reverse-geocoding)    
 * [Geolocation on capacitor](#geolocation-on-capacitor)    
+* [Using Google map navigation](#using-google-map-navigation)      
 * [Alternative to Google Map with leaflet - mapbox](#alternative-to-google-map)       
 
 ## See google map integration (full example)
@@ -332,6 +333,112 @@ Using google map app to start navigating
 
 [tutorial part 1](https://www.youtube.com/watch?v=gSaDDxLbKSs&ab_channel=CodeSwag)      
 [tutorial part 2 - navigation](https://www.youtube.com/watch?v=N8jqxFj9als&ab_channel=CodeSwag)       
+
+
+
+Add your Google Map Api Key to your *index.html*
+
+````html
+<script src="https://maps.googleapis.com/maps/api/js?key=<YOUR_GOOGLEMAP_API_KEY>" async defer></scripts>
+````
+
+*home.html*
+
+````html
+<ion-content>
+	<div #map id="map"></div>
+</ion-content>
+````
+
+*home.ts*
+
+````typescript
+import { ViewChild, ElementRef } from '@angular/core';
+
+declare var google: any;
+
+export class HomePage {
+
+	map: any;
+	@ViewChild('map', { read: ElementRef, static: false }) mapRef: ElementRef;
+	infoWindows: any = [];
+	markers: any = [{
+		title: 'National art gallery',
+		latitude: '-17.824991',
+		longitude: '31.049295'
+	},
+	{
+		title: 'Chop chop',
+		latitude: '-17.819460',
+		longitude: '31.053844'
+	}];
+	
+	constructor() {}
+	ionViewDidEnter() { this.showMap(); }
+	
+	showMap() {
+		const location = new google.maps.LatLng(-17.824858, 31.053028);
+		const options = {
+			center: location,
+			zoom: 15,
+			disableDefaultUI: true
+		}
+		this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+		this.addMarkersToMap(this.markers);
+	}
+	
+	addMarkersToMap(markers) {
+		for (let marker of markers) {
+			letposition = new google.maps.LatLng(marker.latitude, marker.longitude);
+			let mapMarker = new google.maps.Marker({
+				position: position,
+				title: marker.title,
+				latitude: marker.latitude,
+				longitude: marker.longitude
+			});
+			
+			marMarker.setMap(this.map);
+			this.addInfoWindowToMarker(mapMarker);
+		}
+	}
+	
+	addInfoWindowToMarker(marker) {
+		let infoWindowContent = `<div id="content">
+		<h2 id="firstHeading" class="firstHeading">${marker.title}</h2>
+		<p>latitude : ${marker.latitude}</p>
+		<p>longitude : ${marker.longitude}</p>
+		<ion-button>Navigate</ion-button>
+		</div>`
+	
+		let infoWindow = new google.maps.infoWindow({content: infoWindowContent});
+	
+		marker.addListener('click', () => {
+			this.closeAllInfoWindows();
+			infoWindow.open(this.map, marker);
+			
+			// Open google navigation
+			google.maps.event.addEventListenerOnce(infoWindow, 'domready', () => {
+				document.getElementById('navigate').addEventListener('click', () => {
+					window.open('https://wwww.google.com/maps/dir?api=1&destination=' + marker.Latitude + ',' + marker.longitude);
+				});
+			});
+		});
+		this.infoWindows.push(infoWindow);
+	}
+
+	closeAllInfoWindows() {
+		for (let window of this.infoWindows) { window.close(); }
+	}
+}
+````
+
+*home.scss*
+
+````css
+#map {
+	height: 100%;
+}
+````
 
 
 ## Alternative to Google map
