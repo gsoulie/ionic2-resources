@@ -438,7 +438,7 @@ export class HomePage {
 		<ion-button>Navigate</ion-button>
 		</div>`
 	
-		let infoWindow = new google.maps.infoWindow({content: infoWindowContent});
+		let infoWindow = new google.maps.InfoWindow({content: infoWindowContent});
 	
 		marker.addListener('click', () => {
 			this.closeAllInfoWindows();
