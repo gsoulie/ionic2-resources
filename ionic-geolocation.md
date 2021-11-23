@@ -435,7 +435,7 @@ export class HomePage {
 		<h2 id="firstHeading" class="firstHeading">${marker.title}</h2>
 		<p>latitude : ${marker.latitude}</p>
 		<p>longitude : ${marker.longitude}</p>
-		<ion-button>Navigate</ion-button>
+		<ion-button id="navigate">Navigate</ion-button>
 		</div>`
 	
 		let infoWindow = new google.maps.InfoWindow({content: infoWindowContent});
