@@ -441,11 +441,13 @@ export class HomePage {
 		let infoWindow = new google.maps.InfoWindow({content: infoWindowContent});
 	
 		marker.addListener('click', () => {
+			this.map.setZoom(15);
+      			this.map.setCenter(marker.getPosition());
 			this.closeAllInfoWindows();
 			infoWindow.open(this.map, marker);
 			
 			// Open google navigation
-			google.maps.event.addEventListenerOnce(infoWindow, 'domready', () => {
+			google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
 				document.getElementById('navigate').addEventListener('click', () => {
 					window.open('https://google.com/maps/dir/?api=1&destination=' + marker.latitude + ',' + marker.longitude);
 				});
