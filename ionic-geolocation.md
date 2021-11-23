@@ -367,7 +367,7 @@ Using google map app to start navigating
 Add your Google Map Api Key to your *index.html*
 
 ````html
-<script src="https://maps.googleapis.com/maps/api/js?key=<YOUR_GOOGLEMAP_API_KEY>" async defer></scripts>
+<script src="https://maps.googleapis.com/maps/api/js?key=<YOUR_GOOGLEMAP_API_KEY>" async defer></script>
 ````
 
 *home.html*
