@@ -417,7 +417,7 @@ export class HomePage {
 	
 	addMarkersToMap(markers) {
 		for (let marker of markers) {
-			letposition = new google.maps.LatLng(marker.latitude, marker.longitude);
+			let position = new google.maps.LatLng(marker.latitude, marker.longitude);
 			let mapMarker = new google.maps.Marker({
 				position: position,
 				title: marker.title,
@@ -425,7 +425,7 @@ export class HomePage {
 				longitude: marker.longitude
 			});
 			
-			marMarker.setMap(this.map);
+			mapMarker.setMap(this.map);
 			this.addInfoWindowToMarker(mapMarker);
 		}
 	}
