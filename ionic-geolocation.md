@@ -447,7 +447,7 @@ export class HomePage {
 			// Open google navigation
 			google.maps.event.addEventListenerOnce(infoWindow, 'domready', () => {
 				document.getElementById('navigate').addEventListener('click', () => {
-					window.open('https://wwww.google.com/maps/dir?api=1&destination=' + marker.Latitude + ',' + marker.longitude);
+					window.open('https://google.com/maps/dir/?api=1&destination=' + marker.latitude + ',' + marker.longitude);
 				});
 			});
 		});
