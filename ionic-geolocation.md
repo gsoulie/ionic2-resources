@@ -364,7 +364,7 @@ Using google map app to start navigating
 
 **!!** [ionic forum discussion](https://forum.ionicframework.com/t/open-navigation-app-to-navigate-to-adress/47178/13)     
 
-**!!** [Voir aussi le plugin launch-navigator](https://ionicframework.com/docs/native/launch-navigator)      
+**!!** [Voir aussi le plugin launch-navigator](https://ionicframework.com/docs/native/launch-navigator)      permet de gérer tout seul une modale laissant le choix de l'application de navigation
 
 Add your Google Map Api Key to your *index.html*
 
