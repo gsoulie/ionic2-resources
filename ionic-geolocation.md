@@ -424,7 +424,8 @@ export class HomePage {
 				position: position,
 				title: marker.title,
 				latitude: marker.latitude,
-				longitude: marker.longitude
+				longitude: marker.longitude,
+				travelMode: google.maps.DirectionsTravelMode.DRIVING
 			});
 			
 			mapMarker.setMap(this.map);
