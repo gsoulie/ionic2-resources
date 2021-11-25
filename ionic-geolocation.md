@@ -449,7 +449,20 @@ export class HomePage {
 			// Open google navigation
 			google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
 				document.getElementById('navigate').addEventListener('click', () => {
-					window.open('https://google.com/maps/dir/?api=1&destination=' + marker.latitude + ',' + marker.longitude);
+					// work on browser but not on real device
+					//window.open('https://google.com/maps/dir/?api=1&destination=' + marker.latitude + ',' + marker.longitude);
+					
+					// device working solution
+					let label = encodeURI('My Label');
+					let destination = marker.latitude + ',' + marker.longitude;
+
+					if(this.platform.is('ios')){
+						window.open('maps://?q=' + destination, '_system');
+					} else {
+						let label = encodeURI('My Label');
+						window.open('geo:0,0?q=' + destination + '(' + label + ')', '_system');
+					}
+        				
 				});
 			});
 		});
