@@ -2,6 +2,7 @@
 
 # Geolocation
 
+* [Google map api](#google-map-api)       
 * [Angular2 Google maps integration](angular2-google-maps-integration)    
 * [Customize map markers](#customize-map-markers)    
 * [Reverse geocoding](#reverse-geocoding)    
@@ -12,6 +13,28 @@
 ## See google map integration (full example)
 [Full example here](https://github.com/gsoulie/ionic2-resources/blob/master/ionic-google-map-full.md)    
 
+## Google map api
+
+DIRECTION API
+https://developers.google.com/maps/documentation/directions/get-directions        
+
+Exemple d'appel :
+https://maps.googleapis.com/maps/api/directions/json?mode=driving&origin=33+rue+jean+Maridor+75015+Paris&destination=14+rue+de+L'Annonciation+75016+paris&key=AIzaSyCZ5PbPcPuYOBOgxfFS0DlrrTXzrw9RJUs       
+
+GEOCODING API
+https://developers.google.com/maps/documentation/geocoding/overview       
+
+Exemple d'appel (adresse=>{place_id, LatLong,..}):
+https://maps.googleapis.com/maps/api/geocode/json?address=33+rue+jean+Maridor+75015+Paris,+FR&key=AIzaSyCZ5PbPcPuYOBOgxfFS0DlrrTXzrw9RJUs       
+
+Exemple d'appel reverse (latlng=>[adresse]):
+https://maps.googleapis.com/maps/api/geocode/json?latlng=48.838257,2.287638&key=AIzaSyCZ5PbPcPuYOBOgxfFS0DlrrTXzrw9RJUs       
+
+Exemple d'appel reverse (place_id=>adresse):
+https://maps.googleapis.com/maps/api/geocode/json?place_id=ChIJufnpvBJw5kcR05YlyrFk9Gg&key=AIzaSyCZ5PbPcPuYOBOgxfFS0DlrrTXzrw9RJUs      
+
+MAPS JAVASCRIPT API
+https://developers.google.com/maps/documentation/javascript/overview       
 
 ## Angular2 Google maps integration
 [link : google map geolocation](http://www.joshmorony.com/ionic-2-how-to-use-google-maps-geolocation-video-tutorial/)
