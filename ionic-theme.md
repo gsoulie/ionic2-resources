@@ -208,3 +208,18 @@ ion-title{
 	font-family: 'My-custom-font' !important;
 }
 ```
+
+### Set default project custom font
+
+*variable.scss*
+````css
+@font-face {
+font-family: AppFont;
+src: url("…/assets/fonts/Oxygen-Regular.ttf"); //change url accordingly
+}
+
+:root {
+	--ion-font-family: ‘AppFont’;
+}
+````
+[Back to top](#themes)    
