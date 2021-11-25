@@ -457,8 +457,7 @@ export class HomePage {
 					
 					// device working solution
 					let label = encodeURI('My Label');
-					let destination = marker.latitude + ',' + marker.longitude;
-
+					let destination = marker.latitude + ',' + marker.longitude;  // IMPORTANT : destination could be the full address, not necessary GPS coordinates
 					if(this.platform.is('ios')){
 						window.open('maps://?q=' + destination, '_system');
 					} else {
