@@ -27,7 +27,7 @@ export const environment = {
 ````
 [Back to top](#angularfire)  
 
-- 4 - Importer les dépendances dans le *app.module.ts*
+- 4 - Importer les dépendances dont vous avez besoin dans le *app.module.ts*
 
 ````typescript
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
