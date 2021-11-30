@@ -5,9 +5,11 @@
 
 ## Installation et configuration
 
-````ng add @angular/fire````
+- 1 - Créer le projet dans la console firebase
 
-- Ajouter les clés dans les fichiers *environment.ts* (ou ailleurs)
+- 2 - Installation du package ````ng add @angular/fire````
+
+- 3 - Ajouter les clés dans les fichiers *environment.ts* (ou ailleurs)
 
 ````typescript
 export const environment = {
@@ -25,7 +27,7 @@ export const environment = {
 ````
 [Back to top](#angularfire)  
 
-- Importer les dépendances dans le *app.module.ts*
+- 4 - Importer les dépendances dans le *app.module.ts*
 
 ````typescript
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
