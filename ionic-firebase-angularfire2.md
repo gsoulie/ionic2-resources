@@ -29,11 +29,54 @@
 
 #### Plugin installation
 
-First, install angularfire2 plugin ```npm install angularfire2 firebase```
+**2021 update** ````ng add @angular/fire````
+**old version** angularfire2 plugin ```npm install angularfire2 firebase```
 
 #### Module declaration
 
-After you created your Firebase project, retieve your Firebase project credentials and create a constant in the *app.module.ts* to store them
+**2021 update** set your keys into *environment.ts* files
+
+````typescript
+export const environment = {
+  production: false,
+  firebaseConfig: {
+    apiKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    authDomain: "xxxxxxx.firebaseapp.com",
+    databaseURL: "https://xxxxxxxx.firebaseio.com",
+    projectId: "xxxxxxxxxxxx",
+    storageBucket: "xxxxxxxxxx.appspot.com",
+    messagingSenderId: "xxxxxxxxxxxxx",
+    appId: "xxxxxxxxxxxxxxxxxxxxxxxxxx"
+  }
+};
+````
+
+Then import angular fire dependencies into your *app.module.ts*
+
+````typescript
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),	//<---
+    provideAuth(() => getAuth()),	//<---
+    provideFirestore(() => getFirestore())	//<---
+  ],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+````
+
+**Old version**
 
 *app.module.ts*
 ```typescript
