@@ -353,6 +353,7 @@ Consider a ion-list in which we want to hide every items which property "deleted
   </ion-item-sliding>
 </ion-list>
 ```
+[Back to top](#ui-components)  
 
 ```typescript
 @Component(
@@ -383,6 +384,7 @@ Second solution, in case that you prefer to do the filtering in the template the
   </template>
 </ion-list>
 ```
+[Back to top](#ui-components)  
 
 ### ion-item-sliding
 
@@ -423,6 +425,8 @@ Second solution, in case that you prefer to do the filtering in the template the
   </ion-infinite-scroll>
 </ion-content>
 ```
+[Back to top](#ui-components)  
+
 
 *Controller file*
 
@@ -509,6 +513,7 @@ export class HomePage {
 
 
 ### Inifinite scroll in ion-list
+[Back to top](#ui-components)  
 
 #### Solution 1
 
@@ -550,6 +555,7 @@ export class Page1 {
   }
 }
 ```
+[Back to top](#ui-components)  
 
 **Create List**
 
@@ -614,6 +620,7 @@ The syntax is a little different, this time we are using [virtualScroll] and *vi
 It’s important for the virtual scroll to know approximately how big your items will be, since it needs to know how many items would be required to fill up the screen. You can help this process by specifying an approxItemWidth and approxItemHeight
 
 #### Solution 2
+[Back to top](#ui-components)  
 
 > **IMPORTANT** : In Framework v6, the ion-virtual-scroll component has been deprecated in favor of using framework-specific solutions.
 
@@ -665,6 +672,7 @@ export class NewsFeedPage {
 ```
 
 ### Set colour dynamically of each ion-item
+[Back to top](#ui-components)  
 
 *View file*
 
@@ -716,6 +724,7 @@ export class Page1 {
 ```
 
 ### Pull to refresh
+[Back to top](#ui-components)  
 
 *View file*
 
@@ -764,6 +773,7 @@ doRefresh(refresher){
     </ion-item-group>
 </ion-content>
 ```
+[Back to top](#ui-components)  
 
 *Controller file*
 
@@ -849,6 +859,7 @@ export class Contacts {
   }
 }
 ```
+[Back to top](#ui-components)  
 
 **Other example on complex list**
 
@@ -933,6 +944,8 @@ npm install ngx-pagination --save
 <pagination-controls class="my-pagination" (pageChange)="changePage($event)"></pagination-controls>    
 ````
 
+[Back to top](#ui-components)  
+
 *Controller file*
 
 ````typescript
@@ -1003,6 +1016,7 @@ export class PaginationPage implements OnInit {
 }
 
 ````
+[Back to top](#ui-components)  
 
 *Service file*
 
@@ -1034,6 +1048,8 @@ export class DataService {
 }
 
 ````
+
+[Back to top](#ui-components)  
 
 *Style file*
 
@@ -1138,6 +1154,7 @@ To show long label, add the following css to your ion-label
 <!-- Animated Searchbar -->
 <ion-searchbar animated></ion-searchbar>
 ```
+[Back to top](#ui-components)  
 
 *Controller file*
 
@@ -1218,6 +1235,7 @@ To increase list filtering, we can use Observable instead of basic filtering sho
     </ion-list>
 </ion-content>
 ```
+[Back to top](#ui-components)  
 
 *Controller file*
 
@@ -1306,6 +1324,20 @@ Our list filtering is designed pretty nicely now, and it should perform very wel
 A delay is fine, and an artificial delay is sometimes even beneficial, but you definitely don’t want to leave the user wondering “is this just slow or is it frozen?”.
 
 We’re going to make a change now that won’t have any effect on performance, but it will have an impact on the user’s perception of the responsiveness of the app. We’re simply going to add a loading spinner that will display when a search is in progress.
+
+### Filtering on Observable array
+[Back to top](#ui-components)  
+
+````typescript
+games$: Observable<GameDto[]>;
+
+search(ev) {
+ this.games$ = this.games$
+    .pipe(
+      map(item => item.filter(g => g.title.toLowerCase().indexOf(ev.target.value.toLowerCase()) > -1))
+    );
+ }
+````
 
 ## ion-tab
 [Back to top](#ui-components)  
