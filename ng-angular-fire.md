@@ -170,6 +170,28 @@ export class DataService {
 
 ````
 
+## Utilisation
+[Back to top](#angularfire)  
+
+````typescript
+ categoriesSubscription$: Subscription;
+ games$: Observable<GameDto[]>;
+ categories: CategoriesDto[] = [];
+  
+ initializeData(): void {
+    this.categories = this.dataService.categories$.getValue();
+
+    if (this.categories.length <= 0) {
+      this.categoriesSubscription$ = this.dataService.fetchCategories()
+      .subscribe(res => {
+        this.categories = this.dataService.categories$.getValue();
+      });
+    }
+
+    this.games$ = this.dataService.fetchGameByListType(this.listType);
+  }
+````
+
 ## Authentification
 [Back to top](#angularfire)  
 
