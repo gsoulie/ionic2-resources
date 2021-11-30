@@ -29,7 +29,7 @@
 
 #### Plugin installation
 
-**2021 UPDATE** (https://github.com/gsoulie/ionic2-resources/blob/master/ng-angular-fire.md)       
+**2021 UPDATE** https://github.com/gsoulie/ionic2-resources/blob/master/ng-angular-fire.md       
 
 **old version** angularfire2 plugin ```npm install angularfire2 firebase```
 
