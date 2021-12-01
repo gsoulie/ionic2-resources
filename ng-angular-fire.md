@@ -8,7 +8,7 @@ Utilisation d'**Angularfire** avec **Firestore**
 * [Installation et configuration](#installation-et-configuration)     
 * [Requêtage](#requêtage)     
 * [Utilisation](#utilisation)     
-* [Authentification(#authentification)     
+* [Authentification](#authentification)     
 * [app.component.ts](#app-component-ts)     
 * [Routing](#routing)      
 * [Guard](#guard)       
