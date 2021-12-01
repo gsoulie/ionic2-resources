@@ -14,6 +14,7 @@ Utilisation d'**Angularfire** avec **Firestore**
 * [Guard](#guard)       
 * [Infos asynchrones](#infos-asynchrones)      
 * [Règles de sécurité Firebase](#règles-de-sécurité-firebase)       
+* [Utiliser des Promises](#utiliser-des-promises)      
 
 ## Installation et configuration
 
@@ -425,4 +426,43 @@ service cloud.firestore {
   }
 }
 ````
+
+## Utiliser des Promises
+[Back to top](#angularfire-update-2021)  
+
+Dans certain cas, on peut ne pas avoir besoin de la connexion bi-directionnelle permanente avec Firestore (temps réel) et il est préférable de récupérer les données via des Promises.
+
+**ATTENTION** il faudra gérer à la main le refresh des données après chaque opération de CRUD
+
+*service.ts*
+
+````typescript
+  games: GameDto[] = []; // On peut également utiliser un BehaviourSubject à la place
+
+  async fetchGamesByListTypeWithPromise(listType: ListTypeEnum): Promise<void> {
+      const collectionRef = this.getCollectionRef(CollectionEnum.games);
+    const orderConstraint = orderBy('title');
+    const whereConstraint = where('listType', '==', listType);
+    const finalQuery = query(collectionRef, orderConstraint, whereConstraint);
+    await collectionData(finalQuery, { idField: 'id' })
+    .pipe(first())
+    .toPromise()
+    .then(res => {
+      this.games = res as GameDto[];
+    })
+    .catch((e) => console.warn(e));
+  }
+````
+
+*controller.ts*
+
+````typescript
+  games: GameDto[] = [];
+  
+  async initializeData(): Promise<void> {
+    await this.dataService.fetchGamesByListTypeWithPromise(this.listType);
+    this.games = this.dataService.games;
+ }
+````
+
 [Back to top](#angularfire-update-2021)  
