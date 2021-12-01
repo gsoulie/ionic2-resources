@@ -5,6 +5,15 @@
 
 Utilisation d'**Angularfire** avec **Firestore**
 
+* [Installation et configuration](#installation-et-configuration)     
+* [Requêtage](#requêtage)     
+* [Utilisation](#utilisation)     
+* [Authentification(#authentification)     
+* [app.component.ts](#app-component-ts)     
+* [Routing](#routing)      
+* [Guard](#guard)       
+* [Infos asynchrones](#infos-asynchrones)      
+
 ## Installation et configuration
 
 - 1 - Créer le projet dans la console firebase
@@ -355,5 +364,46 @@ export class AuthGuard implements CanActivate {
       });
   }
 }
+````
+[Back to top](#angularfire-update-2021)  
+
+## Infos asynchrones
+
+*home.view.html*
+
+````html
+<mat-list *ngIf="(user | async)">
+    <mat-list-item>Account Type: {{ (user | async)?.accountType }}</mat-list-item>
+    <mat-list-item>Display Name: {{ (user | async)?.displayName }}</mat-list-item>
+    <mat-list-item>Display Name (lower): {{ (user | async)?.displayName_lower }}</mat-list-item>
+    <mat-list-item>Email: {{ (user | async)?.email }}</mat-list-item>
+    <mat-list-item>Email (lower): {{ (user | async)?.email_lower }}</mat-list-item>
+    <mat-list-item>Email Verification Status: {{ (afAuth.user | async)?.emailVerified }}</mat-list-item>
+</mat-list>
+````
+
+*home.component.ts*
+
+````typescript
+import { Firestore, collection, doc, collectionData, docData } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
+
+user: Observable<any>;              // Example: store the user's info here (Cloud Firestore: collection is 'users', docId is the user's email, lower case)
+
+    constructor(private afAuth: Auth, private firestore: Firestore) {
+        this.user = null;
+    }
+
+    ngOnInit(): void {
+        this.afAuth.authState.subscribe(user => {
+            console.log('Dashboard: user', user);
+
+            if (user) {
+                let emailLower = user.email.toLowerCase();
+                const ref = doc(this.firestore, 'users/' + emailLower)
+                this.user = docData(ref)
+            }
+        });
+    }
 ````
 [Back to top](#angularfire-update-2021)  
