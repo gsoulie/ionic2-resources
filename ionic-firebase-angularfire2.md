@@ -14,7 +14,7 @@
 * [Firebase hosting](#firebase-hosting)    
 * [Lazy loading on firebase dataset](#lazy-loading-on-firebase-dataset)    
 * [Multiple database](#multiple-database)    
-* [Firestore](#firestore)    
+* [AngularFire2 Firestore](#angularfire2-firestore)    
 
 ## CRUD angularfire2
 [Back to top](#angularfire2) 
@@ -1724,7 +1724,7 @@ export class HomePage {
 
 ```
 
-## Firestore
+## AngularFire2 Firestore
 [Back to top](#angularfire2) 
 
 (AngularFirestore documentation)[https://github.com/angular/angularfire/blob/master/docs/firestore/querying-collections.md]
