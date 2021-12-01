@@ -25,7 +25,7 @@ export const environment = {
   }
 };
 ````
-[Back to top](#angularfire-(update-2021))  
+[Back to top](#angularfire-update-2021)  
 
 - 4 - Importer les dépendances dont vous avez besoin dans le *app.module.ts*
 
@@ -53,7 +53,7 @@ export class AppModule {}
 ````
 
 ## Requêtage
-[Back to top](#angularfire)  
+[Back to top](#angularfire-update-2021)  
 
 Exemple de service manipulant les données firebase (CRUD)
 *data.service.ts*
@@ -171,7 +171,7 @@ export class DataService {
 ````
 
 ## Utilisation
-[Back to top](#angularfire)  
+[Back to top](#angularfire-update-2021)  
 
 ````typescript
  categoriesSubscription$: Subscription;
@@ -193,7 +193,7 @@ export class DataService {
 ````
 
 ## Authentification
-[Back to top](#angularfire)  
+[Back to top](#angularfire-update-2021)  
 
 Exemple service authentification
 
@@ -268,7 +268,7 @@ export class AuthService {
   }
 }
 ````
-[Back to top](#angularfire)  
+[Back to top](#angularfire-update-2021)  
 
 *app.component.ts*
 
@@ -298,6 +298,9 @@ export class AppComponent implements OnInit {
 }
 ````
 
+## Routing
+[Back to top](#angularfire-update-2021)  
+
 *app-routing.module.ts*
 
 ````typescript
@@ -318,6 +321,7 @@ export class AppComponent implements OnInit {
 ````
 
 ## Guard
+[Back to top](#angularfire-update-2021)  
 
 ````typescript
 import { Injectable } from '@angular/core';
