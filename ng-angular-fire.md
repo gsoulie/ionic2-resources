@@ -25,7 +25,7 @@ export const environment = {
   }
 };
 ````
-[Back to top](#angularfire)  
+[Back to top](#angularfire-(update-2021))  
 
 - 4 - Importer les dépendances dont vous avez besoin dans le *app.module.ts*
 
@@ -201,7 +201,9 @@ Exemple service authentification
 
 ````typescript
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, User } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, getAuth, onAuthStateChanged,
+  sendEmailVerification,
+  signInWithEmailAndPassword, signOut, User } from '@angular/fire/auth';
 import { ToastController } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 
@@ -211,18 +213,30 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
 
   currentUser$: BehaviorSubject<User> = new BehaviorSubject(null);
-  private user: User;
+  userIsLogged$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  private userLoggedIn = false;
   private auth: Auth;
 
   constructor(public afAuth: Auth, private toastCtrl: ToastController) {
     this.auth = getAuth();
+
+    this.afAuth.onAuthStateChanged((user) => {
+      this.userLoggedIn = user ? true : false;
+      this.userIsLogged$.next(user ? true : false); // Avec behaviourSubject
+    });
   }
 
-  async signup(email: string, password: string) {
-    //const auth = getAuth();
-    createUserWithEmailAndPassword(this.auth, email, password)
+  isLogged(): boolean {
+    return this.auth.currentUser !== null ? true : false;
+  }
+
+  async signup(email: string, password: string): Promise<any> {
+    return createUserWithEmailAndPassword(this.auth, email, password)
     .then((userCredentials) => {
       const user = userCredentials.user;
+
+      // Send verification email to user
+      sendEmailVerification(userCredentials.user);
     })
     .catch(async (error) => {
       const toast = await this.toastCtrl.create({
@@ -233,9 +247,8 @@ export class AuthService {
     });
   }
 
-  async signin(email: string, password: string) {
-    //const auth = getAuth();
-    signInWithEmailAndPassword(this.auth, email, password)
+  async signin(email: string, password: string): Promise<any> {
+    return signInWithEmailAndPassword(this.auth, email, password)
     .then((userCredentials) => {
       const user = userCredentials.user;
       this.currentUser$.next(user);
@@ -249,15 +262,90 @@ export class AuthService {
     });
   }
 
-  signout() {
+  signout(): Promise<void> {
     return signOut(this.auth)
     .then(() => this.currentUser$.next(null));
   }
-
-  isLogged(): boolean {
-    return this.auth.currentUser !== null ? true : false;
-  }
 }
-
 ````
 [Back to top](#angularfire)  
+
+*app.component.ts*
+
+````typescript
+import { DataService } from './shared/services/data.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Auth } from '@angular/fire/auth';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss'],
+})
+export class AppComponent implements OnInit {
+  constructor(
+    private auth: Auth,
+    private dataService: DataService,
+    private router: Router) {}
+
+  ngOnInit(): void {
+    if (this.auth.currentUser) {
+      this.dataService.fetchCategories();
+      this.router.navigate(['tabs']);
+    }
+  }
+}
+````
+
+*app-routing.module.ts*
+
+````typescript
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'tabs'
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+````
+
+## Guard
+
+````typescript
+import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+  constructor(private auth: Auth, private router: Router) {}
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+      return new Promise((resolve, reject) => {
+        this.auth.onAuthStateChanged((user) => {
+          if (user) {
+            resolve(true);
+          } else {
+            this.router.navigate(['/login']);
+            resolve(false);
+          }
+        });
+      });
+  }
+}
+````
+[Back to top](#angularfire-(update-2021))  
