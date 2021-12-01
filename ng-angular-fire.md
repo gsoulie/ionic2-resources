@@ -348,4 +348,4 @@ export class AuthGuard implements CanActivate {
   }
 }
 ````
-[Back to top](#angularfire-(-update-2021-))  
+[Back to top](#angularfire-update-2021)  
