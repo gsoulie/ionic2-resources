@@ -270,6 +270,8 @@ export class AuthService {
   }
 }
 ````
+
+## app.component.ts
 [Back to top](#angularfire-update-2021)  
 
 *app.component.ts*
