@@ -13,6 +13,7 @@ Utilisation d'**Angularfire** avec **Firestore**
 * [Routing](#routing)      
 * [Guard](#guard)       
 * [Infos asynchrones](#infos-asynchrones)      
+* [Règles de sécurité Firebase](#règles-de-sécurité-firebase)       
 
 ## Installation et configuration
 
@@ -405,5 +406,23 @@ user: Observable<any>;              // Example: store the user's info here (Clou
             }
         });
     }
+````
+[Back to top](#angularfire-update-2021)  
+
+## Règles de sécurité Firebase
+
+Pour terminer, il faut rédiger les bonnes règles de sécurité d'accès à la base Firestore depuis le dashboard Firebase pour activer l'accès en fonction de l'authentification de l'utilisateur
+
+````typescript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if
+          request.auth != null;
+          //request.time < timestamp.date(2021, 12, 25);
+    }
+  }
+}
 ````
 [Back to top](#angularfire-update-2021)  
