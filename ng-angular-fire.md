@@ -3,6 +3,8 @@
 
 # Angularfire (update 2021)
 
+Utilisation d'**Angularfire** avec **Firestore**
+
 ## Installation et configuration
 
 - 1 - Créer le projet dans la console firebase
