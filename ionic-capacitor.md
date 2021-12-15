@@ -70,7 +70,7 @@ If some plugins were modified, you need to run
 npx cap update
 ```
 
-You can also simply run ```npx sync``` to both copy your web code and update your plugins
+You can also simply run ```npx cap sync``` to both copy your web code and update your plugins
 
 **open native IDE to build, run, and deploy**
 
