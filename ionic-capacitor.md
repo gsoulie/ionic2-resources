@@ -173,6 +173,9 @@ https://ionicacademy.com/ionic-storage-v3-with-angular/
 
 ````
 npm i @ionic/storage-angular
+npm install cordova-sqlite-storage	// for capacitor only
+ionic cordova plugin add cordova-sqlite-storage // for cordova only
+npm install localforage-cordovasqlitedriver // for both cordova and capacitor
 ````
 
 *app.module.ts*
