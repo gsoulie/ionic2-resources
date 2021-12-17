@@ -166,8 +166,8 @@ MAKE THE GOOD CHOICE : https://ionicframework.com/blog/choosing-a-data-storage-s
 
 Local Storage on web and mobile with IndexedDB and CordovaSQLite driver
 
-https://www.youtube.com/watch?v=vCfAe2esboU&ab_channel=SimonGrimm
-https://ionicacademy.com/ionic-storage-v3-with-angular/
+https://www.youtube.com/watch?v=vCfAe2esboU&ab_channel=SimonGrimm      
+https://ionicacademy.com/ionic-storage-v3-with-angular/       
 
 *Installation*
 
