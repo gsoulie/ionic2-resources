@@ -628,7 +628,13 @@ requestPermissions() {
 ## Photo
 [Back to top](#capacitor)    
 
-https://ionicframework.com/docs/angular/your-first-app/2-taking-photos
+### Mobile Cordova camera plugin
+
+Full sample here : https://github.com/gsoulie/capacitor-camera       
+
+### Camera on PWA
+
+https://ionicframework.com/docs/angular/your-first-app/2-taking-photos      
 
 ````
 npm install @capacitor/camera
