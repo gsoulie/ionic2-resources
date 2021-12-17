@@ -6,7 +6,7 @@
 * [Capacitor and PWA](#capacitor-and-pwa)        
 * [Build Android Prod version](#build-android-prod-version)       
 * [App icon and Splashscreen](#app-icon-and-splashscreen)        
-* [Storage](#storage)      
+* [Storage and Sqlite](#storage-and-sqlite)      
 * [Listening internet connection](#listening-internet-connection)     
 * [Haptics](#haptics)      
 * [Android permissions](#android-permissions)      
@@ -157,11 +157,32 @@ At this point, you must have pink rectangles on the top-left, top-right, bottom-
 
 The final step consists in delete all of your old splashscreens *.png* files from each directories to keep only *splash.9* files. After that *build > clean project* and you can run on your device
 
-## Storage
+## Storage adn SQLite
 [Back to top](#capacitor)     
 
 MAKE THE GOOD CHOICE : https://ionicframework.com/blog/choosing-a-data-storage-solution-ionic-storage-capacitor-storage-sqlite-or-ionic-secure-storage/
 
+*Ionic Storage* : utilise par défaut *localStorage* et *IndexedDB* (plutôt pour une version web). 
+=> type clé-valeur, on peut y insérer des objets
+=> sélectionne automatiquement la mailleure solution pour le stockage : *IndexedDB* et sinon *LocalStorage*
+=> fonctionne aussi avec le driver SQLite pour les app mobiles
+=> pas fait pour de grosses structures de données car pas de requêtage et diminue en perf si les objets sont trop complexes
+
+En mode web, *localStorage* => peu de données en asynchrone avec *indexedDB* suffit
+
+*capacitor storage* : peut être gorumand en perf. Ne peut stocker QUE des chaînes. Pour stocker des objets il faut donc les stringifier avant et les parser en sortie = perte de performance
+
+*sqlite* : seulement disponible pour les app natives avec capacitor. Permet le requêtage complexe. Certains plugins permettent également d'importer un dump JSON et de peupler la bdd à l'initialisation
+
+*ionic secure storage (payant)* : stockage SQLite crypté
+
+**Quel choix ?**
+
+- petits stockages de paramètres => *capacitor storage*
+- stockage d'objets un peu plus gros => *ionic storage*
+- *sqlite* => uniquement sur app natives
+- gros requêtage et volumétrie => *SQLite*
+- 
 ### Ionic Storage V3
 
 Local Storage on web and mobile with IndexedDB and CordovaSQLite driver
