@@ -157,7 +157,7 @@ At this point, you must have pink rectangles on the top-left, top-right, bottom-
 
 The final step consists in delete all of your old splashscreens *.png* files from each directories to keep only *splash.9* files. After that *build > clean project* and you can run on your device
 
-## Storage adn SQLite
+## Storage and SQLite
 [Back to top](#capacitor)     
 
 MAKE THE GOOD CHOICE : https://ionicframework.com/blog/choosing-a-data-storage-solution-ionic-storage-capacitor-storage-sqlite-or-ionic-secure-storage/
