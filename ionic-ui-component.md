@@ -2158,6 +2158,8 @@ export class SlidePage implements OnInit, AfterContentChecked {
 
 ### Using specific modules (Navigation, Pagination, Scrollbar...)
 
+> IMPORTANT : By default Swiper Angular uses core version of Swiper (without any additional modules). If you want to use Navigation, Pagination and other modules, you have to install them first. Here is the list of additional modules imports:
+
 Using specific modules requires to import them before all :
 
 ````typescript
