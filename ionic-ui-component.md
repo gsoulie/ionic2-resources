@@ -2125,8 +2125,8 @@ export class SlidePage implements OnInit, AfterContentChecked {
 
 **TRES IMPORTANT**
 
-Lorsqu'on ajoute du style à un slider via la classe *swiper-slide*, **rien ne se produit**. Cela est du à l'encapsulation de style du slider.
-Il faut donc indiquer que l'on ne souhaiter pas respecter cette encapsulation si l'on souhaite customiser le style du slider.
+Le swiper est protégé par la *ViewEncapsulation*, de fait, lorsqu'on ajoute du style à un slider via la classe *swiper-slide*, **rien ne se produit**. 
+Il faut donc désactiver la *ViewEncapsulation* (encapsulation shadow dom) si l'on souhaite customiser le style du slider.
 
 *slider.page.ts*
 
