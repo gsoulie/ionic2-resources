@@ -23,6 +23,7 @@
 * [List accordion](#list-accordion)    
 * [Picker](#picker)     
 * [round progress bar](#round-progress-bar)     
+* [Swiper (replace ion-slide from v6)](swiper-(-replace-ion--slide-from-v6-))      
 * [ion-slide](#ion-slide)    
 * [Hiding header on scroll](#hiding-header-on-scroll)     
 * [Notification badge on icon](#notification-badge-on-icon)    
@@ -2046,7 +2047,311 @@ round-progress {
   }
 ```
 
-## ion-slide
+## Swiper (replace ion-slide from v6)   
+[Back to top](#ui-components)      
+
+[Swiper Angular documentation](https://swiperjs.com/angular)     
+[Swiper demos and code](https://swiperjs.com/demos#effect-fade)      
+
+> IMPORTANT : By default Swiper Angular uses core version of Swiper (without any additional modules). If you want to use Navigation, Pagination and other modules, you have to install them first. Here is the list of additional modules imports:
+
+````npm install swiper````
+
+import module in page module file (lazy loading) or in *app.module.ts*
+
+*swiper.page.module*
+
+````typescript
+import { SwiperModule } from 'swiper/angular';
+...
+import { SlidePage } from './slide.page';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    SlidePageRoutingModule,
+    SwiperModule
+  ],
+  declarations: [SlidePage]
+})
+export class SlidePageModule {}
+````
+
+### import global scss
+
+*global.scss*
+@import 'swiper/css/bundle';	// import all swiper bundle css
+
+#### Initialisation
+
+> A vérifier : non nécessaire depuis les dernières versions de Swiper
+
+*slider.component.ts*
+
+````typescript
+export class SlidePage implements OnInit, AfterContentChecked {
+
+  @ViewChild('swiper') swiper: SwiperComponent;
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  ngAfterContentChecked(): void {
+      // if (this.swiper) {
+      //   this.swiper.updateSwiper({});
+      // }
+  }
+
+}
+````
+
+*slider.page.html*
+
+````html
+
+<ion-content>
+	<swiper #swiper>
+	  <ng-template swiperSlide>Slide 1</ng-template>
+	  <ng-template swiperSlide>Slide 2</ng-template>
+	  <ng-template swiperSlide>Slide 3</ng-template>
+	</swiper>
+</ion-content>
+````
+
+#### Mise en forme
+
+**TRES IMPORTANT**
+
+Lorsqu'on ajoute du style à un slider via la classe *swiper-slide*, **rien ne se produit**. Cela est du à l'encapsulation de style du slider.
+Il faut donc indiquer que l'on ne souhaiter pas respecter cette encapsulation si l'on souhaite customiser le style du slider.
+
+*slider.page.ts*
+
+````typescript
+@Component({
+  selector: 'app-slide',
+  templateUrl: './slide.page.html',
+  styleUrls: ['./slide.page.scss'],
+  encapsulation: ViewEncapsulation.None	// <-------------- important
+})
+export class SlidePage implements OnInit, AfterContentChecked {
+````
+
+*slider.page.scss*
+
+````css
+.swiper {
+  width: 100%;
+  height: 100%;
+
+}
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+````
+
+### Using specific modules (Navigation, Pagination, Scrollbar...)
+
+Using specific modules requires to import them before all :
+
+````typescript
+import { SwiperComponent } from 'swiper/angular';
+
+// import Swiper core and required modules
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, EffectCube } from 'swiper';
+
+// install Swiper modules
+SwiperCore.use([Pagination, Navigation, Scrollbar, EffectCube]);
+
+
+export class SlidePage implements OnInit, AfterContentChecked {
+
+  @ViewChild('swiper') swiper: SwiperComponent;
+  config: SwiperOptions = {
+    pagination: true,	// <---- doing nothing if 'Pagination' module is not imported
+	effect: 'cube'
+  };
+}
+````
+
+> Note : If you don't import specific module, using it will doing nothing
+
+### Interactions
+
+Pour intéragir dynamiquement avec les propriétés / fonctions du swiper, il est nécessaire de passer par sa référence car on ne peut pas intéragir directement
+sur le component :
+
+````typescript
+@ViewChild('swiper') swiper: SwiperComponent;
+
+this.swiper.swiperRef.slideNext();
+this.swiper.swiperRef.slidePrev();
+this.swiper.swiperRef.allowTouchMove = this.touchAllowed;
+...
+````
+
+### Cube effect
+
+*slide.page.ts*
+
+````typescript
+// import Swiper core and required modules
+import SwiperCore, { Pagination, EffectCube } from 'swiper';
+
+// install Swiper modules
+SwiperCore.use([Pagination, EffectCube]);
+
+@Component({
+  selector: 'app-slide',
+  template: `
+  <ion-content>
+	<swiper #swiper [config]="config">
+	  <ng-template swiperSlide *ngFor="let s of images">
+		<img [src]="s" alt="">
+	  </ng-template>
+	</swiper>
+	</ion-content>
+  `,
+  style: `
+  .swiper {
+	  width: 100%;
+	}
+`,
+  encapsulation: ViewEncapsulation.None
+})
+export class SlidePage implements AfterContentChecked {
+
+  @ViewChild('swiper') swiper: SwiperComponent;
+
+  config: SwiperOptions = {
+    slidesPerView: 'auto',
+    pagination: true,
+    effect: 'cube'
+  };
+
+  images = [
+    'https://images.unsplash.com/photo-1580894742597-87bc8789db3d',
+    'https://images.unsplash.com/photo-1580894742597-87bc8789db3d',
+    'https://images.unsplash.com/photo-1580894742597-87bc8789db3d',
+    'https://images.unsplash.com/photo-1580894742597-87bc8789db3d',
+    'https://images.unsplash.com/photo-1580894742597-87bc8789db3d',
+  ];
+ ````
+ 
+ ### Full sample
+ 
+ *slider.page.html*
+ 
+ ````html
+ <ion-header>
+  <ion-toolbar>
+    <ion-title>slide</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<swiper #swiper [config]="config"
+(slideChange)="swiperSlideChange($event)">
+  <ng-template swiperSlide *ngFor="let s of [].constructor(10); let i = index">Slide {{ i }}
+  </ng-template>
+  <!-- <ng-template swiperSlide *ngFor="let s of images">
+    <img [src]="s" alt="">
+  </ng-template> -->
+</swiper>
+</ion-content>
+<ion-footer [style.background]="'white'">
+  <ion-row>
+    <ion-col>
+      <ion-button fill="clear" expand="block" (click)="slidePrevious()">Prev</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block" (click)="slideNext()">Next</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+````
+
+*slider.page.ts*
+
+````typescript
+import { AfterContentChecked, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { SwiperOptions } from 'swiper';
+import { SwiperComponent } from 'swiper/angular';
+
+// import Swiper core and required modules
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y, EffectCube } from 'swiper';
+
+// install Swiper modules
+SwiperCore.use([Pagination, EffectCube]);
+
+@Component({
+  selector: 'app-slide',
+  templateUrl: './slide.page.html',
+  styleUrls: ['./slide.page.scss'],
+  encapsulation: ViewEncapsulation.None
+})
+export class SlidePage implements AfterContentChecked {
+
+  @ViewChild('swiper') swiper: SwiperComponent;
+  config: SwiperOptions = {
+    //slidesPerView: 1.5,
+    //spaceBetween: 50,
+    pagination: true,
+    initialSlide: 1,
+    //allowTouchMove: false // disable swiping by touching
+  };
+
+  constructor() { }
+
+  ngAfterContentChecked(): void {
+      // if (this.swiper) {
+      //   this.swiper.updateSwiper({});
+      // }
+  }
+
+  swiperSlideChange(ev): void {
+    console.log('slide change : ', ev);
+  }
+  slideNext(): void {
+    this.swiper.swiperRef.slideNext();
+    // this.swiper.swiperRef.slideTo(x);  // <---- slide to specific index
+  }
+  slidePrevious(): void {
+    this.swiper.swiperRef.slidePrev();
+  }
+
+  /**
+   * Enable/disable touch move dynamically
+   */
+  toggleTouch() {
+    //this.touchAllowed = !this.touchAllowed;
+    //this.swiper.swiperRef.allowTouchMove = this.touchAllowed;
+  }
+}
+````
+
+*slider.page.scss*
+
+````css
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+````
+
+## ion-slide (deprecated since v6)
 [Back to top](#ui-components)  
 
 [Video : How to build Dynamic Ionic 4 Slides with Shopping Cart](https://www.youtube.com/watch?v=6sXz2swm6Sw&ab_channel=SimonGrimm)      
