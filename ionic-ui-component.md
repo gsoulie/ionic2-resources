@@ -23,7 +23,7 @@
 * [List accordion](#list-accordion)    
 * [Picker](#picker)     
 * [round progress bar](#round-progress-bar)     
-* [Swiper (replace ion-slide from v6)](swiper-replace-ion-slide-from-v6)      
+* [Swiper (replace ion-slide from v6)](#swiper-replace-ion-slide-from-v6)     
 * [ion-slide (deprecated since v6)](#ion-slide-deprecated-since-v6)    
 * [Hiding header on scroll](#hiding-header-on-scroll)     
 * [Notification badge on icon](#notification-badge-on-icon)    
