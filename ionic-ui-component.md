@@ -2082,7 +2082,7 @@ export class SlidePageModule {}
 ### import global scss
 
 *global.scss*
-@import 'swiper/css/bundle';	// import all swiper bundle css
+````@import 'swiper/css/bundle';	// import all swiper bundle css````
 
 #### Initialisation
 
@@ -2121,7 +2121,7 @@ export class SlidePage implements OnInit, AfterContentChecked {
 </ion-content>
 ````
 
-#### Mise en forme
+### Mise en forme
 
 **TRES IMPORTANT**
 
@@ -2184,8 +2184,7 @@ export class SlidePage implements OnInit, AfterContentChecked {
 
 ### Interactions
 
-Pour intéragir dynamiquement avec les propriétés / fonctions du swiper, il est nécessaire de passer par sa référence car on ne peut pas intéragir directement
-sur le component :
+To dynamically interact with swiper properties / functions, you must use swiper's reference. You cannot directly use swiper object : 
 
 ````typescript
 @ViewChild('swiper') swiper: SwiperComponent;
@@ -2244,7 +2243,7 @@ export class SlidePage implements AfterContentChecked {
   ];
  ````
  
- ### Full sample
+ ### Full basic sample
  
  *slider.page.html*
  
