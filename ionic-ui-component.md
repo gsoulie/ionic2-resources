@@ -33,6 +33,7 @@
 * [ion-sliding-item swipe to delete](#ion-sliding-item-swipe-to-delete)       
 * [swipe to delete with gesture](#swipe-to-delete-with-gesture)       
 * [iOS keyboard scroll](#ios-keyboard-scroll)     
+* [ion-range](#ion-range)    
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3164,3 +3165,49 @@ To prevent iOS keyboard scrolling screen when entering in input field, add the f
 ````
 
 In addition you can add **<ion-content scrollY="false">** 
+	
+## ion-range
+[Back to top](#ui-components)  
+
+Customize **ion-range**
+
+*view.html*
+````html
+  <div class="range-div">
+    <ion-range
+    [value]="rangeDefault"
+    [(ngModel)]="rangeDefault"
+    class="custom-range"
+    [min]="rangeMin"
+    [max]="rangeMax"
+    snaps
+    step="10"></ion-range>
+    <div class="range-legend">
+      <ion-label>{{ rangeMin }}</ion-label>
+      <ion-label>{{ rangeDefault }}</ion-label>
+      <ion-label>{{ rangeMax }}</ion-label>
+    </div>
+  </div>
+````
+
+*view.scss*
+````typescript
+.range-legend {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.custom-range {
+  --bar-height: 6px;
+  --bar-background: #56686D;
+  --bar-background-active: #56686D;
+  --knob-background: white;
+
+  --knob-size: 18px;
+  --knob-border-radius: 50%;
+  --knob-box-shadow: 0px 0px 0px 6px #56686D;
+}
+````
+[Back to top](#ui-components)  
