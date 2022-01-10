@@ -11,6 +11,7 @@
 * [Haptics](#haptics)      
 * [Android permissions](#android-permissions)      
 * [Photo](#photo)      
+* [Azure pipeline](#azure-pipeline)      
 
 ## Capacitor 3.0
 
@@ -781,5 +782,99 @@ export class PhotoComponent implements OnInit {
     <img #picture>
   </div>
 ````
+
+[Back to top](#capacitor)     
+
+## Azure pipeline
+
+https://sahansera.dev/multi-stage-builds-with-azure-pipelines-ionic/      
+
+Create a new *pipelines* folder at the root of your project, then create the following pipeline files :
+
+> WARNING : be extremely careful with the syntax of yaml files !
+
+*azure-pipelines.yml*
+
+````typescript
+trigger:
+- develop
+
+variables:
+  vmImageName: 'windows-latest'
+  projectName: 'MyCoolApp'
+
+stages:
+  - stage: Build
+    displayName: Build Ionic - Android projects
+    jobs:
+      # Debug build
+      - job: Build_Ionic_Android_Debug
+        variables:
+          - name: buildConfiguration
+            value: Debug
+        displayName: Build Debug
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          - template: ionic-android-debug-build.yml
+
+      # Release build
+      #- job: Build_Ionic_Android_Release
+      #  variables:
+      #    - name: buildConfiguration
+      #      value: Release
+      #  displayName: Build Release
+      #  pool:
+      #    vmImage: $(vmImageName)
+      #  steps:
+      #    - template: ionic-android-release-build.yml
+
+````
+
+*ionic-android-debug-build.yml*
+
+````typescript
+steps:
+  - script: npm install -g @ionic/cli
+    displayName: 'Install Ionic CLI'
+
+  - task: Npm@1
+    inputs:
+      workingDir: '$(Build.SourcesDirectory)'
+      command: install
+    displayName: 'NPM Install'
+
+  - powershell: |
+      ionic info
+      npx cap -V
+      ls
+    workingDirectory: $(Build.SourcesDirectory)
+    displayName: 'Get environment infos'
+
+  - powershell: |
+      ionic build --configuration=production
+      npx cap copy android
+      npx cap sync
+      cd android
+      ./gradlew assemble$(buildConfiguration)
+    workingDirectory: $(Build.SourcesDirectory)
+    displayName: 'Build Android Project'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/android/app/build/outputs/apk/$(buildConfiguration)'
+      contents: "**/app-$(buildConfiguration).apk"
+      targetFolder: "$(Build.ArtifactStagingDirectory)/$(projectName)"
+    displayName: "Copy unsigned APK to staging directory"
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+      ArtifactName: "$(projectName)"
+      publishLocation: "Container"
+    displayName: "Publish artifacts"
+````
+
+Then in azure, got to pipeline and create a new pipeline based on those yml files
 
 [Back to top](#capacitor)     
