@@ -35,6 +35,7 @@
 * [iOS keyboard scroll](#ios-keyboard-scroll)     
 * [ion-range](#ion-range)    
 * [ion-title](#ion-title)    
+* [ion-checkbox](#ion-checkbox)     
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3222,4 +3223,19 @@ To achieve centering *ion-title* on Android with left and right buttons, use **m
 <ion-title mode="ios">My title</title>
 ````
 	
+## ion-checkbox
+[Back to top](#ui-components)  
+
+Customize checkbox :
+
+````css
+ion-checkbox {
+  --background-checked: darkgray;
+  --border-color-checked: darkgray;
+  --border-radius: 5px;
+  height : 25px;
+  width: 25px;
+}
+````
+
 [Back to top](#ui-components)  
