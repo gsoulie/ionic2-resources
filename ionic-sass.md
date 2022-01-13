@@ -41,6 +41,7 @@
 * [:nth-of-type](#nth-of-type)      
 * [Popover](#popover)      
 * [Accessing shadow parts)(#accessing-shadow-parts      
+* [Text overflow ellipsis](#text-overflow-ellipsis)      
 
 Here are some tips to perform your scss.
 
@@ -1436,4 +1437,17 @@ ion-modal::part(content) {
 }
 ````
 
+## Text overflow ellipsis
+
+Text ellipsis on 2 lines field 
+
+````css
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: initial;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+````
 [Back to top](#stylesheet)
