@@ -34,6 +34,7 @@
 * [swipe to delete with gesture](#swipe-to-delete-with-gesture)       
 * [iOS keyboard scroll](#ios-keyboard-scroll)     
 * [ion-range](#ion-range)    
+* [ion-title](#ion-title)    
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3210,4 +3211,15 @@ Customize **ion-range**
   --knob-box-shadow: 0px 0px 0px 6px #56686D;
 }
 ````
+[Back to top](#ui-components)  
+
+## ion-title
+[Back to top](#ui-components)  
+
+To achieve centering *ion-title* on Android with left and right buttons, use **mode="ios"** option. 
+	
+````html
+<ion-title mode="ios">My title</title>
+````
+	
 [Back to top](#ui-components)  
