@@ -41,7 +41,12 @@ auth_config: {
 }
 ````
 
-Then create the following routes on your server (in redirect Uris and Cors sections) : **com.appauth.demo://callback** and **com.appauth.demo://ensession**
+Then create the following routes on your server (in redirect Uris and Cors sections) : 
+
+````
+com.appauth.demo://callback
+com.appauth.demo://ensession
+````
 
 *app.component.ts*
 
