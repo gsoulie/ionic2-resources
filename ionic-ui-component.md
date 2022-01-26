@@ -36,6 +36,7 @@
 * [ion-range](#ion-range)    
 * [ion-title](#ion-title)    
 * [ion-checkbox](#ion-checkbox)     
+* [ion-datetime](#ion-datetime)     
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3238,4 +3239,51 @@ ion-checkbox {
 }
 ````
 
+[Back to top](#ui-components)  
+## ion-datetime
+
+*inline modal version*
+````html
+<ion-item class="ion-no-padding">
+	<ion-label>Départ</ion-label>
+	<ion-input
+	  value="{{ startHour | date: 'HH:mm' }}"
+	  id="startDate"
+	  class="ion-text-end"></ion-input>
+	<ion-modal trigger="startDate" size="cover">
+	  <ng-template>
+	    <ion-content>
+	      <div class="section-top">Heure de départ</div>
+	      <ion-datetime
+		presentation="time"
+		[(ngModel)]="startHour"
+		locale="fr-FR"
+		showDefaultButtons="true"
+	      ></ion-datetime>
+	    </ion-content>
+	  </ng-template>
+	</ion-modal>
+</ion-item>
+````
+
+*popover inline version*
+````html
+	<ion-item class="ion-no-padding">
+        <ion-label>Arrivée</ion-label>
+        <ion-input
+          value="{{ endHour | date: 'HH:mm' }}"
+          id="endDate"
+          class="ion-text-end"></ion-input>
+        <ion-popover trigger="endDate" size="cover">
+          <ng-template>
+              <ion-datetime
+                presentation="time"
+                [(ngModel)]="endHour"
+                locale="fr-FR"
+                showDefaultButtons="true"
+              ></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+````
 [Back to top](#ui-components)  
