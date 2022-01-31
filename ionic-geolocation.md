@@ -389,6 +389,29 @@ Using google map app to start navigating
 
 **!!** [Voir aussi le plugin launch-navigator](https://ionicframework.com/docs/native/launch-navigator)      Displaying a modal if multiple navigation apps are installed on the device
 
+### Exemple 1
+
+````typescript
+ openGoogleNavigation(): void {
+    const destination = 'Ehpad Korian La Pompignane, 662 Av. de la Pompignane, 34000 Montpellier';
+
+    if(this.platform.is('ios')){
+      window.open('maps://?q=' + destination, '_system');
+    } else {
+      const label = encodeURI(destination);
+      window.open('geo:0,0?q=' + destination + '(' + label + ')', '_system');
+    }
+
+    // 2019 url update
+    // if(this.platform.is('ios')){
+    //   window.open('maps://?q=' + destination, '_system');
+    // }else{
+    //   window.open('https://www.google.com/maps/search/' + destination, '_system');
+    // }
+  }
+````
+
+### Example 2
 Add your Google Map Api Key to your *index.html*
 
 ````html
