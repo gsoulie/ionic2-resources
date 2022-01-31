@@ -393,7 +393,7 @@ Using google map app to start navigating
 
 ````typescript
  openGoogleNavigation(): void {
-    const destination = 'Ehpad Korian La Pompignane, 662 Av. de la Pompignane, 34000 Montpellier';
+    const destination = 'Restaurant pizza, 662 Av. de la Pompignane, 34000 Montpellier';
 
     if(this.platform.is('ios')){
       window.open('maps://?q=' + destination, '_system');
