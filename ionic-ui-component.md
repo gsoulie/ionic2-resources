@@ -171,7 +171,88 @@ onClose() {
 }
 ````
 
+### Passage de paramètres via Input
+[Back to top](#ui-components)  
+
+*home.component.ts*
+
+````typescript
+async openModal() {
+	const modal = this.modalCtrl.create({
+		component: ModalPage,
+		componentProps: { username: 'Jack', userage: 24 }
+	});
+	
+	await modal.present();
+	
+	const { data } = await modal.onDidDismiss();
+	console.log(data);
+}
+````
+
+
+*modal.component.ts*
+
+````typescript
+export class ModalPage {
+
+	@Input() username: string;
+	@Input() userage: number;
+	
+	constructor(private modalCtrl: ModalController) {}
+	
+	close() {
+		this.modalCtrl.dismiss({ myreturnedvalue: 42 });
+	}
+}
+````
+
+### Passage de paramètres avec BehaviourSubject
+[Back to top](#ui-components)  
+
+*home.component.ts*
+
+````typescript
+async openModal() {
+	const mySubject = new BehaviourSubject(null);
+	
+	const modal = this.modalCtrl.create({
+		component: ModalPage,
+		componentProps: { username: 'Jack', userage: 24, subject: mySubject }
+	});
+	
+	await modal.present();
+	
+	mySubject.subscribe((res) => {
+		console.log('behaviour subject value : ', res);
+	});
+	
+	const { data } = await modal.onDidDismiss();
+	console.log(data);
+}
+````
+
+
+*modal.component.ts*
+
+````typescript
+export class ModalPage {
+
+	@Input() username: string;
+	@Input() userage: number;
+	@Input() subject: BehaviourSubject<string>;
+	
+	constructor(private modalCtrl: ModalController) {}
+	
+	close() {
+		this.subject.next('A new value was sent !');
+		this.modalCtrl.dismiss({ myreturnedvalue: 42 });
+	}
+}
+````
+
 ### Other example
+[Back to top](#ui-components)  
 
 Consider that we have a page (UserListPage for example) with a button wich open a modal based on UserPage controller.
 
