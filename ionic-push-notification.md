@@ -365,6 +365,8 @@ export class HomePage implements OnInit {
       // do something when a notification is opened
       alert('notification opened');
       //jsonData.notification.payload.additionalData;
+      // navigating to specific page
+      this.router.navigate(['/home']);
     });
 
     this.oneSignal.endInit();
