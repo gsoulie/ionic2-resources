@@ -8,13 +8,27 @@
 ## Phone call
 [Back to top](#phone-and-social-sharing) 
 
+### HTML version
+
+````html
+<ion-fab-button [href]="tel">
+      <ion-icon name="call-outline"></ion-icon>
+</ion-fab-button>
+````
+
+````typescript
+ngOnInit(): void {
+  this.tel = `tel:${this.contact.tel}`;
+}
+````
+
 ### Capacitor
 
 Capacitor using the native call number plugin
 
 ```
-npm install call-number
-npm install @ionic-native/call-number
+npm install call-number 
+npm install @awesome-cordova-plugins/call-number 
 ionic cap sync
 ```
 
