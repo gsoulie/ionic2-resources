@@ -20,6 +20,10 @@
 ngOnInit(): void {
   this.tel = `tel:${this.contact.tel}`;
 }
+
+phoneCallByCode() {
+      window.open(`tel:${this.user.tel}`);
+}
 ````
 
 ### Capacitor
