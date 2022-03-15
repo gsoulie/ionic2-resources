@@ -358,24 +358,160 @@ this.nativeGeocoder.forwardGeocode('Berlin', options)
 
 ## Geolocation on capacitor
 [back to top](#geolocation)  
-```typescript
-import { Plugins } from '@capacitor/core';
-const { Geolocation } = Plugins;
 
-async getCurrentPosition() {
-    const options = {
-      enableHighAccuracy: true
+### Documentation
+
+https://capacitorjs.com/docs/apis/geolocation#position      
+https://ionicframework.com/docs/native/location-accuracy       
+
+### Installation
+
+````
+npm install @capacitor/geolocation
+npx cap sync
+````
+
+#### optional Location Accuracy to force geolocation enabling
+
+````
+npm install cordova-plugin-request-location-accuracy 
+npm install @awesome-cordova-plugins/location-accuracy 
+npm i --save @awesome-cordova-plugins/core
+npx cap sync
+````
+
+*app.module.ts*
+
+````typescript
+
+import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';
+
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule    
+  providers: [
+    LocationAccuracy,	// <----- 
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+
+````
+
+### Android configuration
+
+*AndroidManifest.xml*
+
+````html
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-feature android:name="android.hardware.location.gps" />
+````
+
+*variables.gradle*
+
+````
+ext {
+    minSdkVersion = 21
+    compileSdkVersion = 30
+    targetSdkVersion = 30
+    androidxActivityVersion = '1.2.0'
+    androidxAppCompatVersion = '1.2.0'
+    androidxCoordinatorLayoutVersion = '1.1.0'
+    androidxCoreVersion = '1.3.2'
+    androidxFragmentVersion = '1.3.0'
+    junitVersion = '4.13.1'
+    androidxJunitVersion = '1.1.2'
+    androidxEspressoCoreVersion = '3.3.0'
+    cordovaAndroidVersion = '7.0.0'
+    playServicesLocationVersion = '17.1.0'	//<----- 
+}
+````
+
+### Usage
+
+````typescript
+import { Component, OnInit } from '@angular/core';
+import { Geolocation, Position } from '@capacitor/geolocation';
+import { LocationAccuracy } from '@awesome-cordova-plugins/location-accuracy/ngx';	// <---- to force gps enabling
+
+@Component({
+  selector: 'app-geolocation',
+  templateUrl: './geolocation.page.html',
+  styleUrls: ['./geolocation.page.scss'],
+})
+export class GeolocationPage implements OnInit {
+  locationCordinates: any;
+  timestamp: any;
+  permissions;
+
+  constructor(private platform: Platform,
+    private locationAccuracy: LocationAccuracy) {
+    this.locationCordinates = {
+      latitude: '',
+      longitude: '',
+      accuracy: '',
+      timestamp: ''
     };
-    const coordinates = await Geolocation.getCurrentPosition(options)
-    .then((data) => {
-      alert('location ok ' + JSON.stringify(data));
-    })
-    .catch(e => {
-      // no location available. invite user to activate geolocation on is device
-      alert('no location ? ' + JSON.stringify(e));
+    this.timestamp = Date.now();
+  }
+
+  ngOnInit() {
+  }
+
+  // Check permission status
+  checkPermission() {
+    Geolocation.checkPermissions().then(
+      result => {
+        console.log('Has permission?',result.location);
+        this.permissions = `has permission ? ${result.location}`;
     });
   }
-```
+
+  // request for permission. Does not automatically enable geolocation even if user set permission to true
+  requestPermission() {
+    Geolocation.requestPermissions()
+    .then(res => {
+      this.permissions = `request permission ? ${res.location}`;
+      console.log(`request permission ? ${res.location}`);
+      ;
+    });
+  }
+
+  // get current position
+  async getCurrentLocation() {
+    await Geolocation.getCurrentPosition()
+    .then(response => {
+      this.locationCordinates.latitude = response.coords.latitude;
+      this.locationCordinates.longitude = response.coords.longitude;
+      this.locationCordinates.accuracy = response.coords.accuracy;
+      this.locationCordinates.timestamp = response.timestamp;
+    }).catch((error) => {
+      alert('Error: ' + error);
+    });
+  }
+
+  // force geolocation enabling
+  async enableLocation() {
+
+    this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+      if(canRequest) {
+        // the accuracy option will be ignored by iOS
+        this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+          () => console.log('Request successful'),
+          error => alert('Error requesting location permissions' + error)
+        );
+      }
+    });
+  }
+
+}
+````
 
 ## Using google map navigation
 [back to top](#geolocation)  
