@@ -7,6 +7,7 @@
 * [PWA : write file](#pwa-write-file)     
 * [Loading json file](#loading-json-file)    
 * [Upload file with file explorer](#upload-file-with-file-explorer)     
+* [Open file with native system viewer](#open-file-with-native-system-viewer)     
 
 ## Capacitor filesystem
 [Back to top](#file)  
@@ -333,3 +334,74 @@ async readFileContent(file: File): Promise<string> {
 }
 ````
 
+## Open file with native system viewer
+[Back to top](#file)
+
+### FileOpener 2
+
+> tested with success with ionic 6 / capacitor 3 / Android 12
+> 
+### installation & configuration
+
+````
+npm install cordova-plugin-file-opener2 
+npm install @awesome-cordova-plugins/file-opener 
+npm install @awesome-cordova-plugins/core
+npx cap sync
+````
+
+*app.module.ts*
+````typescript
+import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
+
+...
+providers: [
+    ...,
+    FileOpener
+]
+````
+
+*AndroidManifest.xml*
+````
+<application
+		...
+        android:requestLegacyExternalStorage="true">
+````
+
+### Usage
+
+*home.component.ts*
+````
+import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
+
+constructor(private fileOpener: FileOpener) {}
+	
+private async openFile(filepath) {
+    if (isPlatform('hybrid')) {
+      // Récupérer l'uri du fichier
+      const fileUri = await Filesystem.getUri({
+        directory: Directory.Document,
+        path: filepath
+      });
+
+      const mime = this.fileHelper.getMimeType(filepath);
+      
+      this.fileOpener.open(fileUri.uri, mime)
+      .then(() => console.log('File is opened'))
+      .catch(e => console.log('Error opening file', e));
+    }
+  }
+  
+ private getMimeType(mimeString: string): string {
+
+    mimeString = mimeString.toLocaleLowerCase();
+    if (mimeString.indexOf('pdf') >= 0) {
+      return 'application/pdf';
+    } else if (mimeString.indexOf('png') >= 0) {
+      return 'image/png';
+    } else if (mimeString.indexOf('jpg') >= 0 || mimeString.indexOf('jpeg')) {
+      return 'image/jpg';
+    }
+}
+````
+[Back to top](#file)
