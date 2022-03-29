@@ -354,7 +354,7 @@ npx cap sync
 ````typescript
 import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 
-...
+...typescript
 providers: [
     ...,
     FileOpener
@@ -362,7 +362,7 @@ providers: [
 ````
 
 *AndroidManifest.xml*
-````
+````html
 <application
 		...
         android:requestLegacyExternalStorage="true">
@@ -371,7 +371,7 @@ providers: [
 ### Usage
 
 *home.component.ts*
-````
+````typescript
 import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 
 constructor(private fileOpener: FileOpener) {}
