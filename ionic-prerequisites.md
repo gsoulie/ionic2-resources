@@ -70,6 +70,8 @@ Then, restart your computer and test ANDROID_HOME ```$ANDROID_HOME``` don't forg
 
 After app is running on device, you can inspect it with chrome inspect device
 
+https://ionicframework.com/blog/debugging-tips-for-your-ionic-app/?utm_campaign=content_community&utm_medium=email&_hsmi=208481150&_hsenc=p2ANqtz-991Rh_XKw-9tlFMr1NVHDRcNhNBZfYYmiX8ItOwgqOHKIJzt0y8wWUT8Q__AV0hCTKwufM2dR8BRrzgqXOaLHPH1Tptg&utm_content=69738787390&utm_source=hubspot
+
 [chrome://inspect/#devices](chrome://inspect/#devices)    
 
 ![alt tag](https://s-media-cache-ak0.pinimg.com/originals/8e/52/17/8e5217a74089f046435655d0e0477517.png)
