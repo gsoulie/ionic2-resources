@@ -405,3 +405,96 @@ private async openFile(filepath) {
 }
 ````
 [Back to top](#file)
+
+### PreviewAnyFile
+
+Documentation : https://www.npmjs.com/package/cordova-plugin-preview-any-file
+
+#### Installation and configuration
+
+````
+npm i @ionic-native/core
+npm i cordova-plugin-preview-any-file
+npm i @ionic-native/preview-any-file
+npx cap sync
+````
+
+*app.module.ts*
+
+````typescript
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+
+declarations: [...],
+imports: [...],
+providers: [PreviewAnyFile]
+````
+
+In case of **missing dependencies @awesome-cordova-plugins/core** error you will need to install 
+
+````
+npm i --save @awesome-cordova-plugins/core
+````
+
+*AndroidManifest.xml*
+````html
+<application
+	...
+	android:requestLegacyExternalStorage="true">
+````
+#### Usage
+
+````typescript
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+
+constructor(private previewAnyFile: PreviewAnyFile) { }
+	
+previewBase64(file) {
+	/****
+	 * DO NOT USE WITH PDF file, base64 conversion will fail
+	 **/
+	if (isPlatform('hybrid')) {
+      // Get the URI and use our Cordova plugin for preview
+      const readFile = await Filesystem.readFile({
+        directory: Directory.Data,
+        path: this.currentFolder + '/' + file.name
+      });
+
+	  // use file base64 data
+      (<any>window).PreviewAnyFile.previewBase64(
+        win => console.log("open status",win),
+        error => console.error("open failed", error),
+        readFile.data
+    );
+}
+
+// Working with pdf / image ...
+previewPath(file) {
+	if (isPlatform('hybrid')) {
+      // Get the URI and use our Cordova plugin for preview
+      const readFile = await Filesystem.getUri({
+        directory: Directory.Data,
+        path: this.currentFolder + '/' + file.name
+      });
+
+      (<any>window).PreviewAnyFile.previewPath(
+        win => console.log("open status",win),
+        error => console.error("open failed", error),
+        readFile.uri
+    );
+}
+````
+
+#### Issue
+
+Be carreful, the following ionic-native syntax may cause an issue
+
+````typescript
+this.previewAnyFile.previewBase64(file_uri.uri)
+.then((res: any) => console.log(res))
+.catch((error: any) => console.error(error));
+````
+
+````
+Error: The old format of this exec call has been removed (deprecated since 2.1). Change to: cordova.exec(null, null, ‘Service’, ‘action’, [ arg1, arg2 ]);
+````
+[Back to top](#file)
