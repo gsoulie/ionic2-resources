@@ -12,6 +12,7 @@
 * [Android permissions](#android-permissions)      
 * [Photo](#photo)      
 * [Azure pipeline](#azure-pipeline)      
+* [Live reload](#live-reload)     
 
 ## Capacitor 3.0
 
@@ -876,5 +877,39 @@ steps:
 ````
 
 Then in azure, got to pipeline and create a new pipeline based on those yml files
+
+[Back to top](#capacitor)     
+
+## Live reload
+
+Using livereload with capacitor 3 (with capacitor.config.ts)
+
+### Configuration
+
+Modify your *ionic.config.json*
+
+````typescript
+{
+  "name": "myApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
+````
+
+### Usage
+
+run ````ionic capacitor run android -l --external --open```` (select your network)
+
+it will open android studio then select your device and run the app.
+
+After that, livereload is running
+
+### Notice
+
+During the run on mobile, *android.manifest.xml* file is automatically modified, so be aware to not commit it on your git when the app is running.
+After stopping the app, the manifest file will be automatically reverted.
+
 
 [Back to top](#capacitor)     
