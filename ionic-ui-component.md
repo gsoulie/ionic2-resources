@@ -3367,4 +3367,129 @@ ion-checkbox {
         </ion-popover>
       </ion-item>
 ````
+	
+### Using standard html input to manage time value
+[Back to top](#ui-components)  
+	
+*component.page.html*
+	
+````html
+<ion-item [disabled]="!currentDatetime" id="fieldId">
+  <ion-label>{{ title }}</ion-label>
+  <ion-input
+  value="{{ currentDatetime | date: 'dd/MM/YYYY HH:mm' }}"
+  class="ion-text-end"
+  ></ion-input>
+</ion-item>
+<ion-modal trigger="fieldId">
+  <ng-template>
+    <ion-content>
+      <ion-row>
+        <div class="datepicker-content">
+          <ion-datetime
+            #dateTime
+            presentation="date"
+            size="cover"
+            [value]="currentDatetime"
+            (ionChange)="dateChanged(dateTime.value)"
+            (ionCancel)="showPicker = false;">
+          </ion-datetime>
+          <ion-item class="time-item">
+            <ion-label>Heure</ion-label>
+            <input class="timeField" type="time" [value]="currentDatetime | date: 'HH:mm'" (change)="timeChange($event)">
+          </ion-item>
+          <ion-buttons class="button-toolbar-grid" slot="buttons">
+            <ion-button class="btn-standard btn-clear" (click)="cancelStartDate()">Annuler</ion-button>
+            <ion-button class="btn-standard btn-plain" (click)="selectStartDate()">Valider</ion-button>
+          </ion-buttons>
+        </div>
+      </ion-row>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+````
+
+*component.page.scss*
+	
+````css
+.time-item {
+  --width: 100% !important;
+  width: 100% !important;
+}
+.timeField {
+  background-color: white;
+  color: var(--ion-color-primary);
+  border: none;
+  text-align: right;
+}
+.timeField:focus {
+  outline: none;
+}
+````
+
+*component.page.ts*
+	
+````typescript
+import { IonDatetime } from '@ionic/angular';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import * as dayjs from 'dayjs';
+
+@Component({
+  selector: 'app-datetime-field',
+  templateUrl: './datetime-field.component.html',
+  styleUrls: ['./datetime-field.component.scss'],
+})
+export class DatetimeFieldComponent implements OnInit {
+
+  @Input() title;
+  @Input() currentDatetime;
+  @Output() selectHour = new EventEmitter();
+  @ViewChild(IonDatetime) dateTime: IonDatetime;
+
+  showPicker = false;
+  selectedDate;
+  time;
+
+  constructor(private tool: ToolService) {}
+
+  ngOnInit() {
+    if (this.currentDatetime !== null && this.currentDatetime !== '') {
+      this.selectedDate = dayjs(this.currentDatetime);
+      this.currentDatetime = dayjs(this.selectedDate).format('YYYY-MM-DDTHH:mm');
+      this.time = dayjs(this.currentDatetime).format('HH:mm');
+    }
+  }
+
+  dateChanged(value) {
+    this.selectedDate = dayjs(value);
+    if (this.time !== undefined) {
+      this.currentDatetime = this.selectedDate.format('YYYY-MM-DD') + 'T' + this.time;
+    } else {
+      this.currentDatetime = this.selectedDate.format('YYYY-MM-DDTHH:mm');
+    }
+
+    this.showPicker = false;
+  }
+
+  timeChange(ev) {
+    const { value } = ev.target;
+    this.time = value;
+    this.selectedDate = dayjs(this.currentDatetime);
+    let d: dayjs.Dayjs = this.selectedDate;
+    d = d.set('h', value.split(':')[0]);
+    d = d.set('m', value.split(':')[1]);
+    this.currentDatetime = d.format('YYYY-MM-DDTHH:mm');
+  }
+
+  selectStartDate() {
+    this.selectHour.emit(this.currentDatetime);
+    this.dateTime.confirm(true);
+  }
+  cancelStartDate() {
+    this.dateTime.reset();
+    this.dateTime.confirm(true);
+  }
+}
+````
+	
 [Back to top](#ui-components)  
