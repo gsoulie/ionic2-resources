@@ -159,6 +159,62 @@ At this point, you must have pink rectangles on the top-left, top-right, bottom-
 
 The final step consists in delete all of your old splashscreens *.png* files from each directories to keep only *splash.9* files. After that *build > clean project* and you can run on your device
 
+### French version
+
+Création d'un splash screen 9-patch
+
+1 - supprimer tous les répertoires landscape
+
+Aller dans le répertoire ````app > src > main > res > drawable```` et supprimer tous les répertoires ````drawable-land-xxxx```` qui ne seront plus utiles.
+
+Ensuite renommer tous les répertoires ````drawable-port-xxxx```` en ````drawable-hdpi, drawable-xhdpi, ...````
+
+2 - Créer les splash screen
+
+Pour chaque répertoire *drawable-xxxx* crééer un splash screen ayant la même résolution que le splash screen par défaut
+
+3 - Création des fichiers 9-patch
+
+Depuis Android Studio, se positionner sur ````app > src > main > res > drawable```` et dans chaque répertoire, pour chaque fichier *splash.png* faire un *clic droit > create 9-patch*.
+
+**Attention :** Ne surtout pas renommer les fichier 9 patchs
+
+4 - Définir les zones extensibles
+
+Ouvrir chaque fichier 9-patch (1 à la fois) pour définir les zones extensibles. Sélectionner l'onglet *9-patch* et cocher la case **Show patches**. Ceci aura pour effet d'afficher votre splash tout rose.
+Cela signifie que pour l'instant, toute la zone est extensible.
+Le but va être de déplacer les limites horizontales et verticales de manière à obtenir le logo sur fond blanc (non extensible), des zones vertes en milieu-haut, gauche-milieu, droite-milieu et bas-milieu,
+des zones roses (extensibles) dans les 4 coins.
+
+**TRES IMPORTANT** : à la fin, on doit aussi avoir des lignes noires (1px) sur le coin haut-gauche, haut-droit et bas-gauche (ci-dessous matérialisées par les **étoiles**)
+
+R : Rose
+V : Vert
+L : Logo
+
+````
+*******------********
+*     |	     |      |
+*  R  |	 V   |	R   |
+*     |	     |	    |
+*-----|------|------|
+|     |      |      |
+|  V  |	 L   |	V   |
+|     |	     |	    |
+|     |	     |	    |
+*-------------------|
+*     |      |      |
+*  R  |	 V   |	R   |
+*     |	     |	    |
+*--------------------
+````
+
+**Cas des images trop grandes pour être affichées dans l'éditeur** : Si l'image est trop grande pour être affichée dans l'éditeur, l'astuce consiste à zoomer au maximum (800%) et de se positionner
+dans un des coins de l'image pour pouvoir ajouter une nouvelle zone flexible
+
+5 - Supprimer les fichiers *splash.png* de chaque répertoire pour ne garder que les 9-patch
+
+
 ## Storage and SQLite
 [Back to top](#capacitor)     
 
