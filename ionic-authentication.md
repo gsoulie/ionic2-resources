@@ -52,6 +52,10 @@ Add the following intent-filter to make app redirection works
     <category android:name="android.intent.category.BROWSABLE" />
     <data android:scheme="@string/custom_url_scheme" />
 </intent-filter>
+<intent-filter>
+    <action android:name="android.intent.action.MAIN" />
+    <category android:name="android.intent.category.LAUNCHER" />
+</intent-filter>
 ````
 
 Then create the following routes on your server (in redirect Uris and Cors sections) : 
