@@ -41,6 +41,19 @@ auth_config: {
 }
 ````
 
+*Android.manifest.xml*
+
+Add the following intent-filter to make app redirection works
+
+````html
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="@string/custom_url_scheme" />
+</intent-filter>
+````
+
 Then create the following routes on your server (in redirect Uris and Cors sections) : 
 
 ````
