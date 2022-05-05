@@ -978,19 +978,22 @@ plugin source : https://github.com/recognizegroup/capacitor-plugin-msauth
 
 https://www.npmjs.com/package/@recognizebv/capacitor-plugin-msauth     
 
-````npm i @recognizebv/capacitor-plugin-msauth````
+````
+npm i @recognizebv/capacitor-plugin-msauth
+npx cap sync
+````
 
 [Back to top](#capacitor) 
 
 ### Azure portal configuration
 
-1 - Go to https://portal.azure.com
-2 - Go to Azure Active Directory (use the searchbar if needed)
-3 - Go to App registrations > New registrations
-4 - Fill the app name and select an account type
-5 - Add an redirection URI of type SPA (for Angular / ionic web) with the value http://localhost:4200 or http://localhost:8100 (ionic)
-5b - For a mobile app, you need to add a new mobile app and fill your appid (com.xxx.xxx) and your hash code generated from your keystore (you will need to install keytool and openssl)
-6 - once it is finished, you can get the following infos (tenantId, clientId, redirect URI...)
+1 - Go to https://portal.azure.com      
+2 - Go to Azure Active Directory (use the searchbar if needed)      
+3 - Go to App registrations > New registrations      
+4 - Fill the app name and select an account type      
+5 - Add an redirection URI of type SPA (for Angular / ionic web) with the value http://localhost:4200 or http://localhost:8100 (ionic)      
+5b - For a mobile app, you need to add a new mobile app and fill your appid (com.xxx.xxx) and your hash code generated from your keystore (you will need to install keytool and openssl)      
+6 - once it is finished, you can get the following infos (tenantId, clientId, redirect URI...)      
 
 *openssl* : https://www.ssl.com/fr/comment/installer-openssl-sur-windows-avec-cygwin/ next you **must** generate your hash from the cygwin console
 
