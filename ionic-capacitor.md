@@ -13,6 +13,7 @@
 * [Photo](#photo)      
 * [Azure pipeline](#azure-pipeline)      
 * [Live reload](#live-reload)     
+* [Azure msal authentication with Capacitor MS auth](#azure-msal-authentication-with-capacitor-ms-auth)       
 
 ## Capacitor 3.0
 
@@ -968,5 +969,262 @@ After that, livereload is running
 During the run on mobile, *android.manifest.xml* file is automatically modified, so be aware to not commit it on your git when the app is running.
 After stopping the app, the manifest file will be automatically reverted.
 
+## Azure msal authentication with Capacitor MS auth
+[Back to top](#capacitor)    
+
+plugin source : https://github.com/recognizegroup/capacitor-plugin-msauth        
+
+### installation 
+
+https://www.npmjs.com/package/@recognizebv/capacitor-plugin-msauth     
+
+````npm i @recognizebv/capacitor-plugin-msauth````
+
+[Back to top](#capacitor) 
+
+### Azure portal configuration
+
+1 - Go to https://portal.azure.com
+2 - Go to Azure Active Directory (use the searchbar if needed)
+3 - Go to App registrations > New registrations
+4 - Fill the app name and select an account type
+5 - Add an redirection URI of type SPA (for Angular / ionic web) with the value http://localhost:4200 or http://localhost:8100 (ionic)
+5b - For a mobile app, you need to add a new mobile app and fill your appid (com.xxx.xxx) and your hash code generated from your keystore (you will need to install keytool and openssl)
+6 - once it is finished, you can get the following infos (tenantId, clientId, redirect URI...)
+
+*openssl* : https://www.ssl.com/fr/comment/installer-openssl-sur-windows-avec-cygwin/ next you **must** generate your hash from the cygwin console
+
+[Back to top](#capacitor) 
+
+### Ionic Android app configuration
+
+**Android**
+
+*android/build.gradle*
+
+````typescript
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.microsoft.identity.client:msal:0.3.+'	// <--- Add this
+    }
+}
+
+// <--- Add : start 
+allprojects {
+  repositories {
+    google()
+    jcenter()
+    maven {
+      url 'https://pkgs.dev.azure.com/MicrosoftDeviceSDK/DuoSDK-Public/_packaging/Duo-SDK-Feed/maven/v1'
+    }
+  }
+}
+// ---> Add : end
+
+apply from: "variables.gradle"
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+````
+[Back to top](#capacitor) 
+
+Add the new *BrowserTabActivity*
+
+*AndroidManifest.xml*
+
+````html
+<application
+	...
+	<!--Intent filter to capture System Browser or Authenticator calling back to our app after sign-in-->
+	<activity
+	  android:name="com.microsoft.identity.client.BrowserTabActivity"
+	  android:exported="true">
+	  <intent-filter>
+		<action android:name="android.intent.action.VIEW" />
+		<category android:name="android.intent.category.DEFAULT" />
+		<category android:name="android.intent.category.BROWSABLE" />
+		<data
+		  android:host="com.xxx.xxx"
+		  android:path="/<your_sha1_hash>="
+		  android:scheme="msauth"
+		/>
+		<!-- hash example 
+		android:path="/sqlmdkqsf84fzerzf454azz8="
+		-->
+	  </intent-filter>
+	</activity>
+</application>
+````
+[Back to top](#capacitor)     
+
+### Usage (ionic android app)
+
+*authentication.service.ts*
+
+````typescript
+import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { MsAuthPlugin  } from '@recognizebv/capacitor-plugin-msauth';
+import jwt_decode from "jwt-decode";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthenticationService {
+
+  private accessToken$ = new BehaviorSubject<string>('');
+
+  constructor() { }
+
+  getAccessToken() {
+    return localStorage.getItem('accessToken');
+  }
+
+  async login() {
+    const result = await MsAuthPlugin.login({
+      clientId: <your_client_id_from_azure_portal>,
+      tenant: <your_tenant_from_azure_portal>,
+      scopes: [<your_scopes_azure_portal>],
+      keyHash: <your_openssl_sha1_hash>,
+    });
+
+    this.accessToken$.next(result.accessToken);
+    localStorage.setItem('accessToken', result.accessToken);
+
+    return result.accessToken;
+  }
+
+  async logout() {
+    const result = await MsAuthPlugin.logout({
+     clientId: <your_client_id_from_azure_portal>,
+      tenant: <your_tenant_from_azure_portal>,
+      keyHash: <your_openssl_sha1_hash>,
+    });
+
+    this.accessToken$.next('');
+    localStorage.setItem('accessToken', '');
+
+    return '';
+  }
+
+  getTokenInfo() {
+    const token = this.getAccessToken();
+    let decoded: any = null;
+    if (token !== null) {
+      decoded = jwt_decode(token);
+    }
+    return decoded;
+  }
+}
+
+````
+[Back to top](#capacitor)     
+
+*httpInterceptor.service.ts*
+
+````typescript
+import { AuthenticationService } from './authentication/authentication.service';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HttpInterceptorService implements HttpInterceptor {
+
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router) { }
+
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let authReq = req;
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getAccessToken()}`
+    });
+    authReq = req.clone({headers});
+
+    return next.handle(authReq)
+    .pipe(
+      retry(2),
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = '';
+        if (error.error instanceof ErrorEvent) {
+          // client-side error
+          errorMessage = `>>>Error: ${error.error.message}`;
+        } else {
+          // server-side error
+          errorMessage = `>>>Error Status: ${error.status}\nMessage: ${error.message}`;
+        }
+        switch (error.status) {
+
+          case 401 :
+            this.authService.login();
+            break;
+          default:
+            break;
+        }
+        return throwError(error);
+      })
+    );
+  }
+}
+````
+[Back to top](#capacitor)     
+
+*app.module.ts*
+
+````typescript
+providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi   : true,
+    },
+````
+[Back to top](#capacitor)     
+
+*auth.guard.ts*
+
+````typescript
+import { AuthenticationService } from './../services/core/authentication/authentication.service';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate, CanActivateChild {
+  constructor(private authService: AuthenticationService,
+    private router: Router) {}
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    const isAuthenticated = this.authService.getAccessToken() !== '' && this.authService.getAccessToken() !== null;
+    if (!isAuthenticated) { this.router.navigate(['/']); }
+    return isAuthenticated;
+
+  }
+  canActivateChild(
+    childRoute: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return this.canActivate(childRoute, state);
+  }
+}
+````
 
 [Back to top](#capacitor)     
