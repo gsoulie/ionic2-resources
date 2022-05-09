@@ -940,6 +940,8 @@ Then in azure, got to pipeline and create a new pipeline based on those yml file
 
 ### Variable replacement before build process
 
+https://www.youtube.com/watch?v=_iPfzH3ENAk&ab_channel=LKGforIT         
+
 Sometimes we want to change some variables like api endpoints when publishing the app with CI/CD.
 
 Steps to follow :
