@@ -848,7 +848,7 @@ export class PhotoComponent implements OnInit {
 https://sahansera.dev/multi-stage-builds-with-azure-pipelines-ionic/      
 complete CI/CD pipeline : https://www.codewithkarma.com/2020/10/ionic-capacitor-cicd-using-new-yaml.html      
 
-Create a new *pipelines* folder at the root of your project, then create the following pipeline files :
+Create a new *pipelines* folder at the root of your project, then create the following pipeline files for a basic Android build (not signed apk) :
 
 > WARNING : be extremely careful with the syntax of yaml files !
 
