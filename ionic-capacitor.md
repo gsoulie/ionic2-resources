@@ -936,9 +936,143 @@ steps:
 
 Then in azure, got to pipeline and create a new pipeline based on those yml files
 
-[Back to top](#capacitor)     
+[Back to top](#capacitor)    
+
+### Variable replacement before build process
+
+Sometimes we want to change some variables like api endpoints when publishing the app with CI/CD.
+
+Steps to follow :
+
+**1 create a config json file in you *assets* folder**
+
+*assets/config.json*
+````typescript
+{
+	"api": {
+		"endpoint": "httl://localhost:4200/api"
+	},
+	"app": {
+		"infos": {
+			"name": "My cool app",
+			"version": "1.0"
+		}
+	}
+}
+````
+
+**2 Modify your pipeline files**
+
+This step consist in using a new tas **FileTransform@1** which gonna modify the *config.json* file by replacing all the variables you want.
+
+Add the variables you want to replace (do not forget to add a dot for each level off the json hierarchy) in the pipeline file
+
+````
+"app": {
+		"infos": {
+			"name": "My cool app", // gives => app.infos.name
+````
+
+*pipelines/azure-pipeline.yml*
+
+````typescript
+trigger:
+- develop
+- master
+
+variables:
+  vmImageName: 'windows-latest'
+  projectName: 'azurePipeline'
+  api.endpoint: http://my-prod-server/api
+  app.infos.name: my cool production app
+  app.infos.version: v1.0
+
+stages:
+  - stage: Build
+    displayName: Build Ionic - Android projects
+    jobs:
+      # Debug build
+      - job: Build_Ionic_Android_Debug
+        variables:
+          - name: buildConfiguration
+            value: Debug
+        displayName: Build Debug
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          - template: ionic-android-debug-build.yml
+
+````
+
+*ionic-android-debug-build.yml*
+
+````typescript
+steps:
+  # NEW TASK TO REPLACE VARIABLES IN CONFIG.JSON
+  - task: FileTransform@1
+    inputs:
+      folderPath: '$(Build.SourcesDirectory)'
+      targetFiles: '**/config.json'
+      fileType: json
+    displayName: 'File transformation: config.json'
+
+  # BUILD
+  - script: npm install -g @ionic/cli
+    displayName: 'Install Ionic CLI'
+
+  - task: Npm@1
+    inputs:
+      workingDir: '$(Build.SourcesDirectory)'
+      command: install
+    displayName: 'NPM Install'
+
+  - powershell: |
+      ionic info
+      npx cap -V
+      ls
+    workingDirectory: $(Build.SourcesDirectory)
+    displayName: 'Get environment infos'
+
+  - powershell: |
+      ionic build --configuration=production
+      npx cap copy android
+      npm install jetifier
+      npx jetify
+      npx cap sync
+    workingDirectory: $(Build.SourcesDirectory)
+    displayName: 'Ionic Build'
+
+  - task: Gradle@2
+    inputs:
+      workingDirectory: '$(Build.SourcesDirectory)/android'
+      gradleWrapperFile: '$(Build.SourcesDirectory)/android/gradlew.bat'
+      tasks: 'build'
+      publishJUnitResults: false
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      gradleOptions: '-Xmx3072m'
+    displayName: 'Build Gradle'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/android/app/build/outputs/apk/$(buildConfiguration)'
+      contents: "**/app-$(buildConfiguration).apk"
+      targetFolder: "$(Build.ArtifactStagingDirectory)/$(projectName)"
+    displayName: "Copy unsigned APK to staging directory"
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+      ArtifactName: "$(projectName)"
+      publishLocation: "Container"
+    displayName: "Publish artifacts"
+
+````
+
+That's all. After the pipeline is finished you can verify by downloading the apk and running it on a device
 
 ## Live reload
+[Back to top](#capacitor)    
 
 Using livereload with capacitor 3 (with capacitor.config.ts)
 
