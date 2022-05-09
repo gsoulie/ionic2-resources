@@ -944,7 +944,7 @@ Sometimes we want to change some variables like api endpoints when publishing th
 
 Steps to follow :
 
-**1 create a config json file in you *assets* folder**
+**1 create a config json file in you *assets* folder** which will be loaded with a factory and *APP_INITAILIZER*
 
 *assets/config.json*
 ````typescript
