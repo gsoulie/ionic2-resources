@@ -3606,7 +3606,7 @@ export class MoviesPage implements OnInit {
 
 *movies.component.html*
 
-````typescript
+````html
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Trending Movies</ion-title>
