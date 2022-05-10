@@ -37,6 +37,7 @@
 * [ion-title](#ion-title)    
 * [ion-checkbox](#ion-checkbox)     
 * [ion-datetime](#ion-datetime)     
+* [ion-infinite-scroll](#ion-infinite-scroll)        
 
 ## ion-button
 [Back to top](#ui-components)  
@@ -3492,4 +3493,145 @@ export class DatetimeFieldComponent implements OnInit {
 }
 ````
 	
+[Back to top](#ui-components)  
+	
+
+## ion-infinite-scroll
+
+source : https://ionicacademy.com/ionic-6-app-api-calls/      
+
+*environment.ts*
+
+````typescript
+export const environment = {
+  production: false,
+  apiKey: '', // <-- Enter your own key here!'
+  baseUrl: 'https://api.themoviedb.org/3',
+  images: 'http://image.tmdb.org/t/p',
+};
+````
+
+*movie.service.ts*
+
+````typescript
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+ 
+export interface ApiResult {
+  page: number;
+  results: any[];
+  total_pages: number;
+  total_results: number;
+}
+ 
+@Injectable({
+  providedIn: 'root',
+})
+export class MovieService {
+  constructor(private http: HttpClient) {}
+ 
+  getTopRatedMovies(page = 1): Observable<ApiResult> {
+    return this.http.get<ApiResult>(
+      `${environment.baseUrl}/movie/popular?page=${page}&api_key=${environment.apiKey}`
+    );
+  }
+ 
+  getMovieDetails(id: string): Observable<any> {
+    return this.http.get<ApiResult>(
+      `${environment.baseUrl}/movie/${id}?api_key=${environment.apiKey}`
+    );
+  }
+}
+````
+
+*movies.component.ts*
+
+````typescript
+import { Component, OnInit } from '@angular/core';
+import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
+import { MovieService } from 'src/app/services/movie.service';
+import { environment } from 'src/environments/environment';
+ 
+@Component({
+  selector: 'app-movies',
+  templateUrl: './movies.page.html',
+  styleUrls: ['./movies.page.scss'],
+})
+export class MoviesPage implements OnInit {
+  movies = [];
+  currentPage = 1;
+  imageBaseUrl = environment.images;
+ 
+  constructor(
+    private movieService: MovieService,
+    private loadingCtrl: LoadingController
+  ) {}
+ 
+  ngOnInit() {
+    this.loadMovies();
+  }
+ 
+  async loadMovies(event?: InfiniteScrollCustomEvent) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading..',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+ 
+    this.movieService.getTopRatedMovies(this.currentPage).subscribe(
+      (res) => {
+        loading.dismiss();
+        this.movies.push(...res.results);	// concat the next movies
+ 
+        event?.target.complete();	// close infinite scroll loading indicator
+        if (event) {
+          event.target.disabled = res.total_pages === this.currentPage;
+        }
+      },
+      (err) => {
+        console.log(err);
+        loading.dismiss();
+      }
+    );
+  }
+ 
+  loadMore(event: InfiniteScrollCustomEvent) {
+    this.currentPage++;
+    this.loadMovies(event);
+  }
+}
+````
+
+*movies.component.html*
+
+````typescript
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Trending Movies</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+  <ion-list>
+    <ion-item button *ngFor="let item of movies" [routerLink]="[item.id]">
+      <ion-avatar slot="start">
+        <img [src]="imageBaseUrl + '/w92' + item.poster_path" />
+      </ion-avatar>
+ 
+      <ion-label class="ion-text-wrap">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.release_date | date:'y' }}</p>
+      </ion-label>
+ 
+      <ion-badge slot="end"> {{ item.vote_average }} </ion-badge>
+    </ion-item>
+  </ion-list>
+ 
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+````
 [Back to top](#ui-components)  
