@@ -558,7 +558,7 @@ This issue occurs when you add space in your **package.json**'s **name** attribu
 Failed to validate the certificate chain, error: java.security.cert.CertPathValidatorException: Trust anchor for certification path not found.
 ````
 
-### Contourner le blocage des certificats CA non signé SSL
+### Contourner le blocage des certificats CA non signés SSL
 
 Référence : https://developer.android.com/training/articles/security-ssl.html#CommonProblems     
 Procédure : https://developer.android.com/training/articles/security-config#TrustingAdditionalCas      
