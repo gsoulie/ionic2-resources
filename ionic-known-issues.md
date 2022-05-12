@@ -23,6 +23,7 @@
 * [Updating NodeJS for window](#updating-nodejs-for-window)      
 * [Cannot read property id of undefined](#cannot-read-property-id-of-undefined)    
 * [npm ERR! code EINVALIDPACKAGENAME](#npm-err!-code-einvalidpackagename)            
+* [Android SSL certificate error](#android-ssl-certificate-error)     
  
 
 ### Clicking in list item in simulator sometimes(!) doesn’t work on device
@@ -549,3 +550,57 @@ npm ERR! Invalid package name "__ngcc_entry_points__.json": name cannot start wi
 
 This issue occurs when you add space in your **package.json**'s **name** attribute
 
+## Android SSL certificate error
+	
+````
+[ERROR:ssl_client_socket_impl.cc(999)] handshake failed; returned -1, SSL error code 1, net_error -202
+
+Failed to validate the certificate chain, error: java.security.cert.CertPathValidatorException: Trust anchor for certification path not found.
+````
+
+### Contourner le blocage des certificats CA non signé SSL
+
+Référence : https://developer.android.com/training/articles/security-ssl.html#CommonProblems     
+Procédure : https://developer.android.com/training/articles/security-config#TrustingAdditionalCas      
+
+Sous Android, l'utilisation de certificats d'api auto-signé (non signé SSL) n'est pas autorisée.
+
+Dans le cas de test en mode dev / recette il peut arriver qu'on n'utilise pas de signature SSL mais des certificats https auto-signé. Pour pouvoir autoriser les appels
+api il faut alors ajouter les certificats en question (certificats DER au format .cer) dans l'application Android.
+
+**1 - récupérer le .cer de l'autorité**
+
+**2 - paramétrer le manifest android**
+
+Ajouter l'option *networkSecurityConfig* et l'option *usesCleartextTraffic* pour autoriser les appels *http* si besoin
+````html
+<manifest xmlns:android="...">
+
+    <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="true"
+````
+
+**3 - créer le fichier network_security_config.xml**
+
+Sous *app/src/main/res/xml/network_security_config.xml*
+
+````html
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+  <base-config>
+    <trust-anchors>
+      <certificates src="@raw/<nomDuCertificatSansExtension>"/>
+      <certificates src="system"/>
+    </trust-anchors>
+  </base-config>
+</network-security-config>
+````
+
+**Attention : ne pas mettre l'extension du fichier dans le xml**
+
+**4 - copier le certificat (.cer) dans android**
+
+Copier le certificat (DER ou PEM) au format .cer dans le répertoire *app/src/main/res/raw/*
+	
+[Back to top](#known-issues)    
