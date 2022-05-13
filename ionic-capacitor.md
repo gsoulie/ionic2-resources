@@ -934,7 +934,7 @@ steps:
     displayName: "Publish artifacts"
 ````
 
-Then in azure, got to pipeline and create a new pipeline based on those yml files
+Then in azure, got to pipeline and create a new pipeline *use the classic editor* > select your branch > *Configuration as code YAML* > select your yml file > *Save & Queue*
 
 [Back to top](#capacitor)    
 
