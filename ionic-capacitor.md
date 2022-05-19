@@ -1521,11 +1521,6 @@ export class AuthService {
           responseType: 'code',
           handleResultOnNewIntent: true,
           handleResultOnActivityResult: true
-          /*appId: environment.authentication.clientId,
-          pkceEnabled: true,
-          responseType: 'code',
-          accessTokenEndpoint: `${environment.authentication.authority}/${environment.authentication.tenant}/oauth2/v2.0/token`,
-   */
         },
         ios: {
             pkceEnabled: true, // workaround for bug #111
