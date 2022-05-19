@@ -14,6 +14,7 @@
 * [Azure pipeline](#azure-pipeline)      
 * [Live reload](#live-reload)     
 * [Azure msal authentication with Capacitor MS auth](#azure-msal-authentication-with-capacitor-ms-auth)       
+* [Azure msal authentication with Capacitor OAuth 2 client plugin](#azure-msal-authentication-with-capacitor-oauth-2-client-plugin)      
 
 ## Capacitor 3.0
 
@@ -1366,4 +1367,278 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 }
 ````
 
+[Back to top](#capacitor)     
+
+## Azure msal authentication with Capacitor OAuth 2 client plugin
+
+capacitor-oauth2 : https://github.com/moberwasserlechner/capacitor-oauth2#android-1      
+capacitor secure storage : https://www.npmjs.com/package/capacitor-secure-storage-plugin      
+
+This plugin is a **generic OAuth 2 client** plugin.
+
+### installation
+
+````
+npm i @byteowls/capacitor-oauth2
+npm install capacitor-secure-storage-plugin
+npx cap sync
+````
+[Back to top](#capacitor)     
+
+### Using Azure AD authentication
+
+#### Add the following activity in your *AndroidManifest.xml*
+
+*AndroidManifest.xml*
+
+````html
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    ...>
+
+    <application
+        ...>
+
+        <activity
+            ...>
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+		  <!-- Add the following intent-filter -->
+          <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="@string/custom_url_scheme" android:host="@string/custom_host" />
+          </intent-filter>
+        </activity>
+
+      <!-- Add the following activity -->
+      <activity android:name="net.openid.appauth.RedirectUriReceiverActivity" android:exported="true">
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data android:scheme="@string/custom_url_scheme" android:host="@string/custom_host" />
+        </intent-filter>
+
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
+          <data 
+		  android:scheme="@string/azure_b2c_scheme" 
+		  android:host="@string/package_name" 
+		  android:path="@string/azure_b2c_signature_hash" />
+        </intent-filter>
+      </activity>
+       
+    </application>
+
+    <!-- Permissions -->
+	...
+</manifest>
+````
+[Back to top](#capacitor)     
+
+#### Add the following configuration in *app/src/main/res/values/string.xml*
+
+````html
+<resources>
+    <string name="app_name">your app name</string>
+    <string name="title_activity_main">your activity</string>
+    <string name="package_name">com.myapp.name</string>
+    <string name="custom_url_scheme">com.myapp.name</string>
+
+    <string name="custom_host">foo</string><!-- any value is fine -->
+    <string name="azure_b2c_scheme">msauth</string>
+    <string name="azure_b2c_signature_hash">/pedl56546efAZDd5zaz4az=</string><!-- Your hask key. The leading slash is required. Copied from Azure Portal Android Config "Signature hash" field -->
+</resources>
+````
+[Back to top](#capacitor)     
+
+#### Add the following into your android/app/build.gradle
+
+````
+apply plugin: 'com.android.application
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        ...
+        manifestPlaceholders = [appAuthRedirectScheme: 'com.myapp.name']	// <-- add this placeholder
+    }
+    buildTypes {
+        ...
+    }
+}
+repositories {
+    ...
+}
+dependencies {
+    ...
+}
+apply from: 'capacitor.build.gradle'
+
+````
+[Back to top](#capacitor)     
+
+### Usage
+
+*auth.service.ts*
+
+````typescript
+import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
+import { OAuth2AuthenticateOptions } from '@byteowls/capacitor-oauth2';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  constructor() { }
+
+  getAzureB2cOAuth2Options(): OAuth2AuthenticateOptions {
+    return {
+        appId: environment.authentication.clientId,
+        authorizationBaseUrl: `${environment.authentication.authority}/${environment.authentication.tenant}/oauth2/v2.0/authorize`,
+        scope: environment.authentication.apiName, // See Azure Portal -> API permission
+        accessTokenEndpoint: `${environment.authentication.authority}/${environment.authentication.tenant}/oauth2/v2.0/token`,
+        resourceUrl: null,
+        responseType: 'code',
+        pkceEnabled: true,
+        logsEnabled: true,
+        web: {
+            redirectUrl: environment.authentication.redirectUriWeb,
+            windowOptions: 'height=600,left=0,top=0',
+        },
+        android: {
+          redirectUrl: `${environment.authentication.redirectUriMsauth}`,
+          responseType: 'code',
+          handleResultOnNewIntent: true,
+          handleResultOnActivityResult: true
+          /*appId: environment.authentication.clientId,
+          pkceEnabled: true,
+          responseType: 'code',
+          accessTokenEndpoint: `${environment.authentication.authority}/${environment.authentication.tenant}/oauth2/v2.0/token`,
+   */
+        },
+        ios: {
+            pkceEnabled: true, // workaround for bug #111
+            redirectUrl: 'msauth.com.myapp.name://auth'
+        }
+    };
+  }
+}
+````
+
+*environment.ts*
+
+````typescript
+export const environment = {
+  authentication: {
+    clientId: 's2az5r-d1q5-s4fe8-z54r-d4d5faz5e4aee',
+    redirectUri: 'com.myapp.name://dashboard',
+    redirectUriMsauth: 'msauth://com.myapp.name/pedl56546efAZDd5zaz4az=',
+    redirectUriWeb: 'http://localhost:8100',
+    tenant: 'mycustom.onmicrosoft.com',
+    apiName: 'acces_api',
+    authority: 'https://login.microsoftonline.com'
+  },
+  production: false
+};
+````
+
+*home.page.html*
+
+````html
+<ion-button (click)="login()">login</ion-button>
+<ion-button (click)="refresh()">refresh</ion-button>
+<ion-button (click)="logout()">logout</ion-button>
+
+<h4>Access token</h4>
+<p>{{ accessToken | slice:0:150 }}</p>
+
+<h4>Refresh token</h4>
+<p>{{ refreshToken | slice:0:150 }}</p>
+````
+
+*home.page.ts*
+
+````typescript
+import {OAuth2Client} from '@byteowls/capacitor-oauth2';
+import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
+import { AuthService } from './../shared/services/core/authentication/auth.service';
+
+accessToken = '';
+refreshToken = '';
+
+constructor(
+    private documentHelper: DocumentHelperService,
+    private authService: AuthService) {}
+
+  async ngOnInit() {
+    await SecureStoragePlugin.get({key: 'my_token'})
+    .then(res => this.accessToken = res.value)
+    .catch(err => this.accessToken = '');
+  }
+
+  login() {
+    const opt = this.authService.getAzureB2cOAuth2Options();
+    OAuth2Client.authenticate(
+      opt
+    ).then(response => {
+      console.log('login response', response);
+
+      this.accessToken = response['access_token'];
+      this.refreshToken = response['refresh_token'];
+      SecureStoragePlugin.set({ key: 'my_token', value: this.accessToken });
+
+      // only if you include a resourceUrl protected user values are included in the response!
+      const oauthUserId = response['id'];
+      const name = response['name'];
+
+        // go to backend
+    }).catch(reason => {
+        console.error('OAuth rejected', reason);
+    });
+  }
+  logout() {
+    OAuth2Client.logout(
+      this.authService.getAzureB2cOAuth2Options()
+    ).then(() => {
+        // do something
+        SecureStoragePlugin.remove({ key: 'my_token' });
+        this.accessToken = '';
+    }).catch(reason => {
+        console.error('OAuth logout failed', reason);
+    });
+  }
+  refresh() {
+    if (!this.refreshToken) {
+      console.error('No refresh token found. Log in with OAuth first.');
+    }
+
+    const opt = this.authService.getAzureB2cOAuth2Options();
+    OAuth2Client.refreshToken(
+      {
+        appId: opt.appId,
+        accessTokenEndpoint: opt.accessTokenEndpoint,
+        refreshToken: this.refreshToken,
+        scope: opt.scope
+      }
+    ).then(response => {
+      this.accessToken = response['access_token'];
+      // Don't forget to store the new refresh token as well!
+      this.refreshToken = response['refresh_token'];
+      // Go to backend
+    }).catch(reason => {
+        console.error('Refreshing token failed', reason);
+    });
+  }
+````
 [Back to top](#capacitor)     
