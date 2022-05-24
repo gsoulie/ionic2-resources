@@ -2242,6 +2242,19 @@ export class SlidePage implements OnInit, AfterContentChecked {
 }
 ````
 
+### Problème de scintillement
+
+Il est possible que sur mobile apparaisse un scintillement des tuiles lors du scroll, pour corriger ce problème, ajoutez les propriétés scss suivantes :
+
+````css
+.swiper {
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+````
+
 ### Using specific modules (Navigation, Pagination, Scrollbar...)
 
 > IMPORTANT : By default Swiper Angular uses core version of Swiper (without any additional modules). If you want to use Navigation, Pagination and other modules, you have to install them first. Here is the list of additional modules imports:
