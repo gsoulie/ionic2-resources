@@ -13,6 +13,7 @@
 * [Photo](#photo)      
 * [Azure pipeline](#azure-pipeline)      
 * [Live reload](#live-reload)     
+* [Aure msal angular with capacitor for android app](#azure-msal-angular-with-capacitor-for-android-app)      
 * [Azure msal authentication with Capacitor MS auth](#azure-msal-authentication-with-capacitor-ms-auth)       
 * [Azure msal authentication with Capacitor OAuth 2 client plugin](#azure-msal-authentication-with-capacitor-oauth-2-client-plugin)      
 
@@ -1105,6 +1106,11 @@ After that, livereload is running
 
 During the run on mobile, *android.manifest.xml* file is automatically modified, so be aware to not commit it on your git when the app is running.
 After stopping the app, the manifest file will be automatically reverted.
+
+## Azure msal angular with capacitor for android app
+[Back to top](#capacitor)    
+
+Using msal v2 for angular with capacitor for Android app sample repos : https://github.com/gsoulie/ionic-angular-snippets/tree/master/msal-ionic-capacitor       
 
 ## Azure msal authentication with Capacitor MS auth
 [Back to top](#capacitor)    
