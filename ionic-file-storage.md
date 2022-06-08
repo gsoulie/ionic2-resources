@@ -334,6 +334,51 @@ async readFileContent(file: File): Promise<string> {
 }
 ````
 
+### Other styling
+
+````html
+<input type="file" name="file" id="file" class="inputfile" (change)="onChange($event)">
+<label for="file" class="mat-elevation-z4">
+   <mat-icon>upload</mat-icon>&nbsp;
+   Choose a file
+</label>
+````
+
+````css
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+  font-size: 1.25em;
+  font-weight: 500;
+  color: white;
+  background-color: #333;
+  display: inline-block;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 150px;
+  padding: 10px;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  //background-color: red;
+  background-color: rgb(194, 24, 91);
+}
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+````
+
 ## Open file with native system viewer
 [Back to top](#file)
 
