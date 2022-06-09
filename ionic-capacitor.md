@@ -1075,6 +1075,12 @@ steps:
 
 That's all. After the pipeline is finished you can verify by downloading the apk and running it on a device
 
+
+### Incrementing Android versionCode and versionName
+
+See : https://stackoverflow.com/questions/62315203/how-do-i-automatically-increment-the-build-id-and-version-number-of-an-android-a      
+
+
 ## Live reload
 [Back to top](#capacitor)    
 
