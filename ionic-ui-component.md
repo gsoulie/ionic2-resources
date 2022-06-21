@@ -2911,6 +2911,73 @@ In order to avoid toast stacking, you could store your Toast object in a variabl
  }
 ````
 
+### Custom Service
+
+````typescript
+async showToast({ header = '',
+  message, icon = '',
+  position = 'bottom',
+  duration = 2000,
+  warning = false}: {
+    header?: string;
+    message: string;
+    icon?: string;
+    position?: 'bottom' | 'middle' | 'top';
+    duration?: number;
+    warning?: boolean;
+  }): Promise<void> {
+    const toast = await this.toastCtrl.create({
+      header,
+      message,
+      icon: !warning ? 'information-circle-outline' : 'alert-circle-outline',
+      position,
+      duration,
+      cssClass: warning ? 'toast-warning' : 'toast-info',
+      buttons: [
+        {
+          text: 'Fermer',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {}
+        }
+      ]
+    });
+
+    await toast.present();
+  }
+
+// Utilisation
+this.messageService.showToast({message : messageList.alert.fileDownloadOffline.message,
+      warning: false, duration: 3000});
+````
+
+### Styling
+
+````css
+.toast-info {
+  --background: #CCE6E8;
+  --color: #00848B;
+}
+
+// style du bouton
+.toast-info::part(button) {
+  --button-color: #00848B !important;
+  --color: #00848B !important;
+  color: #00848B !important;
+}
+
+.toast-warning {
+  --background: #FBDBDA;
+  --color: #E94B48;
+}
+// style du bouton
+.toast-warning::part(button) {
+  --button-color: #E94B48 !important;
+  --color: #E94B48 !important;
+  color: #E94B48 !important;
+}
+````
+
 ## ion-sliding-item swipe to delete
 [Back to top](#ui-components)  
 
