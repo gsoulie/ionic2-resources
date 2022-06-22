@@ -8,6 +8,7 @@
 * [Android debugging with logcat](#android-debugging-with-logcat)    
 * [Using multiple version of Node with nvm](#using-multiple-version-of-node-with-nvm)     
 * [Switching to ESLint](#switching-to-eslint)        
+* [Google and Apple account creation](#google-and-apple-account-creation)       
 
 ## Update environment
 
@@ -119,3 +120,11 @@ ng g @angular-eslint/schematics:convert-tslint-to-eslint {{YOUR_PROJECT_NAME_GOE
 rm tslint.json
 npm uninstall tslint
 ````
+
+## Google and Apple account creation
+
+création compte google : https://fr.goodbarber.com/blog/comment-ouvrir-un-compte-developer-google-play/
+
+création compte apple : https://fr.goodbarber.com/blog/comment-publier-votre-application-sur-l-app-store-les-etapes-a914/
+
+différence entre compte apple developer et compte apple entreprise : https://accella.net/knowledgebase/difference-between-apple-developer-and-enterprise-accounts/
