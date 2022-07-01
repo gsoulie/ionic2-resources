@@ -699,10 +699,72 @@ https://ionicframework.com/docs/angular/your-first-app/2-taking-photos
 
 ````
 npm install @capacitor/camera
+npx cap sync
 npm install @ionic/pwa-elements   // for PWA mode
 ````
 
 > Notice : for mobile usage we need to manage android and ios permissions https://capacitorjs.com/docs/apis/camera?_gl=1*1kply45*_ga*MTY0MjE2NzMwMy4xNjA0NDgxMjA5*_ga_REH9TJF6KF*MTYzMDU4NzY5MC4xMzAuMS4xNjMwNTg3NzExLjA.
+
+### Synthèse
+
+
+
+> IMPORTANT : Ajouter les permissions requises pour Android (manifest) et iOs (plist)
+
+
+*main.ts (SI UTILISATION EN MODE ¨PWA)*
+````typescript
+
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch(err => console.log(err));
+
+// Call the element loader after the platform has been bootstrapped
+defineCustomElements(window);
+````
+
+### Utilisation
+
+````typescript
+selectedImage: any;
+
+checkPlateformForWeb(): bool {
+	return Capacitor.getPlatform() === 'web' || Capacitor.getPlatform() === 'ios';
+}
+
+async getPicture() {
+	const image = await Camera.getPhoto({
+		quality: 70,
+		source: CameraSource.Prompt,
+		width: 600,
+		resultType: this.checkPlateformForWeb() ? CameraResultType.DataUrl : CameraResultType.Uri
+	});
+	console.log('image', image);
+	this.selectedImage = image;
+	if (this.checkPlateformForWeb()) this.selectedImage.webPath = image.dataUrl;
+}
+
+async share() {
+	await Share.share({
+		title: 'Share picture with whatsapp',
+		text: 'Shareing image',
+		url: this.selectedImage.path,
+		dialogTitle: 'Share with Whatsapp'
+	});
+}
+````
+
+
+````html
+<ion-button (click)="getPicture()">Take / Get photo</ion-button>
+<img [src]="selectedImage?.webPath"/>
+````
 
 ### PWA mode 
 
