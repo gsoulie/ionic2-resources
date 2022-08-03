@@ -76,7 +76,7 @@ steps:
     displayName: 'Get environment infos'
 
   - powershell: |
-      ionic build --configuration=production
+      ionic build --configuration=production # matching with needed ionic environment
       npx cap copy android
       npx cap sync
       cd android
