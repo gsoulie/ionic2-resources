@@ -55,7 +55,12 @@ Capacitor uses the WKWebView
 
 **add platforms**
 
-```npx cap add ios / npx cap add android```
+```
+npm install @capacitor/ios
+npm install @capacitor/android
+npx cap add ios
+npx cap add android
+```
 
 **copy code**
 Once web code is built (or if you make changes in your web-based code), it needs to be copied to each native project
