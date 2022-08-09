@@ -932,3 +932,33 @@ After that, livereload is running
 
 During the run on mobile, *android.manifest.xml* file is automatically modified, so be aware to not commit it on your git when the app is running.
 After stopping the app, the manifest file will be automatically reverted.
+
+### Live reload with Angular / Capacitor app
+
+Get your ip address by vscode terminal :
+
+````ipconfig getifaddr en0````
+
+Change your capacitor config like below :
+
+*capacitor.config.ts*
+
+````ts
+import { CapacitorConfig } from '@capacitor/cli';
+
+const config: CapacitorConfig = {
+  appId: 'com.me.myApp',
+  appName: 'myCoolApp',
+  webDir: 'www',
+  bundledWebRuntime: false,
+  server: {	// add this config
+	url: 'http://<your_ip_address>:4200',
+	cleartext: true,	// for android
+  }
+};
+export default config;
+````
+
+Run classis serve with ````ng serve -o --host 0.0.0.0````
+
+Or run ````npx cap sync```` and run your application on a real device / emulator to see live-reload in action
