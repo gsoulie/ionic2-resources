@@ -959,6 +959,6 @@ const config: CapacitorConfig = {
 export default config;
 ````
 
-Run classis serve with ````ng serve -o --host 0.0.0.0````
+Run classic serve with ````ng serve -o --host 0.0.0.0````
 
 Or run ````npx cap sync```` and run your application on a real device / emulator to see live-reload in action
