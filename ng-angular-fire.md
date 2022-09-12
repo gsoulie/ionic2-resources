@@ -392,7 +392,7 @@ export class AuthGuard implements CanActivate {
   }
 ````
 
-### Exemple service authentification
+### Exemple service authentification AngularFire
 
 *auth.service.ts*
 
