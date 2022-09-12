@@ -204,11 +204,195 @@ export class DataService {
     this.games$ = this.dataService.fetchGameByListType(this.listType);
   }
 ````
-
-## Authentification
 [Back to top](#angularfire-update-2021)  
 
-Exemple service authentification
+## Authentification
+
+### Exemple avec url simple et localStorage
+
+*auth.service.ts*
+````typescript
+
+export interface AuthResponseData {
+  kind?: string;
+  idToken: string;
+  displayName?: string;
+  email: string;
+  refreshToken: string;
+  expiresIn: string;
+  localId: string;
+  registered: boolean;
+}
+
+const STORAGE_KEY_USER = 'UserData';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+
+  signinEndpoint = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
+  user = new BehaviorSubject<User>(null);
+  tokenExpirationTimer: any; // permet de gérer l'auto-logout
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  autoLogin() {
+    const userData: {
+      email: string,
+      id: string,
+      _token: string,
+      _tokenExpirationDate: string
+    } = JSON.parse(localStorage.getItem(STORAGE_KEY_USER));
+
+    if (!userData) { return; }
+
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+      const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+      this.autoLogout(expirationDuration);
+    }
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
+  login(email, password): Observable<AuthResponseData | any> {
+    return this.http.post<AuthResponseData>(this.signinEndpoint + environment.firebaseConfig.apiKey, {
+      email,
+      password,
+      returnSecureToken: true
+    })
+      .pipe(
+        take(1),  // permet de se désabonner dès la réception de la réponse
+        catchError(this.handleError),
+        tap((res: AuthResponseData) => {
+          this.handleAuthentication(
+            res.email,
+            res.localId,
+            res.idToken,
+            +res.expiresIn)
+        }
+        )
+    );
+  }
+
+  logout() {
+    this.user.next(null);
+    this.router.navigate(['/login']);
+    localStorage.removeItem(STORAGE_KEY_USER);
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer)
+    }
+    this.tokenExpirationTimer = null;
+  }
+
+  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000)
+    const loggedUser = new User(
+      email,
+      userId,
+      token,
+      expirationDate
+    );
+
+    this.user.next(loggedUser);
+    this.autoLogout(expiresIn * 1000);
+    localStorage.setItem(STORAGE_KEY_USER, JSON.stringify(loggedUser));
+  }
+
+  private handleError(e: HttpErrorResponse) {
+    if (!e.error || !e.error.error) {
+      return throwError(() => new Error('Error'));
+    }
+    switch (e.error.error.message) {
+      case 'EMAIL_NOT_FOUND':
+        return throwError(() => new Error('User email not found !'));
+      case 'INVALID_PASSWORD':
+        return throwError(() => new Error('User password is invalid !'));
+      case 'USER_DISABLED':
+        return throwError(() => new Error('User account is disabled !'));
+      default:
+        return throwError(() => new Error('Unknown Error !'));
+    }
+  }
+}
+````
+
+*user.model.ts*
+````typescript
+export class User {
+  constructor(
+    public email: string,
+    public id: string,
+    private _token: string,
+    private _tokenExpirationDate: Date
+  ) { }
+
+  /**
+   * Retourner le token s'il existe et qu'il n'est pas expiré
+   */
+  get token(): string {
+    if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
+      return null;
+    }
+    return this._token;
+  }
+  get tokenExpirationDate(): Date { return this._tokenExpirationDate; }
+}
+````
+
+*app.component.ts*
+````typescript
+export class AppComponent implements OnInit {
+  username = '';
+  user$: BehaviorSubject<User>;
+
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void {
+    this.user$ = this.authService.user;
+    this.authService.autoLogin();
+  }
+
+  logout() { this.authService.logout(); }
+}
+````
+
+*auth.guard.ts*
+````typescript
+export class AuthGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) { }
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    return this.authService.user
+      .pipe(
+        take(1),
+        map(user => {
+          const isAuth = !!user;
+          if (isAuth) {
+            return true;
+          }
+          return this.router.createUrlTree(['/login']);
+        })
+      );
+  }
+````
+
+### Exemple service authentification
 
 *auth.service.ts*
 
