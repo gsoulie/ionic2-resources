@@ -232,7 +232,7 @@ MAKE THE GOOD CHOICE : https://ionicframework.com/blog/choosing-a-data-storage-s
 
 En mode web, *localStorage* => peu de données en asynchrone avec *indexedDB* suffit
 
-*capacitor storage* : peut être gorumand en perf. Ne peut stocker QUE des chaînes. Pour stocker des objets il faut donc les stringifier avant et les parser en sortie = perte de performance
+*capacitor storage* : peut être gourmand en perf. Ne peut stocker QUE des chaînes. Pour stocker des objets il faut donc les stringifier avant et les parser en sortie = perte de performance
 
 *sqlite* : seulement disponible pour les app natives avec capacitor. Permet le requêtage complexe. Certains plugins permettent également d'importer un dump JSON et de peupler la bdd à l'initialisation
 
