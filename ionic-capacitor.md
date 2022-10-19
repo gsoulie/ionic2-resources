@@ -153,11 +153,11 @@ Now, you have a 9-patch image for each resolution. Always from Android Studio, o
 
 - Finally, click and drag to the bottom from the left grey background to create a new stretch zone. Adjust it to touch the bottom of your logo until the bottom of the image.
 
-> IMPORTANT : You may use the zoom feature to get more easily to click and drag from the grey background.
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : You may use the zoom feature to get more easily to click and drag from the grey background.
 
 At this point, you must have pink rectangles on the top-left, top-right, bottom-left and bottom-right of your image, green rectangles on the top-center, left-center, right-center and bottom-center of your logo.
 
-> IMPORTANT : You must have black pixel lines only on top and left sides (top-left, top-right, bottom-left, bottom-right corners) and nowhere else ! You must not have black pixels on bottom and right edges
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : You must have black pixel lines only on top and left sides (top-left, top-right, bottom-left, bottom-right corners) and nowhere else ! You must not have black pixels on bottom and right edges
 
 #### 4 - clean repository and build
 
@@ -181,7 +181,7 @@ Pour chaque répertoire *drawable-xxxx* crééer un splash screen ayant la même
 
 Depuis Android Studio, se positionner sur ````app > src > main > res > drawable```` et dans chaque répertoire, pour chaque fichier *splash.png* faire un *clic droit > create 9-patch*.
 
-**Attention :** Ne surtout pas renommer les fichier 9 patchs
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> Ne surtout pas renommer les fichier 9 patchs
 
 4 - Définir les zones extensibles
 
@@ -190,7 +190,7 @@ Cela signifie que pour l'instant, toute la zone est extensible.
 Le but va être de déplacer les limites horizontales et verticales de manière à obtenir le logo sur fond blanc (non extensible), des zones vertes en milieu-haut, gauche-milieu, droite-milieu et bas-milieu,
 des zones roses (extensibles) dans les 4 coins.
 
-**TRES IMPORTANT** : à la fin, on doit aussi avoir des lignes noires (1px) sur le coin haut-gauche, haut-droit et bas-gauche (ci-dessous matérialisées par les **étoiles**)
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : à la fin, on doit aussi avoir des lignes noires (1px) sur le coin haut-gauche, haut-droit et bas-gauche (ci-dessous matérialisées par les **étoiles**)
 
 R : Rose
 V : Vert
@@ -710,10 +710,10 @@ npm install @ionic/pwa-elements   // for PWA mode
 
 
 
-> IMPORTANT : Ajouter les permissions requises pour Android (manifest) et iOs (plist)
+<img src="https://img.shields.io/badge/Important-DD0031.svg?logo=LOGO"> : Ajouter les permissions requises pour Android (manifest) et iOs (plist)
 
 
-*main.ts (SI UTILISATION EN MODE ¨PWA)*
+*main.ts (SI UTILISATION EN MODE **PWA**)*
 ````typescript
 
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
