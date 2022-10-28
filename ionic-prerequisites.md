@@ -31,6 +31,7 @@ sudo n stable
 ### ionic
 
 ````
+npm install @ionic/angular@6
 sudo npm i -g @ionic/cli
 ````
 
