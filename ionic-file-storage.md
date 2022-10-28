@@ -8,6 +8,7 @@
 * [Loading json file](#loading-json-file)    
 * [Upload file with file explorer](#upload-file-with-file-explorer)     
 * [Open file with native system viewer](#open-file-with-native-system-viewer)     
+* [File transfer](#file-transfer)     
 
 ## Capacitor filesystem
 [Back to top](#file)  
@@ -543,3 +544,10 @@ this.previewAnyFile.previewBase64(file_uri.uri)
 Error: The old format of this exec call has been removed (deprecated since 2.1). Change to: cordova.exec(null, null, ‘Service’, ‘action’, [ arg1, arg2 ]);
 ````
 [Back to top](#file)
+
+## File transfer
+
+https://devdactic.com/capacitor-file-explorer-ionic
+
+
+[Back to top](#file)    
