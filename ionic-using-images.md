@@ -113,6 +113,20 @@ With this technique you do not need to remove all *fill* and *stroke* attribute 
 }
 ````
 
+To become more generic you can use the syntax below 
+
+````html
+<div class="colored-img"
+        [style.-webkit-mask]="'url(\'/assets/images/icons/icon_tv.svg\') no-repeat center / contain'"
+        [style.mask]="'url(\'/assets/images/icons/icon_tv.svg\') no-repeat center / contain'"></div>
+````
+
+````css
+.colored-img {
+  background-color: orange;
+}
+````
+
 ### Customize SVG with ion-icon / mat-icon
 
 In order to modify the fill or stroke color of your svg, you need to modify your svg file by removing all *fill* and *stroke* attributes which have a value
