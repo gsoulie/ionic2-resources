@@ -14,7 +14,7 @@ To use image in your app, you can store them under ```src/assets/imgs/*.png```
 
 *View file*
 
-```xml
+```html
 <img class="thb" src="{{item.image}}" slot="end"/>
 ```
 
@@ -37,12 +37,12 @@ let item = {name:"my item", image:"./assets/imgs/my_image.png"}
 ## Background image
 
 *View file*
-```
+```html
 <div class="div-img"></div>
 ```
 
 *Style file*
-```
+```css
 background-image: url('/assets/imgs/picto_sr.png');
 background-repeat: no-repeat;
 background-position: center;
@@ -57,7 +57,7 @@ To use SVG image you must specify **./assets/imgs/xxxxxx.svg** instead of **../a
 
 To start put the svg file which containing all the svg icons in your *assets/imgs* folder, then you need to retrieve each icon separately from your svg file. To do this, you can use an online svg generator like [http://www.spritecow.com/] wich generate you the css code like
 
-```
+```css
 .sprite {
 	background: url('imgs/mysvgpicture.sprite--single.svg') no-repeat -42px -10px;
 	width: 13px;
@@ -67,7 +67,7 @@ To start put the svg file which containing all the svg icons in your *assets/img
 
 Then add it to your code (don't forget to adjust the real path for ionic)
 
-```
+```css
 .icon-share {
      background: url('../assets/imgs/mysvgpicture.sprite--single.svg') no-repeat -8px -8px;
      width: 17px;
@@ -83,7 +83,7 @@ Then add it to your code (don't forget to adjust the real path for ionic)
 
 *View file*
 
-```
+```html
 <ion-content>
   <ion-icon class="icon-share"></ion-icon>
   <ion-icon class="icon-close"></ion-icon>
@@ -96,7 +96,7 @@ In order to modify the fill or stroke color of your svg, you need to modify your
 
 *example of svg file*
 
-````
+````html
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16">
   <g fill="#88AACC" fill-rule="evenodd" stroke-linecap="round" stroke="#555555" stroke-linejoin="round" stroke-width="2">
      ...
@@ -106,7 +106,7 @@ In order to modify the fill or stroke color of your svg, you need to modify your
 
 *svg file modified by removing fill ans stroke attributes*
 
-````
+````html
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16">
   <g fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
      ...
@@ -118,7 +118,7 @@ You are now able to control your svg stroke and fill attributes by adding css
 
 *css file*
 
-````
+````html
 <ion-icon class="stroked" src="./assets/imgs/my-picto.svg"></ion-icon>
 <ion-icon class="filled" src="./assets/imgs/my-picto.svg"></ion-icon>
 
@@ -134,7 +134,7 @@ You are now able to control your svg stroke and fill attributes by adding css
 
 #### Customizing ion-icon on ion-tab
 
-````
+````html
 <ion-tab-button tab="search" class="stroke-icon" (click)="handleTabSelect('search', $event)">
       <ion-icon src="./assets/imgs/pictos/picto_menu_search.svg"></ion-icon>
       <ion-label>Search</ion-label>
@@ -143,8 +143,7 @@ You are now able to control your svg stroke and fill attributes by adding css
 
 *style file*
 
-````
-
+````css
 .stroke-icon:active {
     ion-icon {
         stroke: var(--ion-color-primary) !important;
@@ -188,7 +187,7 @@ $ sprity ./output-directory/ ./input-directory/*.png
 
 *style file*
 
-```
+```css
     .blurred{
         -webkit-filter: blur(5px);
         -moz-filter: blur(5px);
@@ -201,7 +200,7 @@ $ sprity ./output-directory/ ./input-directory/*.png
 ## Upload image
 
 *View file*
-```
+```html
 <div>
     <button mat-stroked-button type="button" (click)="filePicker.click()">Upload image</button>
     <input type="file" #filePicker>
@@ -211,7 +210,7 @@ $ sprity ./output-directory/ ./input-directory/*.png
 The ```<input type="file" #filePicker>``` create an automatic upload button which open the file explorer. But this button is not customizable, so we want using our custom button ```<button mat-stroked-button>``` to target the ```<input type="file" #filePicker>``` event.
 
 *style file*
-```
+```css
 input[type="file"] {
     visibility: hidden
 }
@@ -236,7 +235,7 @@ const blob = await base64Response.blob();
 
 ### Convert blob to base64 string
 
-````
+````typscript
 convertBlobToBase64 = (blob) => new Promise((resolve, reject) => {
     const reader = new FileReader;
     reader.onerror = reject;
