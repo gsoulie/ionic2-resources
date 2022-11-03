@@ -89,8 +89,31 @@ Then add it to your code (don't forget to adjust the real path for ionic)
   <ion-icon class="icon-close"></ion-icon>
 </ion-content>
 ```
+### Change svg color
 
-### Customize SVG
+With this technique you do not need to remove all *fill* and *stroke* attribute from the svg file
+
+````html
+  <div class="icon original-logo"></div>
+  <div class="icon colored-logo"></div>
+````
+
+````css
+.icon {
+    width: 24px;
+    height: 24px;
+}
+.original-logo {
+   background: url('/assets/images/icons/icon_tv.svg') no-repeat center / contain;
+}
+.colored-logo {
+  background-color: orange; /* defines the background color of the image */
+  mask: url('/assets/images/icons/icon_tv.svg') no-repeat center / contain;
+  -webkit-mask: url('/assets/images/icons/icon_tv.svg') no-repeat center / contain;
+}
+````
+
+### Customize SVG with ion-icon / mat-icon
 
 In order to modify the fill or stroke color of your svg, you need to modify your svg file by removing all *fill* and *stroke* attributes which have a value
 
