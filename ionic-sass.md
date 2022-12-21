@@ -40,8 +40,9 @@
 * [&::before and &::after](#before-and-after)       
 * [:nth-of-type](#nth-of-type)      
 * [Popover](#popover)      
-* [Accessing shadow parts)(#accessing-shadow-parts      
+* [Accessing shadow parts](#accessing-shadow-parts)      
 * [Text overflow ellipsis](#text-overflow-ellipsis)      
+* [ion-checkbox](#ion-checkbox)      
 
 Here are some tips to perform your scss.
 
@@ -1450,4 +1451,28 @@ Text ellipsis on 2 lines field
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 ````
+[Back to top](#stylesheet)
+
+## ion-checkbox
+
+Customize checkbox icon with svg
+
+````css
+ion-checkbox {
+  --checkmark-color: red;
+  --border-width: 0px;
+  --background-checked: transparent;
+}
+
+ion-checkbox::part(mark) {
+  d: path('M 12 21 C 11.699219 21 11.40625 20.910156 11.15625 20.738281 C 7.472656 18.238281 5.878906 16.523438 4.996094 15.453125 C 3.121094 13.167969 2.226562 10.820312 2.25 8.28125 C 2.28125 5.367188 4.617188 3 7.457031 3 C 9.523438 3 10.953125 4.164062 11.789062 5.132812 C 11.839844 5.195312 11.917969 5.230469 12 5.230469 C 12.082031 5.230469 12.160156 5.195312 12.210938 5.132812 C 13.046875 4.164062 14.476562 3 16.542969 3 C 19.382812 3 21.71875 5.367188 21.75 8.28125 C 21.773438 10.820312 20.875 13.167969 19.003906 15.453125 C 18.121094 16.523438 16.527344 18.238281 12.84375 20.738281 C 12.59375 20.910156 12.300781 21 12 21 Z M 12 21');
+  opacity: 1;
+}
+
+ion-checkbox.checkbox-checked::part(mark) {
+  d: path('M 12 21 C 11.699219 21 11.40625 20.910156 11.15625 20.738281 C 7.472656 18.238281 5.878906 16.523438 4.996094 15.453125 C 3.121094 13.167969 2.226562 10.820312 2.25 8.28125 C 2.28125 5.367188 4.617188 3 7.457031 3 C 9.523438 3 10.953125 4.164062 11.789062 5.132812 C 11.839844 5.195312 11.917969 5.230469 12 5.230469 C 12.082031 5.230469 12.160156 5.195312 12.210938 5.132812 C 13.046875 4.164062 14.476562 3 16.542969 3 C 19.382812 3 21.71875 5.367188 21.75 8.28125 C 21.773438 10.820312 20.875 13.167969 19.003906 15.453125 C 18.121094 16.523438 16.527344 18.238281 12.84375 20.738281 C 12.59375 20.910156 12.300781 21 12 21 Z M 12 21');
+  fill: red;
+}
+````
+
 [Back to top](#stylesheet)
