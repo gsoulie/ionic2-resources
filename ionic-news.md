@@ -229,11 +229,10 @@ Ionic 7 apporte des améliorations dans l'expérience de développement en ce qu
 
 Après les Modal et Popover, c'est au tour des **Action sheet, Alert, Loading, Picker et Toast** de pouvoir être déclarées directement dans le template html.
 
-```typescript
-<ion-button id=”open-loading”>Open Loading</ion-button>
-<ion-loading trigger=”open-loading” message=”Loading…”></ion-loading>
-
-```
+````typescript
+<ion-button id="open-loading">Open Loading</ion-button>
+<ion-loading trigger="open-loading" message="Loading…"></ion-loading>
+````
 
 A ceci s'ajoute les propriétés **isOpen** et **trigger** permettant de gérer plus facilement les intéractions.
 
