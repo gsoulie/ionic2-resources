@@ -342,6 +342,41 @@ onClose(remove = false){
 
 https://stackoverflow.com/questions/56596932/ionic-4-customize-ion-select
 
+### Nouveau style shadow dom pour les select (Ionic 7.1)
+
+Afin de gagner en customisation, les sélecteurs suivants ont été ajouté aux éléments ````<ion-select>````
+
+````css
+ion-select::part(container) {
+  width: 100%;
+}
+
+ion-select::part(label) {
+  color: #6e5afd;
+}
+````
+
+### Icône personalisée pour les ion-select
+
+Il est désormais possible de contrôler l'icône utilisée dans le ````<ion-select>```` de manière simple avec les propriétés ````toggleIcon```` et ````expandedIcon````.
+Cette propriété supporte les icônes SVG et les icônes provenant de **ionicons**
+
+````html
+<style>
+ion-select::part(icon) {
+  width: 22px;
+
+  color: #0088cc;
+}
+</style>
+
+<ion-select toggle-icon="caret-down-circle-outline" expanded-icon="caret-up-circle-outline" fill="icon" label="Favorite Fruit" label-placement="floating">
+  <ion-select-option value="apple">Apple</ion-select-option>
+  <ion-select-option value="banana">Banana</ion-select-option>
+  <ion-select-option value="orange">Orange</ion-select-option>
+</ion-select>
+````
+
 
 ## ion-item
 [Back to top](#ui-components)  
@@ -3447,6 +3482,35 @@ ion-checkbox {
           </ng-template>
         </ion-popover>
       </ion-item>
+````
+
+### Ajout de style sur les date pickers (Ionic 7.1)
+
+De nouvelles propriétés permettent maintenant de modifier le style des rouleaux, ainsi que cibler l'élément actif via la propriété ````active````
+
+Voir les propriétés css ````--wheel-highlight-background, --wheel-fade-background-rgb```` ainsi que les sélecteurs css ````month-year-button, time-button````:
+
+````css
+ion-datetime {
+  --background: #333;
+  --wheel-highlight-background: #111;
+  --wheel-fade-background-rgb: 51, 51, 51;
+
+  border-radius: 8px;
+
+  width: 350px;
+
+  color: white;
+}
+
+ion-datetime::part(month-year-button) {
+  --color: white;
+}
+
+ion-datetime::part(time-button) {
+  background: #111;
+  color: white;
+}
 ````
 	
 ### Using standard html input to manage time value
