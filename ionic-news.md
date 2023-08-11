@@ -47,7 +47,7 @@ La Searchbar dispose maintenant d'une propriété ````name```` pour faciliter l'
 
 Ionic 7.2 prend en charge la fonctionnalité introduite dans **Angular 16**, qui permet aux développeurs de *lier des paramètres de route en tant qu'entrées de composant*. 
 
-Pour rappel, cela permet d'accéder aux paramètres pour /my-route/:id en utilisant le décorateur @Input dans le composant associé (voir https://wiki-collab.groupe-isia.com/books/angular/page/angular-16).
+Pour rappel, cela permet d'accéder aux paramètres pour /my-route/:id en utilisant le décorateur @Input dans le composant associé
 
 Pour utiliser cette fonctionnalité, il faut mettre à jour la configuration du router en activant le paramètre **bindToComponentInputs** de la manière suivante :
 
