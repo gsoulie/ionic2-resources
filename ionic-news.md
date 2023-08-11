@@ -2,8 +2,8 @@
 
 # News
 
-* [Ionic 7.2](#ionic-7-2)
-* [Ionic 7.2](#ionic-7-1)
+* [Ionic 7.2](#ionic-72)
+* [Ionic 7.2](#ionic-71)
 * [Ionic 7.2](#ionic-7)
 * [Chrome 108 impact sur clavier virtuel](#chrome-108-impact-sur-clavier-virtuel)    
 
