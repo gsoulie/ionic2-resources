@@ -2,6 +2,13 @@
 
 # News
 
+* [Ionic 7.2](#ionic-7-2)
+* [Ionic 7.2](#ionic-7-1)
+* [Ionic 7.2](#ionic-7)
+* [Chrome 108 impact sur clavier virtuel](#chrome-108-impact-sur-clavier-virtuel)    
+
+# Ionic 7.2
+
 > [Source : Ionic 7.2](https://ionic.io/blog/announcing-ionic-7-2)
 
 La version 7.2 est arrivée, voici les nouveautés qu'elle apporte 
@@ -58,6 +65,8 @@ provideRouter(appRoutes, withComponentInputBinding());
 ````
 
 [Back to top](#news)     
+
+# Ionic 7.1
 
 ## Principales évolutions de Ionic 7.1
 
@@ -121,8 +130,6 @@ export class ExampleComponent {
   readonly maskPredicate: MaskitoElementPredicateAsync = async (el) => (el as HTMLIonInputElement).getInputElement();
 }
 ````
-
-
 ### Nouveau slot "label"
 
 De nouveaux "slot" ont été ajoutés pour les éléments ````<ion-select>````, ````<ion-input>```` et ````<ion-textarea>````. Ce nouveau slot permet de renseigner des labels avec du code html customisé contrairement à la propriété ````label```` existante qui ne fourni que du texte brut
@@ -208,7 +215,9 @@ ion-select::part(icon) {
 </ion-select>
 ````
 
-[Back to top](#news)    
+[Back to top](#news)   
+
+# Ionic 7
 
 `30/03/2023`
 
@@ -272,6 +281,8 @@ Les **ion-slides** sont définitivement retirés au profit de l'utilisation de l
 Le composant **ion-virtual-scroll** a lui aussi été supprimé laissant chaque framework utiliser sa propre solution. Par exemple, Angular utilise le `import { ScrollingModule } from '@angular/cdk/scrolling';`
 
 [Back to top](#news)    
+
+# Chrome 108 impact sur clavier virtuel
 
 ## Impact sur le viewport avec clavier virtuel
 
