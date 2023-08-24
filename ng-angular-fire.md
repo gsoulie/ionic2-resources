@@ -5,7 +5,8 @@
 
 Utilisation d'**Angularfire** avec **Firestore**
 
-* [Installation et configuration](#installation-et-configuration)     
+* [Installation et configuration](#installation-et-configuration)
+* [Règles d'accès](#règles-dacces)    
 * [Requêtage](#requêtage)     
 * [Utilisation](#utilisation)     
 * [Authentification](#authentification)     
@@ -64,6 +65,24 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 })
 export class AppModule {}
 ````
+
+## Règles d'accès
+
+Définir les règles d'accès à la base :
+
+````typescript
+{
+  "rules": {
+    ".read": "now < 1703977200000",  // 2023-12-31
+    ".write": "now < 1703977200000",  // 2023-12-31
+  }
+}
+````
+Utiliser les sites suivants pour définir la date voulue
+
+* convert milliseond to date : https://www.timecalculator.net/milliseconds-to-date      
+* convert date to milliseconds : https://currentmillis.com/      
+
 
 ## Requêtage
 [Back to top](#angularfire-update-2021)  
