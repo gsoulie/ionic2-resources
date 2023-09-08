@@ -222,6 +222,24 @@ backFwd(){
 ## Routing params
 [Back to top](#navigation)
 
+<details>
+	<summary>Angular 16 new way to get routing params</summary>
+
+Since Angular 16 you can get routing params by using ````@Input() id!: number;````. To activate this feature, add ````withComponentInputBinding()```` in your *main.ts*
+
+*main.ts*
+````typescript
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    importProvidersFrom(IonicModule.forRoot({})),
+    provideRouter(routes, withComponentInputBinding()),
+  ],
+});
+````
+</details>
+
 ### Official Documentation solution
 
 *app-routing.module.ts*
