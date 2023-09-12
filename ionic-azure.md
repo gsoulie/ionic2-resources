@@ -9,6 +9,9 @@
 
 ## Azure pipeline
 
+<details>
+	<summary></summary>
+
 sources :
 * https://sahansera.dev/multi-stage-builds-with-azure-pipelines-ionic/      
 * complete CI/CD pipeline : https://www.codewithkarma.com/2020/10/ionic-capacitor-cicd-using-new-yaml.html      
@@ -103,8 +106,12 @@ Then in azure, got to pipeline and create a new pipeline *use the classic editor
 
 [Back to top](#azure)    
 
-### Variable replacement before build process
+</details>
 
+<details>
+	<summary>Variable replacement before build process</summary>
+
+ 
 https://www.youtube.com/watch?v=_iPfzH3ENAk&ab_channel=LKGforIT         
 
 Sometimes we want to change some variables like api endpoints when publishing the app with CI/CD.
@@ -238,12 +245,16 @@ steps:
 
 That's all. After the pipeline is finished you can verify by downloading the apk and running it on a device
 
+</details>
+
+
 
 ### Incrementing Android versionCode and versionName
 
 See : https://stackoverflow.com/questions/62315203/how-do-i-automatically-increment-the-build-id-and-version-number-of-an-android-a      
+<details>
+	<summary>Complete apk signin pipeline</summary>
 
-### Complete apk signin pipeline
 
 source : 
 * https://sahansera.dev/multi-stage-builds-with-azure-pipelines-ionic/        
@@ -403,6 +414,8 @@ steps:
 La dernière étape consiste à exécuter la pipeline. Lors de la première exécution, la pipeline restera bloquée car elle attend l'autorisation pour utiliser le fichier sécurisé du keystore. Il faut donc entrer dans la pipeline en attente, un encart orange indique que la permission d'accès doit être donnée. Il suffit de cliquer sur le bouton et la pipeline s'exécute.
 
 [Back to top](#azure)      
+ 
+</details>
 
 ## Azure msal angular with capacitor for android app
 [Back to top](#azure)    
