@@ -10,9 +10,10 @@
 ## Azure pipeline
 
 <details>
-	<summary></summary>
+	<summary>How it works</summary>
 
 sources :
+
 * https://sahansera.dev/multi-stage-builds-with-azure-pipelines-ionic/      
 * complete CI/CD pipeline : https://www.codewithkarma.com/2020/10/ionic-capacitor-cicd-using-new-yaml.html      
 
