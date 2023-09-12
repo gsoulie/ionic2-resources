@@ -419,12 +419,12 @@ La dernière étape consiste à exécuter la pipeline. Lors de la première exé
 </details>
 
 ## Azure msal angular with capacitor for android app
-[Back to top](#azure)    
 
 Using msal v2 for angular with capacitor for Android app sample repos : https://github.com/gsoulie/ionic-angular-snippets/tree/master/msal-ionic-capacitor       
 
-## Azure msal authentication with Capacitor MS auth
 [Back to top](#azure)    
+
+## Azure msal authentication with Capacitor MS auth
 
 plugin source : https://github.com/recognizegroup/capacitor-plugin-msauth        
 
@@ -439,7 +439,8 @@ npx cap sync
 
 [Back to top](#azure) 
 
-### Azure portal configuration
+<details>
+	<summary>Azure portal configuration</summary>
 
 1 - Go to https://portal.azure.com      
 2 - Go to Azure Active Directory (use the searchbar if needed)      
@@ -453,8 +454,12 @@ npx cap sync
 
 [Back to top](#azure) 
 
-### Ionic Android app configuration
+</details>
 
+<details>
+	<summary>Ionic Android app configuration</summary>
+
+ 
 **Android**
 
 *android/build.gradle*
@@ -520,11 +525,14 @@ Add the new *BrowserTabActivity*
 	</activity>
 </application>
 ````
-[Back to top](#azure)     
+[Back to top](#azure)    
 
-### Usage (ionic android app)
+</details>
 
-*authentication.service.ts*
+ <details>
+	 <summary>Usage (ionic android app)</summary>
+
+  *authentication.service.ts*
 
 ````typescript
 import { BehaviorSubject } from 'rxjs';
@@ -684,7 +692,9 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 }
 ````
 
-[Back to top](#azure)     
+[Back to top](#azure)    
+
+</details> 
 
 ## Azure msal authentication with Capacitor OAuth 2 client plugin
 
@@ -704,9 +714,10 @@ npx cap sync
 
 ### Using Azure AD authentication
 
-#### Add the following activity in your *AndroidManifest.xml*
+<details>
+	<summary>Add the following activity in your *AndroidManifest.xml*</summary>
 
-*AndroidManifest.xml*
+ *AndroidManifest.xml*
 
 ````html
 <?xml version="1.0" encoding="utf-8"?>
@@ -759,10 +770,13 @@ npx cap sync
 	...
 </manifest>
 ````
-[Back to top](#azure)     
+[Back to top](#azure)    
 
-#### Add the following configuration in *app/src/main/res/values/string.xml*
+</details>
 
+ <details>
+	 <summary>Add the following configuration in *app/src/main/res/values/string.xml*</summary>
+	 
 ````html
 <resources>
     <string name="app_name">your app name</string>
@@ -777,9 +791,12 @@ npx cap sync
 ````
 [Back to top](#azure)     
 
-#### Add the following into your android/app/build.gradle
+</details>
+ 
+<details>
+	<summary>Add the following into your android/app/build.gradle</summary>
 
-````
+````typescript
 apply plugin: 'com.android.application
 
 android {
@@ -802,11 +819,15 @@ apply from: 'capacitor.build.gradle'
 
 ````
 [Back to top](#azure)     
+ 
+</details>
 
 ### Usage
 
-*auth.service.ts*
+<details>
+	<summary>Example</summary>
 
+ *auth.service.ts*
 ````typescript
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
@@ -953,4 +974,8 @@ constructor(
     });
   }
 ````
+
+</details>
+
+
 [Back to top](#azure)     
